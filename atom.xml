@@ -50,4 +50,26 @@
     
   </entry>
   
+  <entry>
+    <title>meta详解</title>
+    <link href="http://yoursite.com/2019/12/26/meta%E8%AF%A6%E8%A7%A3/"/>
+    <id>http://yoursite.com/2019/12/26/meta%E8%AF%A6%E8%A7%A3/</id>
+    <published>2019-12-26T11:59:08.145Z</published>
+    <updated>2019-12-28T07:36:16.969Z</updated>
+    
+    <content type="html"><![CDATA[<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;  H5标准声明，使用 HTML5 doctype，不区分大小写</span><br><span class="line">&lt;head lang=”en”&gt; 标准的 lang 属性写法</span><br><span class="line">&lt;meta charset=’utf<span class="number">-8</span>′&gt;    声明文档使用的字符编码</span><br><span class="line">&lt;meta http-equiv=”X-UA-Compatible” content=”IE=edge,chrome=<span class="number">1</span>″/&gt;   优先使用 IE 最新版本和 Chrome</span><br><span class="line">&lt;meta name=”description” content=”不超过<span class="number">150</span>个字符”/&gt;       页面描述</span><br><span class="line">&lt;meta name=”keywords” content=””/&gt;      页面关键词</span><br><span class="line">&lt;meta name=”author” content=”name, email@gmail.com”/&gt;    网页作者</span><br><span class="line">&lt;meta name=”robots” content=”index,follow”/&gt;      搜索引擎抓取</span><br><span class="line">&lt;meta name=”viewport” content=”initial-scale=<span class="number">1</span>, maximum-scale=<span class="number">3</span>, minimum-scale=<span class="number">1</span>, user-scalable=no”&gt; 为移动设备添加 viewport</span><br><span class="line">&lt;meta name=”apple-mobile-web-app-title” content=”标题”&gt; iOS 设备 begin</span><br><span class="line">&lt;meta name=”apple-mobile-web-app-capable” content=”yes”/&gt;  添加到主屏后的标题（iOS <span class="number">6</span> 新增）</span><br><span class="line">是否启用 WebApp 全屏模式，删除苹果默认的工具栏和菜单栏</span><br><span class="line">&lt;meta name=”apple-itunes-app” content=”app-id=myAppStoreID, affiliate-data=myAffiliateData, app-argument=myURL”&gt;</span><br><span class="line">添加智能 App 广告条 Smart App Banner（iOS <span class="number">6</span>+ Safari）</span><br><span class="line">&lt;meta name=”apple-mobile-web-app-status-bar-style” content=”black”/&gt;</span><br><span class="line">&lt;meta name=”format-detection” content=”telphone=no, email=no”/&gt;  设置苹果工具栏颜色</span><br><span class="line">&lt;meta name=”renderer” content=”webkit”&gt;  启用<span class="number">360</span>浏览器的极速模式(webkit)</span><br><span class="line">&lt;meta http-equiv=”X-UA-Compatible” content=”IE=edge”&gt;     避免IE使用兼容模式</span><br><span class="line">&lt;meta http-equiv=”Cache-Control” content=”no-siteapp” /&gt;    不让百度转码</span><br><span class="line">&lt;meta name=”HandheldFriendly” content=”<span class="literal">true</span>”&gt;     针对手持设备优化，主要是针对一些老的不识别viewport的浏览器，比如黑莓</span><br><span class="line">&lt;meta name=”MobileOptimized” content=”<span class="number">320</span>″&gt;   微软的老式浏览器</span><br><span class="line">&lt;meta name=”screen-orientation” content=”portrait”&gt;   uc强制竖屏</span><br><span class="line">&lt;meta name=”x5-orientation” content=”portrait”&gt;    QQ强制竖屏</span><br><span class="line">&lt;meta name=”full-screen” content=”yes”&gt;              UC强制全屏</span><br><span class="line">&lt;meta name=”x5-fullscreen” content=”<span class="literal">true</span>”&gt;       QQ强制全屏</span><br><span class="line">&lt;meta name=”browsermode” content=”application”&gt;   UC应用模式</span><br><span class="line">&lt;meta name=”x5-page-mode” content=”app”&gt;    QQ应用模式</span><br><span class="line">&lt;meta name=”msapplication-tap-highlight” content=”no”&gt;    windows phone 点击无高光</span><br><span class="line">设置页面不缓存</span><br><span class="line">&lt;meta http-equiv=”pragma” content=”no-cache”&gt;</span><br><span class="line">&lt;meta http-equiv=”cache-control” content=”no-cache”&gt;</span><br><span class="line">&lt;meta http-equiv=”expires” content=”<span class="number">0</span>″&gt;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span 
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
 </feed>
