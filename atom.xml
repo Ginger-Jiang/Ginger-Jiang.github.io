@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-12-30T07:10:21.460Z</updated>
+  <updated>2019-12-31T08:02:33.781Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>JavaScript简介</title>
+    <link href="http://yoursite.com/2019/12/31/js%E7%AE%80%E4%BB%8B/"/>
+    <id>http://yoursite.com/2019/12/31/js%E7%AE%80%E4%BB%8B/</id>
+    <published>2019-12-31T08:01:47.000Z</published>
+    <updated>2019-12-31T08:02:33.781Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="JavaScript-–-gt-简称-js"><a href="#JavaScript-–-gt-简称-js" class="headerlink" title="JavaScript –&gt; 简称 js"></a>JavaScript –&gt; 简称 js</h4><blockquote><p>JavaScript 历史</p></blockquote><p>​ 1995 年，网景公司希望能在静态 HTML 页面上添加一些动态效果, 让 Brendan Eich 设计出了 JavaScript 语言(用时 2 周)</p><blockquote><p>JavaScript 分为三个部分:</p></blockquote><ul><li>ECMAScript 标准—-js 的基本语法</li><li>DOM—Document Object Model 文档对象模型</li><li>BOM—Browser Object Model 浏览器对象模型</li></ul><blockquote><p>JavaScript 是什么?</p></blockquote><ul><li>是一门脚本语言</li><li>是一门解释性语言</li><li>是一门弱类型的语言</li><li>是一门动态类型的语言</li><li>是一门基于对象的语言</li></ul><blockquote><p>JavaScript 代码写在哪里</p></blockquote><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">第一种:写在html文件中--&gt;使用script标签包裹代码</span><br><span class="line">&lt;script&gt;</span><br><span class="line">alert(<span class="string">'这对script标签中的就是js代码)</span></span><br><span class="line"><span class="string">&lt;/script&gt;</span></span><br><span class="line"><span class="string">第二种:可以单独写在js文件中--&gt;js文件中不需要使用&lt;script&gt;标签</span></span><br></pre></td></tr></table></figure><blockquote><script>标签的属性:</blockquote><ul><li>src 表示要引入的外部文件</li><li>type 表示脚本语言的类型 text/javascript,默认值就是它.</li><li>language 已废弃。原来用于代码使用的脚本语言。由于大多数浏览器忽略它，所以不要用了。</li><li>defer：可选。(等页面加载完成后,才执行 js)表示脚本可以延迟到文档完全被解析和显示之后再执行。由于大多数浏览器不支持，故很少用。</li><li>charset：可选。表示通过 src 属性指定的字符集。由于大多数浏览器忽略它，所以很少有人用它。</li><li>async:可选,能简单实现 js 的异步加载.</li></ul><blockquote><p>注意事项</p></blockquote><ul><li><script>标签尽量放在<body>标签内,放在结束的</body>标签前- 一个<script>标签如果用于引入外部 js 文件,就不要在标签内写 script 代码</li><li>html 文件中可以同时存在多对<script>标签,浏览器会依次解析执行</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h4 id=&quot;JavaScript-–-gt-简称-js&quot;&gt;&lt;a href=&quot;#JavaScript-–-gt-简称-js&quot; class=&quot;headerlink&quot; title=&quot;JavaScript –&amp;gt; 简称 js&quot;&gt;&lt;/a&gt;JavaScript –&amp;gt; 简称 js
+      
+    
+    </summary>
+    
+    
+      <category term="JavaScript" scheme="http://yoursite.com/categories/JavaScript/"/>
+    
+    
+      <category term="JavaScript" scheme="http://yoursite.com/tags/JavaScript/"/>
+    
+  </entry>
   
   <entry>
     <title>实现一个简单的 Form 表单组件</title>
