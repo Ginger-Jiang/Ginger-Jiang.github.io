@@ -100,7 +100,7 @@
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">第一种:写在html文件中--&gt;使用script标签包裹代码</span><br><span class="line">&lt;script&gt;</span><br><span class="line">	alert(<span class="string">'这对script标签中的就是js代码)</span></span><br><span class="line"><span class="string">&lt;/script&gt;</span></span><br><span class="line"><span class="string">第二种:可以单独写在js文件中--&gt;js文件中不需要使用&lt;script&gt;标签</span></span><br></pre></td></tr></table></figure>
 
 <blockquote>
-<script>标签的属性:
+<p><code>&lt;script&gt;</code>标签的属性:</p>
 </blockquote>
 <ul>
 <li>src 表示要引入的外部文件</li>
@@ -114,9 +114,9 @@
 <p>注意事项</p>
 </blockquote>
 <ul>
-<li><script>标签尽量放在<body>标签内,放在结束的</body>标签前
-- 一个<script>标签如果用于引入外部 js 文件,就不要在标签内写 script 代码</li>
-<li>html 文件中可以同时存在多对<script>标签,浏览器会依次解析执行</li>
+<li><code>&lt;script&gt;</code>标签尽量放在<code>&lt;body&gt;</code>标签内,放在结束的<code>&lt;/body&gt;</code>标签前</li>
+<li>一个<code>&lt;script&gt;</code>标签如果用于引入外部 js 文件,就不要在标签内写 script 代码</li>
+<li>html 文件中可以同时存在多对<code>&lt;script&gt;</code>标签,浏览器会依次解析执行</li>
 </ul>
 ]]></content>
       <categories>
