@@ -46,20 +46,20 @@
   };
 </script>
 
-  <meta name="description" content="JavaScript –&gt; 简称 js JavaScript 历史  ​ 1995 年，网景公司希望能在静态 HTML 页面上添加一些动态效果, 让 Brendan Eich 设计出了 JavaScript 语言(用时 2 周)  JavaScript 分为三个部分:   ECMAScript 标准—-js 的基本语法 DOM—Document Object Model 文档对象模型 BOM">
+  <meta name="description" content="构造器模式 简单工厂模式  构造器模式-抽象每个对象的变与不变你正在开发一个学生管理系统, 开发时只有自己, 于是创建自己的用户信息: 123456&#x2F;&#x2F; 字面量const zhangsan &#x3D; &amp;#123;  name: &#39;张三&#39;,  age: 22,  gender: 0&amp;#125;  过了两天, 你的同事过来说让你加上他的用户信息, 他要使用用户信息, 于是你: 1234567891011&#x2F;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JavaScript简介">
-<meta property="og:url" content="http://yoursite.com/2019/12/31/js%E7%AE%80%E4%BB%8B/index.html">
+<meta property="og:title" content="简单工厂模式">
+<meta property="og:url" content="http://yoursite.com/2020/01/22/%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/index.html">
 <meta property="og:site_name" content="Ginger">
-<meta property="og:description" content="JavaScript –&gt; 简称 js JavaScript 历史  ​ 1995 年，网景公司希望能在静态 HTML 页面上添加一些动态效果, 让 Brendan Eich 设计出了 JavaScript 语言(用时 2 周)  JavaScript 分为三个部分:   ECMAScript 标准—-js 的基本语法 DOM—Document Object Model 文档对象模型 BOM">
+<meta property="og:description" content="构造器模式 简单工厂模式  构造器模式-抽象每个对象的变与不变你正在开发一个学生管理系统, 开发时只有自己, 于是创建自己的用户信息: 123456&#x2F;&#x2F; 字面量const zhangsan &#x3D; &amp;#123;  name: &#39;张三&#39;,  age: 22,  gender: 0&amp;#125;  过了两天, 你的同事过来说让你加上他的用户信息, 他要使用用户信息, 于是你: 1234567891011&#x2F;">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2019-12-31T08:01:47.000Z">
-<meta property="article:modified_time" content="2020-01-03T09:57:32.561Z">
+<meta property="article:published_time" content="2020-01-22T08:07:02.780Z">
+<meta property="article:modified_time" content="2020-01-22T08:07:54.733Z">
 <meta property="article:author" content="Ginger">
-<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="设计模式">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://yoursite.com/2019/12/31/js%E7%AE%80%E4%BB%8B/">
+<link rel="canonical" href="http://yoursite.com/2020/01/22/%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/">
 
 
 <script id="page-configurations">
@@ -71,7 +71,7 @@
   };
 </script>
 
-  <title>JavaScript简介 | Ginger</title>
+  <title>简单工厂模式 | Ginger</title>
   
 
 
@@ -215,7 +215,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/31/js%E7%AE%80%E4%BB%8B/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/22/%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/head_pic.jpeg">
@@ -228,7 +228,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          JavaScript简介
+          简单工厂模式
         </h1>
 
         <div class="post-meta">
@@ -237,24 +237,18 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2019-12-31 16:01:47" itemprop="dateCreated datePublished" datetime="2019-12-31T16:01:47+08:00">2019-12-31</time>
+              <time title="创建时间：2020-01-22 16:07:02 / 修改时间：16:07:54" itemprop="dateCreated datePublished" datetime="2020-01-22T16:07:02+08:00">2020-01-22</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-03 17:57:32" itemprop="dateModified" datetime="2020-01-03T17:57:32+08:00">2020-01-03</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
-                    <span itemprop="name">JavaScript</span>
+                  <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" itemprop="url" rel="index">
+                    <span itemprop="name">设计模式</span>
                   </a>
                 </span>
             </span>
@@ -265,14 +259,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>809</span>
+              <span>1.9k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>2 分钟</span>
             </span>
 
         </div>
@@ -284,53 +278,34 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h4 id="JavaScript-–-gt-简称-js"><a href="#JavaScript-–-gt-简称-js" class="headerlink" title="JavaScript –&gt; 简称 js"></a>JavaScript –&gt; 简称 js</h4><blockquote>
-<p>JavaScript 历史</p>
-</blockquote>
-<p>​ 1995 年，网景公司希望能在静态 HTML 页面上添加一些动态效果, 让 Brendan Eich 设计出了 JavaScript 语言(用时 2 周)</p>
-<blockquote>
-<p>JavaScript 分为三个部分:</p>
-</blockquote>
-<ul>
-<li>ECMAScript 标准—-js 的基本语法</li>
-<li>DOM—Document Object Model 文档对象模型</li>
-<li>BOM—Browser Object Model 浏览器对象模型</li>
+        <ul>
+<li>构造器模式</li>
+<li>简单工厂模式</li>
 </ul>
-<blockquote>
-<p>JavaScript 是什么?</p>
-</blockquote>
-<ul>
-<li>是一门脚本语言</li>
-<li>是一门解释性语言</li>
-<li>是一门弱类型的语言</li>
-<li>是一门动态类型的语言</li>
-<li>是一门基于对象的语言</li>
-</ul>
-<blockquote>
-<p>JavaScript 代码写在哪里</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">第一种:写在html文件中--&gt;使用script标签包裹代码</span><br><span class="line">&lt;script&gt;</span><br><span class="line">	alert(<span class="string">'这对script标签中的就是js代码)</span></span><br><span class="line"><span class="string">&lt;/script&gt;</span></span><br><span class="line"><span class="string">第二种:可以单独写在js文件中--&gt;js文件中不需要使用&lt;script&gt;标签</span></span><br></pre></td></tr></table></figure>
+<h2 id="构造器模式-抽象每个对象的变与不变"><a href="#构造器模式-抽象每个对象的变与不变" class="headerlink" title="构造器模式-抽象每个对象的变与不变"></a>构造器模式-抽象每个对象的变与不变</h2><p>你正在开发一个学生管理系统, 开发时只有自己, 于是创建自己的用户信息:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 字面量</span></span><br><span class="line"><span class="keyword">const</span> zhangsan = &#123;</span><br><span class="line">  name: <span class="string">'张三'</span>,</span><br><span class="line">  age: <span class="number">22</span>,</span><br><span class="line">  gender: <span class="number">0</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<blockquote>
-<p><code>&lt;script&gt;</code>标签的属性:</p>
-</blockquote>
-<ul>
-<li>src 表示要引入的外部文件</li>
-<li>type 表示脚本语言的类型 text/javascript,默认值就是它.</li>
-<li>language 已废弃。原来用于代码使用的脚本语言。由于大多数浏览器忽略它，所以不要用了。</li>
-<li>defer：可选。(等页面加载完成后,才执行 js)表示脚本可以延迟到文档完全被解析和显示之后再执行。由于大多数浏览器不支持，故很少用。</li>
-<li>charset：可选。表示通过 src 属性指定的字符集。由于大多数浏览器忽略它，所以很少有人用它。</li>
-<li>async:可选,能简单实现 js 的异步加载.</li>
-</ul>
-<blockquote>
-<p>注意事项</p>
-</blockquote>
-<ul>
-<li><code>&lt;script&gt;</code>标签尽量放在<code>&lt;body&gt;</code>标签内,放在结束的<code>&lt;/body&gt;</code>标签前</li>
-<li>一个<code>&lt;script&gt;</code>标签如果用于引入外部 js 文件,就不要在标签内写 script 代码</li>
-<li>html 文件中可以同时存在多对<code>&lt;script&gt;</code>标签,浏览器会依次解析执行</li>
-</ul>
+<p>过了两天, 你的同事过来说让你加上他的用户信息, 他要使用用户信息, 于是你:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 字面量</span></span><br><span class="line"><span class="keyword">const</span> zhangsan = &#123;</span><br><span class="line">  name: <span class="string">'张三'</span>,</span><br><span class="line">  age: <span class="number">22</span>,</span><br><span class="line">  gender: <span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> lisi = &#123;</span><br><span class="line">  name: <span class="string">'李四'</span>,</span><br><span class="line">  age: <span class="number">20</span>,</span><br><span class="line">  gender: <span class="number">1</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<p>过了两个星期,产品经理跟你说, 我这里有一点点(1000 个)测试数据, 你给我录入下, 于是你写了个构造函数(构造器)</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 构造器</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Students</span>(<span class="params">name, age, gender</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name = name</span><br><span class="line">  <span class="keyword">this</span>.age = age</span><br><span class="line">  <span class="keyword">this</span>.gender = genger</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// ... 此处省略读取数据, 遍历调用构造器</span></span><br><span class="line"><span class="keyword">const</span> student = <span class="keyword">new</span> Students(name, age, gender)</span><br></pre></td></tr></table></figure>
+
+<h3 id="思考-变与不变"><a href="#思考-变与不变" class="headerlink" title="思考 变与不变"></a>思考 变与不变</h3><p>不变的是每个学生都有姓名、年龄、性别三个属性,这叫<strong>共性</strong><br>变化的是三个属性的值,这叫<strong>个性</strong></p>
+<blockquote>
+<p>案例中构造器在整个过程中就是抽象了学生这个对象, 将赋值的过程进行了封装, 确定不变的部分, 使每个学生对象都有自己的姓名、年龄、性别三个属性, 在确保不变的同时, 将变化的三个属性的值进行开放, 由用户自己传入, 保证了个性的灵活度</p>
+</blockquote>
+<h2 id="工厂模式-抽象不同构造器之间的变与不变"><a href="#工厂模式-抽象不同构造器之间的变与不变" class="headerlink" title="工厂模式-抽象不同构造器之间的变与不变"></a>工厂模式-抽象不同构造器之间的变与不变</h2><p>第一期交付后一个月, 学校方面打来电话, 表示要对学生中的班干部进行区分, 备注班干部职责, 于是你加了一个班干部的构造器用来生成班干部的信息,</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Students</span>(<span class="params">name, age, gender</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 普通学生</span></span><br><span class="line">  <span class="keyword">this</span>.name = name</span><br><span class="line">  <span class="keyword">this</span>.age = age</span><br><span class="line">  <span class="keyword">this</span>.gender = genger</span><br><span class="line">  <span class="keyword">this</span>.identity = <span class="string">'student'</span></span><br><span class="line">  <span class="keyword">this</span>.duties = [<span class="string">'学习'</span>]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Cadres</span>(<span class="params">name, age, gender</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 班干部</span></span><br><span class="line">  <span class="keyword">this</span>.name = name</span><br><span class="line">  <span class="keyword">this</span>.age = age</span><br><span class="line">  <span class="keyword">this</span>.gender = genger</span><br><span class="line">  <span class="keyword">this</span>.identity = <span class="string">'cadre'</span></span><br><span class="line">  <span class="keyword">this</span>.duties = [<span class="string">'点名'</span>,<span class="string">'出黑板报'</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这时候, 你发现又出现了 <strong>变数</strong> identity, 你还需要一个方法来判断调用哪一个构造器</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Factory</span>(<span class="params">name, age, gender, identity</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">switch</span>(identity) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">'student'</span>:</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">new</span> Students(name, age, gender)</span><br><span class="line">      <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">case</span> <span class="string">'cadre'</span>:</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">new</span> Cadres(name, age, gender)</span><br><span class="line">      <span class="keyword">break</span></span><br><span class="line">    <span class="comment">// 此处省略无数个班干部</span></span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">      <span class="keyword">break</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>写完后, 你发现每类班干部职责实在太多了, 难道要写几十个构造器么</p>
+<h3 id="重新思考-变与不变"><a href="#重新思考-变与不变" class="headerlink" title="重新思考 变与不变"></a>重新思考 变与不变</h3><p>在我们的学生与班干部两个构造器中, 都拥有不变的姓名、年龄、性别三个共性, 变化是的身份与职责, 由此可以看出我们的问题, 共性封装不够、共性与个性分离不彻底, 于是我们重新封装下:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Student</span>(<span class="params">name, age, gender, identity, duties</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name = name</span><br><span class="line">  <span class="keyword">this</span>.age = age</span><br><span class="line">  <span class="keyword">this</span>.gender = gender</span><br><span class="line">  <span class="keyword">this</span>.identity = identity</span><br><span class="line">  <span class="keyword">this</span>.duties = duties</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Factory</span>(<span class="params">name, age, gender, identity</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> duties</span><br><span class="line">  <span class="keyword">switch</span>(identity)&#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">'student'</span>:</span><br><span class="line">      duties = [<span class="string">'学习'</span>,<span class="string">'做作业'</span>]</span><br><span class="line">      <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">case</span> <span class="string">'cadre'</span>:</span><br><span class="line">      duties = [<span class="string">'组织活动'</span>,<span class="string">'点名'</span>]</span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">      <span class="keyword">break</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> Student(name, age, gender, identity, duties)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<pre><code>工厂模式就是对创建对象的过程进行封装, 我们不需要在关心封装内做的事情,只需要拿到工厂交付给我们的结果即可.</code></pre>
     </div>
 
     
@@ -354,7 +329,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+              <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag"># 设计模式</a>
           </div>
 
         
@@ -363,13 +338,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2019/12/30/myForm/" rel="prev" title="实现一个简单的 Form 表单组件">
-      <i class="fa fa-chevron-left"></i> 实现一个简单的 Form 表单组件
+    <a href="/2020/01/22/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%A6%82%E5%86%B5/" rel="prev" title="设计模式概况">
+      <i class="fa fa-chevron-left"></i> 设计模式概况
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/01/02/js%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/" rel="next" title="js基本语法">
-      js基本语法 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -430,7 +402,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#JavaScript-–-gt-简称-js"><span class="nav-number">1.</span> <span class="nav-text">JavaScript –&gt; 简称 js</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#构造器模式-抽象每个对象的变与不变"><span class="nav-number">1.</span> <span class="nav-text">构造器模式-抽象每个对象的变与不变</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#思考-变与不变"><span class="nav-number">1.1.</span> <span class="nav-text">思考 变与不变</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#工厂模式-抽象不同构造器之间的变与不变"><span class="nav-number">2.</span> <span class="nav-text">工厂模式-抽象不同构造器之间的变与不变</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#重新思考-变与不变"><span class="nav-number">2.1.</span> <span class="nav-text">重新思考 变与不变</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -700,7 +672,7 @@ NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
       repo: 'Ginger-Jiang.github.io',
       owner: 'Ginger-Jiang',
       admin: ['Ginger-Jiang'],
-      id: 'a7d3118dfd7bbac309aed8326f6c21ce',
+      id: 'c38180079437c6d8c378125c0fdf921b',
         language: 'zh-CN',
       distractionFreeMode: true
     });
