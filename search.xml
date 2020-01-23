@@ -1,6 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>抽象工厂模式</title>
+    <url>/2020/01/23/%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/</url>
+    <content><![CDATA[<h2 id="前情回顾"><a href="#前情回顾" class="headerlink" title="前情回顾"></a>前情回顾</h2><p>在实际的项目开发时, 我们面对的往往不是如此简单的工厂, 而是会面对多个工厂.</p>
+<p>在简单工厂模式中, 如果我们再加入学生会干部, 就意味着我们需要修改我们的工厂函数. 长此以往, 我们的工厂函数会变得复杂臃肿.</p>
+<p>回顾我们设计模式的<strong>开放封闭原则, 对扩展开放, 对修改封闭</strong> 而我们添加其他判断逻辑则是在修改它.</p>
+<p>所以我们需要一个更加合理的方式来处理</p>
+<h2 id="抽象工厂模式"><a href="#抽象工厂模式" class="headerlink" title="抽象工厂模式"></a>抽象工厂模式</h2><p>由于抽象最初源于 Java 等强类型静态语言, 在设计初期, 往往就需要关注类型解耦. 而 JavaScript 是一个动态类型的语言, 天然具有多态性, 但目前的 JavaScript 语法里，不支持抽象类的直接实现, 所以我们只能模拟抽象类.</p>
+<h2 id="实现一个生产手机的抽象工厂"><a href="#实现一个生产手机的抽象工厂" class="headerlink" title="实现一个生产手机的抽象工厂"></a>实现一个生产手机的抽象工厂</h2><p>一个手机生产线</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 抽象工厂-只对类抽象的对象基本组成进行约束</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PhoneFactory</span> </span>&#123;</span><br><span class="line">  createOs() &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'抽象工厂创建软件系统方法, 需要重写'</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  createHardware() &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'抽象工厂创建硬件方法, 需要重写'</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 具体工厂-实现具体功能</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">FakeStarFactory</span> <span class="keyword">extends</span> <span class="title">PhoneFactory</span> </span>&#123;</span><br><span class="line">  createOs() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> IOS()</span><br><span class="line">  &#125;</span><br><span class="line">  createHardware() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> MI()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>抽象出系统部分的抽象工厂</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 抽象手机系统工厂</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">OS</span> </span>&#123;</span><br><span class="line">  run() &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'抽象工厂, 不允许直接调用'</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 具体运行系统工厂</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Ios</span> <span class="keyword">extends</span> <span class="title">OS</span> </span>&#123;</span><br><span class="line">  run() &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'用ios系统方式启动'</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Android</span> <span class="keyword">extends</span> <span class="title">OS</span> </span>&#123;</span><br><span class="line">  run() &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'用安卓系统启动'</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>抽象出硬件的抽象工厂</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 抽象硬件类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Hardware</span> </span>&#123;</span><br><span class="line">  operating() &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'抽象工厂方法, 不允许直接调用'</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 具体工厂</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MI</span> <span class="keyword">extends</span> <span class="title">Hardware</span> </span>&#123;</span><br><span class="line">  operating() &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'使用小米硬件'</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">HUAWEI</span> <span class="keyword">extends</span> <span class="title">Hardware</span> </span>&#123;</span><br><span class="line">  operating() &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'使用华为硬件'</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>开始生产手机</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> phone = <span class="keyword">new</span> FakeStarFactory() <span class="comment">// 生产手机</span></span><br><span class="line"><span class="keyword">const</span> phoneOs = phone.createOs() <span class="comment">// 加上系统</span></span><br><span class="line"><span class="keyword">const</span> phonrHardware = phone.createHardware() <span class="comment">// 加上硬件</span></span><br><span class="line">phonrHardware.operating() <span class="comment">// 选择硬件</span></span><br><span class="line">phoneOs.run() <span class="comment">// 运行系统</span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>设计模式</category>
+      </categories>
+      <tags>
+        <tag>设计模式</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>简单工厂模式</title>
     <url>/2020/01/22/%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/</url>
     <content><![CDATA[<ul>
