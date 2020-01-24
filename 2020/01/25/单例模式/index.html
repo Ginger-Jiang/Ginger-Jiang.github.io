@@ -46,22 +46,20 @@
   };
 </script>
 
-  <meta name="description" content="&amp;emsp;&amp;emsp;秃头一族怎么能没有自己的 Blog 呢? 本想着自己买服务器与域名,使用 Node React 纯手撸 ,奈何钱包与时间它不允许, 所以就有了本站与这篇文章了.  相关链接  Hexo 文档NexT 文档参考大神博客  一.全局安装 Hexo  1npm install -g hexo-cli   二.创建博客项目  1234# 使用终端进入准备存放博客项目的目录 输入以下">
+  <meta name="description" content="单例模式 单例模式下的类只能存在一个实例对象  非单例模式实例在 JavaScript 中, 我们可以通过 class 类来实例化对象, 我们 new 出两个对象, 但是两个对象是没有直接关联的, 他们储存在不同的内存地址中, 不符合我们的单例模式 12345678class Singleton &amp;#123;  show() &amp;#123;    console.log(&#39;单例对象&#39;)  &amp;#125">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hexo + Next + GitHub 搭建博客">
-<meta property="og:url" content="http://yoursite.com/2019/12/26/hello-blog/index.html">
+<meta property="og:title" content="单例模式">
+<meta property="og:url" content="http://yoursite.com/2020/01/25/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/index.html">
 <meta property="og:site_name" content="Ginger">
-<meta property="og:description" content="&amp;emsp;&amp;emsp;秃头一族怎么能没有自己的 Blog 呢? 本想着自己买服务器与域名,使用 Node React 纯手撸 ,奈何钱包与时间它不允许, 所以就有了本站与这篇文章了.  相关链接  Hexo 文档NexT 文档参考大神博客  一.全局安装 Hexo  1npm install -g hexo-cli   二.创建博客项目  1234# 使用终端进入准备存放博客项目的目录 输入以下">
+<meta property="og:description" content="单例模式 单例模式下的类只能存在一个实例对象  非单例模式实例在 JavaScript 中, 我们可以通过 class 类来实例化对象, 我们 new 出两个对象, 但是两个对象是没有直接关联的, 他们储存在不同的内存地址中, 不符合我们的单例模式 12345678class Singleton &amp;#123;  show() &amp;#123;    console.log(&#39;单例对象&#39;)  &amp;#125">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2019-12-26T12:32:11.404Z">
-<meta property="article:modified_time" content="2019-12-27T11:13:56.676Z">
+<meta property="article:published_time" content="2020-01-24T16:26:43.000Z">
+<meta property="article:modified_time" content="2020-01-24T16:27:00.735Z">
 <meta property="article:author" content="Ginger">
-<meta property="article:tag" content="Blog">
-<meta property="article:tag" content="Hexo">
-<meta property="article:tag" content="GitHub">
+<meta property="article:tag" content="设计模式">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://yoursite.com/2019/12/26/hello-blog/">
+<link rel="canonical" href="http://yoursite.com/2020/01/25/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/">
 
 
 <script id="page-configurations">
@@ -73,7 +71,7 @@
   };
 </script>
 
-  <title>Hexo + Next + GitHub 搭建博客 | Ginger</title>
+  <title>单例模式 | Ginger</title>
   
 
 
@@ -217,7 +215,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/26/hello-blog/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/25/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/head_pic.jpeg">
@@ -230,7 +228,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Hexo + Next + GitHub 搭建博客
+          单例模式
         </h1>
 
         <div class="post-meta">
@@ -239,24 +237,18 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2019-12-26 20:32:11" itemprop="dateCreated datePublished" datetime="2019-12-26T20:32:11+08:00">2019-12-26</time>
+              <time title="创建时间：2020-01-25 00:26:43 / 修改时间：00:27:00" itemprop="dateCreated datePublished" datetime="2020-01-25T00:26:43+08:00">2020-01-25</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-12-27 19:13:56" itemprop="dateModified" datetime="2019-12-27T19:13:56+08:00">2019-12-27</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Hexo/" itemprop="url" rel="index">
-                    <span itemprop="name">Hexo</span>
+                  <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" itemprop="url" rel="index">
+                    <span itemprop="name">设计模式</span>
                   </a>
                 </span>
             </span>
@@ -267,14 +259,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>292</span>
+              <span>2.2k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>2 分钟</span>
             </span>
 
         </div>
@@ -286,30 +278,17 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>&emsp;&emsp;秃头一族怎么能没有自己的 Blog 呢? 本想着自己买服务器与域名,使用 Node React 纯手撸 ,奈何钱包与时间它不允许, 所以就有了本站与这篇文章了.</p>
-<blockquote>
-<p>相关链接</p>
+        <h2 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h2><blockquote>
+<p>单例模式下的类只能存在一个实例对象</p>
 </blockquote>
-<p><a href="https://hexo.io/" target="_blank" rel="noopener">Hexo 文档</a><br><a href="https://theme-next.iissnan.com/" target="_blank" rel="noopener">NexT 文档</a><br><a href="https://cuiqingcai.com/7625.html" target="_blank" rel="noopener">参考大神博客</a></p>
-<blockquote>
-<p>一.全局安装 Hexo</p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
+<h2 id="非单例模式实例"><a href="#非单例模式实例" class="headerlink" title="非单例模式实例"></a>非单例模式实例</h2><p>在 JavaScript 中, 我们可以通过 class 类来实例化对象, 我们 new 出两个对象, 但是两个对象是没有直接关联的, 他们储存在不同的内存地址中, 不符合我们的单例模式</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;</span><br><span class="line">  show() &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'单例对象'</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> s1 = <span class="keyword">new</span> Singleton()</span><br><span class="line"><span class="keyword">const</span> s2 = <span class="keyword">new</span> Singleton()</span><br><span class="line">s1 === s2 <span class="comment">// false 引用类型储存在堆的不同内存地址中</span></span><br></pre></td></tr></table></figure>
 
-<blockquote>
-<p>二.创建博客项目</p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用终端进入准备存放博客项目的目录 输入以下命令</span></span><br><span class="line">hexo init hexo-blog <span class="comment"># hexo-blog 自己取名即可</span></span><br><span class="line"><span class="built_in">cd</span> hexo-blog</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
+<h2 id="单例模式实例"><a href="#单例模式实例" class="headerlink" title="单例模式实例"></a>单例模式实例</h2><p>如果要实现单例模式, 我们需要保证只能存在一个实例对象, 这就要求我们的类具有是否已存在实例对象的功能</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 类 - 静态方法模拟</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;</span><br><span class="line">  show() &#123;</span><br><span class="line">    consle.log(<span class="string">'我是一个单例对象'</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">static</span> getInstance() &#123;</span><br><span class="line">    <span class="comment">// 静态方法 重点</span></span><br><span class="line">    <span class="keyword">if</span>(!Singleton.instance)&#123;</span><br><span class="line">      <span class="comment">// 判断是否已存在一个实例</span></span><br><span class="line">      Singleton.instance = <span class="keyword">new</span> Singleton() <span class="comment">// 如果没有就创建一个</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> Singleton.instance</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 闭包实现单例模式</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Singleton</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line">Singleton.prototype.getInstance = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">let</span> instance <span class="comment">// 定义局部变量模拟 重点</span></span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!instance) &#123;</span><br><span class="line">      instance = <span class="keyword">new</span> Singleton()</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> instance</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure>
 
-<blockquote>
-<p>三.本地预览博客</p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo server <span class="comment"># 使用浏览器开大 http://localhost:4000 即可</span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>四.打包部署</p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo d -g</span><br></pre></td></tr></table></figure>
+<h2 id="单例模式应用"><a href="#单例模式应用" class="headerlink" title="单例模式应用"></a>单例模式应用</h2><p>通过单例模式管理全局唯一存在的一个 Model 模态框</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"ie=edge"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line">      div &#123;</span><br><span class="line">        width: 200px;</span><br><span class="line">        height: 200px;</span><br><span class="line">        line-height: 200px;</span><br><span class="line">        border: 1px solid pink;</span><br><span class="line">        position: fixed;</span><br><span class="line">        top: 50%;</span><br><span class="line">        left: 50%;</span><br><span class="line">        transform: translate(-50%, -50%);</span><br><span class="line">        text-align: center;</span><br><span class="line">      &#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">"show"</span>&gt;</span>显示全局模拟框<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">"hidden"</span>&gt;</span>隐藏全局模拟框<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">      <span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">let</span> showbtn = <span class="built_in">document</span>.getElementById(<span class="string">'show'</span>)</span></span><br><span class="line"><span class="javascript">        <span class="keyword">let</span> hiddenbtn = <span class="built_in">document</span>.getElementById(<span class="string">'hidden'</span>)</span></span><br><span class="line"></span><br><span class="line"><span class="actionscript">        <span class="comment">// 闭包实现</span></span></span><br><span class="line"><span class="actionscript">        <span class="keyword">const</span> Model = (<span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span></span><br><span class="line"><span class="javascript">          <span class="keyword">let</span> model = <span class="literal">null</span></span></span><br><span class="line"><span class="actionscript">          <span class="keyword">return</span> <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span></span><br><span class="line">            if (!model) &#123;</span><br><span class="line"><span class="javascript">              model = <span class="built_in">document</span>.createElement(<span class="string">'div'</span>)</span></span><br><span class="line"><span class="actionscript">              model.innerText = <span class="string">'单例模式的核心就是保证只有一个实例对象'</span></span></span><br><span class="line"><span class="actionscript">              model.style.display = <span class="string">'none'</span></span></span><br><span class="line"><span class="actionscript">              model.style.color = <span class="string">'pink'</span></span></span><br><span class="line"><span class="javascript">              <span class="built_in">document</span>.body.appendChild(model)</span></span><br><span class="line">            &#125;</span><br><span class="line"><span class="actionscript">            <span class="keyword">return</span> model</span></span><br><span class="line">          &#125;</span><br><span class="line">        &#125;)()</span><br><span class="line"></span><br><span class="line">        showbtn.addEventListener(</span><br><span class="line"><span class="actionscript">          <span class="string">'click'</span>,</span></span><br><span class="line"><span class="actionscript">          <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span></span><br><span class="line"><span class="actionscript">            <span class="keyword">const</span> model = <span class="keyword">new</span> Model()</span></span><br><span class="line"><span class="actionscript">            model.style.display = <span class="string">'block'</span></span></span><br><span class="line">          &#125;,</span><br><span class="line"><span class="actionscript">          <span class="literal">false</span></span></span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">        hiddenbtn.addEventListener(</span><br><span class="line"><span class="actionscript">          <span class="string">'click'</span>,</span></span><br><span class="line"><span class="actionscript">          <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span></span><br><span class="line"><span class="actionscript">            <span class="keyword">const</span> model = <span class="keyword">new</span> Model()</span></span><br><span class="line"><span class="actionscript">            model.style.display = <span class="string">'none'</span></span></span><br><span class="line">          &#125;,</span><br><span class="line"><span class="actionscript">          <span class="literal">false</span></span></span><br><span class="line">        )</span><br><span class="line">      &#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -334,9 +313,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/Blog/" rel="tag"># Blog</a>
-              <a href="/tags/Hexo/" rel="tag"># Hexo</a>
-              <a href="/tags/GitHub/" rel="tag"># GitHub</a>
+              <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag"># 设计模式</a>
           </div>
 
         
@@ -345,13 +322,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2019/12/26/meta%E8%AF%A6%E8%A7%A3/" rel="prev" title="HTML meta标签详解">
-      <i class="fa fa-chevron-left"></i> HTML meta标签详解
+    <a href="/2020/01/23/%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/" rel="prev" title="抽象工厂模式">
+      <i class="fa fa-chevron-left"></i> 抽象工厂模式
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2019/12/30/myForm/" rel="next" title="实现一个简单的 Form 表单组件">
-      实现一个简单的 Form 表单组件 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -412,6 +386,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#单例模式"><span class="nav-number">1.</span> <span class="nav-text">单例模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#非单例模式实例"><span class="nav-number">2.</span> <span class="nav-text">非单例模式实例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#单例模式实例"><span class="nav-number">3.</span> <span class="nav-text">单例模式实例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#单例模式应用"><span class="nav-number">4.</span> <span class="nav-text">单例模式应用</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -681,7 +656,7 @@ NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
       repo: 'Ginger-Jiang.github.io',
       owner: 'Ginger-Jiang',
       admin: ['Ginger-Jiang'],
-      id: 'e4dfa6f824ecf532bc9982a7b737d86c',
+      id: '940a97ca33789c1956a81820640aa2d1',
         language: 'zh-CN',
       distractionFreeMode: true
     });
