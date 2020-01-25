@@ -46,18 +46,20 @@
   };
 </script>
 
-  <meta name="description" content="未来可期">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Ginger">
-<meta property="og:url" content="http://yoursite.com/categories/Vue/index.html">
+  <meta name="description" content="原型模式 在 JavaScript 中, Object.create() 是对原型模式的最好实现.  prototype 原型模式的应用 JavaScript 中不存在 class , ES6 中 class 也只是原型继承的语法糖, 在 js 中我们常用的是通过 prototype 模拟类来得到类的实例, 实现实例间数据、方法的共享.  JavaScript 的原型与原型链在 JavaScrip">
+<meta property="og:type" content="article">
+<meta property="og:title" content="原型模式">
+<meta property="og:url" content="http://yoursite.com/2020/01/25/%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/index.html">
 <meta property="og:site_name" content="Ginger">
-<meta property="og:description" content="未来可期">
+<meta property="og:description" content="原型模式 在 JavaScript 中, Object.create() 是对原型模式的最好实现.  prototype 原型模式的应用 JavaScript 中不存在 class , ES6 中 class 也只是原型继承的语法糖, 在 js 中我们常用的是通过 prototype 模拟类来得到类的实例, 实现实例间数据、方法的共享.  JavaScript 的原型与原型链在 JavaScrip">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-01-25T14:09:38.000Z">
+<meta property="article:modified_time" content="2020-01-25T14:09:58.079Z">
 <meta property="article:author" content="Ginger">
-<meta property="article:tag" content="Web Node.js Vue React HTML CSS">
+<meta property="article:tag" content="设计模式">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://yoursite.com/categories/Vue/">
+<link rel="canonical" href="http://yoursite.com/2020/01/25/%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/">
 
 
 <script id="page-configurations">
@@ -65,11 +67,11 @@
   CONFIG.page = {
     sidebar: "",
     isHome: false,
-    isPost: false
+    isPost: true
   };
 </script>
 
-  <title>分类: Vue | Ginger</title>
+  <title>原型模式 | Ginger</title>
   
 
 
@@ -208,54 +210,145 @@
           <div class="content">
             
 
+  <div class="posts-expand">
+      
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <h1 class="collection-header">Vue
-          <small>分类</small>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/25/%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head_pic.jpeg">
+      <meta itemprop="name" content="Ginger">
+      <meta itemprop="description" content="未来可期">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ginger">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          原型模式
         </h1>
-      </div>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-01-25 22:09:38 / 修改时间：22:09:58" itemprop="dateCreated datePublished" datetime="2020-01-25T22:09:38+08:00">2020-01-25</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" itemprop="url" rel="index">
+                    <span itemprop="name">设计模式</span>
+                  </a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <h1 class="collection-header">2019</h1>
+        <h2 id="原型模式"><a href="#原型模式" class="headerlink" title="原型模式"></a>原型模式</h2><blockquote>
+<p>在 JavaScript 中, Object.create() 是对原型模式的最好实现.</p>
+</blockquote>
+<h2 id="prototype-原型模式的应用"><a href="#prototype-原型模式的应用" class="headerlink" title="prototype 原型模式的应用"></a>prototype 原型模式的应用</h2><blockquote>
+<p>JavaScript 中不存在 class , ES6 中 class 也只是原型继承的语法糖, 在 js 中我们常用的是通过 prototype 模拟类来得到类的实例, 实现实例间数据、方法的共享.</p>
+</blockquote>
+<h2 id="JavaScript-的原型与原型链"><a href="#JavaScript-的原型与原型链" class="headerlink" title="JavaScript 的原型与原型链"></a>JavaScript 的原型与原型链</h2><p>在 JavaScript 中, 创建一个对象有多种方式</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 通过 Object 构造函数创建对象</span></span><br><span class="line"><span class="keyword">const</span> obj = <span class="keyword">new</span> <span class="built_in">Object</span>(&#123;&#125;)</span><br><span class="line"><span class="comment">// 通过 create 创建对象</span></span><br><span class="line"><span class="keyword">const</span> obj2 = <span class="built_in">Object</span>.create(&#123;&#125;)</span><br><span class="line"><span class="comment">// 字面量方式创建对象</span></span><br><span class="line"><span class="keyword">const</span> obj3 = &#123;<span class="attr">name</span>: <span class="string">'Ginger'</span>&#125;</span><br><span class="line"><span class="comment">// ...</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>在 JavaScript 中每一个构造函数都有一个 prototype 属性, 该原型对象指向构造函数的原型对象, 原型对象中 construtor 指回该构造函数</li>
+<li>每个实例对象, 都有一个 <code>__proto__</code> 属性, 该属性指向创建该实例对象的构造函数的原型对象</li>
+</ul>
+<p>通过 new 关键字, 获得 Fn 构造函数的实例对象, f 实例对象上并没有 hi 方法, 但是我们可以调用成功, 便是因为原型链的存在.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Fn</span>(<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name = name</span><br><span class="line">  <span class="keyword">this</span>.age = age</span><br><span class="line">&#125;</span><br><span class="line">Fn.prototype.hi = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'Hi'</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> f = <span class="keyword">new</span> Fn()</span><br><span class="line">f.hi() <span class="comment">// Hi</span></span><br><span class="line"><span class="built_in">console</span>.log(f.__proto__ === Fn.prototype) <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="一个简单的深拷贝"><a href="#一个简单的深拷贝" class="headerlink" title="一个简单的深拷贝"></a>一个简单的深拷贝</h2><p>通过两个 api 对 obj 对象进行拷贝, 得到 obj2 改变 obj2 后, obj 内容未发生改变, 但是如果 obj 不是一个严格 json 格式的数据, 他的值是还是一个对象的时候, 这个就无法处理了</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">  name:<span class="string">'Ginger'</span>,</span><br><span class="line">  age:<span class="number">24</span>,</span><br><span class="line">  web:[<span class="string">'html'</span>, <span class="string">'js'</span>, <span class="string">'css'</span>]</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> obj2 = <span class="built_in">JSON</span>.parse(<span class="built_in">JSON</span>.stringify(obj))</span><br><span class="line">obj2.web.splice(<span class="number">0</span>,<span class="number">1</span>)</span><br><span class="line"><span class="built_in">console</span>.log(obj.web) <span class="comment">// ['html', 'js', 'css']</span></span><br><span class="line"><span class="built_in">console</span>.log(obj2.web) <span class="comment">// ["js", "css"]</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="另外一个深拷贝"><a href="#另外一个深拷贝" class="headerlink" title="另外一个深拷贝"></a>另外一个深拷贝</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">DeepClone</span>(<span class="params">obj</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 边界判断</span></span><br><span class="line">  <span class="keyword">if</span>(<span class="keyword">typeof</span> obj !== <span class="string">'object'</span> || obj === <span class="literal">null</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> obj</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 初始化结果值</span></span><br><span class="line">  <span class="keyword">let</span> res = &#123;&#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 如果是数组</span></span><br><span class="line">  <span class="keyword">if</span>(obj.constructor === <span class="string">'array'</span>) &#123;</span><br><span class="line">    res = []</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">let</span> i <span class="keyword">in</span> obj) &#123;</span><br><span class="line">    <span class="keyword">if</span>(obj.hasOwnProperty(i)) &#123;</span><br><span class="line">      <span class="comment">// 如果值是对象 递归调用</span></span><br><span class="line">      res[i] = DeepClone(obj[i])</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> res</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-12-30T14:26:20+08:00"
-              content="2019-12-30">
-          12-30
-        </time>
+    
+    
+    
+        <div class="reward-container">
+  <div>请作者喝杯咖啡</div>
+  <button disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.jpg" alt="Ginger 微信支付">
+        <p>微信支付</p>
       </div>
 
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2019/12/30/myForm/" itemprop="url">
-            <span itemprop="name">实现一个简单的 Form 表单组件</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-    </div>
   </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag"># 设计模式</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/01/25/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/" rel="prev" title="单例模式">
+      <i class="fa fa-chevron-left"></i> 单例模式
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
   
   
   
 
-  
-
+  </div>
 
 
           </div>
           
+    <div class="comments" id="gitalk-container"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -302,6 +395,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#原型模式"><span class="nav-number">1.</span> <span class="nav-text">原型模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#prototype-原型模式的应用"><span class="nav-number">2.</span> <span class="nav-text">prototype 原型模式的应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JavaScript-的原型与原型链"><span class="nav-number">3.</span> <span class="nav-text">JavaScript 的原型与原型链</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一个简单的深拷贝"><span class="nav-number">4.</span> <span class="nav-text">一个简单的深拷贝</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#另外一个深拷贝"><span class="nav-number">5.</span> <span class="nav-text">另外一个深拷贝</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -560,6 +654,25 @@ window.addEventListener('pjax:success', () => {
 
   
 
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID: 'a5e0a164b4c7c72f9f25',
+      clientSecret: 'fb8d8950376aa9315351770b8dd8deb9fd66ab2c',
+      repo: 'Ginger-Jiang.github.io',
+      owner: 'Ginger-Jiang',
+      admin: ['Ginger-Jiang'],
+      id: 'b77ca8958e97ec3a69e2f0560ca2d124',
+        language: 'zh-CN',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
 
     </div>
 </body>

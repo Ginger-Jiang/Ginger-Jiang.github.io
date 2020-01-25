@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-01-24T16:41:36.575Z</updated>
+  <updated>2020-01-25T14:09:58.079Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>原型模式</title>
+    <link href="http://yoursite.com/2020/01/25/%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/"/>
+    <id>http://yoursite.com/2020/01/25/%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/</id>
+    <published>2020-01-25T14:09:38.000Z</published>
+    <updated>2020-01-25T14:09:58.079Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="原型模式"><a href="#原型模式" class="headerlink" title="原型模式"></a>原型模式</h2><blockquote><p>在 JavaScript 中, Object.create() 是对原型模式的最好实现.</p></blockquote><h2 id="prototype-原型模式的应用"><a href="#prototype-原型模式的应用" class="headerlink" title="prototype 原型模式的应用"></a>prototype 原型模式的应用</h2><blockquote><p>JavaScript 中不存在 class , ES6 中 class 也只是原型继承的语法糖, 在 js 中我们常用的是通过 prototype 模拟类来得到类的实例, 实现实例间数据、方法的共享.</p></blockquote><h2 id="JavaScript-的原型与原型链"><a href="#JavaScript-的原型与原型链" class="headerlink" title="JavaScript 的原型与原型链"></a>JavaScript 的原型与原型链</h2><p>在 JavaScript 中, 创建一个对象有多种方式</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 通过 Object 构造函数创建对象</span></span><br><span class="line"><span class="keyword">const</span> obj = <span class="keyword">new</span> <span class="built_in">Object</span>(&#123;&#125;)</span><br><span class="line"><span class="comment">// 通过 create 创建对象</span></span><br><span class="line"><span class="keyword">const</span> obj2 = <span class="built_in">Object</span>.create(&#123;&#125;)</span><br><span class="line"><span class="comment">// 字面量方式创建对象</span></span><br><span class="line"><span class="keyword">const</span> obj3 = &#123;<span class="attr">name</span>: <span class="string">'Ginger'</span>&#125;</span><br><span class="line"><span class="comment">// ...</span></span><br></pre></td></tr></table></figure><ul><li>在 JavaScript 中每一个构造函数都有一个 prototype 属性, 该原型对象指向构造函数的原型对象, 原型对象中 construtor 指回该构造函数</li><li>每个实例对象, 都有一个 <code>__proto__</code> 属性, 该属性指向创建该实例对象的构造函数的原型对象</li></ul><p>通过 new 关键字, 获得 Fn 构造函数的实例对象, f 实例对象上并没有 hi 方法, 但是我们可以调用成功, 便是因为原型链的存在.</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Fn</span>(<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name = name</span><br><span class="line">  <span class="keyword">this</span>.age = age</span><br><span class="line">&#125;</span><br><span class="line">Fn.prototype.hi = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'Hi'</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> f = <span class="keyword">new</span> Fn()</span><br><span class="line">f.hi() <span class="comment">// Hi</span></span><br><span class="line"><span class="built_in">console</span>.log(f.__proto__ === Fn.prototype) <span class="comment">// true</span></span><br></pre></td></tr></table></figure><h2 id="一个简单的深拷贝"><a href="#一个简单的深拷贝" class="headerlink" title="一个简单的深拷贝"></a>一个简单的深拷贝</h2><p>通过两个 api 对 obj 对象进行拷贝, 得到 obj2 改变 obj2 后, obj 内容未发生改变, 但是如果 obj 不是一个严格 json 格式的数据, 他的值是还是一个对象的时候, 这个就无法处理了</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">  name:<span class="string">'Ginger'</span>,</span><br><span class="line">  age:<span class="number">24</span>,</span><br><span class="line">  web:[<span class="string">'html'</span>, <span class="string">'js'</span>, <span class="string">'css'</span>]</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> obj2 = <span class="built_in">JSON</span>.parse(<span class="built_in">JSON</span>.stringify(obj))</span><br><span class="line">obj2.web.splice(<span class="number">0</span>,<span class="number">1</span>)</span><br><span class="line"><span class="built_in">console</span>.log(obj.web) <span class="comment">// ['html', 'js', 'css']</span></span><br><span class="line"><span class="built_in">console</span>.log(obj2.web) <span class="comment">// ["js", "css"]</span></span><br></pre></td></tr></table></figure><h2 id="另外一个深拷贝"><a href="#另外一个深拷贝" class="headerlink" title="另外一个深拷贝"></a>另外一个深拷贝</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">DeepClone</span>(<span class="params">obj</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 边界判断</span></span><br><span class="line">  <span class="keyword">if</span>(<span class="keyword">typeof</span> obj !== <span class="string">'object'</span> || obj === <span class="literal">null</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> obj</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 初始化结果值</span></span><br><span class="line">  <span class="keyword">let</span> res = &#123;&#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 如果是数组</span></span><br><span class="line">  <span class="keyword">if</span>(obj.constructor === <span class="string">'array'</span>) &#123;</span><br><span class="line">    res = []</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">let</span> i <span class="keyword">in</span> obj) &#123;</span><br><span class="line">    <span class="keyword">if</span>(obj.hasOwnProperty(i)) &#123;</span><br><span class="line">      <span class="comment">// 如果值是对象 递归调用</span></span><br><span class="line">      res[i] = DeepClone(obj[i])</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> res</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;原型模式&quot;&gt;&lt;a href=&quot;#原型模式&quot; class=&quot;headerlink&quot; title=&quot;原型模式&quot;&gt;&lt;/a&gt;原型模式&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;在 JavaScript 中, Object.create() 是对原型模式的最好实现.&lt;/p&gt;
+
+      
+    
+    </summary>
+    
+    
+      <category term="设计模式" scheme="http://yoursite.com/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+    
+      <category term="设计模式" scheme="http://yoursite.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+  </entry>
   
   <entry>
     <title>单例模式</title>
