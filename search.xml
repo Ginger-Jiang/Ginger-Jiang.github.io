@@ -1,6 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>vue安装使用</title>
+    <url>/2020/02/02/vue%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/</url>
+    <content><![CDATA[<h2 id="Vue-Devtools"><a href="#Vue-Devtools" class="headerlink" title="Vue Devtools"></a>Vue Devtools</h2><p><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">Devtools</a> 是一个 Vue 官方提供的浏览器插件, 他可以让我们在开发过程中国更直观更友好的的在浏览器中对 Vue 项目进行审查和调试</p>
+<h3 id="版本"><a href="#版本" class="headerlink" title="版本"></a>版本</h3><p>Vue 分为开发版本和生产版本</p>
+<ul>
+<li>开发版本 - 包含完整的警告和调试模式</li>
+<li>生产版本 - 删除了警告</li>
+</ul>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><h3 id="直接引入-本地文件或-CDN"><a href="#直接引入-本地文件或-CDN" class="headerlink" title="直接引入(本地文件或 CDN)"></a>直接引入(本地文件或 CDN)</h3><p>在 html 文件中, 我们如果需要使用 Vue 可以直接使用 script 标签进行引入</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"ie=edge"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 最新版本 适合开发环境 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://cdn.jsdelivr.net/npm/vue/dist/vue.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 指定版本 适合生产环境追溯问题 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://cdn.jsdelivr.net/npm/vue@2.6.11"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="NPM"><a href="#NPM" class="headerlink" title="NPM"></a>NPM</h3><p>在使用 Vue 开发大型应用时, 推荐使用 NPM 安装, NPM 能够很好的与 webpack 配合使用.</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> npm install vue</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="命令行工具"><a href="#命令行工具" class="headerlink" title="命令行工具"></a>命令行工具</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">vue create hello-word</span><br></pre></td></tr></table></figure>
+
+<p>Vue 提供了一个官方的 Cli, 为单页面应用(SPA)快速搭建繁杂的脚手架.</p>
+<ul>
+<li><a href="https://github.com/vuejs/vue-cli" target="_blank" rel="noopener">Cli GitHub</a></li>
+<li><a href="https://cli.vuejs.org/zh/" target="_blank" rel="noopener">Cli 文档</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Vue</category>
+      </categories>
+      <tags>
+        <tag>Vue</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>装饰器模式</title>
     <url>/2020/01/26/%E8%A3%85%E9%A5%B0%E5%99%A8%E6%A8%A1%E5%BC%8F/</url>
     <content><![CDATA[<h2 id="装饰器模式"><a href="#装饰器模式" class="headerlink" title="装饰器模式"></a>装饰器模式</h2><blockquote>
