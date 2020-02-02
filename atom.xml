@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-02-02T11:33:14.696Z</updated>
+  <updated>2020-02-02T11:37:35.622Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>vue实例</title>
+    <link href="http://yoursite.com/2020/02/02/vue%E5%AE%9E%E4%BE%8B/"/>
+    <id>http://yoursite.com/2020/02/02/vue%E5%AE%9E%E4%BE%8B/</id>
+    <published>2020-02-02T11:37:22.000Z</published>
+    <updated>2020-02-02T11:37:35.622Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="创建一个-Vue-实例"><a href="#创建一个-Vue-实例" class="headerlink" title="创建一个 Vue 实例"></a>创建一个 Vue 实例</h2><p>Vue 实例通过 <code>new</code> 一个 <code>Vue</code> 函数得到<br>在创建一个 <code>Vue</code> 实例的时候, 我们可以通过传入一个<strong>选项对象</strong>来构建我们需要的行为.</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> vm = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  <span class="comment">// 选项</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure><h2 id="数据与方法"><a href="#数据与方法" class="headerlink" title="数据与方法"></a>数据与方法</h2><p>当一个 <code>Vue</code> 实例被创建时, 它会将 <code>data</code> 对象中所有的属性加入到 <code>Vue</code> 的响应式系统中, 当他们发生改变时, 视图将会产生响应, 进行更新</p><blockquote><p>data 中数据只有在实例创建时就已存在的属性才是响应式的</p></blockquote><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 数据对象</span></span><br><span class="line"><span class="keyword">var</span> data = &#123; <span class="attr">name</span>: <span class="string">'jack'</span> &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 将数据对象加入到 Vue 实例中</span></span><br><span class="line"><span class="keyword">var</span> vm = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">'app'</span></span><br><span class="line">  data: data</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取实例上的属性 返回源数据中对应的字段</span></span><br><span class="line">vm.name == data.a <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 设置属性也会影响到原始数据</span></span><br><span class="line">vm.name = <span class="string">'Ginger'</span></span><br><span class="line">data.a <span class="comment">// Ginger</span></span><br></pre></td></tr></table></figure><p><code>Vue</code> 实例暴露了一系列内置实例属性与方法, 他们都有*<strong>*$**</strong> 前缀</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vm.$data === data <span class="comment">// true</span></span><br><span class="line">vm.$el === <span class="built_in">document</span>.getElementById(<span class="string">'app'</span>) <span class="comment">// true</span></span><br></pre></td></tr></table></figure><h2 id="实例生命周期"><a href="#实例生命周期" class="headerlink" title="实例生命周期"></a>实例生命周期</h2><p><code>Vue</code> 实例在创建时, 需要经过一系列的初始化过程, 在这个过程中, 会运行一些叫做<strong>生命周期钩子</strong>的函数, 这些钩子函数为用户提供了在实例创建过程中添加自己代码的机会</p><blockquote><p>生命周期钩子中的<code>this</code>上下文指向调用他的<code>vue</code>实例<br>不要使用箭头函数</p></blockquote><h3 id="生命周期钩子"><a href="#生命周期钩子" class="headerlink" title="生命周期钩子"></a>生命周期钩子</h3><ul><li>beforeCreate 实例创建前</li><li>created 实例创建后</li><li>beforeMount 挂载前</li><li>Mounted 挂载完毕</li><li>beforeupdate 实例数据更新前</li><li>updated 数据更新完毕</li><li>beforeDestroy 实例销毁前</li><li>destroyed 实例销毁完毕</li></ul><h3 id="生命周期图示"><a href="#生命周期图示" class="headerlink" title="生命周期图示"></a>生命周期图示</h3><p><img data-src="../image/vue%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.png" alt="生命周期"></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;创建一个-Vue-实例&quot;&gt;&lt;a href=&quot;#创建一个-Vue-实例&quot; class=&quot;headerlink&quot; title=&quot;创建一个 Vue 实例&quot;&gt;&lt;/a&gt;创建一个 Vue 实例&lt;/h2&gt;&lt;p&gt;Vue 实例通过 &lt;code&gt;new&lt;/code&gt; 一个 &lt;code
+      
+    
+    </summary>
+    
+    
+      <category term="Vue" scheme="http://yoursite.com/categories/Vue/"/>
+    
+    
+      <category term="Vue" scheme="http://yoursite.com/tags/Vue/"/>
+    
+  </entry>
   
   <entry>
     <title>vue安装使用</title>
