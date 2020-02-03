@@ -1,6 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>vue条件渲染</title>
+    <url>/2020/02/03/vue%E6%9D%A1%E4%BB%B6%E6%B8%B2%E6%9F%93/</url>
+    <content><![CDATA[<h2 id="v-if"><a href="#v-if" class="headerlink" title="v-if"></a>v-if</h2><p><code>v-if</code> 指令用于条件性的渲染一块内容. 该内容只有在表达式结果返回 <code>true</code> 值的时候被渲染</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">v-if</span>=<span class="string">"true"</span>&gt;</span>v-if表达式结果为真时显示<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="元素"><a href="#元素" class="headerlink" title=" 元素"></a><template> 元素</h3><p><code>&lt;template&gt;</code> 元素是 Vue 给我们提供的内置元素, 它不会显示在页面中<br>如果我们要对多个元素使用<code>v-if</code>指令, 可以使用 <code>&lt;template&gt;</code> 元素包裹所有需要作用的元素</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span> <span class="attr">v-if</span>=<span class="string">"true"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">h3</span>&gt;</span>title<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>...content<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="v-else"><a href="#v-else" class="headerlink" title="v-else"></a>v-else</h3><p>可以使用 <code>v-else</code> 指令来表示 <code>v-if</code> 的’else’块<br><code>v-else</code> 元素必须紧跟在带 <code>v-if</code> 或者 <code>v-else-if</code> 的元素后面, 否则它将不会被识别</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">v-if</span>=<span class="string">"Math.random() &gt; 0.5"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">v-else</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="v-else-if"><a href="#v-else-if" class="headerlink" title="v-else-if"></a>v-else-if</h3><p><code>v-else-if</code>, 可以充当<code>v-if</code>的’else-if’块, 可以连续使用, 也必须紧跟在带<code>v-if</code>或者<code>v-else-if</code>元素之后</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">v-if</span>=<span class="string">"type==='A'"</span>&gt;</span>A<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">v-else-if</span>=<span class="string">"type==='B'"</span>&gt;</span>B<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">v-else-if</span>=<span class="string">"type==='C'"</span>&gt;</span>C<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">v-else</span>=<span class="string">"type==='D'"</span>&gt;</span>A<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="key"><a href="#key" class="headerlink" title="key"></a>key</h3><p>Vue 会尽可能高效的渲染元素, 通常会复用已有元素而不是从头开始渲染, 这么做会使 Vue 变得非常快<br>但有时候, 我们并不希望使用此特性, Vue 为我们一种方式来表达不复用, 只需要添加一个具有唯一值的<code>key</code>属性即可</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div class&#x3D;&quot;hello&quot;&gt;</span><br><span class="line">    &lt;template v-if&#x3D;&quot;loginType&quot;&gt;</span><br><span class="line">      &lt;label&gt;Username&lt;&#x2F;label&gt;</span><br><span class="line">      &lt;input placeholder&#x3D;&quot;Enter your username&quot; key&#x3D;&quot;username&quot; &#x2F;&gt;</span><br><span class="line">    &lt;&#x2F;template&gt;</span><br><span class="line">    &lt;template v-else&gt;</span><br><span class="line">      &lt;label&gt;Email&lt;&#x2F;label&gt;</span><br><span class="line">      &lt;input placeholder&#x3D;&quot;Enter your email address&quot; key&#x3D;&quot;pwd&quot; &#x2F;&gt;</span><br><span class="line">    &lt;&#x2F;template&gt;</span><br><span class="line">    &lt;button @click&#x3D;&quot;handle&quot;&gt;toog&lt;&#x2F;button&gt;</span><br><span class="line">  &lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">  name: &#39;HelloWorld&#39;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    handle() &#123;</span><br><span class="line">      this.loginType &#x3D; !this.loginType</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  data() &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">      loginType: true</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="v-show"><a href="#v-show" class="headerlink" title="v-show"></a>v-show</h2><p>另一个根据条件展示元素的选项是<code>v-show</code>指令, 用法与<code>v-if</code>大致一样:</p>
+<blockquote>
+<p>v-show 不支持 <template> 元素, 也不支持 v-else</p>
+</blockquote>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h1</span> <span class="attr">v-show</span>=<span class="string">"true"</span>&gt;</span>Ginger<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="v-if-vs-v-show"><a href="#v-if-vs-v-show" class="headerlink" title="v-if vs v-show"></a>v-if vs v-show</h2><ul>
+<li>v-if 是真正的条件渲染, 他会在切换过程中适当的将事件监听器和子组件适当地被销毁和重建</li>
+<li>v-if 是惰性的, 如果在初始渲染时条件为假, 元素便不会渲染, 只到条件第一次为真时, 才会开始渲染</li>
+<li>v-show 不管初始条件是什么, 元素总是会被渲染, 并且只是基于 CSS 进行切换</li>
+</ul>
+<h2 id="v-if-与-v-show-一起使用"><a href="#v-if-与-v-show-一起使用" class="headerlink" title="v-if 与 v-show 一起使用"></a>v-if 与 v-show 一起使用</h2><p>当<code>v-if</code>与<code>v-for</code>一起使用时, <code>v-for</code>具有比<code>v-if</code>更高的优先级</p>
+<blockquote>
+<p>不推荐同时使用<code>v-if</code>和<code>v-else</code></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Vue</category>
+      </categories>
+      <tags>
+        <tag>Vue</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>vue中class与style绑定</title>
     <url>/2020/02/03/vue%E4%B8%ADclass%E4%B8%8Estyle%E7%BB%91%E5%AE%9A/</url>
     <content><![CDATA[<h2 id="绑定-HTML-Class"><a href="#绑定-HTML-Class" class="headerlink" title="绑定 HTML Class"></a>绑定 HTML Class</h2><p>Vue 对于 class 和 style 上使用<code>v-bind</code>做了专门的增强, 表达式结果的类型除了字符串之外, 还可以是对象或数组</p>
