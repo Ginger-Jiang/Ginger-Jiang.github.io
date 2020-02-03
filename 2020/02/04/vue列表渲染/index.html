@@ -46,15 +46,15 @@
   };
 </script>
 
-  <meta name="description" content="v-for我们可以用v-for指令基于一个数组来渲染一个列表. v-for指令需要使用 item in items形式的特殊语法, 其中items是源数据数组, 而item则是被迭代的数组元素的别名  也可以用of替代in作为分隔符v-for 可以接受整数, 它会将模板重复对应次数v-for 的对象也可以是一个计算属性或一个方法可以在元素上使用 v-for不推荐在同一个元素上直接使用 v-for">
+  <meta name="description" content="v-for我们可以用v-for指令基于一个数组来渲染一个列表. v-for指令需要使用 item in items形式的特殊语法, 其中items是源数据数组, 而item则是被迭代的数组元素的别名  也可以用of替代in作为分隔符v-for 可以接受整数, 它会将模板重复对应次数v-for 的对象也可以是一个计算属性或一个方法可以在&lt;template&gt;元素上使用 v-for不推荐在同">
 <meta property="og:type" content="article">
 <meta property="og:title" content="vue列表渲染">
 <meta property="og:url" content="http://yoursite.com/2020/02/04/vue%E5%88%97%E8%A1%A8%E6%B8%B2%E6%9F%93/index.html">
 <meta property="og:site_name" content="Ginger">
-<meta property="og:description" content="v-for我们可以用v-for指令基于一个数组来渲染一个列表. v-for指令需要使用 item in items形式的特殊语法, 其中items是源数据数组, 而item则是被迭代的数组元素的别名  也可以用of替代in作为分隔符v-for 可以接受整数, 它会将模板重复对应次数v-for 的对象也可以是一个计算属性或一个方法可以在元素上使用 v-for不推荐在同一个元素上直接使用 v-for">
+<meta property="og:description" content="v-for我们可以用v-for指令基于一个数组来渲染一个列表. v-for指令需要使用 item in items形式的特殊语法, 其中items是源数据数组, 而item则是被迭代的数组元素的别名  也可以用of替代in作为分隔符v-for 可以接受整数, 它会将模板重复对应次数v-for 的对象也可以是一个计算属性或一个方法可以在&lt;template&gt;元素上使用 v-for不推荐在同">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-02-03T16:02:05.000Z">
-<meta property="article:modified_time" content="2020-02-03T16:03:02.816Z">
+<meta property="article:modified_time" content="2020-02-03T16:14:40.340Z">
 <meta property="article:author" content="Ginger">
 <meta property="article:tag" content="Vue">
 <meta name="twitter:card" content="summary">
@@ -239,7 +239,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-02-04 00:02:05 / 修改时间：00:03:02" itemprop="dateCreated datePublished" datetime="2020-02-04T00:02:05+08:00">2020-02-04</time>
+              <time title="创建时间：2020-02-04 00:02:05 / 修改时间：00:14:40" itemprop="dateCreated datePublished" datetime="2020-02-04T00:02:05+08:00">2020-02-04</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -280,7 +280,7 @@
       
         <h2 id="v-for"><a href="#v-for" class="headerlink" title="v-for"></a>v-for</h2><p>我们可以用<code>v-for</code>指令基于一个数组来渲染一个列表. <code>v-for</code>指令需要使用 <code>item in items</code>形式的特殊语法, 其中<code>items</code>是源数据数组, 而<code>item</code>则是被迭代的数组元素的<strong>别名</strong></p>
 <blockquote>
-<p>也可以用<code>of</code>替代<code>in</code>作为分隔符<br>v-for 可以接受整数, 它会将模板重复对应次数<br>v-for 的对象也可以是一个计算属性或一个方法<br>可以在<template>元素上使用 v-for<br>不推荐在同一个元素上直接使用 v-for 与 v-if, v-for 的优先级高于 v-if</p>
+<p>也可以用<code>of</code>替代<code>in</code>作为分隔符<br>v-for 可以接受整数, 它会将模板重复对应次数<br>v-for 的对象也可以是一个计算属性或一个方法<br>可以在<code>&lt;template&gt;</code>元素上使用 v-for<br>不推荐在同一个元素上直接使用 v-for 与 v-if, v-for 的优先级高于 v-if</p>
 </blockquote>
 <h3 id="遍历数组"><a href="#遍历数组" class="headerlink" title="遍历数组"></a>遍历数组</h3><ul>
 <li>items 遍历源数据</li>
@@ -335,7 +335,7 @@
 <h2 id="对象变更检测"><a href="#对象变更检测" class="headerlink" title="对象变更检测"></a>对象变更检测</h2><p>由于 JavaScript 限制, Vue 不能检测对象属性的添加或删除<br>对于已创建的 Vue 实例, Vue 不允许动态添加根级别的响应式属性, 但是可以用 <code>Vue.set(object, propertyName, value)</code> 方法向嵌套对象添加响应式属性</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> vm = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">'app'</span>,</span><br><span class="line">  data: &#123;</span><br><span class="line">    obj: &#123;</span><br><span class="line">      name: <span class="string">'ginger'</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 添加单个属性</span></span><br><span class="line">vm.$<span class="keyword">set</span>(vm.obj, 'age', 18)</span><br><span class="line">// 添加多个属性</span><br><span class="line">vm.obj = Object.assign(&#123;&#125;, vm.obj, &#123;</span><br><span class="line">  gender: <span class="number">0</span></span><br><span class="line">  address: <span class="string">'China'</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
-<h3 id="在组件上使用-v-for"><a href="#在组件上使用-v-for" class="headerlink" title="在组件上使用 v-for"></a>在组件上使用 v-for</h3><p>我们可以在任何自定义组件上使用 v-for 但是我们必须定义 key<br>如果要将遍历内容数据传递到组件内, 需要使用 props</p>
+<h2 id="在组件上使用-v-for"><a href="#在组件上使用-v-for" class="headerlink" title="在组件上使用 v-for"></a>在组件上使用 v-for</h2><p>我们可以在任何自定义组件上使用 v-for 但是我们必须定义 key<br>如果要将遍历内容数据传递到组件内, 需要使用 props</p>
 
     </div>
 
@@ -433,7 +433,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#v-for"><span class="nav-number">1.</span> <span class="nav-text">v-for</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#遍历数组"><span class="nav-number">1.1.</span> <span class="nav-text">遍历数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#遍历对象"><span class="nav-number">1.2.</span> <span class="nav-text">遍历对象</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#维护状态"><span class="nav-number">2.</span> <span class="nav-text">维护状态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数组更新检测"><span class="nav-number">3.</span> <span class="nav-text">数组更新检测</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#变异方法"><span class="nav-number">3.1.</span> <span class="nav-text">变异方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#替换数组"><span class="nav-number">3.2.</span> <span class="nav-text">替换数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注意事项"><span class="nav-number">3.3.</span> <span class="nav-text">注意事项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Set-方法"><span class="nav-number">3.4.</span> <span class="nav-text">Set 方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对象变更检测"><span class="nav-number">4.</span> <span class="nav-text">对象变更检测</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#在组件上使用-v-for"><span class="nav-number">4.1.</span> <span class="nav-text">在组件上使用 v-for</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#v-for"><span class="nav-number">1.</span> <span class="nav-text">v-for</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#遍历数组"><span class="nav-number">1.1.</span> <span class="nav-text">遍历数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#遍历对象"><span class="nav-number">1.2.</span> <span class="nav-text">遍历对象</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#维护状态"><span class="nav-number">2.</span> <span class="nav-text">维护状态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数组更新检测"><span class="nav-number">3.</span> <span class="nav-text">数组更新检测</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#变异方法"><span class="nav-number">3.1.</span> <span class="nav-text">变异方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#替换数组"><span class="nav-number">3.2.</span> <span class="nav-text">替换数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注意事项"><span class="nav-number">3.3.</span> <span class="nav-text">注意事项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Set-方法"><span class="nav-number">3.4.</span> <span class="nav-text">Set 方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对象变更检测"><span class="nav-number">4.</span> <span class="nav-text">对象变更检测</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在组件上使用-v-for"><span class="nav-number">5.</span> <span class="nav-text">在组件上使用 v-for</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

@@ -5,7 +5,7 @@
     <url>/2020/02/04/vue%E5%88%97%E8%A1%A8%E6%B8%B2%E6%9F%93/</url>
     <content><![CDATA[<h2 id="v-for"><a href="#v-for" class="headerlink" title="v-for"></a>v-for</h2><p>我们可以用<code>v-for</code>指令基于一个数组来渲染一个列表. <code>v-for</code>指令需要使用 <code>item in items</code>形式的特殊语法, 其中<code>items</code>是源数据数组, 而<code>item</code>则是被迭代的数组元素的<strong>别名</strong></p>
 <blockquote>
-<p>也可以用<code>of</code>替代<code>in</code>作为分隔符<br>v-for 可以接受整数, 它会将模板重复对应次数<br>v-for 的对象也可以是一个计算属性或一个方法<br>可以在<template>元素上使用 v-for<br>不推荐在同一个元素上直接使用 v-for 与 v-if, v-for 的优先级高于 v-if</p>
+<p>也可以用<code>of</code>替代<code>in</code>作为分隔符<br>v-for 可以接受整数, 它会将模板重复对应次数<br>v-for 的对象也可以是一个计算属性或一个方法<br>可以在<code>&lt;template&gt;</code>元素上使用 v-for<br>不推荐在同一个元素上直接使用 v-for 与 v-if, v-for 的优先级高于 v-if</p>
 </blockquote>
 <h3 id="遍历数组"><a href="#遍历数组" class="headerlink" title="遍历数组"></a>遍历数组</h3><ul>
 <li>items 遍历源数据</li>
@@ -60,7 +60,7 @@
 <h2 id="对象变更检测"><a href="#对象变更检测" class="headerlink" title="对象变更检测"></a>对象变更检测</h2><p>由于 JavaScript 限制, Vue 不能检测对象属性的添加或删除<br>对于已创建的 Vue 实例, Vue 不允许动态添加根级别的响应式属性, 但是可以用 <code>Vue.set(object, propertyName, value)</code> 方法向嵌套对象添加响应式属性</p>
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> vm = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">'app'</span>,</span><br><span class="line">  data: &#123;</span><br><span class="line">    obj: &#123;</span><br><span class="line">      name: <span class="string">'ginger'</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 添加单个属性</span></span><br><span class="line">vm.$<span class="keyword">set</span>(vm.obj, 'age', 18)</span><br><span class="line">// 添加多个属性</span><br><span class="line">vm.obj = Object.assign(&#123;&#125;, vm.obj, &#123;</span><br><span class="line">  gender: <span class="number">0</span></span><br><span class="line">  address: <span class="string">'China'</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
-<h3 id="在组件上使用-v-for"><a href="#在组件上使用-v-for" class="headerlink" title="在组件上使用 v-for"></a>在组件上使用 v-for</h3><p>我们可以在任何自定义组件上使用 v-for 但是我们必须定义 key<br>如果要将遍历内容数据传递到组件内, 需要使用 props</p>
+<h2 id="在组件上使用-v-for"><a href="#在组件上使用-v-for" class="headerlink" title="在组件上使用 v-for"></a>在组件上使用 v-for</h2><p>我们可以在任何自定义组件上使用 v-for 但是我们必须定义 key<br>如果要将遍历内容数据传递到组件内, 需要使用 props</p>
 ]]></content>
       <categories>
         <category>Vue</category>
@@ -75,7 +75,7 @@
     <content><![CDATA[<h2 id="v-if"><a href="#v-if" class="headerlink" title="v-if"></a>v-if</h2><p><code>v-if</code> 指令用于条件性的渲染一块内容. 该内容只有在表达式结果返回 <code>true</code> 值的时候被渲染</p>
 <figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">v-if</span>=<span class="string">"true"</span>&gt;</span>v-if表达式结果为真时显示<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="元素"><a href="#元素" class="headerlink" title=" 元素"></a><template> 元素</h3><p><code>&lt;template&gt;</code> 元素是 Vue 给我们提供的内置元素, 它不会显示在页面中<br>如果我们要对多个元素使用<code>v-if</code>指令, 可以使用 <code>&lt;template&gt;</code> 元素包裹所有需要作用的元素</p>
+<h3 id="lt-template-gt-元素"><a href="#lt-template-gt-元素" class="headerlink" title="&lt;template&gt; 元素"></a><code>&lt;template&gt;</code> 元素</h3><p><code>&lt;template&gt;</code> 元素是 Vue 给我们提供的内置元素, 它不会显示在页面中<br>如果我们要对多个元素使用<code>v-if</code>指令, 可以使用 <code>&lt;template&gt;</code> 元素包裹所有需要作用的元素</p>
 <figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span> <span class="attr">v-if</span>=<span class="string">"true"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">h3</span>&gt;</span>title<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>...content<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <h3 id="v-else"><a href="#v-else" class="headerlink" title="v-else"></a>v-else</h3><p>可以使用 <code>v-else</code> 指令来表示 <code>v-if</code> 的’else’块<br><code>v-else</code> 元素必须紧跟在带 <code>v-if</code> 或者 <code>v-else-if</code> 的元素后面, 否则它将不会被识别</p>
@@ -89,7 +89,7 @@
 
 <h2 id="v-show"><a href="#v-show" class="headerlink" title="v-show"></a>v-show</h2><p>另一个根据条件展示元素的选项是<code>v-show</code>指令, 用法与<code>v-if</code>大致一样:</p>
 <blockquote>
-<p>v-show 不支持 <template> 元素, 也不支持 v-else</p>
+<p>v-show 不支持 <code>&lt;template&gt;</code> 元素, 也不支持 v-else</p>
 </blockquote>
 <figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h1</span> <span class="attr">v-show</span>=<span class="string">"true"</span>&gt;</span>Ginger<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
@@ -100,7 +100,7 @@
 </ul>
 <h2 id="v-if-与-v-show-一起使用"><a href="#v-if-与-v-show-一起使用" class="headerlink" title="v-if 与 v-show 一起使用"></a>v-if 与 v-show 一起使用</h2><p>当<code>v-if</code>与<code>v-for</code>一起使用时, <code>v-for</code>具有比<code>v-if</code>更高的优先级</p>
 <blockquote>
-<p>不推荐同时使用<code>v-if</code>和<code>v-else</code></p>
+<p>不推荐同时使用 <code>v-if</code> 和 <code>v-else</code></p>
 </blockquote>
 ]]></content>
       <categories>
