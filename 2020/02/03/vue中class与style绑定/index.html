@@ -46,20 +46,20 @@
   };
 </script>
 
-  <meta name="description" content="JavaScript –&gt; 简称 js JavaScript 历史  ​ 1995 年，网景公司希望能在静态 HTML 页面上添加一些动态效果, 让 Brendan Eich 设计出了 JavaScript 语言(用时 2 周)  JavaScript 分为三个部分:   ECMAScript 标准—-js 的基本语法 DOM—Document Object Model 文档对象模型 BOM">
+  <meta name="description" content="绑定 HTML ClassVue 对于 class 和 style 上使用v-bind做了专门的增强, 表达式结果的类型除了字符串之外, 还可以是对象或数组 对象语法我们可以传给v-bind:class一个对象, 以动态的切换 class. 1234567891011121314151617181920212223242526272829303132333435363738394041424344">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JavaScript简介">
-<meta property="og:url" content="http://yoursite.com/2019/12/31/js%E7%AE%80%E4%BB%8B/index.html">
+<meta property="og:title" content="vue中class与style绑定">
+<meta property="og:url" content="http://yoursite.com/2020/02/03/vue%E4%B8%ADclass%E4%B8%8Estyle%E7%BB%91%E5%AE%9A/index.html">
 <meta property="og:site_name" content="Ginger">
-<meta property="og:description" content="JavaScript –&gt; 简称 js JavaScript 历史  ​ 1995 年，网景公司希望能在静态 HTML 页面上添加一些动态效果, 让 Brendan Eich 设计出了 JavaScript 语言(用时 2 周)  JavaScript 分为三个部分:   ECMAScript 标准—-js 的基本语法 DOM—Document Object Model 文档对象模型 BOM">
+<meta property="og:description" content="绑定 HTML ClassVue 对于 class 和 style 上使用v-bind做了专门的增强, 表达式结果的类型除了字符串之外, 还可以是对象或数组 对象语法我们可以传给v-bind:class一个对象, 以动态的切换 class. 1234567891011121314151617181920212223242526272829303132333435363738394041424344">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2019-12-31T08:01:47.000Z">
-<meta property="article:modified_time" content="2020-01-03T09:57:32.561Z">
+<meta property="article:published_time" content="2020-02-03T07:58:33.000Z">
+<meta property="article:modified_time" content="2020-02-03T07:58:55.957Z">
 <meta property="article:author" content="Ginger">
-<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="Vue">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://yoursite.com/2019/12/31/js%E7%AE%80%E4%BB%8B/">
+<link rel="canonical" href="http://yoursite.com/2020/02/03/vue%E4%B8%ADclass%E4%B8%8Estyle%E7%BB%91%E5%AE%9A/">
 
 
 <script id="page-configurations">
@@ -71,7 +71,7 @@
   };
 </script>
 
-  <title>JavaScript简介 | Ginger</title>
+  <title>vue中class与style绑定 | Ginger</title>
   
 
 
@@ -215,7 +215,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/31/js%E7%AE%80%E4%BB%8B/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/03/vue%E4%B8%ADclass%E4%B8%8Estyle%E7%BB%91%E5%AE%9A/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/head_pic.jpeg">
@@ -228,7 +228,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          JavaScript简介
+          vue中class与style绑定
         </h1>
 
         <div class="post-meta">
@@ -237,24 +237,18 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2019-12-31 16:01:47" itemprop="dateCreated datePublished" datetime="2019-12-31T16:01:47+08:00">2019-12-31</time>
+              <time title="创建时间：2020-02-03 15:58:33 / 修改时间：15:58:55" itemprop="dateCreated datePublished" datetime="2020-02-03T15:58:33+08:00">2020-02-03</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-03 17:57:32" itemprop="dateModified" datetime="2020-01-03T17:57:32+08:00">2020-01-03</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
-                    <span itemprop="name">JavaScript</span>
+                  <a href="/categories/Vue/" itemprop="url" rel="index">
+                    <span itemprop="name">Vue</span>
                   </a>
                 </span>
             </span>
@@ -265,14 +259,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>809</span>
+              <span>3.4k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>3 分钟</span>
             </span>
 
         </div>
@@ -284,52 +278,22 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h4 id="JavaScript-–-gt-简称-js"><a href="#JavaScript-–-gt-简称-js" class="headerlink" title="JavaScript –&gt; 简称 js"></a>JavaScript –&gt; 简称 js</h4><blockquote>
-<p>JavaScript 历史</p>
-</blockquote>
-<p>​ 1995 年，网景公司希望能在静态 HTML 页面上添加一些动态效果, 让 Brendan Eich 设计出了 JavaScript 语言(用时 2 周)</p>
-<blockquote>
-<p>JavaScript 分为三个部分:</p>
-</blockquote>
-<ul>
-<li>ECMAScript 标准—-js 的基本语法</li>
-<li>DOM—Document Object Model 文档对象模型</li>
-<li>BOM—Browser Object Model 浏览器对象模型</li>
-</ul>
-<blockquote>
-<p>JavaScript 是什么?</p>
-</blockquote>
-<ul>
-<li>是一门脚本语言</li>
-<li>是一门解释性语言</li>
-<li>是一门弱类型的语言</li>
-<li>是一门动态类型的语言</li>
-<li>是一门基于对象的语言</li>
-</ul>
-<blockquote>
-<p>JavaScript 代码写在哪里</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">第一种:写在html文件中--&gt;使用script标签包裹代码</span><br><span class="line">&lt;script&gt;</span><br><span class="line">	alert(<span class="string">'这对script标签中的就是js代码)</span></span><br><span class="line"><span class="string">&lt;/script&gt;</span></span><br><span class="line"><span class="string">第二种:可以单独写在js文件中--&gt;js文件中不需要使用&lt;script&gt;标签</span></span><br></pre></td></tr></table></figure>
+        <h2 id="绑定-HTML-Class"><a href="#绑定-HTML-Class" class="headerlink" title="绑定 HTML Class"></a>绑定 HTML Class</h2><p>Vue 对于 class 和 style 上使用<code>v-bind</code>做了专门的增强, 表达式结果的类型除了字符串之外, 还可以是对象或数组</p>
+<h3 id="对象语法"><a href="#对象语法" class="headerlink" title="对象语法"></a>对象语法</h3><p>我们可以传给<code>v-bind:class</code>一个对象, 以动态的切换 class.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div id&#x3D;&quot;app&quot;&gt;</span><br><span class="line">    &lt;!-- 传递一个对象 --&gt;</span><br><span class="line">    &lt;div :class&#x3D;&quot;&#123; box: showBox, box1: showBox &#125;&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">    &lt;!-- class 与 绑定对象共存 --&gt;</span><br><span class="line">    &lt;div class&#x3D;&quot;box&quot; :class&#x3D;&quot;&#123; box1: showBox &#125;&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">    &lt;!-- 接受一个对象 --&gt;</span><br><span class="line">    &lt;div :class&#x3D;&quot;classObj&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">    &lt;!-- 接受一个计算属性 --&gt;</span><br><span class="line">    &lt;div :class&#x3D;&quot;isShowBox&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">  &lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">  name: &#39;HelloWorld&#39;,</span><br><span class="line">  data() &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">      showBox: true,</span><br><span class="line">      classObj: &#123;</span><br><span class="line">        box: true,</span><br><span class="line">        box1: false</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  computed: &#123;</span><br><span class="line">    isShowBox() &#123;</span><br><span class="line">      return &#123;</span><br><span class="line">        box: true,</span><br><span class="line">        box1: true</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br><span class="line"></span><br><span class="line">&lt;style&gt;</span><br><span class="line">.box &#123;</span><br><span class="line">  border: 1px solid red;</span><br><span class="line">  width: 100px;</span><br><span class="line">  height: 100px;</span><br><span class="line">&#125;</span><br><span class="line">.box1 &#123;</span><br><span class="line">  width: 60px;</span><br><span class="line">  height: 60px;</span><br><span class="line">  background-color: pink;</span><br><span class="line">&#125;</span><br><span class="line">&lt;&#x2F;style&gt;</span><br></pre></td></tr></table></figure>
 
-<blockquote>
-<p><code>&lt;script&gt;</code>标签的属性:</p>
-</blockquote>
-<ul>
-<li>src 表示要引入的外部文件</li>
-<li>type 表示脚本语言的类型 text/javascript,默认值就是它.</li>
-<li>language 已废弃。原来用于代码使用的脚本语言。由于大多数浏览器忽略它，所以不要用了。</li>
-<li>defer：可选。(等页面加载完成后,才执行 js)表示脚本可以延迟到文档完全被解析和显示之后再执行。由于大多数浏览器不支持，故很少用。</li>
-<li>charset：可选。表示通过 src 属性指定的字符集。由于大多数浏览器忽略它，所以很少有人用它。</li>
-<li>async:可选,能简单实现 js 的异步加载.</li>
-</ul>
-<blockquote>
-<p>注意事项</p>
-</blockquote>
-<ul>
-<li><code>&lt;script&gt;</code>标签尽量放在<code>&lt;body&gt;</code>标签内,放在结束的<code>&lt;/body&gt;</code>标签前</li>
-<li>一个<code>&lt;script&gt;</code>标签如果用于引入外部 js 文件,就不要在标签内写 script 代码</li>
-<li>html 文件中可以同时存在多对<code>&lt;script&gt;</code>标签,浏览器会依次解析执行</li>
-</ul>
+<h3 id="数组语法"><a href="#数组语法" class="headerlink" title="数组语法"></a>数组语法</h3><p>我们还可以把一个数组传给 <code>v-bind:class</code>, 应用一个 class 列表</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div id&#x3D;&quot;app&quot;&gt;</span><br><span class="line">    &lt;!-- 接受一个数组 --&gt;</span><br><span class="line">    &lt;div :class&#x3D;&quot;clsasArr&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">    &lt;!-- 使用表达式 --&gt;</span><br><span class="line">    &lt;div :class&#x3D;&quot;[...clsasArr]&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">    &lt;!-- 使用三元表达式 --&gt;</span><br><span class="line">    &lt;div :class&#x3D;&quot;[showBox ? &#39;box&#39; : &#39;&#39;]&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">    &lt;!-- 对象与数组同时使用 --&gt;</span><br><span class="line">    &lt;div :class&#x3D;&quot;[&#123; box: showBox &#125;, &#39;box1&#39;]&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">  &lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">  name: &#39;HelloWorld&#39;,</span><br><span class="line">  data() &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">      showBox: true,</span><br><span class="line">      clsasArr: [&#39;box&#39;, &#39;box1&#39;]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br><span class="line"></span><br><span class="line">&lt;style&gt;</span><br><span class="line">.box &#123;</span><br><span class="line">  border: 1px solid red;</span><br><span class="line">&#125;</span><br><span class="line">.box1 &#123;</span><br><span class="line">  width: 60px;</span><br><span class="line">  height: 60px;</span><br><span class="line">  background-color: pink;</span><br><span class="line">&#125;</span><br><span class="line">&lt;&#x2F;style&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="用于组件上"><a href="#用于组件上" class="headerlink" title="用于组件上"></a>用于组件上</h3><p>当我们在一个自定义组件上使用 <code>class</code> 属性时, 这些 class 将被添加到该组件的根元素上, 这个元素上已存在的 class 不会被覆盖</p>
+<h2 id="绑定内联样式"><a href="#绑定内联样式" class="headerlink" title="绑定内联样式"></a>绑定内联样式</h2><h3 id="对象语法-1"><a href="#对象语法-1" class="headerlink" title="对象语法"></a>对象语法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div id&#x3D;&quot;app&quot;&gt;</span><br><span class="line">    &lt;!-- 内联样式 --&gt;</span><br><span class="line">    &lt;div</span><br><span class="line">      class&#x3D;&quot;box&quot;</span><br><span class="line">      :style&#x3D;&quot;&#123; width: width + &#39;px&#39;, height: height + &#39;px&#39; &#125;&quot;</span><br><span class="line">    &gt;&lt;&#x2F;div&gt;</span><br><span class="line">    &lt;!-- 直接传入对象 --&gt;</span><br><span class="line">    &lt;div :style&#x3D;&quot;style&quot;&gt;box&lt;&#x2F;div&gt;</span><br><span class="line">  &lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">  name: &#39;HelloWorld&#39;,</span><br><span class="line">  data() &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">      width: 100,</span><br><span class="line">      height: 100,</span><br><span class="line">      style: &#123;</span><br><span class="line">        backgroundColor: &#39;pink&#39;,</span><br><span class="line">        color: &#39;#000&#39;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br><span class="line"></span><br><span class="line">&lt;style&gt;</span><br><span class="line">div.box &#123;</span><br><span class="line">  border: 1px solid red;</span><br><span class="line">&#125;</span><br><span class="line">&lt;&#x2F;style&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="数组语法-1"><a href="#数组语法-1" class="headerlink" title="数组语法"></a>数组语法</h3><p><code>v-bind:style</code> 的数组语法可以将多个样式对象应用到同一个元素上</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div id&#x3D;&quot;app&quot;&gt;</span><br><span class="line">    &lt;div :style&#x3D;&quot;arr&quot;&gt;box&lt;&#x2F;div&gt;</span><br><span class="line">  &lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">  name: &quot;HelloWorld&quot;,</span><br><span class="line">  data() &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">      arr: [&#123; color: &quot;red&quot; &#125;, &#123; border: &quot;1px solid red&quot; &#125;]</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br><span class="line"></span><br><span class="line">&lt;style&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="自动添加前缀"><a href="#自动添加前缀" class="headerlink" title="自动添加前缀"></a>自动添加前缀</h3><p>当 <code>v-bind:style</code> 使用需要添加浏览器引擎前缀的 CSS 属性时，如 transform，Vue.js 会自动侦测并添加相应的前缀。</p>
+<h3 id="多重值"><a href="#多重值" class="headerlink" title="多重值"></a>多重值</h3><p>可以为 style 绑定中的属性提供一个包含多个值的数组，常用于提供多个带前缀的值，例如：<br>这样写只会渲染数组中最后一个被浏览器支持的值。在本例中，如果浏览器支持不带浏览器前缀的 flexbox，那么就只会渲染 display: flex。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">:style</span>=<span class="string">"&#123; display: ['-webkit-box', '-ms-flexbox', 'flex'] &#125;"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -354,7 +318,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+              <a href="/tags/Vue/" rel="tag"># Vue</a>
           </div>
 
         
@@ -363,13 +327,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2019/12/30/myForm/" rel="prev" title="实现一个简单的 Form 表单组件">
-      <i class="fa fa-chevron-left"></i> 实现一个简单的 Form 表单组件
+    <a href="/2020/02/03/vue%E8%AE%A1%E7%AE%97%E5%B1%9E%E6%80%A7%E4%B8%8E%E4%BE%A6%E5%90%AC%E5%99%A8/" rel="prev" title="vue计算属性与侦听器">
+      <i class="fa fa-chevron-left"></i> vue计算属性与侦听器
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/01/02/js%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/" rel="next" title="js基本语法">
-      js基本语法 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -430,7 +391,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#JavaScript-–-gt-简称-js"><span class="nav-number">1.</span> <span class="nav-text">JavaScript –&gt; 简称 js</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#绑定-HTML-Class"><span class="nav-number">1.</span> <span class="nav-text">绑定 HTML Class</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#对象语法"><span class="nav-number">1.1.</span> <span class="nav-text">对象语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数组语法"><span class="nav-number">1.2.</span> <span class="nav-text">数组语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用于组件上"><span class="nav-number">1.3.</span> <span class="nav-text">用于组件上</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#绑定内联样式"><span class="nav-number">2.</span> <span class="nav-text">绑定内联样式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#对象语法-1"><span class="nav-number">2.1.</span> <span class="nav-text">对象语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数组语法-1"><span class="nav-number">2.2.</span> <span class="nav-text">数组语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自动添加前缀"><span class="nav-number">2.3.</span> <span class="nav-text">自动添加前缀</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多重值"><span class="nav-number">2.4.</span> <span class="nav-text">多重值</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -700,7 +661,7 @@ NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
       repo: 'Ginger-Jiang.github.io',
       owner: 'Ginger-Jiang',
       admin: ['Ginger-Jiang'],
-      id: 'a7d3118dfd7bbac309aed8326f6c21ce',
+      id: '09d246203fe19c5ed9a8274ccb585199',
         language: 'zh-CN',
       distractionFreeMode: true
     });
