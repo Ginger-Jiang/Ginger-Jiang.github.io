@@ -1,6 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>vue列表渲染</title>
+    <url>/2020/02/04/vue%E5%88%97%E8%A1%A8%E6%B8%B2%E6%9F%93/</url>
+    <content><![CDATA[<h2 id="v-for"><a href="#v-for" class="headerlink" title="v-for"></a>v-for</h2><p>我们可以用<code>v-for</code>指令基于一个数组来渲染一个列表. <code>v-for</code>指令需要使用 <code>item in items</code>形式的特殊语法, 其中<code>items</code>是源数据数组, 而<code>item</code>则是被迭代的数组元素的<strong>别名</strong></p>
+<blockquote>
+<p>也可以用<code>of</code>替代<code>in</code>作为分隔符<br>v-for 可以接受整数, 它会将模板重复对应次数<br>v-for 的对象也可以是一个计算属性或一个方法<br>可以在<template>元素上使用 v-for<br>不推荐在同一个元素上直接使用 v-for 与 v-if, v-for 的优先级高于 v-if</p>
+</blockquote>
+<h3 id="遍历数组"><a href="#遍历数组" class="headerlink" title="遍历数组"></a>遍历数组</h3><ul>
+<li>items 遍历源数据</li>
+<li>item 遍历项</li>
+<li>index 索引值</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"hello"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>滴滴搭<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">li</span> <span class="attr">v-for</span>=<span class="string">"(item, index) in items"</span> <span class="attr">:key</span>=<span class="string">"item"</span>&gt;</span>&#123;&#123; item &#125;&#125;<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">  <span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></span><br><span class="line"><span class="actionscript">    name: <span class="string">'HelloWorld'</span>,</span></span><br><span class="line">    data() &#123;</span><br><span class="line"><span class="actionscript">      <span class="keyword">return</span> &#123;</span></span><br><span class="line"><span class="actionscript">        items: [<span class="string">'html'</span>, <span class="string">'css'</span>, <span class="string">'js'</span>, <span class="string">'vue'</span>, <span class="string">'react'</span>]</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="遍历对象"><a href="#遍历对象" class="headerlink" title="遍历对象"></a>遍历对象</h3><blockquote>
+<p>遍历对象会按照 Object.keys() 的结果遍历</p>
+</blockquote>
+<ul>
+<li>objs 源数据对象</li>
+<li>key 键</li>
+<li>val 值</li>
+<li>index 索引</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"hello"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>滴滴<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">li</span> <span class="attr">v-for</span>=<span class="string">"(val, key, index) of objs"</span> <span class="attr">:key</span>=<span class="string">"key"</span>&gt;</span></span><br><span class="line">        &#123;&#123; index &#125;&#125;-&#123;&#123; key &#125;&#125;-&#123;&#123;val&#125;&#125;</span><br><span class="line">      <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">  <span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></span><br><span class="line"><span class="actionscript">    name: <span class="string">'HelloWorld'</span>,</span></span><br><span class="line">    data() &#123;</span><br><span class="line"><span class="actionscript">      <span class="keyword">return</span> &#123;</span></span><br><span class="line">        objs: &#123;</span><br><span class="line"><span class="actionscript">          name: <span class="string">'Ginger'</span>,</span></span><br><span class="line">          age: 24</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="维护状态"><a href="#维护状态" class="headerlink" title="维护状态"></a>维护状态</h2><p>Vue 在使用 <code>v-for</code> 渲染元素列表时, 如果数据项顺序发生改变, Vue 将不会移动 DOM 元素来匹配数据项的顺序, 而是就地更新每个元素, 并且确保他们每个索引位置正确渲染.<br>为了使 Vue 能跟踪每个节点的身份, 从而重用和重新排序现有元素, 我们需要为每项提供一个唯一的 key 属性</p>
+<blockquote>
+<p>不推荐使用对象或数之类的非基本类型值作为 v-for 的 key, 推荐使用字符串或数值类型</p>
+</blockquote>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">v-for</span>=<span class="string">"item in items"</span> <span class="attr">v-bind:key</span>=<span class="string">"item.id"</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 内容 --&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="数组更新检测"><a href="#数组更新检测" class="headerlink" title="数组更新检测"></a>数组更新检测</h2><h3 id="变异方法"><a href="#变异方法" class="headerlink" title="变异方法"></a>变异方法</h3><p>Vue 将被侦听的数组的编译方法进行了包裹, 所以他们也将会触发试图更新</p>
+<ul>
+<li>push()</li>
+<li>pop()</li>
+<li>shift()</li>
+<li>unshift()</li>
+<li>splice()</li>
+<li>sort()</li>
+<li>reverse()</li>
+</ul>
+<h3 id="替换数组"><a href="#替换数组" class="headerlink" title="替换数组"></a>替换数组</h3><p>Vue 除了提供变异方法外, 还提供了非变异方法, 他们不会改变原始数组, 而总是返回一个数组</p>
+<ul>
+<li>filter()</li>
+<li>concat()</li>
+<li>slice()</li>
+</ul>
+<h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><p>由于 JavaScript 限制, Vue 不能检测以下数组变动</p>
+<ul>
+<li>利用索引直接修改数组某一项时</li>
+<li>修改数组长度时</li>
+</ul>
+<h3 id="Set-方法"><a href="#Set-方法" class="headerlink" title="Set 方法"></a>Set 方法</h3><p>为了解决无法检测到数组变动的问题, Vue 提供了以下两个方法, 或者使用其他变异方式等进行处理</p>
+<ul>
+<li>Vue.set()</li>
+<li>vm.$set()</li>
+</ul>
+<h2 id="对象变更检测"><a href="#对象变更检测" class="headerlink" title="对象变更检测"></a>对象变更检测</h2><p>由于 JavaScript 限制, Vue 不能检测对象属性的添加或删除<br>对于已创建的 Vue 实例, Vue 不允许动态添加根级别的响应式属性, 但是可以用 <code>Vue.set(object, propertyName, value)</code> 方法向嵌套对象添加响应式属性</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> vm = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">'app'</span>,</span><br><span class="line">  data: &#123;</span><br><span class="line">    obj: &#123;</span><br><span class="line">      name: <span class="string">'ginger'</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 添加单个属性</span></span><br><span class="line">vm.$<span class="keyword">set</span>(vm.obj, 'age', 18)</span><br><span class="line">// 添加多个属性</span><br><span class="line">vm.obj = Object.assign(&#123;&#125;, vm.obj, &#123;</span><br><span class="line">  gender: <span class="number">0</span></span><br><span class="line">  address: <span class="string">'China'</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="在组件上使用-v-for"><a href="#在组件上使用-v-for" class="headerlink" title="在组件上使用 v-for"></a>在组件上使用 v-for</h3><p>我们可以在任何自定义组件上使用 v-for 但是我们必须定义 key<br>如果要将遍历内容数据传递到组件内, 需要使用 props</p>
+]]></content>
+      <categories>
+        <category>Vue</category>
+      </categories>
+      <tags>
+        <tag>Vue</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>vue条件渲染</title>
     <url>/2020/02/03/vue%E6%9D%A1%E4%BB%B6%E6%B8%B2%E6%9F%93/</url>
     <content><![CDATA[<h2 id="v-if"><a href="#v-if" class="headerlink" title="v-if"></a>v-if</h2><p><code>v-if</code> 指令用于条件性的渲染一块内容. 该内容只有在表达式结果返回 <code>true</code> 值的时候被渲染</p>
