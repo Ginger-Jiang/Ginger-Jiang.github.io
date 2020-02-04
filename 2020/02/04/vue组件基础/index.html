@@ -46,20 +46,22 @@
   };
 </script>
 
-  <meta name="description" content="设计模式 软件设计模式（Design pattern），又称设计模式，是一套被反复使用、多数人知晓的、经过分类编目的、代码设计经验的总结。使用设计模式是为了可重用代码、让代码更容易被他人理解、保证代码可靠性、程序的重用性。   设计模式是一套现成的工具, 拿来即可用. 就像电饭锅、洗衣机, 不用关心电饭锅、洗衣机的制作原理, 只需将需要的特定事物放入, 即可得到想要的结果.  JavaScript">
+  <meta name="description" content="基本示例组件是可复用的 Vue 实例, 且带有一个名字, 我们可以通过 new Vue 创建的 Vue 跟实例中, 把这个组件当做自定义元素来使用组件与 new Vue 接受相同的选项  组件的 data 必须是一个函数, 它返回一个对象的独立的拷贝组件注册可分为 全局注册和局部注册  12345678Vue.component(&#39;hello-world&#39;, &amp;#123;  data() &amp;#12">
 <meta property="og:type" content="article">
-<meta property="og:title" content="设计模式概况">
-<meta property="og:url" content="http://yoursite.com/2020/01/22/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%A6%82%E5%86%B5/index.html">
+<meta property="og:title" content="vue组件基础">
+<meta property="og:url" content="http://yoursite.com/2020/02/04/vue%E7%BB%84%E4%BB%B6%E5%9F%BA%E7%A1%80/index.html">
 <meta property="og:site_name" content="Ginger">
-<meta property="og:description" content="设计模式 软件设计模式（Design pattern），又称设计模式，是一套被反复使用、多数人知晓的、经过分类编目的、代码设计经验的总结。使用设计模式是为了可重用代码、让代码更容易被他人理解、保证代码可靠性、程序的重用性。   设计模式是一套现成的工具, 拿来即可用. 就像电饭锅、洗衣机, 不用关心电饭锅、洗衣机的制作原理, 只需将需要的特定事物放入, 即可得到想要的结果.  JavaScript">
+<meta property="og:description" content="基本示例组件是可复用的 Vue 实例, 且带有一个名字, 我们可以通过 new Vue 创建的 Vue 跟实例中, 把这个组件当做自定义元素来使用组件与 new Vue 接受相同的选项  组件的 data 必须是一个函数, 它返回一个对象的独立的拷贝组件注册可分为 全局注册和局部注册  12345678Vue.component(&#39;hello-world&#39;, &amp;#123;  data() &amp;#12">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-01-22T06:05:59.588Z">
-<meta property="article:modified_time" content="2020-01-22T06:07:14.326Z">
+<meta property="og:image" content="http://yoursite.com/2020/02/04/image/components.png">
+<meta property="article:published_time" content="2020-02-04T13:29:19.000Z">
+<meta property="article:modified_time" content="2020-02-04T13:29:33.876Z">
 <meta property="article:author" content="Ginger">
-<meta property="article:tag" content="设计模式">
+<meta property="article:tag" content="Vue">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2020/02/04/image/components.png">
 
-<link rel="canonical" href="http://yoursite.com/2020/01/22/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%A6%82%E5%86%B5/">
+<link rel="canonical" href="http://yoursite.com/2020/02/04/vue%E7%BB%84%E4%BB%B6%E5%9F%BA%E7%A1%80/">
 
 
 <script id="page-configurations">
@@ -71,7 +73,7 @@
   };
 </script>
 
-  <title>设计模式概况 | Ginger</title>
+  <title>vue组件基础 | Ginger</title>
   
 
 
@@ -215,7 +217,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/22/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%A6%82%E5%86%B5/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/04/vue%E7%BB%84%E4%BB%B6%E5%9F%BA%E7%A1%80/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/head_pic.jpeg">
@@ -228,7 +230,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          设计模式概况
+          vue组件基础
         </h1>
 
         <div class="post-meta">
@@ -239,7 +241,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-01-22 14:05:59 / 修改时间：14:07:14" itemprop="dateCreated datePublished" datetime="2020-01-22T14:05:59+08:00">2020-01-22</time>
+              <time title="创建时间：2020-02-04 21:29:19 / 修改时间：21:29:33" itemprop="dateCreated datePublished" datetime="2020-02-04T21:29:19+08:00">2020-02-04</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -247,8 +249,8 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" itemprop="url" rel="index">
-                    <span itemprop="name">设计模式</span>
+                  <a href="/categories/Vue/" itemprop="url" rel="index">
+                    <span itemprop="name">Vue</span>
                   </a>
                 </span>
             </span>
@@ -259,14 +261,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>473</span>
+              <span>2.2k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>2 分钟</span>
             </span>
 
         </div>
@@ -278,20 +280,49 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="设计模式"><a href="#设计模式" class="headerlink" title="设计模式"></a>设计模式</h2><blockquote>
-<p>软件设计模式（Design pattern），又称设计模式，是一套被反复使用、多数人知晓的、经过分类编目的、代码设计经验的总结。使用设计模式是为了可重用代码、让代码更容易被他人理解、保证代码可靠性、程序的重用性。</p>
-</blockquote>
+        <h2 id="基本示例"><a href="#基本示例" class="headerlink" title="基本示例"></a>基本示例</h2><p>组件是可复用的 Vue 实例, 且带有一个名字, 我们可以通过 new Vue 创建的 Vue 跟实例中, 把这个组件当做自定义元素来使用<br>组件与 new Vue 接受相同的选项</p>
 <blockquote>
-<p>设计模式是一套现成的工具, 拿来即可用. 就像电饭锅、洗衣机, 不用关心电饭锅、洗衣机的制作原理, 只需将需要的特定事物放入, 即可得到想要的结果.</p>
+<p>组件的 <code>data</code> 必须是一个函数, 它返回一个对象的独立的拷贝<br>组件注册可分为 <strong>全局注册</strong>和<strong>局部注册</strong></p>
 </blockquote>
-<h2 id="JavaScript-主要设计原则–面向对象编程和面向对象设计"><a href="#JavaScript-主要设计原则–面向对象编程和面向对象设计" class="headerlink" title="JavaScript 主要设计原则–面向对象编程和面向对象设计"></a>JavaScript 主要设计原则–面向对象编程和面向对象设计</h2><ul>
-<li>单一功能原则</li>
-<li>开放封闭原则</li>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Vue.component(<span class="string">'hello-world'</span>, &#123;</span><br><span class="line">  data() &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      msg: <span class="string">'Hi! Vue'</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  template: <span class="string">'&lt;div&gt; &#123;&#123; msg &#125;&#125; &lt;/div&gt;'</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="组件的复用"><a href="#组件的复用" class="headerlink" title="组件的复用"></a>组件的复用</h2><p>组件可以进行任意次数的复用, 每个组件都会各自维护它的实例</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">hellp-world</span>&gt;</span><span class="tag">&lt;/<span class="name">hellp-world</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">hellp-world</span>&gt;</span><span class="tag">&lt;/<span class="name">hellp-world</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">hellp-world</span>&gt;</span><span class="tag">&lt;/<span class="name">hellp-world</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="组件的组织"><a href="#组件的组织" class="headerlink" title="组件的组织"></a>组件的组织</h2><p>一个应用会以一颗嵌套的组件树的形式来组织:<br><img data-src="../image/components.png" alt="component"></p>
+<h2 id="通过-Prop-向子组件传递数据"><a href="#通过-Prop-向子组件传递数据" class="headerlink" title="通过 Prop 向子组件传递数据"></a>通过 <code>Prop</code> 向子组件传递数据</h2><p>Prop 是可以在组件上注册的一些自定义 attribute, 当一个值传递给一个 prop attribute 的时候, 他就变成了那个组件实例的一个属性.<br>我们可以用一个 <code>props</code> 选项将其包含在该组件可接受的 prop 列表中</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Vue.component(<span class="string">'hello-world'</span>, &#123;</span><br><span class="line">  props: [<span class="string">'title'</span>],</span><br><span class="line">  template: <span class="string">'&lt;h3&gt; &#123;&#123; title &#125;&#125;&lt;/h3&gt;'</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="单个根元素"><a href="#单个根元素" class="headerlink" title="单个根元素"></a>单个根元素</h2><blockquote>
+<p>每个组件必须只有一个根元素</p>
+</blockquote>
+<p>当构建一个子组件的时候, 模板内最终包含的内容远不止一个标题, Vue 要求每个组件必须只有一个根元素, 可以将模板的内容包裹在一个父元素内.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// parent 父组件</span></span><br><span class="line">&lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"parent"</span>&gt;</span><br><span class="line">  &lt;child /&gt;</span><br><span class="line">&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">/</span><span class="regexp">/ child 子组件</span></span><br><span class="line"><span class="regexp">&lt;div class="child"&gt;</span></span><br><span class="line"><span class="regexp">  &lt;h3&gt;标题&lt;/</span>h3&gt;</span><br><span class="line">  &lt;p&gt;内容&lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>div&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="监听子组件事件"><a href="#监听子组件事件" class="headerlink" title="监听子组件事件"></a>监听子组件事件</h2><p>有时候, 我们需要在子组件内部传递一些内容到父元素<br>Vue 实例提供了一个自定义事件的系统来解决这个问题, 父组件可以像处理 native DOM 事件一样通过 <code>v-on</code> 监听子组件实例的任意事件</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 父组件 接受一个由子元素提交的自定义方法</span></span><br><span class="line">&lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"parent"</span>&gt;</span><br><span class="line">  &lt;child v-on:myEmit=<span class="string">"handleEmit"</span> /&gt;</span><br><span class="line">&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">/</span><span class="regexp">/ 子组件 传递一个自定义事件</span></span><br><span class="line"><span class="regexp">&lt;child v-on:click="$emit('myEmit')"&gt;</span></span><br><span class="line"><span class="regexp">  子组件</span></span><br><span class="line"><span class="regexp">&lt;/</span>child&gt;</span><br><span class="line"></span><br><span class="line">&lt;hr /&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 父组件 接受一个由子元素提交的自定义方法</span></span><br><span class="line">&lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"parent"</span>&gt;</span><br><span class="line">  &lt;child v-on:myEmit=<span class="string">"handleEmit"</span> /&gt;</span><br><span class="line">&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">/</span><span class="regexp">/ 子组件 自定义方法可以通过第二个参数进行传递</span></span><br><span class="line"><span class="regexp">&lt;child v-on:click="$emit('myEmit', true)"&gt;</span></span><br><span class="line"><span class="regexp">  子组件</span></span><br><span class="line"><span class="regexp">&lt;/</span>child&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="在组件上使用-v-model"><a href="#在组件上使用-v-model" class="headerlink" title="在组件上使用 v-model"></a>在组件上使用 v-model</h2><p>自定义事件也可以用于创建支持 <code>v-model</code> 的自定义输入组件</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">my-input</span> <span class="attr">v-model</span>=<span class="string">"searchText"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>等价于</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">my-input</span> <span class="attr">v-bind:value</span>=<span class="string">"searchText"</span> <span class="attr">v-on:input</span>=<span class="string">"searchText = $event"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>为了让它正常工作, 这个组件内的 <code>&lt;input&gt;</code> 必须:</p>
+<ul>
+<li>将其 value attribute 绑定到一个名叫 value 的 prop 上</li>
+<li>在其 input 事件被触发时, 将新的值通过自定义的 input 事件抛出</li>
 </ul>
-<h2 id="核心思想–封装变化"><a href="#核心思想–封装变化" class="headerlink" title="核心思想–封装变化"></a>核心思想–封装变化</h2><p>一个简单的产品流程节点可以分为:</p>
-<pre><code>想法 -&gt; 需求 -&gt; 设计 -&gt; 开发 -&gt; 测试 -&gt; 部署 -&gt; 产品</code></pre><p>&nbsp;&nbsp;通过上面的关键节点可以看出, 影响一个产品的复杂程度的主要节点是需求与设计, 在抛开个人能力不谈的时候, 设计的复杂程度取决于需求的复杂程度, 所以我们可以说需求是一个产品复杂程度的”罪魁祸首”, 而需求对于开发人员来说, 往往就是<strong>变化</strong></p>
-<p>在实际开发过中, 我们需要做的就是将变化造成的影响 <strong>最小化</strong>.</p>
-<pre><code>-- 将变与不变分离, 保证变化部分的灵活性, 保证不变部分的稳定性.</code></pre>
+<h2 id="通过插槽分发内容"><a href="#通过插槽分发内容" class="headerlink" title="通过插槽分发内容"></a>通过插槽分发内容</h2><p>和 HTML 元素一样, 我们经常需要向一个组件传递内容</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 父组件使用子组件 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">alert-box</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">span</span>&gt;</span>插槽插入内容<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">alert-box</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 子组件 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">alert-box</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 插槽插入内容会替换下面的slot标签 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">slot</span>&gt;</span><span class="tag">&lt;/<span class="name">slot</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">alert-box</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="动态组件"><a href="#动态组件" class="headerlink" title="动态组件"></a>动态组件</h2><p>有的时候, 在不同的组件之间进行动态切换时非常有用的<br>我们可以通过 Vue 的<code>&lt;component&gt;</code>元素加一个特殊的<code>is</code>attribute 来实现<br><code>currentTabComponent</code> 可以包括</p>
+<ul>
+<li>已注册组件的名字</li>
+<li>一个组件的选项对象</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 组件会在 currentTabComponent 改变时改变</span></span><br><span class="line">&lt;component v-bind:is=<span class="string">"currentTabComponent"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">component</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
     </div>
 
     
@@ -315,7 +346,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag"># 设计模式</a>
+              <a href="/tags/Vue/" rel="tag"># Vue</a>
           </div>
 
         
@@ -324,13 +355,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/01/06/js%E6%95%B0%E7%BB%84%E4%B8%8E%E5%87%BD%E6%95%B0-1/" rel="prev" title="js数组与函数">
-      <i class="fa fa-chevron-left"></i> js数组与函数
+    <a href="/2020/02/04/vue%E8%A1%A8%E5%8D%95%E8%BE%93%E5%85%A5%E7%BB%91%E5%AE%9A/" rel="prev" title="vue表单输入绑定">
+      <i class="fa fa-chevron-left"></i> vue表单输入绑定
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/01/22/%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/" rel="next" title="简单工厂模式">
-      简单工厂模式 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -391,7 +419,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#设计模式"><span class="nav-number">1.</span> <span class="nav-text">设计模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JavaScript-主要设计原则–面向对象编程和面向对象设计"><span class="nav-number">2.</span> <span class="nav-text">JavaScript 主要设计原则–面向对象编程和面向对象设计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#核心思想–封装变化"><span class="nav-number">3.</span> <span class="nav-text">核心思想–封装变化</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本示例"><span class="nav-number">1.</span> <span class="nav-text">基本示例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#组件的复用"><span class="nav-number">2.</span> <span class="nav-text">组件的复用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#组件的组织"><span class="nav-number">3.</span> <span class="nav-text">组件的组织</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通过-Prop-向子组件传递数据"><span class="nav-number">4.</span> <span class="nav-text">通过 Prop 向子组件传递数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#单个根元素"><span class="nav-number">5.</span> <span class="nav-text">单个根元素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#监听子组件事件"><span class="nav-number">6.</span> <span class="nav-text">监听子组件事件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在组件上使用-v-model"><span class="nav-number">7.</span> <span class="nav-text">在组件上使用 v-model</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通过插槽分发内容"><span class="nav-number">8.</span> <span class="nav-text">通过插槽分发内容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动态组件"><span class="nav-number">9.</span> <span class="nav-text">动态组件</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -661,7 +689,7 @@ NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
       repo: 'Ginger-Jiang.github.io',
       owner: 'Ginger-Jiang',
       admin: ['Ginger-Jiang'],
-      id: '859432974afa69a70b3821c7c41606bf',
+      id: '6dae26f6aee4d335724929cc124c30f5',
         language: 'zh-CN',
       distractionFreeMode: true
     });

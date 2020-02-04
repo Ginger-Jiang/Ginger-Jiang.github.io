@@ -1,6 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>vue组件基础</title>
+    <url>/2020/02/04/vue%E7%BB%84%E4%BB%B6%E5%9F%BA%E7%A1%80/</url>
+    <content><![CDATA[<h2 id="基本示例"><a href="#基本示例" class="headerlink" title="基本示例"></a>基本示例</h2><p>组件是可复用的 Vue 实例, 且带有一个名字, 我们可以通过 new Vue 创建的 Vue 跟实例中, 把这个组件当做自定义元素来使用<br>组件与 new Vue 接受相同的选项</p>
+<blockquote>
+<p>组件的 <code>data</code> 必须是一个函数, 它返回一个对象的独立的拷贝<br>组件注册可分为 <strong>全局注册</strong>和<strong>局部注册</strong></p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">Vue.component(<span class="string">'hello-world'</span>, &#123;</span><br><span class="line">  data() &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      msg: <span class="string">'Hi! Vue'</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  template: <span class="string">'&lt;div&gt; &#123;&#123; msg &#125;&#125; &lt;/div&gt;'</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="组件的复用"><a href="#组件的复用" class="headerlink" title="组件的复用"></a>组件的复用</h2><p>组件可以进行任意次数的复用, 每个组件都会各自维护它的实例</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">hellp-world</span>&gt;</span><span class="tag">&lt;/<span class="name">hellp-world</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">hellp-world</span>&gt;</span><span class="tag">&lt;/<span class="name">hellp-world</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">hellp-world</span>&gt;</span><span class="tag">&lt;/<span class="name">hellp-world</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="组件的组织"><a href="#组件的组织" class="headerlink" title="组件的组织"></a>组件的组织</h2><p>一个应用会以一颗嵌套的组件树的形式来组织:<br><img data-src="../image/components.png" alt="component"></p>
+<h2 id="通过-Prop-向子组件传递数据"><a href="#通过-Prop-向子组件传递数据" class="headerlink" title="通过 Prop 向子组件传递数据"></a>通过 <code>Prop</code> 向子组件传递数据</h2><p>Prop 是可以在组件上注册的一些自定义 attribute, 当一个值传递给一个 prop attribute 的时候, 他就变成了那个组件实例的一个属性.<br>我们可以用一个 <code>props</code> 选项将其包含在该组件可接受的 prop 列表中</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">Vue.component(<span class="string">'hello-world'</span>, &#123;</span><br><span class="line">  props: [<span class="string">'title'</span>],</span><br><span class="line">  template: <span class="string">'&lt;h3&gt; &#123;&#123; title &#125;&#125;&lt;/h3&gt;'</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="单个根元素"><a href="#单个根元素" class="headerlink" title="单个根元素"></a>单个根元素</h2><blockquote>
+<p>每个组件必须只有一个根元素</p>
+</blockquote>
+<p>当构建一个子组件的时候, 模板内最终包含的内容远不止一个标题, Vue 要求每个组件必须只有一个根元素, 可以将模板的内容包裹在一个父元素内.</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// parent 父组件</span></span><br><span class="line">&lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"parent"</span>&gt;</span><br><span class="line">  &lt;child /&gt;</span><br><span class="line">&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">/</span><span class="regexp">/ child 子组件</span></span><br><span class="line"><span class="regexp">&lt;div class="child"&gt;</span></span><br><span class="line"><span class="regexp">  &lt;h3&gt;标题&lt;/</span>h3&gt;</span><br><span class="line">  &lt;p&gt;内容&lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>div&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="监听子组件事件"><a href="#监听子组件事件" class="headerlink" title="监听子组件事件"></a>监听子组件事件</h2><p>有时候, 我们需要在子组件内部传递一些内容到父元素<br>Vue 实例提供了一个自定义事件的系统来解决这个问题, 父组件可以像处理 native DOM 事件一样通过 <code>v-on</code> 监听子组件实例的任意事件</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 父组件 接受一个由子元素提交的自定义方法</span></span><br><span class="line">&lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"parent"</span>&gt;</span><br><span class="line">  &lt;child v-on:myEmit=<span class="string">"handleEmit"</span> /&gt;</span><br><span class="line">&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">/</span><span class="regexp">/ 子组件 传递一个自定义事件</span></span><br><span class="line"><span class="regexp">&lt;child v-on:click="$emit('myEmit')"&gt;</span></span><br><span class="line"><span class="regexp">  子组件</span></span><br><span class="line"><span class="regexp">&lt;/</span>child&gt;</span><br><span class="line"></span><br><span class="line">&lt;hr /&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 父组件 接受一个由子元素提交的自定义方法</span></span><br><span class="line">&lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"parent"</span>&gt;</span><br><span class="line">  &lt;child v-on:myEmit=<span class="string">"handleEmit"</span> /&gt;</span><br><span class="line">&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">/</span><span class="regexp">/ 子组件 自定义方法可以通过第二个参数进行传递</span></span><br><span class="line"><span class="regexp">&lt;child v-on:click="$emit('myEmit', true)"&gt;</span></span><br><span class="line"><span class="regexp">  子组件</span></span><br><span class="line"><span class="regexp">&lt;/</span>child&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="在组件上使用-v-model"><a href="#在组件上使用-v-model" class="headerlink" title="在组件上使用 v-model"></a>在组件上使用 v-model</h2><p>自定义事件也可以用于创建支持 <code>v-model</code> 的自定义输入组件</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">my-input</span> <span class="attr">v-model</span>=<span class="string">"searchText"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>等价于</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">my-input</span> <span class="attr">v-bind:value</span>=<span class="string">"searchText"</span> <span class="attr">v-on:input</span>=<span class="string">"searchText = $event"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>为了让它正常工作, 这个组件内的 <code>&lt;input&gt;</code> 必须:</p>
+<ul>
+<li>将其 value attribute 绑定到一个名叫 value 的 prop 上</li>
+<li>在其 input 事件被触发时, 将新的值通过自定义的 input 事件抛出</li>
+</ul>
+<h2 id="通过插槽分发内容"><a href="#通过插槽分发内容" class="headerlink" title="通过插槽分发内容"></a>通过插槽分发内容</h2><p>和 HTML 元素一样, 我们经常需要向一个组件传递内容</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 父组件使用子组件 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">alert-box</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">span</span>&gt;</span>插槽插入内容<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">alert-box</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 子组件 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">alert-box</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 插槽插入内容会替换下面的slot标签 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">slot</span>&gt;</span><span class="tag">&lt;/<span class="name">slot</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">alert-box</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="动态组件"><a href="#动态组件" class="headerlink" title="动态组件"></a>动态组件</h2><p>有的时候, 在不同的组件之间进行动态切换时非常有用的<br>我们可以通过 Vue 的<code>&lt;component&gt;</code>元素加一个特殊的<code>is</code>attribute 来实现<br><code>currentTabComponent</code> 可以包括</p>
+<ul>
+<li>已注册组件的名字</li>
+<li>一个组件的选项对象</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 组件会在 currentTabComponent 改变时改变</span></span><br><span class="line">&lt;component v-bind:is=<span class="string">"currentTabComponent"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">component</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>Vue</category>
+      </categories>
+      <tags>
+        <tag>Vue</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>vue表单输入绑定</title>
     <url>/2020/02/04/vue%E8%A1%A8%E5%8D%95%E8%BE%93%E5%85%A5%E7%BB%91%E5%AE%9A/</url>
     <content><![CDATA[<h2 id="基础用法"><a href="#基础用法" class="headerlink" title="基础用法"></a>基础用法</h2><p>你可以用 <code>v-model</code> 指令在表单 <code>&lt;input&gt;</code>、<code>&lt;textarea&gt;</code>、<code>&lt;select&gt;</code> 元素上创建双向数据绑定. 它会根据控件类型自动选取正确的方法来更新元素. 但<code>v-model</code>的本质只是语法糖</p>
