@@ -1,6 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>vue选项DOM</title>
+    <url>/2020/02/21/vue%E9%80%89%E9%A1%B9DOM/</url>
+    <content><![CDATA[<h2 id="el"><a href="#el" class="headerlink" title="el"></a>el</h2><ul>
+<li>类型 string | Element</li>
+<li>限制: 只在用 <code>new</code> 创建实例时生效</li>
+<li>详细<br>提供一个在页面上已存在的 DOM 元素作为 Vue 实例的挂载目标, 可以是 CSS 选择器, 也可以是一个 HTMLElement 实例<br>在实例挂载之后, 元素可以用 <code>vm.$el</code> 访问<br>如果在实例化时存在这个选项, 实例将立刻进入编译过程, 否则, 需要显式调用 <code>vm.$mount()</code> 手动开启编译</li>
+</ul>
+<h2 id="template"><a href="#template" class="headerlink" title="template"></a>template</h2><ul>
+<li>类型 string</li>
+<li>详细<br>一个字符串模板作为 Vue 实例的标识使用。模板将会 替换 挂载的元素。挂载元素的内容都将被忽略，除非模板的内容有分发插槽。<br>如果值以 # 开始，则它将被用作选择符，并使用匹配元素的 innerHTML 作为模板。常用的技巧是用 <script type="x-template"> 包含模板。</li>
+</ul>
+<h2 id="render"><a href="#render" class="headerlink" title="render"></a>render</h2><ul>
+<li>类型 (createElement: () => VNode) => VNode</li>
+<li>详细<br>字符串模板的代替方案，允许你发挥 JavaScript 最大的编程能力。该渲染函数接收一个 createElement 方法作为第一个参数用来创建 VNode。<br>如果组件是一个函数组件，渲染函数还会接收一个额外的 context 参数，为没有实例的函数组件提供上下文信息。</li>
+</ul>
+<h2 id="renderError"><a href="#renderError" class="headerlink" title="renderError"></a>renderError</h2><ul>
+<li><p>类型 (createElement: () => VNode, error: Error) => VNode</p>
+</li>
+<li><p>详细:<br><strong>只在开发者环境下工作。</strong><br>当 render 函数遭遇错误时，提供另外一种渲染输出。其错误将会作为第二个参数传递到 renderError。这个功能配合 hot-reload 非常实用。</p>
+</li>
+<li><p>示例</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  render(h) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'oops'</span>)</span><br><span class="line">  &#125;,</span><br><span class="line">  renderError(h, err) &#123;</span><br><span class="line">    <span class="keyword">return</span> h(<span class="string">'pre'</span>, &#123; <span class="attr">style</span>: &#123; <span class="attr">color</span>: <span class="string">'red'</span> &#125; &#125;, err.stack)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;).$mount(<span class="string">'#app'</span>)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Vue</category>
+      </categories>
+      <tags>
+        <tag>Vue</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>vue选项数据</title>
     <url>/2020/02/20/vue%E9%80%89%E9%A1%B9%E6%95%B0%E6%8D%AE/</url>
     <content><![CDATA[<h2 id="data"><a href="#data" class="headerlink" title="data"></a>data</h2><ul>
