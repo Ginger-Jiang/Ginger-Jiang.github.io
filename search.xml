@@ -1,6 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>vue选项其他</title>
+    <url>/2020/02/24/vue%E9%80%89%E9%A1%B9%E5%85%B6%E4%BB%96/</url>
+    <content><![CDATA[<h2 id="name"><a href="#name" class="headerlink" title="name"></a>name</h2><ul>
+<li>类型: <code>string</code></li>
+<li>限制: 只有作为组件选项时起作用</li>
+<li>详细:<br>允许组件模板递归的调用自身, 组件在全局用 <code>Vue.component()</code> 注册时, 全局 ID 自动作为组件的 name<br>指定 <code>name</code> 选项的另一个好处是便于调试, 有名字的组件有更友好的警告信息</li>
+</ul>
+<h2 id="delimiters"><a href="#delimiters" class="headerlink" title="delimiters"></a>delimiters</h2><ul>
+<li><p>类型: <code>Array&lt;string&gt;</code></p>
+</li>
+<li><p>默认值: <code>[&quot;,]</code></p>
+</li>
+<li><p>限制: 这个选项只在完整构建版本中的浏览器内编译时可用</p>
+</li>
+<li><p>详细:<br>改变纯文本插入分隔符</p>
+</li>
+<li><p>示例</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  delimiters: <span class="string">`['<span class="subst">$&#123;<span class="string">''</span>&#125;</span>']`</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 分隔符变成了 ES6 模板字符串的风格</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="functional"><a href="#functional" class="headerlink" title="functional"></a>functional</h2><ul>
+<li>类型: <code>boolean</code></li>
+<li>详细:<br>使组件无状态(没有<code>data</code>)和无示例(没有<code>this</code>上下文). 他们用一个简单的 <code>render</code> 函数返回虚拟节点使他们渲染的代价更小</li>
+</ul>
+<h2 id="model"><a href="#model" class="headerlink" title="model"></a>model</h2><ul>
+<li>类型: <code>{ prop?: string, event?: string}</code></li>
+<li>详细:<br>允许一个自定义组件在使用<code>v-model</code>时定制 prop 和 event. 默认情况下, 一个组件上的<code>v-model</code>会把<code>value</code>用作 prop 且把<code>input</code>用作 event, 但是一些输入类型比如单选框和复选框按钮可能想使用 <code>value</code> prop 来打到不同的目的</li>
+<li>示例<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">Vue.component(<span class="string">'my-checkbox'</span>, &#123;</span><br><span class="line">  model: &#123;</span><br><span class="line">    prop: <span class="string">'checked'</span>,</span><br><span class="line">    event: <span class="string">'change'</span></span><br><span class="line">  &#125;,</span><br><span class="line">  props: &#123;</span><br><span class="line">    <span class="comment">// this allows using the `value` prop for a different purpose</span></span><br><span class="line">    value: <span class="built_in">String</span>,</span><br><span class="line">    <span class="comment">// use `checked` as the prop which take the place of `value`</span></span><br><span class="line">    checked: &#123;</span><br><span class="line">      type: <span class="built_in">Number</span>,</span><br><span class="line">      <span class="keyword">default</span>: <span class="number">0</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">my-checkbox</span> <span class="attr">v-model</span>=<span class="string">"foo"</span> <span class="attr">value</span>=<span class="string">"some value"</span>&gt;</span><span class="tag">&lt;/<span class="name">my-checkbox</span>&gt;</span></span><br></pre></td></tr></table></figure>
+上述代码相当于:<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">my-checkbox</span> <span class="attr">:checked</span>=<span class="string">"foo"</span> @<span class="attr">change</span>=<span class="string">"val =&gt; &#123; foo = val &#125;"</span> <span class="attr">value</span>=<span class="string">"some value"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">my-checkbox</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="inheritAttrs"><a href="#inheritAttrs" class="headerlink" title="inheritAttrs"></a>inheritAttrs</h2><ul>
+<li>类型: <code>boolean</code></li>
+<li>默认值: <code>true</code></li>
+<li>详细:<br>默认情况下父作用域的不被认作 props 的特性绑定 (attribute bindings) 将会“回退”且作为普通的 HTML 特性应用在子组件的根元素上。当撰写包裹一个目标元素或另一个组件的组件时，这可能不会总是符合预期行为。通过设置 inheritAttrs 到 false，这些默认行为将会被去掉。而通过 (同样是 2.4 新增的) 实例属性 $attrs 可以让这些特性生效，且可以通过 v-bind 显性的绑定到非根元素上。</li>
+</ul>
+<h2 id="comments"><a href="#comments" class="headerlink" title="comments"></a>comments</h2><ul>
+<li>类型: <code>boolran</code></li>
+<li>默认值: <code>false</code></li>
+<li>限制: 这个选项只有在完成构建版本中的浏览器内编译时可用</li>
+<li>详细:<br>当设为 <code>true</code> 时, 将会保留且渲染模板中的 HTML 注释</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Vue</category>
+      </categories>
+      <tags>
+        <tag>Vue</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>vue选项组合</title>
     <url>/2020/02/23/vue%E9%80%89%E9%A1%B9%E7%BB%84%E5%90%88/</url>
     <content><![CDATA[<h2 id="parent"><a href="#parent" class="headerlink" title="parent"></a>parent</h2><ul>
