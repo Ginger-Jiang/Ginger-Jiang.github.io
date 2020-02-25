@@ -1,6 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>vue实例属性</title>
+    <url>/2020/02/25/vue%E5%AE%9E%E4%BE%8B%E5%B1%9E%E6%80%A7/</url>
+    <content><![CDATA[<h2 id="vm-data"><a href="#vm-data" class="headerlink" title="vm.$data"></a>vm.$data</h2><ul>
+<li>类型: Object</li>
+<li>详细:<br>Vue 实例观察的数据对象. Vue 实例代理了对其 data 对象属性的访问</li>
+</ul>
+<h2 id="vm-props"><a href="#vm-props" class="headerlink" title="vm.$props"></a>vm.$props</h2><ul>
+<li>类型: Object</li>
+<li>详细:<br>当前组件接受到的 props 对象. Vue 实例代理了对其 props 对象属性的访问</li>
+</ul>
+<h2 id="vm-el"><a href="#vm-el" class="headerlink" title="vm.$el"></a>vm.$el</h2><ul>
+<li>类型: Elemnt</li>
+<li>只读</li>
+<li>详细:<br>Vue 实例使用的根 DOM 元素</li>
+</ul>
+<h2 id="vm-options"><a href="#vm-options" class="headerlink" title="vm.$options"></a>vm.$options</h2><ul>
+<li>类型: Object</li>
+<li>只读</li>
+<li>详细:<br>用于当前 Vue 实例的初始化选项. 需要在选项中包含自定义属性时会有用处<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  customOption: <span class="string">'foo'</span>,</span><br><span class="line">  created: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.$options.customOption) <span class="comment">// =&gt; foo</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="vm-parent"><a href="#vm-parent" class="headerlink" title="vm.$parent"></a>vm.$parent</h2><ul>
+<li>类型: Vue instance</li>
+<li>只读</li>
+<li>详细:<br>父实例</li>
+</ul>
+<h2 id="vm-root"><a href="#vm-root" class="headerlink" title="vm.$root"></a>vm.$root</h2><ul>
+<li>类型: Vue instance</li>
+<li>只读</li>
+<li>详细:<br>当前组件树的根 Vue 实例. 如果当前实例没有父实例, 此实例将会是其自己.</li>
+</ul>
+<h2 id="vm-children"><a href="#vm-children" class="headerlink" title="vm.$children"></a>vm.$children</h2><ul>
+<li>类型: Array<Vue instance></li>
+<li>只读</li>
+<li>详细:<br>当前实例的直接子组件. 不保证顺序, 也不是响应式的</li>
+</ul>
+<h2 id="vm-slots"><a href="#vm-slots" class="headerlink" title="vm.$slots"></a>vm.$slots</h2><ul>
+<li><p>类型: { [name: string]: ?Array<VNode>}</p>
+</li>
+<li><p>只读</p>
+</li>
+<li><p>详细:<br>用来访问被插槽分发的内容. 每个具名插槽有其相应的属性.</p>
+</li>
+<li><p>示例:</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">blog-post</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">template</span> <span class="attr">v-slot:header</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>About Me<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">    Here's some page content, which will be included in vm.$slots.default,</span><br><span class="line">    because it's not inside a named slot.</span><br><span class="line">  <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">template</span> <span class="attr">v-slot:footer</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>Copyright 2016 Evan You<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">    If I have some content down here, it will also be included in</span><br><span class="line">    vm.$slots.default.</span><br><span class="line">  <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">blog-post</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">Vue.component(<span class="string">'blog-post'</span>,</span><br><span class="line">  render: <span class="function"><span class="keyword">function</span>(<span class="params">createElement</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> header = <span class="keyword">this</span>.$slots.header</span><br><span class="line">    <span class="keyword">var</span>  body = <span class="keyword">this</span>.$slots.default</span><br><span class="line">    <span class="keyword">var</span> footer = <span class="keyword">this</span>.$slots.footer</span><br><span class="line">    <span class="keyword">return</span> createElement(<span class="string">'div'</span>, [</span><br><span class="line">      createElement(<span class="string">'header'</span>, hdaer)</span><br><span class="line">      createElement(<span class="string">'main'</span>, body)</span><br><span class="line">      createElement(<span class="string">'footer'</span>, footer)</span><br><span class="line">    ])</span><br><span class="line">  &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="vm-scopedSlots"><a href="#vm-scopedSlots" class="headerlink" title="vm.$scopedSlots"></a>vm.$scopedSlots</h2><ul>
+<li><p>类型: { [name: string]: props =&gt; Array<VNode> | undefined }</p>
+</li>
+<li><p>只读</p>
+</li>
+<li><p>详细:<br>用来访问作用域插槽. 对于包括默认 slot 在内的每一个插槽. 该对象都包含一个返回相应 VNode 的函数</p>
+</li>
+<li><p>注意:<br>作用域插槽函数现在保证返回一个 VNode 数组，除非在返回值无效的情况下返回 undefined。</p>
+<p>所有的 <code>$slots</code> 现在都会作为函数暴露在 <code>$scopedSlots</code> 中。如果你在使用渲染函数，不论当前插槽是否带有作用域，我们都推荐始终通过 <code>$scopedSlots</code> 访问它们。这不仅仅使得在未来添加作用域变得简单，也可以让你最终轻松迁移到所有插槽都是函数的 Vue 3。</p>
+</li>
+</ul>
+<h2 id="vm-refs"><a href="#vm-refs" class="headerlink" title="vm.$refs"></a>vm.$refs</h2><ul>
+<li>类型: Object</li>
+<li>只读</li>
+<li>详细:<br>一个对象, 持有注册过 <code>ref</code> 特性的所有 DOM 元素和组件实例</li>
+</ul>
+<h2 id="vm-isServer"><a href="#vm-isServer" class="headerlink" title="vm.$isServer"></a>vm.$isServer</h2><ul>
+<li>类型: boolean</li>
+<li>只读</li>
+<li>详细:<br>当前 Vue 实例是否运行于服务器</li>
+</ul>
+<h2 id="vm-attrs"><a href="#vm-attrs" class="headerlink" title="vm.$attrs"></a>vm.$attrs</h2><ul>
+<li>类型: { [key: string]: string}</li>
+<li>只读</li>
+<li>详细:<br>包含了父作用域中不作为 prop 被识别的特性绑定(<code>class</code>和<code>style</code>除外). 当一个组件没有声明任何 prop 时, 这里会包含所有父作用域的绑定, 并且可以通过 <code>v-bind=&quot;$attrs</code> 传入内部组件</li>
+</ul>
+<h2 id="vm-listeners"><a href="#vm-listeners" class="headerlink" title="vm.$listeners"></a>vm.$listeners</h2><ul>
+<li>类型: { [key: string]: Function | Array<Function> }</li>
+<li>只读</li>
+<li>详细:<br>包含了父作用域中<code>v-on</code>事件监听器, 他可以通过<code>v-on=$listeners</code>传入内部组件</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Vue</category>
+      </categories>
+      <tags>
+        <tag>Vue</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>vue选项其他</title>
     <url>/2020/02/24/vue%E9%80%89%E9%A1%B9%E5%85%B6%E4%BB%96/</url>
     <content><![CDATA[<h2 id="name"><a href="#name" class="headerlink" title="name"></a>name</h2><ul>
