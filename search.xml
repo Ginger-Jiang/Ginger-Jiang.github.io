@@ -1,6 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>vue实例方法事件</title>
+    <url>/2020/02/26/vue%E5%AE%9E%E4%BE%8B%E6%96%B9%E6%B3%95%E4%BA%8B%E4%BB%B6/</url>
+    <content><![CDATA[<h2 id="vm-on-event-callback"><a href="#vm-on-event-callback" class="headerlink" title="vm.$on(event, callback)"></a>vm.$on(event, callback)</h2><ul>
+<li>参数:<ul>
+<li>{string | Array<string>} event</li>
+<li>{Function} callback</li>
+</ul>
+</li>
+<li>用法:<br>监听当前实例上的自定义事件, 事件可以由 <code>vm.$emit</code> 触发. 回调函数会接受所有传入事件触发函数的额外参数</li>
+<li>示例:<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">vm.$on(<span class="string">'test'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">msg</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(msg)</span><br><span class="line">&#125;)</span><br><span class="line">vm.$emit(<span class="string">'test'</span>, <span class="string">'Ginger'</span>)</span><br><span class="line"><span class="comment">// =&gt; Ginger</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="vm-once-event-target"><a href="#vm-once-event-target" class="headerlink" title="vm.$once(event, target)"></a>vm.$once(event, target)</h2><ul>
+<li>参数:<ul>
+<li>{string} event</li>
+<li>{Function} callback</li>
+</ul>
+</li>
+<li>用法:<br>监听一个自定义事件, 但是只触发一次, 一旦触发之后, 监听器就会被移除</li>
+</ul>
+<h2 id="vm-off-event-callback"><a href="#vm-off-event-callback" class="headerlink" title="vm.$off(event, callback)"></a>vm.$off(event, callback)</h2><ul>
+<li>参数:<ul>
+<li>{string | Array<string>} event</li>
+<li>{Function} [callback]</li>
+</ul>
+</li>
+<li>用法<br>移除自定义事件监听器<ul>
+<li>如果没有提供参数, 则移除所有事件监听器</li>
+<li>如果只提供了事件, 则移除该事件的所有监听器</li>
+<li>如果同时提供了事件与回调, 则只移除这个回调的监听器</li>
+</ul>
+</li>
+</ul>
+<h2 id="vm-emit-eventName-…args"><a href="#vm-emit-eventName-…args" class="headerlink" title="vm.$emit(eventName, […args])"></a>vm.$emit(eventName, […args])</h2><ul>
+<li><p>参数:</p>
+<ul>
+<li>{string} eventName</li>
+<li>[…args]<br>触发当前实例上的事件</li>
+</ul>
+</li>
+<li><p>示例:<br>只配合一个事件名使用 <code>$emit</code></p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">Vue.component(<span class="string">'welcome-button'</span>, &#123;</span><br><span class="line">  template: <span class="string">`</span></span><br><span class="line"><span class="string">  &lt;button v-on:click="$emit('welcome')"&gt;</span></span><br><span class="line"><span class="string">    Click me to be welcomed</span></span><br><span class="line"><span class="string">  &lt;/button&gt;</span></span><br><span class="line"><span class="string">`</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"emit-example-simple"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">welcome-button</span> <span class="attr">v-on:welcome</span>=<span class="string">"sayHi"</span>&gt;</span><span class="tag">&lt;/<span class="name">welcome-button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">'#emit-example-simple'</span>,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    sayHi: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      alert(<span class="string">'Hi!'</span>)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>配合额外的参数使用 <code>$emit</code></p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">Vue.component(<span class="string">'magic-eight-ball'</span>, &#123;</span><br><span class="line">  data: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      possibleAdvice: [<span class="string">'Yes'</span>, <span class="string">'No'</span>, <span class="string">'Maybe'</span>]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    giveAdvice: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">var</span> randomAdviceIndex = <span class="built_in">Math</span>.floor(</span><br><span class="line">        <span class="built_in">Math</span>.random() * <span class="keyword">this</span>.possibleAdvice.length</span><br><span class="line">      )</span><br><span class="line">      <span class="keyword">this</span>.$emit(<span class="string">'give-advice'</span>, <span class="keyword">this</span>.possibleAdvice[randomAdviceIndex])</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  template: <span class="string">`</span></span><br><span class="line"><span class="string">  &lt;button v-on:click="giveAdvice"&gt;</span></span><br><span class="line"><span class="string">    Click me for advice</span></span><br><span class="line"><span class="string">  &lt;/button&gt;</span></span><br><span class="line"><span class="string">`</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"emit-example-argument"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">magic-eight-ball</span> <span class="attr">v-on:give-advice</span>=<span class="string">"showAdvice"</span>&gt;</span><span class="tag">&lt;/<span class="name">magic-eight-ball</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">'#emit-example-argument'</span>,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    showAdvice: <span class="function"><span class="keyword">function</span>(<span class="params">advice</span>) </span>&#123;</span><br><span class="line">      alert(advice)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Vue</category>
+      </categories>
+      <tags>
+        <tag>Vue</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>vue实例方法数据</title>
     <url>/2020/02/26/vue%E5%AE%9E%E4%BE%8B%E6%96%B9%E6%B3%95%E6%95%B0%E6%8D%AE/</url>
     <content><![CDATA[<h2 id="vm-watch-expOrFn-callback-options"><a href="#vm-watch-expOrFn-callback-options" class="headerlink" title="vm.$watch(expOrFn, callback, [options])"></a>vm.$watch(expOrFn, callback, [options])</h2><ul>

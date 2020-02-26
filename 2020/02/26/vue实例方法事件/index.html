@@ -46,20 +46,20 @@
   };
 </script>
 
-  <meta name="description" content="自定义指令Vue 除了默认的内置指令, 还允许注册自定义指令. 全局注册 1234567&#x2F;&#x2F; 注册 v-focus 自定义指令Vue.directive(&#39;focus&#39;, &amp;#123;  inserted(el) &amp;#123;    &#x2F;&#x2F; 自动获取焦点    el.focus()  &amp;#125;&amp;#125;)  局部注册 12345678910new Vue(&amp;#123;  el: &#39;#app&#39;,">
+  <meta name="description" content="vm.$on(event, callback) 参数: {string | Array} event {Function} callback   用法:监听当前实例上的自定义事件, 事件可以由 vm.$emit 触发. 回调函数会接受所有传入事件触发函数的额外参数 示例:12345vm.$on(&#39;test&#39;, function(msg) &amp;#123;  console.log(msg)&amp;#125;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="vue自定义指令">
-<meta property="og:url" content="http://yoursite.com/2020/02/12/vue%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8C%87%E4%BB%A4/index.html">
+<meta property="og:title" content="vue实例方法事件">
+<meta property="og:url" content="http://yoursite.com/2020/02/26/vue%E5%AE%9E%E4%BE%8B%E6%96%B9%E6%B3%95%E4%BA%8B%E4%BB%B6/index.html">
 <meta property="og:site_name" content="Ginger">
-<meta property="og:description" content="自定义指令Vue 除了默认的内置指令, 还允许注册自定义指令. 全局注册 1234567&#x2F;&#x2F; 注册 v-focus 自定义指令Vue.directive(&#39;focus&#39;, &amp;#123;  inserted(el) &amp;#123;    &#x2F;&#x2F; 自动获取焦点    el.focus()  &amp;#125;&amp;#125;)  局部注册 12345678910new Vue(&amp;#123;  el: &#39;#app&#39;,">
+<meta property="og:description" content="vm.$on(event, callback) 参数: {string | Array} event {Function} callback   用法:监听当前实例上的自定义事件, 事件可以由 vm.$emit 触发. 回调函数会接受所有传入事件触发函数的额外参数 示例:12345vm.$on(&#39;test&#39;, function(msg) &amp;#123;  console.log(msg)&amp;#125;">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-02-12T12:28:20.000Z">
-<meta property="article:modified_time" content="2020-02-12T12:28:37.901Z">
+<meta property="article:published_time" content="2020-02-26T07:42:13.000Z">
+<meta property="article:modified_time" content="2020-02-26T07:42:25.380Z">
 <meta property="article:author" content="Ginger">
 <meta property="article:tag" content="Vue">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://yoursite.com/2020/02/12/vue%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8C%87%E4%BB%A4/">
+<link rel="canonical" href="http://yoursite.com/2020/02/26/vue%E5%AE%9E%E4%BE%8B%E6%96%B9%E6%B3%95%E4%BA%8B%E4%BB%B6/">
 
 
 <script id="page-configurations">
@@ -71,7 +71,7 @@
   };
 </script>
 
-  <title>vue自定义指令 | Ginger</title>
+  <title>vue实例方法事件 | Ginger</title>
   
 
 
@@ -215,7 +215,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/12/vue%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8C%87%E4%BB%A4/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/26/vue%E5%AE%9E%E4%BE%8B%E6%96%B9%E6%B3%95%E4%BA%8B%E4%BB%B6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/head_pic.jpeg">
@@ -228,7 +228,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          vue自定义指令
+          vue实例方法事件
         </h1>
 
         <div class="post-meta">
@@ -239,7 +239,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-02-12 20:28:20 / 修改时间：20:28:37" itemprop="dateCreated datePublished" datetime="2020-02-12T20:28:20+08:00">2020-02-12</time>
+              <time title="创建时间：2020-02-26 15:42:13 / 修改时间：15:42:25" itemprop="dateCreated datePublished" datetime="2020-02-26T15:42:13+08:00">2020-02-26</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -259,14 +259,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>2.4k</span>
+              <span>1.6k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
+              <span>1 分钟</span>
             </span>
 
         </div>
@@ -278,58 +278,60 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="自定义指令"><a href="#自定义指令" class="headerlink" title="自定义指令"></a>自定义指令</h2><p>Vue 除了默认的内置指令, 还允许注册自定义指令.</p>
-<p>全局注册</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 注册 v-focus 自定义指令</span></span><br><span class="line">Vue.directive(<span class="string">'focus'</span>, &#123;</span><br><span class="line">  inserted(el) &#123;</span><br><span class="line">    <span class="comment">// 自动获取焦点</span></span><br><span class="line">    el.focus()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>局部注册</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">'#app'</span>,</span><br><span class="line">  directives: &#123;</span><br><span class="line">    focus: &#123;</span><br><span class="line">      inserted: <span class="function"><span class="keyword">function</span>(<span class="params">el</span>) </span>&#123;</span><br><span class="line">        el.focus()</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>使用 <code>v-focus</code> 自定义指令</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">v-focus</span> /&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="钩子函数"><a href="#钩子函数" class="headerlink" title="钩子函数"></a>钩子函数</h2><p>一个指令定义对象可以提供几个钩子函数</p>
-<ul>
-<li><code>bind</code>: 只调用一次, 指令第一次绑定到元素时调用, 可以进行一次性的初始化设置</li>
-<li><code>inserted</code>: 被绑定元素插入父节点时调用 (仅保证父节点存在，但不一定已被插入文档中)。</li>
-<li><code>update</code>: 所在组件的 VNode 更新时调用, 但是可能发生在其子 VNode 更新之前。指令的值可能发生了改变，也可能没有。但是你可以通过比较更新前后的值来忽略不必要的模板更新</li>
-<li><code>componentUpdated</code>: 指令所在组件的 VNode 及其子 VNode 全部更新后调用</li>
-<li><code>unbind</code>: 只调用一次, 指令与元素解绑时调用</li>
-</ul>
-<h2 id="钩子函数的参数"><a href="#钩子函数的参数" class="headerlink" title="钩子函数的参数"></a>钩子函数的参数</h2><ul>
-<li><code>el</code>: 指令所绑定的元素, 可以用来直接操作 DOM</li>
-<li><code>binding</code>: 一个对象, 包含以下属性:<ul>
-<li><code>name</code>: 指令名, 不包括<code>v-</code>前缀</li>
-<li><code>value</code>: 指令的绑定值, 例: <code>v-my-directive=&quot;1+1&quot;</code>, value 为 2</li>
-<li><code>oldvalue</code>: 指令绑定的前一个值, 仅在 <code>update</code> 和 <code>componentUpdate</code> 钩子中可用</li>
-<li><code>expression</code>: 字符串形式的指令表达式, 例: <code>v-my-directive=&quot;1+1&quot;</code>, 表达式为 “1+1”</li>
-<li><code>arg</code>: 传给指令的参数, 可选. 例: <code>v-my-directive:foo</code>, arg 为 foo</li>
-<li><code>modifiers</code>: 一个包含修饰符的对象, 例: <code>v-my-directive:foo.bar</code>, 修饰符对象为 <code>{ foo: true, bar : true}</code></li>
+        <h2 id="vm-on-event-callback"><a href="#vm-on-event-callback" class="headerlink" title="vm.$on(event, callback)"></a>vm.$on(event, callback)</h2><ul>
+<li>参数:<ul>
+<li>{string | Array<string>} event</li>
+<li>{Function} callback</li>
 </ul>
 </li>
-<li><code>vnode</code>: Vue 编译生成的虚拟节点</li>
-<li><code>oldVnode</code>: 上一个虚拟节点, 仅在 <code>update</code> 和 <code>componentUpdate</code> 钩子可用</li>
+<li>用法:<br>监听当前实例上的自定义事件, 事件可以由 <code>vm.$emit</code> 触发. 回调函数会接受所有传入事件触发函数的额外参数</li>
+<li>示例:<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vm.$on(<span class="string">'test'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">msg</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(msg)</span><br><span class="line">&#125;)</span><br><span class="line">vm.$emit(<span class="string">'test'</span>, <span class="string">'Ginger'</span>)</span><br><span class="line"><span class="comment">// =&gt; Ginger</span></span><br></pre></td></tr></table></figure>
+
+</li>
 </ul>
-<blockquote>
-<p>除了 <code>el</code>, 其他参数都应该是只读的, 切勿修改, 如果要在钩子之间共享数据, 建议通过元素的 <code>dataset</code> 来进行</p>
-</blockquote>
-<h2 id="动态指令参数"><a href="#动态指令参数" class="headerlink" title="动态指令参数"></a>动态指令参数</h2><p>指令的参数可以是动态的, 例 <code>v-my-directive:[argument]=&quot;value&quot;</code>, <code>argument</code> 参数可以根据组件数据进行更新</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"baseexample"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>Scroll down the page<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span> <span class="attr">v-pin</span>=<span class="string">"200"</span>&gt;</span>Stick me 200px from the top of the page<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="vm-once-event-target"><a href="#vm-once-event-target" class="headerlink" title="vm.$once(event, target)"></a>vm.$once(event, target)</h2><ul>
+<li>参数:<ul>
+<li>{string} event</li>
+<li>{Function} callback</li>
+</ul>
+</li>
+<li>用法:<br>监听一个自定义事件, 但是只触发一次, 一旦触发之后, 监听器就会被移除</li>
+</ul>
+<h2 id="vm-off-event-callback"><a href="#vm-off-event-callback" class="headerlink" title="vm.$off(event, callback)"></a>vm.$off(event, callback)</h2><ul>
+<li>参数:<ul>
+<li>{string | Array<string>} event</li>
+<li>{Function} [callback]</li>
+</ul>
+</li>
+<li>用法<br>移除自定义事件监听器<ul>
+<li>如果没有提供参数, 则移除所有事件监听器</li>
+<li>如果只提供了事件, 则移除该事件的所有监听器</li>
+<li>如果同时提供了事件与回调, 则只移除这个回调的监听器</li>
+</ul>
+</li>
+</ul>
+<h2 id="vm-emit-eventName-…args"><a href="#vm-emit-eventName-…args" class="headerlink" title="vm.$emit(eventName, […args])"></a>vm.$emit(eventName, […args])</h2><ul>
+<li><p>参数:</p>
+<ul>
+<li>{string} eventName</li>
+<li>[…args]<br>触发当前实例上的事件</li>
+</ul>
+</li>
+<li><p>示例:<br>只配合一个事件名使用 <code>$emit</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Vue.component(<span class="string">'welcome-button'</span>, &#123;</span><br><span class="line">  template: <span class="string">`</span></span><br><span class="line"><span class="string">  &lt;button v-on:click="$emit('welcome')"&gt;</span></span><br><span class="line"><span class="string">    Click me to be welcomed</span></span><br><span class="line"><span class="string">  &lt;/button&gt;</span></span><br><span class="line"><span class="string">`</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Vue.directive(<span class="string">'pin'</span>, &#123;</span><br><span class="line">  bind: <span class="function"><span class="keyword">function</span>(<span class="params">el, binding, vnode</span>) </span>&#123;</span><br><span class="line">    el.style.position = <span class="string">'fixed'</span></span><br><span class="line">    el.style.top = binding.value + <span class="string">'px'</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">'baseexample'</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"emit-example-simple"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">welcome-button</span> <span class="attr">v-on:welcome</span>=<span class="string">"sayHi"</span>&gt;</span><span class="tag">&lt;/<span class="name">welcome-button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p>这会把该元素固定在距离页面顶部 200 像素的位置。但如果场景是我们需要把元素固定在左侧而不是顶部又该怎么办呢？这时使用动态参数就可以非常方便地根据每个组件实例来进行更新。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"dynamicexample"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">h3</span>&gt;</span>Scroll down inside this section ↓<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span> <span class="attr">v-pin:</span>[<span class="attr">direction</span>]=<span class="string">"200"</span>&gt;</span>I am pinned onto the page at 200px to the left.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">'#emit-example-simple'</span>,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    sayHi: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      alert(<span class="string">'Hi!'</span>)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">Vue.directive(<span class="string">'pin'</span>, &#123;</span><br><span class="line">  bind: <span class="function"><span class="keyword">function</span>(<span class="params">el, binding, vnode</span>) </span>&#123;</span><br><span class="line">    el.style.position = <span class="string">'fixed'</span></span><br><span class="line">    <span class="keyword">var</span> s = binding.arg == <span class="string">'left'</span> ? <span class="string">'left'</span> : <span class="string">'top'</span></span><br><span class="line">    el.style[s] = binding.value + <span class="string">'px'</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">'#dynamicexample'</span>,</span><br><span class="line">  data: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      direction: <span class="string">'left'</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>配合额外的参数使用 <code>$emit</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">Vue.component(<span class="string">'magic-eight-ball'</span>, &#123;</span><br><span class="line">  data: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      possibleAdvice: [<span class="string">'Yes'</span>, <span class="string">'No'</span>, <span class="string">'Maybe'</span>]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    giveAdvice: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">var</span> randomAdviceIndex = <span class="built_in">Math</span>.floor(</span><br><span class="line">        <span class="built_in">Math</span>.random() * <span class="keyword">this</span>.possibleAdvice.length</span><br><span class="line">      )</span><br><span class="line">      <span class="keyword">this</span>.$emit(<span class="string">'give-advice'</span>, <span class="keyword">this</span>.possibleAdvice[randomAdviceIndex])</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  template: <span class="string">`</span></span><br><span class="line"><span class="string">  &lt;button v-on:click="giveAdvice"&gt;</span></span><br><span class="line"><span class="string">    Click me for advice</span></span><br><span class="line"><span class="string">  &lt;/button&gt;</span></span><br><span class="line"><span class="string">`</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
-<h2 id="函数简写"><a href="#函数简写" class="headerlink" title="函数简写"></a>函数简写</h2><p>在很多时候，你可能想在 bind 和 update 时触发相同行为，而不关心其它的钩子。比如这样写:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Vue.directive(<span class="string">'color-swatch'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">el, binding</span>) </span>&#123;</span><br><span class="line">  el.style.backgroundColor = binding.value</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"emit-example-argument"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">magic-eight-ball</span> <span class="attr">v-on:give-advice</span>=<span class="string">"showAdvice"</span>&gt;</span><span class="tag">&lt;/<span class="name">magic-eight-ball</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<h2 id="对象字面量"><a href="#对象字面量" class="headerlink" title="对象字面量"></a>对象字面量</h2><p>如果指令需要多个值，可以传入一个 JavaScript 对象字面量。记住，指令函数能够接受所有合法的 JavaScript 表达式。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">v-demo</span>=<span class="string">"&#123; color: 'white', text: 'hello!' &#125;"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Vue.directive(<span class="string">'demo'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">el, binding</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(binding.value.color) <span class="comment">// =&gt; "white"</span></span><br><span class="line">  <span class="built_in">console</span>.log(binding.value.text) <span class="comment">// =&gt; "hello!"</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">'#emit-example-argument'</span>,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    showAdvice: <span class="function"><span class="keyword">function</span>(<span class="params">advice</span>) </span>&#123;</span><br><span class="line">      alert(advice)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
 
     </div>
 
@@ -363,13 +365,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/02/11/vue%E6%B7%B7%E5%85%A5/" rel="prev" title="vue混入">
-      <i class="fa fa-chevron-left"></i> vue混入
+    <a href="/2020/02/26/vue%E5%AE%9E%E4%BE%8B%E6%96%B9%E6%B3%95%E6%95%B0%E6%8D%AE/" rel="prev" title="vue实例方法数据">
+      <i class="fa fa-chevron-left"></i> vue实例方法数据
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/02/14/vue%E6%B8%B2%E6%9F%93%E5%87%BD%E6%95%B0-JSX/" rel="next" title="vue渲染函数-JSX">
-      vue渲染函数-JSX <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -430,7 +429,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#自定义指令"><span class="nav-number">1.</span> <span class="nav-text">自定义指令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#钩子函数"><span class="nav-number">2.</span> <span class="nav-text">钩子函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#钩子函数的参数"><span class="nav-number">3.</span> <span class="nav-text">钩子函数的参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动态指令参数"><span class="nav-number">4.</span> <span class="nav-text">动态指令参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数简写"><span class="nav-number">5.</span> <span class="nav-text">函数简写</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对象字面量"><span class="nav-number">6.</span> <span class="nav-text">对象字面量</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#vm-on-event-callback"><span class="nav-number">1.</span> <span class="nav-text">vm.$on(event, callback)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vm-once-event-target"><span class="nav-number">2.</span> <span class="nav-text">vm.$once(event, target)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vm-off-event-callback"><span class="nav-number">3.</span> <span class="nav-text">vm.$off(event, callback)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vm-emit-eventName-…args"><span class="nav-number">4.</span> <span class="nav-text">vm.$emit(eventName, […args])</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -700,7 +699,7 @@ NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
       repo: 'Ginger-Jiang.github.io',
       owner: 'Ginger-Jiang',
       admin: ['Ginger-Jiang'],
-      id: 'b6bf87d092455d408a2d6370facded7a',
+      id: 'f68ac83e4e8b1d869af6b0e480a6ba7c',
         language: 'zh-CN',
       distractionFreeMode: true
     });
