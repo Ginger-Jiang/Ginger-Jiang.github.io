@@ -1,6 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>vue实例方法数据</title>
+    <url>/2020/02/26/vue%E5%AE%9E%E4%BE%8B%E6%96%B9%E6%B3%95%E6%95%B0%E6%8D%AE/</url>
+    <content><![CDATA[<h2 id="vm-watch-expOrFn-callback-options"><a href="#vm-watch-expOrFn-callback-options" class="headerlink" title="vm.$watch(expOrFn, callback, [options])"></a>vm.$watch(expOrFn, callback, [options])</h2><ul>
+<li><p>参数</p>
+<ul>
+<li>{string | Function} expOrFn</li>
+<li>{Function | Object} callback</li>
+<li>{Object} [options]<ul>
+<li>{boolean} deep</li>
+<li>{boolean} immediate</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>返回值 {Function} newwatch</p>
+</li>
+<li><p>用法<br>观察 Vue 实例上的一个表达式或者一个函数计算结果的变化. 回调永汉得到的参数为新值和旧值. 表达式只接受监督的键路径</p>
+</li>
+<li><p>示例</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 键路径</span></span><br><span class="line">vm.$watch(<span class="string">'a.b.c'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">newVal, oldVal</span>) </span>&#123;&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 函数</span></span><br><span class="line">vm.$watch(</span><br><span class="line">  <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 表达式 `this.a + this.b` 每次得出一个不同的结果时</span></span><br><span class="line">    <span class="comment">// 处理函数都会被调用。</span></span><br><span class="line">    <span class="comment">// 这就像监听一个未被定义的计算属性</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.a + <span class="keyword">this</span>.b</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="function"><span class="keyword">function</span>(<span class="params">newVal, oldVal</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 做点什么</span></span><br><span class="line">  &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p><code>vm.$watch</code> 返回一个取消观察函数, 用来停止触发回调</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> unwatch vm.$watch(<span class="string">'a'</span>, cb)</span><br><span class="line"><span class="comment">// 取消观察</span></span><br><span class="line">unwatch()</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>选项: deep<br>为了发现对象内部值的变化, 可以在选项参数中指定 <code>deep: true</code> 将立即以表达式的当前值触发回调:</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">vm.$watch(<span class="string">'a'</span>, callback, &#123;</span><br><span class="line">  immediate: <span class="literal">true</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 立即以 'a' 的当前值触发回调</span></span><br></pre></td></tr></table></figure>
+
+<p>注意在带有 <code>immediate</code>选项时, 不能再第一次回调时取消侦听给定的 property</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 这会导致报错</span></span><br><span class="line"><span class="keyword">var</span> unwatch = vm.$watch(</span><br><span class="line">  <span class="string">'value'</span>,</span><br><span class="line">  <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    doSomething()</span><br><span class="line">    unwatch()</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123; <span class="attr">immediate</span>: <span class="literal">true</span> &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>如果想在会调内部调用一个取消侦听的函数, 应该先检查其函数的可用性</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> unwatch = vm.$watch(</span><br><span class="line">  <span class="string">'value'</span>,</span><br><span class="line">  <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    doSomething()</span><br><span class="line">    <span class="keyword">if</span> (unwatch) &#123;</span><br><span class="line">      unwatch()</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123; <span class="attr">immediate</span>: <span class="literal">true</span> &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="vm-set-target-propertyName-index-value"><a href="#vm-set-target-propertyName-index-value" class="headerlink" title="vm.$set(target, propertyName/index,value)"></a>vm.$set(target, propertyName/index,value)</h2><ul>
+<li>参数:<ul>
+<li>{Object | Array} target</li>
+<li>{string | number} propertyName/index</li>
+<li>{any} value</li>
+</ul>
+</li>
+<li>返回值: 设置的值</li>
+<li>用法: 这是全局 Vue.set 的别名</li>
+</ul>
+<h2 id="vm-delete-target-propertyName-index"><a href="#vm-delete-target-propertyName-index" class="headerlink" title="vm.$delete(target, propertyName/index)"></a>vm.$delete(target, propertyName/index)</h2><ul>
+<li>参数:<ul>
+<li>{Object | Array} target</li>
+<li>{string | number} propertyname/index</li>
+</ul>
+</li>
+<li>用法: 这是全局 Vue.delete 的别名</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Vue</category>
+      </categories>
+      <tags>
+        <tag>Vue</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>vue实例属性</title>
     <url>/2020/02/25/vue%E5%AE%9E%E4%BE%8B%E5%B1%9E%E6%80%A7/</url>
     <content><![CDATA[<h2 id="vm-data"><a href="#vm-data" class="headerlink" title="vm.$data"></a>vm.$data</h2><ul>

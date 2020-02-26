@@ -213,6 +213,111 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/15/vue%E6%8F%92%E4%BB%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head_pic.jpeg">
+      <meta itemprop="name" content="Ginger">
+      <meta itemprop="description" content="未来可期">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ginger">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/02/15/vue%E6%8F%92%E4%BB%B6/" class="post-title-link" itemprop="url">vue插件</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-02-15 17:10:13 / 修改时间：17:10:27" itemprop="dateCreated datePublished" datetime="2020-02-15T17:10:13+08:00">2020-02-15</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Vue/" itemprop="url" rel="index">
+                    <span itemprop="name">Vue</span>
+                  </a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h2><p>插件通常用来为 Vue 添加全局功能, 插件的功能范围没有严格的限制</p>
+<ul>
+<li>1.添加全局方法或者属性</li>
+<li>2.添加全局资源: 指令/过滤器/过渡</li>
+<li>3.通过全局混入来添加一些组件的选项: <code>vue-router</code></li>
+<li>4.添加 Vue 实例方法, 通过他们添加到 <code>Vue.prototype</code> 上实现</li>
+<li>5.一个库, 提供自己的 api, 同时提供上面提到的一个或多个功能</li>
+</ul>
+<h2 id="使用插件"><a href="#使用插件" class="headerlink" title="使用插件"></a>使用插件</h2><p>通过全局方法 <code>Vue.use()</code> 使用插件, 他需要在你调用 <code>new Vue()</code> 启动应用之前完成</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 调用 'MyPlugin.install(Vue)</span></span><br><span class="line">Vue.use(MyPlugin)</span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  <span class="comment">// ...组件选项</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>也可以传入一个可选的选项对象</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Vue.use(MyPlugin, &#123; <span class="attr">someOption</span>: trur &#125;)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>Vue.use 会自动阻止多次注册相同插件，届时即使多次调用也只会注册一次该插件。</p>
+</blockquote>
+<p>Vue.js 官方提供的一些插件 (例如 vue-router) 在检测到 Vue 是可访问的全局变量时会自动调用 Vue.use()。然而在像 CommonJS 这样的模块环境中，你应该始终显式地调用 Vue.use()</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 用 Browserify 或 webpack 提供的 CommonJS 模块环境时</span></span><br><span class="line"><span class="keyword">var</span> Vue = <span class="built_in">require</span>(<span class="string">'vue'</span>)</span><br><span class="line"><span class="keyword">var</span> VueRouter = <span class="built_in">require</span>(<span class="string">'vue-router'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 不要忘了调用此方法</span></span><br><span class="line">Vue.use(VueRouter)</span><br></pre></td></tr></table></figure>
+
+<h2 id="开发插件"><a href="#开发插件" class="headerlink" title="开发插件"></a>开发插件</h2><p>Vue.js 的插件应该暴露一个<code>install</code>方法, 这个方法的第一个参数是<code>Vue</code>构造器, 第二个参数是一个可选的选项对象:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">MyPlugin.install = <span class="function"><span class="keyword">function</span>(<span class="params">Vue, options</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 添加全局方法或属性</span></span><br><span class="line">  Vue.MyGlobalMethod = funtion() &#123;</span><br><span class="line">    <span class="comment">// 逻辑...</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 添加全局资源</span></span><br><span class="line">  Vue.directive(<span class="string">'my-directive'</span>, &#123;</span><br><span class="line">    bind(el, binding, vnode, oldVnode) &#123;</span><br><span class="line">      <span class="comment">// 逻辑...</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 注入组件选项</span></span><br><span class="line">  Vue.mixin(&#123;</span><br><span class="line">    created() &#123;</span><br><span class="line">      <span class="comment">// 逻辑...</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 添加实例方法</span></span><br><span class="line">  Vue.prototype.$myMethod = <span class="function"><span class="keyword">function</span>(<span class="params">methodOptions</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 逻辑...</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/14/vue%E6%B8%B2%E6%9F%93%E5%87%BD%E6%95%B0-JSX/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1484,150 +1589,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/05/vue%E7%BB%84%E4%BB%B6%E6%B7%B1%E5%85%A5-Prop/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/head_pic.jpeg">
-      <meta itemprop="name" content="Ginger">
-      <meta itemprop="description" content="未来可期">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ginger">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/02/05/vue%E7%BB%84%E4%BB%B6%E6%B7%B1%E5%85%A5-Prop/" class="post-title-link" itemprop="url">vue组件深入-Prop</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-02-05 15:24:29 / 修改时间：15:24:48" itemprop="dateCreated datePublished" datetime="2020-02-05T15:24:29+08:00">2020-02-05</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Vue/" itemprop="url" rel="index">
-                    <span itemprop="name">Vue</span>
-                  </a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>2.8k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>3 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Prop-的大小写"><a href="#Prop-的大小写" class="headerlink" title="Prop 的大小写"></a>Prop 的大小写</h2><p>在 HTML 元素的属性中对于大小写是不敏感的, 所以浏览器会将所有大写解释为小写字符, 意味着使用 DOM 模板时, 驼峰命名的 prop 名需要使用等价的短横线分隔命名</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Vue.component(<span class="string">'componentsName'</span>, &#123;</span><br><span class="line">  <span class="comment">// 驼峰命名</span></span><br><span class="line">  props: [<span class="string">'docTitle'</span>],</span><br><span class="line">  template: <span class="string">'&lt;h1&gt;&#123;&#123; docTitle &#125;&#125;&lt;/h1&gt;'</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 在 html 中是短横线分隔的 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">component-name</span> <span class="attr">doc-title</span>=<span class="string">"hello"</span>&gt;</span><span class="tag">&lt;/<span class="name">component-name</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="Prop-类型"><a href="#Prop-类型" class="headerlink" title="Prop 类型"></a>Prop 类型</h2><p>props 可以是个数组</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">props: [<span class="string">'title'</span>, <span class="string">'name'</span>, <span class="string">'content'</span>, <span class="string">'gender'</span>]</span><br></pre></td></tr></table></figure>
-
-<p>很多时候我们都希望每个 prop 都有指定的值类型, 我们可以用对象的形式列出 prop, 如果传入的 prop 类型与定义不符, Vue 会在控制台进行提示</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">props: &#123;</span><br><span class="line">  title: <span class="built_in">String</span>,</span><br><span class="line">  name: <span class="built_in">String</span>,</span><br><span class="line">  content: <span class="built_in">String</span>,</span><br><span class="line">  gender: <span class="built_in">Boolean</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="传递静态或动态-Prop"><a href="#传递静态或动态-Prop" class="headerlink" title="传递静态或动态 Prop"></a>传递静态或动态 Prop</h2><blockquote>
-<p>我们可以将任意数据类型的值传递给 prop</p>
-</blockquote>
-<p>我们可以给 prop 传入一个静态值</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">my-component</span> <span class="attr">title</span>=<span class="string">"Ginger"</span>&gt;</span><span class="tag">&lt;/<span class="name">my-component</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>我们也可以通过<code>v-bind</code>对 prop 进行动态赋值</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> info = &#123;</span><br><span class="line">  title: <span class="string">'Ginger'</span></span><br><span class="line">&#125;</span><br><span class="line">&lt;my-component v-bind:title=<span class="string">"info.title"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">my-component</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
-
-<h2 id="单向数据流"><a href="#单向数据流" class="headerlink" title="单向数据流"></a>单向数据流</h2><p>所有的 prop 都使得父子组件的 prop 之间形成了一个<strong>单向下行绑定</strong><br>父级的 prop 的更新会向下流动到子组件中, 无法反过来<br>因为每次父组件发生更新时, 子组件中所有 prop 都将会刷新为最新的值, 所以不应该在一个子组件内改变 prop</p>
-<ul>
-<li>需要将 prop 作为子组件内部数据来使用</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">props: [<span class="string">'initialCounter'</span>],</span><br><span class="line">data: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    counter: <span class="keyword">this</span>.initialCounter</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>需要将传入的 prop 值进行转换</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">props:[<span class="string">'size'</span>],</span><br><span class="line"><span class="comment">// 使用一个计算属性来处理</span></span><br><span class="line">computed: &#123;</span><br><span class="line">  normalizedSize: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.size.trim().toLowerCase()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="prop-验证"><a href="#prop-验证" class="headerlink" title="prop 验证"></a>prop 验证</h2><p>我们可以为组件的 prop 指定验证要求, 如果不满足要求, Vue 会在控制台发出警告<br>为了定制 prop 的验证方式, 可以为 props 中的值提供一个验证需求的对象, 而不是一个字符串数组</p>
-<blockquote>
-<p>验证失败 Vue 会在控制台显示警告</p>
-</blockquote>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">Vue.component(<span class="string">'my-component'</span>, &#123;</span><br><span class="line">  props: &#123;</span><br><span class="line">    propA: <span class="built_in">Number</span>, <span class="comment">// 基础类型验证</span></span><br><span class="line">    propB: [<span class="built_in">String</span>, <span class="built_in">Number</span>], <span class="comment">// 可以是多个类型</span></span><br><span class="line">    propC: &#123;</span><br><span class="line">      <span class="comment">// 必须传入的字符串</span></span><br><span class="line">      type: <span class="built_in">String</span>,</span><br><span class="line">      <span class="built_in">require</span>: <span class="literal">true</span></span><br><span class="line">    &#125;,</span><br><span class="line">    propD: &#123;</span><br><span class="line">      <span class="comment">// 默认100的数字</span></span><br><span class="line">      type: <span class="built_in">Number</span>,</span><br><span class="line">      <span class="keyword">default</span>: <span class="number">100</span></span><br><span class="line">    &#125;,</span><br><span class="line">    propE: &#123;</span><br><span class="line">      <span class="comment">// 带有默认的对象</span></span><br><span class="line">      type: <span class="built_in">Object</span>,</span><br><span class="line">      <span class="keyword">default</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> &#123; <span class="attr">name</span>: <span class="string">'Ginger'</span> &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    propF: &#123;</span><br><span class="line">      <span class="comment">// 自定义验证函数</span></span><br><span class="line">      validator: <span class="function"><span class="keyword">function</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> [<span class="string">'success'</span>, <span class="string">'waring'</span>, <span class="string">'danger'</span>].indexOf(value) !== <span class="number">-1</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<h3 id="类型检测"><a href="#类型检测" class="headerlink" title="类型检测"></a>类型检测</h3><p><code>type</code> 可以是下列原生构造函数中的一个:</p>
-<ul>
-<li><code>String</code></li>
-<li><code>Number</code></li>
-<li><code>Boolean</code></li>
-<li><code>Array</code></li>
-<li><code>Object</code></li>
-<li><code>Date</code></li>
-<li><code>Function</code></li>
-<li><code>Symbol</code></li>
-</ul>
-<p>另外, <code>type</code> 也可以是一个自定义的构造函数, 并且通过 <code>instanceof</code> 来进行检查确认</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">firstName, lastName</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.firstName = firstName</span><br><span class="line">  <span class="keyword">this</span>.lastName = lastName</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用</span></span><br><span class="line">Vue.component(<span class="string">'my-component'</span>, &#123;</span><br><span class="line">  props: &#123;</span><br><span class="line">    author: Person</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<h3 id="非-Prop-的-Attribute"><a href="#非-Prop-的-Attribute" class="headerlink" title="非 Prop 的 Attribute"></a>非 Prop 的 Attribute</h3><p>有些 attribute 通过自定义属性传向子组件, 但是在子组件内部并没有通过 props 接受, 这些 attribute 会被添加到这个组件的根元素上</p>
-<h3 id="替换-合并已有的-attribute"><a href="#替换-合并已有的-attribute" class="headerlink" title="替换/合并已有的 attribute"></a>替换/合并已有的 attribute</h3><p>对于绝大多数 <code>attribute</code> 来说，从外部提供给组件的值会替换掉组件内部设置好的值。所以如果传入 <code>type=&quot;text</code> 就会替换掉 <code>type=&quot;date</code> <code>并把它破坏！庆幸的是，class</code> 和 <code>style</code> attribute 会稍微智能一些，即两边的值会被合并起来，从而得到最终的值：<code>form-control</code> <code>date-picker-theme-dark</code>。</p>
-<h3 id="禁用-attribute-继承"><a href="#禁用-attribute-继承" class="headerlink" title="禁用 attribute 继承"></a>禁用 attribute 继承</h3><p>如果不希望组件的根元素继承 attribute, 可以在组件的选项中设置 <code>inheritAttrs: false</code></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Vue.component(<span class="string">'my-component'</span>, &#123;</span><br><span class="line">  inheritAttrs: <span class="literal">false</span>,</span><br><span class="line">  ...</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<h4 id="attrs-属性包含了传递给一个组件的-attribute-名和值"><a href="#attrs-属性包含了传递给一个组件的-attribute-名和值" class="headerlink" title="$attrs 属性包含了传递给一个组件的 attribute 名和值"></a>$attrs 属性包含了传递给一个组件的 attribute 名和值</h4><p>利用 <code>inheritAttrs: false</code> 和 <code>$attrs</code>，就可以手动决定这些 attribute 会被赋予哪个元素</p>
-<blockquote>
-<p>inheritAttrs: false 选项不会影响 style 和 class 的绑定。</p>
-</blockquote>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Vue.component(<span class="string">'base-input'</span>, &#123;</span><br><span class="line">  inheritAttrs: <span class="literal">false</span>,</span><br><span class="line">  props: [<span class="string">'label'</span>, <span class="string">'value'</span>],</span><br><span class="line">  template: <span class="string">`</span></span><br><span class="line"><span class="string">    &lt;label&gt;</span></span><br><span class="line"><span class="string">      &#123;&#123; label &#125;&#125;</span></span><br><span class="line"><span class="string">      &lt;input</span></span><br><span class="line"><span class="string">        v-bind="$attrs"</span></span><br><span class="line"><span class="string">        v-bind:value="value"</span></span><br><span class="line"><span class="string">        v-on:input="$emit('input', $event.target.value)"</span></span><br><span class="line"><span class="string">      &gt;</span></span><br><span class="line"><span class="string">    &lt;/label&gt;</span></span><br><span class="line"><span class="string">  `</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1700,7 +1661,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">45</span>
+          <span class="site-state-item-count">46</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1755,12 +1716,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">111k</span>
+    <span title="站点总字数">113k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:41</span>
+    <span title="站点阅读时长">1:42</span>
 </div>
 
 
