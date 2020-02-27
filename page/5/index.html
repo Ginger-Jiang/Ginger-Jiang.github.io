@@ -213,6 +213,308 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/22/%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head_pic.jpeg">
+      <meta itemprop="name" content="Ginger">
+      <meta itemprop="description" content="未来可期">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ginger">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/01/22/%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/" class="post-title-link" itemprop="url">简单工厂模式</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-01-22 16:07:02 / 修改时间：16:07:54" itemprop="dateCreated datePublished" datetime="2020-01-22T16:07:02+08:00">2020-01-22</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" itemprop="url" rel="index">
+                    <span itemprop="name">设计模式</span>
+                  </a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.9k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <ul>
+<li>构造器模式</li>
+<li>简单工厂模式</li>
+</ul>
+<h2 id="构造器模式-抽象每个对象的变与不变"><a href="#构造器模式-抽象每个对象的变与不变" class="headerlink" title="构造器模式-抽象每个对象的变与不变"></a>构造器模式-抽象每个对象的变与不变</h2><p>你正在开发一个学生管理系统, 开发时只有自己, 于是创建自己的用户信息:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 字面量</span></span><br><span class="line"><span class="keyword">const</span> zhangsan = &#123;</span><br><span class="line">  name: <span class="string">'张三'</span>,</span><br><span class="line">  age: <span class="number">22</span>,</span><br><span class="line">  gender: <span class="number">0</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>过了两天, 你的同事过来说让你加上他的用户信息, 他要使用用户信息, 于是你:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 字面量</span></span><br><span class="line"><span class="keyword">const</span> zhangsan = &#123;</span><br><span class="line">  name: <span class="string">'张三'</span>,</span><br><span class="line">  age: <span class="number">22</span>,</span><br><span class="line">  gender: <span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> lisi = &#123;</span><br><span class="line">  name: <span class="string">'李四'</span>,</span><br><span class="line">  age: <span class="number">20</span>,</span><br><span class="line">  gender: <span class="number">1</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>过了两个星期,产品经理跟你说, 我这里有一点点(1000 个)测试数据, 你给我录入下, 于是你写了个构造函数(构造器)</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 构造器</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Students</span>(<span class="params">name, age, gender</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name = name</span><br><span class="line">  <span class="keyword">this</span>.age = age</span><br><span class="line">  <span class="keyword">this</span>.gender = genger</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// ... 此处省略读取数据, 遍历调用构造器</span></span><br><span class="line"><span class="keyword">const</span> student = <span class="keyword">new</span> Students(name, age, gender)</span><br></pre></td></tr></table></figure>
+
+<h3 id="思考-变与不变"><a href="#思考-变与不变" class="headerlink" title="思考 变与不变"></a>思考 变与不变</h3><p>不变的是每个学生都有姓名、年龄、性别三个属性,这叫<strong>共性</strong><br>变化的是三个属性的值,这叫<strong>个性</strong></p>
+<blockquote>
+<p>案例中构造器在整个过程中就是抽象了学生这个对象, 将赋值的过程进行了封装, 确定不变的部分, 使每个学生对象都有自己的姓名、年龄、性别三个属性, 在确保不变的同时, 将变化的三个属性的值进行开放, 由用户自己传入, 保证了个性的灵活度</p>
+</blockquote>
+<h2 id="工厂模式-抽象不同构造器之间的变与不变"><a href="#工厂模式-抽象不同构造器之间的变与不变" class="headerlink" title="工厂模式-抽象不同构造器之间的变与不变"></a>工厂模式-抽象不同构造器之间的变与不变</h2><p>第一期交付后一个月, 学校方面打来电话, 表示要对学生中的班干部进行区分, 备注班干部职责, 于是你加了一个班干部的构造器用来生成班干部的信息,</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Students</span>(<span class="params">name, age, gender</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 普通学生</span></span><br><span class="line">  <span class="keyword">this</span>.name = name</span><br><span class="line">  <span class="keyword">this</span>.age = age</span><br><span class="line">  <span class="keyword">this</span>.gender = genger</span><br><span class="line">  <span class="keyword">this</span>.identity = <span class="string">'student'</span></span><br><span class="line">  <span class="keyword">this</span>.duties = [<span class="string">'学习'</span>]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Cadres</span>(<span class="params">name, age, gender</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 班干部</span></span><br><span class="line">  <span class="keyword">this</span>.name = name</span><br><span class="line">  <span class="keyword">this</span>.age = age</span><br><span class="line">  <span class="keyword">this</span>.gender = genger</span><br><span class="line">  <span class="keyword">this</span>.identity = <span class="string">'cadre'</span></span><br><span class="line">  <span class="keyword">this</span>.duties = [<span class="string">'点名'</span>,<span class="string">'出黑板报'</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这时候, 你发现又出现了 <strong>变数</strong> identity, 你还需要一个方法来判断调用哪一个构造器</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Factory</span>(<span class="params">name, age, gender, identity</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">switch</span>(identity) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">'student'</span>:</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">new</span> Students(name, age, gender)</span><br><span class="line">      <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">case</span> <span class="string">'cadre'</span>:</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">new</span> Cadres(name, age, gender)</span><br><span class="line">      <span class="keyword">break</span></span><br><span class="line">    <span class="comment">// 此处省略无数个班干部</span></span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">      <span class="keyword">break</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>写完后, 你发现每类班干部职责实在太多了, 难道要写几十个构造器么</p>
+<h3 id="重新思考-变与不变"><a href="#重新思考-变与不变" class="headerlink" title="重新思考 变与不变"></a>重新思考 变与不变</h3><p>在我们的学生与班干部两个构造器中, 都拥有不变的姓名、年龄、性别三个共性, 变化是的身份与职责, 由此可以看出我们的问题, 共性封装不够、共性与个性分离不彻底, 于是我们重新封装下:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Student</span>(<span class="params">name, age, gender, identity, duties</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name = name</span><br><span class="line">  <span class="keyword">this</span>.age = age</span><br><span class="line">  <span class="keyword">this</span>.gender = gender</span><br><span class="line">  <span class="keyword">this</span>.identity = identity</span><br><span class="line">  <span class="keyword">this</span>.duties = duties</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Factory</span>(<span class="params">name, age, gender, identity</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> duties</span><br><span class="line">  <span class="keyword">switch</span>(identity)&#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">'student'</span>:</span><br><span class="line">      duties = [<span class="string">'学习'</span>,<span class="string">'做作业'</span>]</span><br><span class="line">      <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">case</span> <span class="string">'cadre'</span>:</span><br><span class="line">      duties = [<span class="string">'组织活动'</span>,<span class="string">'点名'</span>]</span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">      <span class="keyword">break</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> Student(name, age, gender, identity, duties)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<pre><code>工厂模式就是对创建对象的过程进行封装, 我们不需要在关心封装内做的事情,只需要拿到工厂交付给我们的结果即可.</code></pre>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/22/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%A6%82%E5%86%B5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head_pic.jpeg">
+      <meta itemprop="name" content="Ginger">
+      <meta itemprop="description" content="未来可期">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ginger">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/01/22/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%A6%82%E5%86%B5/" class="post-title-link" itemprop="url">设计模式概况</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-01-22 14:05:59 / 修改时间：14:07:14" itemprop="dateCreated datePublished" datetime="2020-01-22T14:05:59+08:00">2020-01-22</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" itemprop="url" rel="index">
+                    <span itemprop="name">设计模式</span>
+                  </a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>473</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="设计模式"><a href="#设计模式" class="headerlink" title="设计模式"></a>设计模式</h2><blockquote>
+<p>软件设计模式（Design pattern），又称设计模式，是一套被反复使用、多数人知晓的、经过分类编目的、代码设计经验的总结。使用设计模式是为了可重用代码、让代码更容易被他人理解、保证代码可靠性、程序的重用性。</p>
+</blockquote>
+<blockquote>
+<p>设计模式是一套现成的工具, 拿来即可用. 就像电饭锅、洗衣机, 不用关心电饭锅、洗衣机的制作原理, 只需将需要的特定事物放入, 即可得到想要的结果.</p>
+</blockquote>
+<h2 id="JavaScript-主要设计原则–面向对象编程和面向对象设计"><a href="#JavaScript-主要设计原则–面向对象编程和面向对象设计" class="headerlink" title="JavaScript 主要设计原则–面向对象编程和面向对象设计"></a>JavaScript 主要设计原则–面向对象编程和面向对象设计</h2><ul>
+<li>单一功能原则</li>
+<li>开放封闭原则</li>
+</ul>
+<h2 id="核心思想–封装变化"><a href="#核心思想–封装变化" class="headerlink" title="核心思想–封装变化"></a>核心思想–封装变化</h2><p>一个简单的产品流程节点可以分为:</p>
+<pre><code>想法 -&gt; 需求 -&gt; 设计 -&gt; 开发 -&gt; 测试 -&gt; 部署 -&gt; 产品</code></pre><p>&nbsp;&nbsp;通过上面的关键节点可以看出, 影响一个产品的复杂程度的主要节点是需求与设计, 在抛开个人能力不谈的时候, 设计的复杂程度取决于需求的复杂程度, 所以我们可以说需求是一个产品复杂程度的”罪魁祸首”, 而需求对于开发人员来说, 往往就是<strong>变化</strong></p>
+<p>在实际开发过中, 我们需要做的就是将变化造成的影响 <strong>最小化</strong>.</p>
+<pre><code>-- 将变与不变分离, 保证变化部分的灵活性, 保证不变部分的稳定性.</code></pre>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/06/js%E6%95%B0%E7%BB%84%E4%B8%8E%E5%87%BD%E6%95%B0-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head_pic.jpeg">
+      <meta itemprop="name" content="Ginger">
+      <meta itemprop="description" content="未来可期">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ginger">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/01/06/js%E6%95%B0%E7%BB%84%E4%B8%8E%E5%87%BD%E6%95%B0-1/" class="post-title-link" itemprop="url">js数组与函数</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-01-06 18:34:26 / 修改时间：18:34:40" itemprop="dateCreated datePublished" datetime="2020-01-06T18:34:26+08:00">2020-01-06</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.6k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">知识点 - 数组 - 函数 - 作用域 - 作用域链</span><br></pre></td></tr></table></figure>
+
+<h3 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 数组:一组有序的数据</span></span><br><span class="line"><span class="comment">// 数组的作用:可以一次性储存多个数据</span></span><br><span class="line"><span class="comment">// 数组元素:数组中存储的每个数据,都可以叫数组的元素,比如:存储了3个数据,数组中3个元素</span></span><br><span class="line"><span class="comment">// 数组长度:就是数组的元素的个数,比如有3个元素,就说,这个数组的长度是3</span></span><br><span class="line"><span class="comment">// 数组索引(下标):用来存储或者访问数组中的数据的,索引从0开始,到长度减1结束</span></span><br><span class="line"><span class="comment">// 数组的索引和数组的长度的关系:长度减1就是最大的索引值</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 1、构造函数创建数组</span></span><br><span class="line"><span class="keyword">var</span> arr = <span class="keyword">new</span> <span class="built_in">Array</span>()   <span class="comment">// 定义了一个叫arr的空数组</span></span><br><span class="line"><span class="keyword">var</span> arr = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">10</span>)  <span class="comment">// 定义了一个长度为10的数组，数组中每个数据为undefiend</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 2、字面量方式创建数组</span></span><br><span class="line"><span class="keyword">var</span> arr = []  <span class="comment">// 创建了一个空数组</span></span><br><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]  <span class="comment">// 创建了一个数组并赋值</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取数组中所有值</span></span><br><span class="line"><span class="built_in">console</span>.Log(arr)  <span class="comment">// 打印数组与值</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>; i&lt;arr.length; i++)&#123; <span class="comment">// 循环遍历获取数组中所有元素</span></span><br><span class="line">    <span class="built_in">console</span>.log(arr[i])</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 设置数组的值</span></span><br><span class="line">arr[<span class="number">1</span>] = <span class="number">100</span>  <span class="comment">// 设置数组中下标为1的元素为100</span></span><br><span class="line"><span class="comment">// 获取数组中某个位置的值</span></span><br><span class="line"><span class="keyword">var</span> result = arr[<span class="number">1</span>]  <span class="comment">// 获取数组中下标为1的元素</span></span><br><span class="line"><span class="comment">// 获取数组的长度</span></span><br><span class="line"><span class="built_in">console</span>.log(arr.length）  <span class="comment">// 打印arr数组的长度</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 总结数组</span></span><br><span class="line"><span class="comment">// 数组:存储一组有序的数据</span></span><br><span class="line"><span class="comment">// 数组的作用:一次性存储多个数据</span></span><br><span class="line"><span class="comment">// 数组的定义方式:</span></span><br><span class="line"><span class="comment">// 1.构造函数定义数组: var 数组名=new Array();</span></span><br><span class="line"><span class="comment">// 2.字面量方式定义数组: var 数组名=[];</span></span><br><span class="line"><span class="comment">// var 数组名=new Array();空数组</span></span><br><span class="line"><span class="comment">// var 数组名=new Array(值);数组定义了,有长度</span></span><br><span class="line"><span class="comment">// var 数组名=new Array(值1,值2,值3....);定义数组并且有多个数据</span></span><br><span class="line"><span class="comment">// var 数组名=[];空数组</span></span><br><span class="line"><span class="comment">// var 数组名=[值1,值2,值3];有三个数据</span></span><br><span class="line"><span class="comment">// 数组元素:就是数组中存储的数据</span></span><br><span class="line"><span class="comment">// 数组长度:就是数组中元素的个数</span></span><br><span class="line"><span class="comment">// 数组索引(下标):从0开始,到数组的长度减1结束</span></span><br><span class="line"><span class="comment">// 通过下标设置数组的元素值: 数组名[索引]=值</span></span><br><span class="line"><span class="comment">// 通过下标访问数组的元素值: 数组名[索引]</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 把数据按照一定的顺序排列(从小到大或从大到小)</span></span><br><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">9</span>, <span class="number">2</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="number">8</span>]</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; arr.length - <span class="number">1</span>; i++) &#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> j = <span class="number">0</span>; j &lt; arr.length - <span class="number">1</span> - i; j++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (arr[j] &gt; arr[j + <span class="number">1</span>]) &#123;</span><br><span class="line">      <span class="keyword">var</span> tmp = arr[j]</span><br><span class="line">      arr[j] = arr[j + <span class="number">1</span>]</span><br><span class="line">      arr[j + <span class="number">1</span>] = tmp</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 函数：把重复的代码进行封装，在需要的时候直接调用函数即可。</span></span><br><span class="line"><span class="comment">// 函数作用：代码的重用(重复使用)</span></span><br><span class="line"><span class="comment">// 函数也是一种数据类型 --&gt; function 类型</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 命名函数(有名字的函数叫命名函数)</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f1</span>(<span class="params"></span>)</span>&#123;  <span class="comment">// 使用function关键字定义了一个叫fn的函数 --&gt; 函数声明</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'函数体--&gt;重复的代码'</span>)</span><br><span class="line">&#125;</span><br><span class="line">f1() <span class="comment">// 函数的调用--&gt;执行函数体中的代码</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 匿名函数(函数如果没名字，就是匿名函数)</span></span><br><span class="line"><span class="keyword">var</span> f2 = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; <span class="comment">// 函数表达式</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'匿名函数'</span>)</span><br><span class="line">&#125;</span><br><span class="line">f2() <span class="comment">// 匿名函数的调用</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 函数的自调用</span></span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'函数的自调用'</span>)</span><br><span class="line">&#125;)()； <span class="comment">// 函数声明的同时就调用</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 回调函数</span></span><br><span class="line"><span class="comment">// 如果一个函数作为参数，那么这个参数(函数)，可以叫做回调函数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f2</span>(<span class="params">fn</span>)</span>&#123;</span><br><span class="line">    fn()</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f3</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'f3'</span>)</span><br><span class="line">&#125;</span><br><span class="line">f2(f3) <span class="comment">// 将 f3 函数作为参数传入 f2 函数，在 f2 函数内部执行 f3 函数</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 形参与实参</span></span><br><span class="line"><span class="comment">// 函数在定义时，函数名后面的小括号里面的变量叫形参</span></span><br><span class="line"><span class="comment">// 函数在调用时，函数名后面的小括号里面的变量或值叫实参</span></span><br><span class="line"><span class="comment">// 函数返回值，在函数内部有return关键字,并且在关键字后面有内容,这个内容被返回了</span></span><br><span class="line"><span class="comment">// 例子</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum</span>(<span class="params">num1, num2</span>)</span>&#123; <span class="comment">// 形参</span></span><br><span class="line">    <span class="keyword">var</span> sum = num1 + num2</span><br><span class="line">    <span class="built_in">console</span>.log(sum)  <span class="comment">// 打印结果 30</span></span><br><span class="line">    <span class="keyword">return</span> sum	<span class="comment">// return 关键字 函数的返回值</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> result = sum(<span class="number">10</span>, <span class="number">20</span>) <span class="comment">// (10,20)-&gt;实参 result-&gt;接受函数返回值</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// arguments对象伪数组</span></span><br><span class="line"><span class="comment">// 如果一个函数不确定用户是否传入了参数，或者不知道传入了几个参数，可以使用 arguments 进行处理</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="comment">// arguments对象可以获取传入的每个参数的值</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">arguments</span>.length) <span class="comment">// 5</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;<span class="built_in">arguments</span>.length; i++)&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="built_in">arguments</span>[i]) <span class="comment">// 输出每个实参的值</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">fn(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 小结函数</span></span><br><span class="line"><span class="comment">// 如果一个函数中有return ,那么这个函数就有返回值</span></span><br><span class="line"><span class="comment">// 如果一个函数中没有return,那么这个函数就没有返回值</span></span><br><span class="line"><span class="comment">// 如果一个函数中没有明确的返回值,那么调用的时候接收了,结果就是undefined</span></span><br><span class="line"><span class="comment">// 没有明确返回值:函数中没有return,函数中有return,但是return后面没有任何内容</span></span><br><span class="line"><span class="comment">// 函数没有返回值,但是在调用的时候接收了,那么结果就是undefined</span></span><br><span class="line"><span class="comment">// 变量声明了,没有赋值,结果也是undefined</span></span><br><span class="line"><span class="comment">// 如果一个函数有参数,有参数的函数</span></span><br><span class="line"><span class="comment">// 如果一个函数没有参数,没有参数的函数</span></span><br><span class="line"><span class="comment">// 形参的个数和实参的个数可以不一致</span></span><br><span class="line"><span class="comment">// return 下面的代码是不会执行的</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 作用域：使用范围</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 全局变量：在函数外部使用 var 关键字定义的变量。</span></span><br><span class="line"><span class="comment">// 局部变量：在函数内部定义的变量是局部变量，外面不能使用。</span></span><br><span class="line"><span class="comment">// 隐式全局变量：在函数内部没有使用 var 定义的变量</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 全局作用域：全局变量的使用范围</span></span><br><span class="line"><span class="comment">// 局部作用域：局部变量的使用范围</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 示例</span></span><br><span class="line"><span class="keyword">var</span> num1 = <span class="number">100</span> <span class="comment">// 全局变量</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">num</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> num2 = <span class="number">200</span> <span class="comment">// 局部变量</span></span><br><span class="line">  num3 = <span class="number">300</span> <span class="comment">// 隐式全局变量</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(num1) <span class="comment">// 100</span></span><br><span class="line"><span class="built_in">console</span>.log(num2) <span class="comment">// undefiend</span></span><br><span class="line"><span class="built_in">console</span>.log(num3) <span class="comment">// 300</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="作用域链"><a href="#作用域链" class="headerlink" title="作用域链"></a>作用域链</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> num = <span class="number">10</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f1</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">f2</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">f3</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(num)</span><br><span class="line">    &#125;</span><br><span class="line">    f3()</span><br><span class="line">  &#125;</span><br><span class="line">  f2()</span><br><span class="line">&#125;</span><br><span class="line">f1() <span class="comment">// 打印输出 10 一层一层往上寻找 num 的值</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="预解析-变量-函数-提升"><a href="#预解析-变量-函数-提升" class="headerlink" title="预解析(变量(函数)提升)"></a>预解析(变量(函数)提升)</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 预解析:提前解析代码，提升变量的声明与函数的声明</span></span><br><span class="line"><span class="comment">// 预解析做什么事?</span></span><br><span class="line"><span class="comment">// 把变量的声明提前了----提前到当前所在的作用域的最上面</span></span><br><span class="line"><span class="comment">// 函数的声明也会被提前---提前到当前所在的作用域的最上面</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(num) <span class="comment">// 打印 undefined 不报错</span></span><br><span class="line"><span class="keyword">var</span> num = <span class="number">10</span></span><br><span class="line"></span><br><span class="line">f1() <span class="comment">// 打印 '函数预解析'</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f1</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'函数预解析'</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> num1 = <span class="number">100</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f1</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// var num1 等价于增加了此行代码</span></span><br><span class="line">  <span class="built_in">console</span>.log(num1) <span class="comment">// 变量提升到了作用域最上面 --&gt; 输出 undefined</span></span><br><span class="line">  <span class="keyword">var</span> num1 = <span class="number">200</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 预解析小结</span></span><br><span class="line"><span class="comment">// 预解析中,变量的提升,只会在当前的作用域中提升,提前到当前的作用域的最上面</span></span><br><span class="line"><span class="comment">// 函数中的变量只会提前到函数的作用域中的最前面,不会出去</span></span><br><span class="line"><span class="comment">// 预解析会分段(多对的script标签中函数重名,预解析的时候不会冲突)</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/04/js%E6%95%B0%E7%BB%84%E4%B8%8E%E5%87%BD%E6%95%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1052,7 +1354,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">47</span>
+          <span class="site-state-item-count">50</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1107,12 +1409,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">114k</span>
+    <span title="站点总字数">123k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:44</span>
+    <span title="站点阅读时长">1:52</span>
 </div>
 
 
