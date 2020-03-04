@@ -46,20 +46,20 @@
   };
 </script>
 
-  <meta name="description" content="插件插件通常用来为 Vue 添加全局功能, 插件的功能范围没有严格的限制  1.添加全局方法或者属性 2.添加全局资源: 指令&#x2F;过滤器&#x2F;过渡 3.通过全局混入来添加一些组件的选项: vue-router 4.添加 Vue 实例方法, 通过他们添加到 Vue.prototype 上实现 5.一个库, 提供自己的 api, 同时提供上面提到的一个或多个功能  使用插件通过全局方法 Vue.use()">
+  <meta name="description" content="命名视图有时候, 我们想要在一个页面内, 同时展示多个视图. 而不是嵌套展示, 可以使用命名视图.如果 &lt;router-view&gt; 没有设置名字, name 默认为 default 123&lt;router-view class&#x3D;&quot;one&quot;&gt;&lt;&#x2F;router-view&gt;&lt;router-view class&#x3D;&quot;two&quot; name&#x3D;&quot;a&quot;&gt;&lt;&#x2F;rout">
 <meta property="og:type" content="article">
-<meta property="og:title" content="vue插件">
-<meta property="og:url" content="http://yoursite.com/2020/02/15/vue%E6%8F%92%E4%BB%B6/index.html">
+<meta property="og:title" content="vue-router命名视图">
+<meta property="og:url" content="http://yoursite.com/2020/03/04/vue-router%E5%91%BD%E5%90%8D%E8%A7%86%E5%9B%BE/index.html">
 <meta property="og:site_name" content="Ginger">
-<meta property="og:description" content="插件插件通常用来为 Vue 添加全局功能, 插件的功能范围没有严格的限制  1.添加全局方法或者属性 2.添加全局资源: 指令&#x2F;过滤器&#x2F;过渡 3.通过全局混入来添加一些组件的选项: vue-router 4.添加 Vue 实例方法, 通过他们添加到 Vue.prototype 上实现 5.一个库, 提供自己的 api, 同时提供上面提到的一个或多个功能  使用插件通过全局方法 Vue.use()">
+<meta property="og:description" content="命名视图有时候, 我们想要在一个页面内, 同时展示多个视图. 而不是嵌套展示, 可以使用命名视图.如果 &lt;router-view&gt; 没有设置名字, name 默认为 default 123&lt;router-view class&#x3D;&quot;one&quot;&gt;&lt;&#x2F;router-view&gt;&lt;router-view class&#x3D;&quot;two&quot; name&#x3D;&quot;a&quot;&gt;&lt;&#x2F;rout">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-02-15T09:10:13.000Z">
-<meta property="article:modified_time" content="2020-02-15T09:10:27.389Z">
+<meta property="article:published_time" content="2020-03-04T03:24:14.000Z">
+<meta property="article:modified_time" content="2020-03-04T03:24:26.379Z">
 <meta property="article:author" content="Ginger">
-<meta property="article:tag" content="Vue">
+<meta property="article:tag" content="VueRoute">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://yoursite.com/2020/02/15/vue%E6%8F%92%E4%BB%B6/">
+<link rel="canonical" href="http://yoursite.com/2020/03/04/vue-router%E5%91%BD%E5%90%8D%E8%A7%86%E5%9B%BE/">
 
 
 <script id="page-configurations">
@@ -71,7 +71,7 @@
   };
 </script>
 
-  <title>vue插件 | Ginger</title>
+  <title>vue-router命名视图 | Ginger</title>
   
 
 
@@ -215,7 +215,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/15/vue%E6%8F%92%E4%BB%B6/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/04/vue-router%E5%91%BD%E5%90%8D%E8%A7%86%E5%9B%BE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/head_pic.jpeg">
@@ -228,7 +228,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          vue插件
+          vue-router命名视图
         </h1>
 
         <div class="post-meta">
@@ -239,7 +239,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-02-15 17:10:13 / 修改时间：17:10:27" itemprop="dateCreated datePublished" datetime="2020-02-15T17:10:13+08:00">2020-02-15</time>
+              <time title="创建时间：2020-03-04 11:24:14 / 修改时间：11:24:26" itemprop="dateCreated datePublished" datetime="2020-03-04T11:24:14+08:00">2020-03-04</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -247,8 +247,8 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Vue/" itemprop="url" rel="index">
-                    <span itemprop="name">Vue</span>
+                  <a href="/categories/VueRoute/" itemprop="url" rel="index">
+                    <span itemprop="name">VueRoute</span>
                   </a>
                 </span>
             </span>
@@ -259,7 +259,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.1k</span>
+              <span>912</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -278,28 +278,16 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h2><p>插件通常用来为 Vue 添加全局功能, 插件的功能范围没有严格的限制</p>
-<ul>
-<li>1.添加全局方法或者属性</li>
-<li>2.添加全局资源: 指令/过滤器/过渡</li>
-<li>3.通过全局混入来添加一些组件的选项: <code>vue-router</code></li>
-<li>4.添加 Vue 实例方法, 通过他们添加到 <code>Vue.prototype</code> 上实现</li>
-<li>5.一个库, 提供自己的 api, 同时提供上面提到的一个或多个功能</li>
-</ul>
-<h2 id="使用插件"><a href="#使用插件" class="headerlink" title="使用插件"></a>使用插件</h2><p>通过全局方法 <code>Vue.use()</code> 使用插件, 他需要在你调用 <code>new Vue()</code> 启动应用之前完成</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 调用 'MyPlugin.install(Vue)</span></span><br><span class="line">Vue.use(MyPlugin)</span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  <span class="comment">// ...组件选项</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+        <h2 id="命名视图"><a href="#命名视图" class="headerlink" title="命名视图"></a>命名视图</h2><p>有时候, 我们想要在一个页面内, 同时展示多个视图. 而不是嵌套展示, 可以使用命名视图.<br>如果 <code>&lt;router-view&gt;</code> 没有设置名字, name 默认为 <code>default</code></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">router-view</span> <span class="attr">class</span>=<span class="string">"one"</span>&gt;</span><span class="tag">&lt;/<span class="name">router-view</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">router-view</span> <span class="attr">class</span>=<span class="string">"two"</span> <span class="attr">name</span>=<span class="string">"a"</span>&gt;</span><span class="tag">&lt;/<span class="name">router-view</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">router-view</span> <span class="attr">class</span>=<span class="string">"shree"</span> <span class="attr">name</span>=<span class="string">"b"</span>&gt;</span><span class="tag">&lt;/<span class="name">router-view</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p>也可以传入一个可选的选项对象</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Vue.use(MyPlugin, &#123; <span class="attr">someOption</span>: trur &#125;)</span><br></pre></td></tr></table></figure>
+<p>一个视图使用一个组件渲染, 因此对于同个路由, 多个视图就需要多个组件, 确保正确使用 <code>components</code> 配置</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> VueRouter(&#123;</span><br><span class="line">  routes: [</span><br><span class="line">    &#123;</span><br><span class="line">      path: <span class="string">'/'</span>,</span><br><span class="line">      components: &#123;</span><br><span class="line">        <span class="keyword">default</span>: Foo,</span><br><span class="line">        a: Bar,</span><br><span class="line">        b: Baz</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
-<blockquote>
-<p>Vue.use 会自动阻止多次注册相同插件，届时即使多次调用也只会注册一次该插件。</p>
-</blockquote>
-<p>Vue.js 官方提供的一些插件 (例如 vue-router) 在检测到 Vue 是可访问的全局变量时会自动调用 Vue.use()。然而在像 CommonJS 这样的模块环境中，你应该始终显式地调用 Vue.use()</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 用 Browserify 或 webpack 提供的 CommonJS 模块环境时</span></span><br><span class="line"><span class="keyword">var</span> Vue = <span class="built_in">require</span>(<span class="string">'vue'</span>)</span><br><span class="line"><span class="keyword">var</span> VueRouter = <span class="built_in">require</span>(<span class="string">'vue-router'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 不要忘了调用此方法</span></span><br><span class="line">Vue.use(VueRouter)</span><br></pre></td></tr></table></figure>
+<h2 id="嵌套命名视图"><a href="#嵌套命名视图" class="headerlink" title="嵌套命名视图"></a>嵌套命名视图</h2><p>我们也有可能使用命名视图创建嵌套视图的复杂布局。这时你也需要命名用到的嵌套 router-view 组件</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- UserSettings.vue --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">h1</span>&gt;</span>User Settings<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">NavBar</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">router-view</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">router-view</span> <span class="attr">name</span>=<span class="string">"helper"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<h2 id="开发插件"><a href="#开发插件" class="headerlink" title="开发插件"></a>开发插件</h2><p>Vue.js 的插件应该暴露一个<code>install</code>方法, 这个方法的第一个参数是<code>Vue</code>构造器, 第二个参数是一个可选的选项对象:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">MyPlugin.install = <span class="function"><span class="keyword">function</span>(<span class="params">Vue, options</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 添加全局方法或属性</span></span><br><span class="line">  Vue.MyGlobalMethod = funtion() &#123;</span><br><span class="line">    <span class="comment">// 逻辑...</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 添加全局资源</span></span><br><span class="line">  Vue.directive(<span class="string">'my-directive'</span>, &#123;</span><br><span class="line">    bind(el, binding, vnode, oldVnode) &#123;</span><br><span class="line">      <span class="comment">// 逻辑...</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 注入组件选项</span></span><br><span class="line">  Vue.mixin(&#123;</span><br><span class="line">    created() &#123;</span><br><span class="line">      <span class="comment">// 逻辑...</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 添加实例方法</span></span><br><span class="line">  Vue.prototype.$myMethod = <span class="function"><span class="keyword">function</span>(<span class="params">methodOptions</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 逻辑...</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  path: <span class="string">'/settings'</span>,</span><br><span class="line">  <span class="comment">// 你也可以在顶级路由就配置命名视图</span></span><br><span class="line">  component: UserSettings,</span><br><span class="line">  children: [&#123;</span><br><span class="line">    path: <span class="string">'emails'</span>,</span><br><span class="line">    component: UserEmailsSubscriptions</span><br><span class="line">  &#125;, &#123;</span><br><span class="line">    path: <span class="string">'profile'</span>,</span><br><span class="line">    components: &#123;</span><br><span class="line">      <span class="keyword">default</span>: UserProfile,</span><br><span class="line">      helper: UserProfilePreview</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -324,7 +312,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/Vue/" rel="tag"># Vue</a>
+              <a href="/tags/VueRoute/" rel="tag"># VueRoute</a>
           </div>
 
         
@@ -333,13 +321,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/02/14/vue%E6%B8%B2%E6%9F%93%E5%87%BD%E6%95%B0-JSX/" rel="prev" title="vue渲染函数-JSX">
-      <i class="fa fa-chevron-left"></i> vue渲染函数-JSX
+    <a href="/2020/03/04/vue-router%E5%91%BD%E5%90%8D%E8%B7%AF%E7%94%B1/" rel="prev" title="vue-router命名路由">
+      <i class="fa fa-chevron-left"></i> vue-router命名路由
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/02/16/vue%E8%BF%87%E6%BB%A4%E5%99%A8/" rel="next" title="vue过滤器">
-      vue过滤器 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -400,7 +385,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#插件"><span class="nav-number">1.</span> <span class="nav-text">插件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用插件"><span class="nav-number">2.</span> <span class="nav-text">使用插件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开发插件"><span class="nav-number">3.</span> <span class="nav-text">开发插件</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#命名视图"><span class="nav-number">1.</span> <span class="nav-text">命名视图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#嵌套命名视图"><span class="nav-number">2.</span> <span class="nav-text">嵌套命名视图</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -670,7 +655,7 @@ NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
       repo: 'Ginger-Jiang.github.io',
       owner: 'Ginger-Jiang',
       admin: ['Ginger-Jiang'],
-      id: '3eeb09867e2304b6b571f6002ced1805',
+      id: '08b1158c048154cd0a0ed147398ed442',
         language: 'zh-CN',
       distractionFreeMode: true
     });

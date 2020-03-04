@@ -1,6 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>vue-router命名视图</title>
+    <url>/2020/03/04/vue-router%E5%91%BD%E5%90%8D%E8%A7%86%E5%9B%BE/</url>
+    <content><![CDATA[<h2 id="命名视图"><a href="#命名视图" class="headerlink" title="命名视图"></a>命名视图</h2><p>有时候, 我们想要在一个页面内, 同时展示多个视图. 而不是嵌套展示, 可以使用命名视图.<br>如果 <code>&lt;router-view&gt;</code> 没有设置名字, name 默认为 <code>default</code></p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">router-view</span> <span class="attr">class</span>=<span class="string">"one"</span>&gt;</span><span class="tag">&lt;/<span class="name">router-view</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">router-view</span> <span class="attr">class</span>=<span class="string">"two"</span> <span class="attr">name</span>=<span class="string">"a"</span>&gt;</span><span class="tag">&lt;/<span class="name">router-view</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">router-view</span> <span class="attr">class</span>=<span class="string">"shree"</span> <span class="attr">name</span>=<span class="string">"b"</span>&gt;</span><span class="tag">&lt;/<span class="name">router-view</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>一个视图使用一个组件渲染, 因此对于同个路由, 多个视图就需要多个组件, 确保正确使用 <code>components</code> 配置</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> VueRouter(&#123;</span><br><span class="line">  routes: [</span><br><span class="line">    &#123;</span><br><span class="line">      path: <span class="string">'/'</span>,</span><br><span class="line">      components: &#123;</span><br><span class="line">        <span class="keyword">default</span>: Foo,</span><br><span class="line">        a: Bar,</span><br><span class="line">        b: Baz</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="嵌套命名视图"><a href="#嵌套命名视图" class="headerlink" title="嵌套命名视图"></a>嵌套命名视图</h2><p>我们也有可能使用命名视图创建嵌套视图的复杂布局。这时你也需要命名用到的嵌套 router-view 组件</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- UserSettings.vue --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">h1</span>&gt;</span>User Settings<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">NavBar</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">router-view</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">router-view</span> <span class="attr">name</span>=<span class="string">"helper"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  path: <span class="string">'/settings'</span>,</span><br><span class="line">  <span class="comment">// 你也可以在顶级路由就配置命名视图</span></span><br><span class="line">  component: UserSettings,</span><br><span class="line">  children: [&#123;</span><br><span class="line">    path: <span class="string">'emails'</span>,</span><br><span class="line">    component: UserEmailsSubscriptions</span><br><span class="line">  &#125;, &#123;</span><br><span class="line">    path: <span class="string">'profile'</span>,</span><br><span class="line">    components: &#123;</span><br><span class="line">      <span class="keyword">default</span>: UserProfile,</span><br><span class="line">      helper: UserProfilePreview</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>VueRoute</category>
+      </categories>
+      <tags>
+        <tag>VueRoute</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>vue-router命名路由</title>
+    <url>/2020/03/04/vue-router%E5%91%BD%E5%90%8D%E8%B7%AF%E7%94%B1/</url>
+    <content><![CDATA[<h2 id="命名路由"><a href="#命名路由" class="headerlink" title="命名路由"></a>命名路由</h2><p>有时候, 通过一个名称来标识一个路由显得更方便一些, 特别是在链接一个路由, 或者是执行一些跳转的时候<br>可以在创建 Router 实例的时候, 在 <code>routes</code> 配置中给某个路由设置名称</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> VueRouter(&#123;</span><br><span class="line">  routes: [</span><br><span class="line">    &#123;</span><br><span class="line">      path: <span class="string">'/user/:userid'</span>,</span><br><span class="line">      name: <span class="string">'user'</span>,</span><br><span class="line">      component: User</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>要链接到一个命名路由, 可以给 <code>router-link</code> 的 <code>to</code> 属性传一个对象</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 声明式 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">router-link</span> <span class="attr">:to</span>=<span class="string">"&#123;name: 'user', params: &#123;userId: 123&#125;&#125;"</span>&gt;</span> <span class="tag">&lt;/<span class="name">router-link</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 编程式</span></span><br><span class="line">router.push(&#123;</span><br><span class="line">  name: <span class="string">'user'</span>,</span><br><span class="line">  params: &#123;</span><br><span class="line">    userId: <span class="number">123</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>VueRoute</category>
+      </categories>
+      <tags>
+        <tag>VueRoute</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>vue-router编程式导航</title>
     <url>/2020/03/04/vue-router%E7%BC%96%E7%A8%8B%E5%BC%8F%E5%AF%BC%E8%88%AA/</url>
     <content><![CDATA[<h2 id="编程式导航"><a href="#编程式导航" class="headerlink" title="编程式导航"></a>编程式导航</h2><p>除了使用 <code>&lt;vue-router&gt;</code> 创建 <code>a</code> 标签来定义导航链接, 我们还可以借助 router 的实例方法, 通过编写代码来实现</p>
