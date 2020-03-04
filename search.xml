@@ -1,6 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>vue-router编程式导航</title>
+    <url>/2020/03/04/vue-router%E7%BC%96%E7%A8%8B%E5%BC%8F%E5%AF%BC%E8%88%AA/</url>
+    <content><![CDATA[<h2 id="编程式导航"><a href="#编程式导航" class="headerlink" title="编程式导航"></a>编程式导航</h2><p>除了使用 <code>&lt;vue-router&gt;</code> 创建 <code>a</code> 标签来定义导航链接, 我们还可以借助 router 的实例方法, 通过编写代码来实现</p>
+<h3 id="router-push-location-onComplete-onAbort"><a href="#router-push-location-onComplete-onAbort" class="headerlink" title="router.push(location, onComplete?, onAbort)"></a>router.push(location, onComplete?, onAbort)</h3><blockquote>
+<p>在 Vue 实例内部, 可以通过 <code>$router</code> 访问路由实例, 因此可以调用 <code>this.$router.push</code></p>
+</blockquote>
+<p>想到导航到不同的 URL, 则使用 <code>router.push</code> 方法. 这个方法会想 history 栈添加一个新的记录, 所以当用户点击浏览器后退按钮时, 则回到之前的 URL</p>
+<p>当点击 <code>&lt;router-linke&gt;</code> 时, 这个方法会在内部调用, 所以点击 <code>&lt;router-link&gt;</code> 等同于调用 <code>router.push()</code></p>
+<ul>
+<li><code>&lt;router-link to=&quot;&quot;&gt;</code> 声明式</li>
+<li><code>router.replace</code> 编程式</li>
+</ul>
+<p>该方法的参数可以是一个字符串路径, 或者一个描述地址的对象</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 字符串</span></span><br><span class="line">router.push(<span class="string">'foo'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 对象</span></span><br><span class="line">router.push(&#123;</span><br><span class="line">  path: <span class="string">'home'</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 命名的路由</span></span><br><span class="line">router.push(&#123;</span><br><span class="line">  name: <span class="string">'user'</span>,</span><br><span class="line">  params: &#123;</span><br><span class="line">    userId: <span class="number">123</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">//  带查询参数</span></span><br><span class="line">router.push(&#123;</span><br><span class="line">  path: <span class="string">'register'</span>,</span><br><span class="line">  query: &#123;</span><br><span class="line">    plan: <span class="string">'private'</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>如果提供了 path，params 会被忽略</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> userId = <span class="string">'123'</span></span><br><span class="line"></span><br><span class="line">router.push(&#123;</span><br><span class="line">  <span class="comment">// -&gt; /user/123</span></span><br><span class="line">  name: <span class="string">'user'</span>,</span><br><span class="line">  params: &#123;</span><br><span class="line">    userId</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line">router.push(&#123;</span><br><span class="line">  <span class="comment">// -&gt; /user/123</span></span><br><span class="line">  path: <span class="string">`/user/<span class="subst">$&#123;userId&#125;</span>`</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">router.push(&#123;</span><br><span class="line">  <span class="comment">// -&gt; /user</span></span><br><span class="line">  path: <span class="string">'/user'</span>,</span><br><span class="line">  params: &#123; userId &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>如果目的地和当前路由相同，只有参数发生了改变 (比如从一个用户资料到另一个 /users/1 -&gt; /users/2)，你需要使用 beforeRouteUpdate 来响应这个变化 (比如抓取用户信息)。</p>
+</blockquote>
+<h2 id="router-replace-location-onComplete-onAbort"><a href="#router-replace-location-onComplete-onAbort" class="headerlink" title="router.replace(location, onComplete, onAbort)"></a>router.replace(location, onComplete, onAbort)</h2><p>跟 <code>router.push</code> 很像, 唯一的不同是, 他不会向 history 添加新纪录, 而是跟他的方法名一样, 替换掉当前的 history 记录</p>
+<ul>
+<li><code>&lt;router-link to=&quot;&quot; replace&gt;</code> 声明式</li>
+<li><code>router.replace</code> 编程式</li>
+</ul>
+<h2 id="router-go-n"><a href="#router-go-n" class="headerlink" title="router.go(n)"></a>router.go(n)</h2><p>这个方法的参数是一个整数, 意思是在 history 记录中向前或者后退多少步, 类似 <code>window.history.go(n)</code></p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//  在浏览器记录中前进一步, 等同于 history.forward()</span></span><br><span class="line">router.go(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 后退一步记录 等同与 window.back()</span></span><br><span class="line">router.go(<span class="number">-1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 前进 3 步记录</span></span><br><span class="line">router.go(<span class="number">3</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 如果 history 不够, 默认失败</span></span><br><span class="line">router.go(<span class="number">100</span>)</span><br><span class="line">router.go(<span class="number">-100</span>)</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>VueRoute</category>
+      </categories>
+      <tags>
+        <tag>VueRoute</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>vue-router嵌套路由</title>
+    <url>/2020/03/04/vue-router%E5%B5%8C%E5%A5%97%E8%B7%AF%E7%94%B1/</url>
+    <content><![CDATA[<h2 id="嵌套路由"><a href="#嵌套路由" class="headerlink" title="嵌套路由"></a>嵌套路由</h2><p>实际生活中的应用界面, 通常由多层嵌套的组件组合而成. URL 中各段动态路径也按某种结构对应嵌套的各层组件<br>借助 <code>vur-router</code> 使用嵌套路由配置, 可以简单的表达这种关系</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">router-view</span>&gt;</span><span class="tag">&lt;/<span class="name">router-view</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> User = &#123;</span><br><span class="line">  template: <span class="string">'&lt;div&gt;&#123;&#123; $route.params.id &#125;&#125;&lt;/div&gt;'</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> routes = [</span><br><span class="line">  &#123;</span><br><span class="line">    path: <span class="string">'/user'</span>,</span><br><span class="line">    component: User</span><br><span class="line">  &#125;</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> VueRouter(&#123;</span><br><span class="line">  routes</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>这里的 <code>&lt;router-view&gt;</code> 是顶层的出口, 渲染最高级路由匹配到的组件.<br>一个被渲染的组件可以包含自己的嵌套 <code>&lt;router-view&gt;</code></p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 给 User 组件加上嵌套的 &lt;router-view&gt;</span></span><br><span class="line"><span class="keyword">const</span> User = &#123;</span><br><span class="line">  template: <span class="string">`</span></span><br><span class="line"><span class="string">  &lt;div&gt;</span></span><br><span class="line"><span class="string">    &lt;h2&gt;User&lt;h2&gt;</span></span><br><span class="line"><span class="string">    &lt;router-view&gt;&lt;/router-view&gt;</span></span><br><span class="line"><span class="string">  &lt;/div&gt;</span></span><br><span class="line"><span class="string">  `</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>要在嵌套的出口中渲染组件, 需要在 <code>VurRouter</code> 的参数中使用 <code>children</code> 配置</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> VueRouter(&#123;</span><br><span class="line">  routes: [</span><br><span class="line">    &#123;</span><br><span class="line">      path: <span class="string">'user'</span>,</span><br><span class="line">      component: User,</span><br><span class="line">      chidren: [</span><br><span class="line">        &#123;</span><br><span class="line">          <span class="comment">// 当 /user/:id/posts 匹配成功</span></span><br><span class="line">          <span class="comment">// UserPosts 会被渲染在 User 的 &lt;router-view&gt; 中</span></span><br><span class="line">          path: <span class="string">'posts'</span>,</span><br><span class="line">          component: UserPosts</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          <span class="comment">// 当 /user/:id/profile 匹配成功，</span></span><br><span class="line">          <span class="comment">// UserProfile 会被渲染在 User 的 &lt;router-view&gt; 中</span></span><br><span class="line">          path: <span class="string">'profile'</span>,</span><br><span class="line">          component: UserProfile</span><br><span class="line">        &#125;</span><br><span class="line">      ]</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>以 <code>/</code> 开头的嵌套路径会被当做根路径,</p>
+</blockquote>
+<p>当你访问 <code>/user/foo</code> 时，User 的出口是不会渲染任何东西，这是因为没有匹配到合适的子路由。如果你想要渲染点什么，可以提供一个 空的 子路由：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> VueRouter(&#123;</span><br><span class="line">  routes: [</span><br><span class="line">    &#123;</span><br><span class="line">      path: <span class="string">'/user/:id'</span>,</span><br><span class="line">      component: User,</span><br><span class="line">      children: [</span><br><span class="line">        <span class="comment">// 当 /user/:id 匹配成功，</span></span><br><span class="line">        <span class="comment">// UserHome 会被渲染在 User 的 &lt;router-view&gt; 中</span></span><br><span class="line">        &#123; <span class="attr">path</span>: <span class="string">''</span>, <span class="attr">component</span>: UserHome &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// ...其他子路由</span></span><br><span class="line">      ]</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>VueRoute</category>
+      </categories>
+      <tags>
+        <tag>VueRoute</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>vue-router动态路由匹配</title>
     <url>/2020/03/03/vue-router%E5%8A%A8%E6%80%81%E8%B7%AF%E7%94%B1%E5%8C%B9%E9%85%8D/</url>
     <content><![CDATA[<h2 id="动态路由匹配"><a href="#动态路由匹配" class="headerlink" title="动态路由匹配"></a>动态路由匹配</h2><p>我们经常需要把某种模式匹配到的所有路由, 全部映射到同个组件.<br>如: 我们有个 User 组件, 对于所有 ID 各不相同的用户, 都要使用这个组件来渲染, 那么,我们可以在 vue-router 的路由路径中使用 动态路径参数来达到这个效果:</p>
