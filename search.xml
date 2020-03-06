@@ -1,6 +1,369 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>vue-router导航守卫</title>
+    <url>/2020/03/06/vue-router%E5%AF%BC%E8%88%AA%E5%AE%88%E5%8D%AB/</url>
+    <content><![CDATA[<h2 id="导航守卫"><a href="#导航守卫" class="headerlink" title="导航守卫"></a>导航守卫</h2><p><code>vue-route</code> 提供的导航守卫主要用来通过跳转或取消的方式守卫导航, 有多种机会植入路由导航过程中: 全局、单个路由独享、组件级</p>
+<p>参数或查询的改变并不会触发进入/离开的导航守卫, 可以通过观察 <code>$route</code> 对象来应对这些变化, 或使用 <code>beforeRouteUpdate</code> 的组件内守卫</p>
+<h2 id="全局前置守卫"><a href="#全局前置守卫" class="headerlink" title="全局前置守卫"></a>全局前置守卫</h2><p>可以使用 <code>router.beforeEach</code> 注册一个全局的前置守卫</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> VueRouter(&#123;...&#125;)</span><br><span class="line">router.beforeEach(<span class="function">(<span class="params">to, <span class="keyword">from</span>,  next</span>)=&gt;</span>&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>当一个导航触发时, 全局前置守卫按照创建顺序调用. 守卫是异步解析执行, 此时导航在所有守卫 resolve 完之前一直处于等待中</p>
+<p>每个守卫方法接受三个参数:</p>
+<ul>
+<li>to: Route: 即将要进入的目标路由对象</li>
+<li>from: Route: 当前导航正要离开的路由</li>
+<li>next: Function: 一定要调用该方法来 resolve 这个钩子. 执行效果依赖 <code>next</code> 方法的调用参数<ul>
+<li>next(): 进行管道中的下一个钩子, 如果全部钩子执行完了, 则导航的状态就是 confirmed(确认的)</li>
+<li>next(false): 中断当前的导航. 如果浏览器的 URL 改变了(可能是用户手动或浏览器后退按钮), 那么 URL 地址会重置到 <code>from</code> 路由对应的地址</li>
+<li>next(‘/‘): 或者 next({path: ‘/‘}): 跳转到一个不同的地址. 当前的导航被终端, 然后进行一个新的导航. 可以向 <code>next</code> 传递任意位置对象, 且允许设置如 <code>replace: true</code>、<code>name: &#39;home&#39;</code> 之类的选项以及任何用在 <code>router-link</code> 的 <code>to</code> prop 或 <code>router.push</code> 中的选项</li>
+<li>next(error): 如果传入 next 的参数是一个 error 实例, 则导航会被终止且该错误会被传递给 <code>router.onError()</code> 注册过的回调</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>确保要调用 next 方法，否则钩子就不会被 resolved。</p>
+</blockquote>
+<h2 id="全局解析守卫"><a href="#全局解析守卫" class="headerlink" title="全局解析守卫"></a>全局解析守卫</h2><p>可以用 <code>router.beforeResolve()</code> 注册一个全局守卫, 这个 <code>router.beforeEach</code> 类似, 区别是在导航被确认之前, 同时在所有组件内守卫和异步路由组件被解析之后, 解析守卫就被调用</p>
+<h2 id="全局后置钩子"><a href="#全局后置钩子" class="headerlink" title="全局后置钩子"></a>全局后置钩子</h2><p>可以通过 <code>afterEach</code> 注册全局后置钩子, 与守卫不同的是, 这些钩子不会接受 <code>next</code> 函数也不会改变导航本身</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">router.afterEach(<span class="function">(<span class="params">to, <span class="keyword">from</span></span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="路由独享的守卫"><a href="#路由独享的守卫" class="headerlink" title="路由独享的守卫"></a>路由独享的守卫</h2><p>你可以在路由配置上直接定义 <code>beforeEnter</code> 守卫:</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> VueRouter(&#123;</span><br><span class="line">  routes: [</span><br><span class="line">    &#123;</span><br><span class="line">      path: <span class="string">'foo'</span>,</span><br><span class="line">      component: Foo,</span><br><span class="line">      beforeEnter: <span class="function">(<span class="params">to, <span class="keyword">from</span>, next</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>这些守卫与全局前置守卫的方法参数是一样的</p>
+<h2 id="组件内的守卫"><a href="#组件内的守卫" class="headerlink" title="组件内的守卫"></a>组件内的守卫</h2><p>可以在路由组件内直接定义一下路由导航守卫</p>
+<ul>
+<li><code>beforeRouteEnter</code></li>
+<li><code>beforeRouteUpdate</code></li>
+<li><code>beforeRouteLeave</code></li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> Foo = &#123;</span><br><span class="line">  template: <span class="string">'...'</span>,</span><br><span class="line">  beforeRouteEnter(to, <span class="keyword">from</span>, next) &#123;</span><br><span class="line">    <span class="comment">// 在渲染该组件的对应路由被 confirm 前调用</span></span><br><span class="line">    <span class="comment">// 不能获取组件实例 this</span></span><br><span class="line">    <span class="comment">// 因为当守卫执行前, 组件实例还没被创建</span></span><br><span class="line">  &#125;,</span><br><span class="line">  beforeRouteUpdate(to, <span class="keyword">from</span>, next) &#123;</span><br><span class="line">    <span class="comment">// 在当前路由改变, 但是该组件被复用时调用</span></span><br><span class="line">    <span class="comment">// 对于一个带有动态参数的路径 /foo/:id，在 /foo/1 和 /foo/2 之间跳转的时候，</span></span><br><span class="line">    <span class="comment">// 由于会渲染同样的 Foo 组件，因此组件实例会被复用。而这个钩子就会在这个情况下被调用。</span></span><br><span class="line">    <span class="comment">// 可以访问组件实例 `this`</span></span><br><span class="line">  &#125;,</span><br><span class="line">  beforeRouteLeave(to, <span class="keyword">from</span>, next) &#123;</span><br><span class="line">    <span class="comment">// 导航离开该组件的对应路由时调用</span></span><br><span class="line">    <span class="comment">// 可以访问组件实例 this</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>beforeRouteEnter</code> 守卫不能访问 <code>this</code>, 因为守卫在导航确认前被调用, 因此即将登场的新组建还没被创建<br>不过, 可以通过传一个回调给 <code>next</code> 来访问组件实例, 在导航被确认的时候执行回调, 并且把组件实例作为回调方法的参数</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">beforeRouteEnter(to, <span class="keyword">from</span>, next) &#123;</span><br><span class="line">  next(<span class="function"><span class="params">vm</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="comment">// 通过 `vm` 访问组件实例</span></span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意 <code>beforeRouteEnter</code> 是支持给 <code>next</code> 传递回调的唯一守卫. 对于 <code>beforeRouteUpdate</code> 和 <code>beforeRouteLeave</code> 来说, <code>this</code> 已经可用了, 所以不支持传递回调</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">beforeRouteUpdate(to, <span class="keyword">from</span>, next) &#123;</span><br><span class="line">  <span class="comment">// just user this</span></span><br><span class="line">  <span class="keyword">this</span>.name = to.params.name</span><br><span class="line">  next()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这个离开守卫通常用来禁止用户在还未保存修改前突然离开. 该导航可以通过 <code>next(false)</code> 来取消</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">beforeRouteLeave(to, <span class="keyword">from</span>, next) &#123;</span><br><span class="line">  <span class="keyword">const</span> answer = <span class="built_in">window</span>.confirm(<span class="string">'Do you really want to leave? you have unsaved changes!'</span>)</span><br><span class="line">  answer ? next() : next(<span class="literal">false</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="完整的导航解析流程"><a href="#完整的导航解析流程" class="headerlink" title="完整的导航解析流程"></a>完整的导航解析流程</h2><ol>
+<li>导航被触发</li>
+<li>在失活的组件里调用离开守卫</li>
+<li>调用全局的 <code>beforeEach</code> 守卫</li>
+<li>在重用的组件里调用 <code>beforeRouteUpdate</code> 守卫</li>
+<li>在路由配置里调用 <code>beforeRouteEnter</code></li>
+<li>解析异步路由组件</li>
+<li>在被激活的组件里调用 <code>beforeResolve</code> 守卫</li>
+<li>调用全局的 <code>beforeResolve</code> 守卫</li>
+<li>导航被确认</li>
+<li>调用全局的 <code>afterEach</code> 守卫</li>
+<li>触发 DOM 更新</li>
+<li>用创建好的实例调用 <code>beforeRouteEnter</code> 守卫中传给 <code>next</code> 的回调函数</li>
+</ol>
+]]></content>
+      <categories>
+        <category>VueRoute</category>
+      </categories>
+      <tags>
+        <tag>VueRoute</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>CSS-基础选择器</title>
+    <url>/2020/03/05/CSS-%E5%9F%BA%E7%A1%80%E9%80%89%E6%8B%A9%E5%99%A8/</url>
+    <content><![CDATA[<h2 id="选择器的作用"><a href="#选择器的作用" class="headerlink" title="选择器的作用"></a>选择器的作用</h2><p>选择器是根据不同需求把不同标签选出来</p>
+<p>最常见的 CSS 选择器是元素选择器</p>
+<h2 id="标签选择器"><a href="#标签选择器" class="headerlink" title="标签选择器"></a>标签选择器</h2><p>标签选择器是指用 HTML 标签名称作为选择器, 按标签名称分类, 为页面中某一类标签指定统一的 CSS 样式</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* 语法: */</span></span><br><span class="line">标签名 &#123;</span><br><span class="line">  属性1: 属性值1;</span><br><span class="line">  属性2: 属性值2;</span><br><span class="line">  属性3: 属性值3;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 例子 */</span></span><br><span class="line"><span class="selector-tag">html</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: black;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">h1</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: blue;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">p</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: silver;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="类选择器"><a href="#类选择器" class="headerlink" title="类选择器"></a>类选择器</h2><p>类选择器使用 <code>.</code> 进行标识, 后面紧跟类名<br>类名可以使用 <code>-</code> 短横线进行连接<br>类选择器可以单独选择一个或几个标签<br>一个元素可以有多个类名, 使用空格分隔</p>
+<p>语法:</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"red font35"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* 语法 */</span></span><br><span class="line">.类名 &#123;</span><br><span class="line">  属性1: 属性值1;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* 例子 */</span></span><br><span class="line"><span class="selector-class">.red</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: red;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* 多类名 */</span></span><br><span class="line"><span class="selector-class">.font35</span> &#123;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">35px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="id-选择器"><a href="#id-选择器" class="headerlink" title="id 选择器"></a>id 选择器</h2><p>ID 选择器允许以一种独立于文档元素的方式来指定样式。</p>
+<p>注意:</p>
+<ul>
+<li>只能在文档中使用一次: 与类不同，在一个 HTML 文档中，ID 选择器会使用一次，而且仅一次。</li>
+<li>不能使用 ID 词列表: 不同于类选择器，ID 选择器不能结合使用，因为 ID 属性不允许有以空格分隔的词列表</li>
+</ul>
+<p>语法:<br>ID 选择器前面有一个 <code>#</code> 号。</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-id">#intro</span> &#123;</span><br><span class="line">  <span class="attribute">font-weight</span>: bold;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="通配符选择器"><a href="#通配符选择器" class="headerlink" title="通配符选择器"></a>通配符选择器</h2><p>CSS2 引入了一种新的简单选择器 - 通配选择器（universal selector），显示为一个星号（*）。该选择器可以与任何元素匹配，就像是一个通配符。</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">* &#123;</span><br><span class="line">  <span class="attribute">color</span>: red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>CSS</category>
+      </categories>
+      <tags>
+        <tag>CSS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>CSS-简介与代码风格</title>
+    <url>/2020/03/05/CSS-%E7%AE%80%E4%BB%8B%E4%B8%8E%E4%BB%A3%E7%A0%81%E9%A3%8E%E6%A0%BC/</url>
+    <content><![CDATA[<h2 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a>CSS</h2><ul>
+<li>CSS 指层叠样式表 (Cascading Style Sheets)</li>
+<li>样式定义如何显示 HTML 元素</li>
+<li>样式通常存储在样式表中</li>
+<li>把样式添加到 HTML 4.0 中，是为了解决内容与表现分离的问题</li>
+<li>外部样式表可以极大提高工作效率</li>
+<li>外部样式表通常存储在 CSS 文件中</li>
+<li>多个样式定义可层叠为一</li>
+</ul>
+<h2 id="语法规范"><a href="#语法规范" class="headerlink" title="语法规范"></a>语法规范</h2><p>CSS 规则由两个主要的部分构成：选择器，以及一条或多条声明。</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">selector &#123;declaration1; declaration2; ... declarationN &#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>选择器通常是您需要改变样式的 HTML 元素。</li>
+<li>每条声明由一个属性和一个值组成。</li>
+<li>属性（property）是您希望设置的样式属性（style attribute）。每个属性有一个值。属性和值被冒号分开。</li>
+</ul>
+<p>下面这行代码的作用是将 h1 元素内的文字颜色定义为红色，同时将字体大小设置为 14 像素。<br>在这个例子中，h1 是选择器，color 和 font-size 是属性，red 和 14px 是值。</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">h1</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: red;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">14px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="值的不同写法和单位"><a href="#值的不同写法和单位" class="headerlink" title="值的不同写法和单位"></a>值的不同写法和单位</h3><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">h1</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#fff</span>;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">14px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">p</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: <span class="built_in">rgb</span>(<span class="number">255</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>如果值为若干单词，则要给值加引号：</p>
+</blockquote>
+<p>除了英文单词 red，我们还可以使用十六进制的颜色值 #ff0000：</p>
+<p><img data-src="../../image/css/ct_css_selector.gif" alt="1"></p>
+<h2 id="CSS-代码风格"><a href="#CSS-代码风格" class="headerlink" title="CSS 代码风格"></a>CSS 代码风格</h2><h3 id="多重声明"><a href="#多重声明" class="headerlink" title="多重声明"></a>多重声明</h3><p>如果要定义不止一个声明，则需要用分号将每个声明分开</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">p</span> &#123;</span><br><span class="line">  <span class="attribute">text-align</span>: center;</span><br><span class="line">  <span class="attribute">color</span>: black;</span><br><span class="line">  <span class="attribute">font-family</span>: arial;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="空格和大小写"><a href="#空格和大小写" class="headerlink" title="空格和大小写"></a>空格和大小写</h3><ul>
+<li>推荐使用小写</li>
+<li>推荐在选择器后保留一个空格</li>
+<li>推荐在属性值前面, 冒号后面保留一个空格</li>
+</ul>
+<p>大多数样式表包含不止一条规则，而大多数规则包含不止一个声明。多重声明和空格的使用使得样式表更容易被编辑：</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">body</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#000</span>;</span><br><span class="line">  <span class="attribute">background</span>: <span class="number">#fff</span>;</span><br><span class="line">  <span class="attribute">margin</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">font-family</span>: Georgia, Palatino, serif;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>是否包含空格不会影响 CSS 在浏览器的工作效果，同样，与 XHTML 不同，CSS 对大小写不敏感。不过存在一个例外：如果涉及到与 HTML 文档一起工作的话，class 和 id 名称对大小写是敏感的。</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>CSS</category>
+      </categories>
+      <tags>
+        <tag>CSS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>HTML-常见标签</title>
+    <url>/2020/03/05/HTML-%E5%B8%B8%E8%A7%81%E6%A0%87%E7%AD%BE/</url>
+    <content><![CDATA[<h2 id="标题标签"><a href="#标题标签" class="headerlink" title="标题标签"></a>标题标签</h2><p>HTML 标题是通过 <code>&lt;h1&gt;-&lt;h6&gt;</code> 等标签定义<br>head 的缩写, 意为头部、标题<br><code>&lt;h1&gt;</code> 定义最大的标题。<code>&lt;h6&gt;</code> 定义最小的标题。</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>一级标题<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h2</span>&gt;</span>二级标题<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h3</span>&gt;</span>三级标题<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h4</span>&gt;</span>四级标题<span class="tag">&lt;/<span class="name">h4</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h5</span>&gt;</span>五级标题<span class="tag">&lt;/<span class="name">h5</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h6</span>&gt;</span>六级标题<span class="tag">&lt;/<span class="name">h6</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="段落标签"><a href="#段落标签" class="headerlink" title="段落标签"></a>段落标签</h2><p>HTML 段落是通过 <code>&lt;p&gt;</code> 标签定义的 单词: paragraph<br>可以将文字分成若干段落</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>这是第一个段落<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>这是第二个段落<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="换行"><a href="#换行" class="headerlink" title="换行"></a>换行</h2><p>可以通过 <code>&lt;br /&gt;</code> 标签进行换行 单词: break</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">  这是第一行内容 <span class="tag">&lt;<span class="name">br</span> /&gt;</span></span><br><span class="line">  这是第二行内容</span><br><span class="line"><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="加粗"><a href="#加粗" class="headerlink" title="加粗"></a>加粗</h2><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">b</span>&gt;</span>加粗<span class="tag">&lt;/<span class="name">b</span>&gt;</span> <span class="tag">&lt;<span class="name">strong</span>&gt;</span>推荐使用 strong 标签进行 加粗<span class="tag">&lt;/<span class="name">strong</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="倾斜"><a href="#倾斜" class="headerlink" title="倾斜"></a>倾斜</h2><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">em</span>&gt;</span>倾斜 推荐使用em<span class="tag">&lt;/<span class="name">em</span>&gt;</span> <span class="tag">&lt;<span class="name">i</span>&gt;</span>倾斜<span class="tag">&lt;/<span class="name">i</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="删除线"><a href="#删除线" class="headerlink" title="删除线"></a>删除线</h2><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">del</span>&gt;</span>删除线<span class="tag">&lt;/<span class="name">del</span>&gt;</span> <span class="tag">&lt;<span class="name">s</span>&gt;</span>删除线<span class="tag">&lt;/<span class="name">s</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="下划线"><a href="#下划线" class="headerlink" title="下划线"></a>下划线</h2><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ins</span>&gt;</span>推荐使用 下划线<span class="tag">&lt;/<span class="name">ins</span>&gt;</span> <span class="tag">&lt;<span class="name">u</span>&gt;</span>下划线<span class="tag">&lt;/<span class="name">u</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="div-and-span"><a href="#div-and-span" class="headerlink" title="div and span"></a>div and span</h2><p><code>&lt;div&gt;``&lt;span&gt;</code> 是两个没有语义的标签</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span>我占满一整行<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">span</span>&gt;</span>我不会占满一行<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="图像"><a href="#图像" class="headerlink" title="图像"></a>图像</h2><p>HTML 图像是通过 <code>&lt;img&gt;</code> 标签定义的</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- src: 指向图片路径; title: 鼠标经过图片显示; alt: 图片未显示时展示文字 --&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- width: 宽度; height: 高度; border: 边框 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">img</span></span></span><br><span class="line"><span class="tag">  <span class="attr">src</span>=<span class="string">"图片链接.jpg"</span></span></span><br><span class="line"><span class="tag">  <span class="attr">title</span>=<span class="string">"我是一张图"</span></span></span><br><span class="line"><span class="tag">  <span class="attr">alt</span>=<span class="string">"如果你看到我, 说明图没显示出来"</span></span></span><br><span class="line"><span class="tag">/&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h2><p>HTML 链接是通过 <code>&lt;a&gt;</code> 标签定义的</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- href: 资源对应路径, 如果给的不是链接而是 `#name(锚点) 将会在页面内进行跳转 --&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- target: 打开方式 _self 默认当前窗口打开; _blank: 新窗口打开 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"https://ginger-jiang.github.io/"</span>&gt;</span>Ginger Blogs<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h2><p>HTML 中的注释内容也会被浏览器忽略, 不会显示出来</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 这就是注释 它不会被浏览器显示出现 --&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="特殊字符"><a href="#特殊字符" class="headerlink" title="特殊字符"></a>特殊字符</h2><p>特殊字符:</p>
+<ul>
+<li><code>&amp;nbsp;</code>: 空格</li>
+<li><code>&amp;lt;</code>: 小于</li>
+<li><code>&amp;gt;</code>: 大于</li>
+<li><code>&amp;AMP;</code>: &amp;</li>
+<li><code>&amp;yen;</code>: ¥</li>
+<li><code>$copy;</code>: ©</li>
+</ul>
+<h2 id="表格标签"><a href="#表格标签" class="headerlink" title="表格标签"></a>表格标签</h2><p>属性:</p>
+<ul>
+<li>align: {left | center | right} 对齐方式 (弃用)</li>
+<li>border: 边框 (弃用)</li>
+<li>cellpadding: 单元格与内容之间距离</li>
+<li>cellspacing: 单元格之间的空白 默认 2 像素</li>
+<li>width: 宽度</li>
+<li>height: 高度</li>
+</ul>
+<p>合并单元格</p>
+<ul>
+<li>rowspan: 跨行合并</li>
+<li>colspan: 跨列合并</li>
+</ul>
+<p>案例:</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 表格 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">table</span></span></span><br><span class="line"><span class="tag">  <span class="attr">align</span>=<span class="string">"center"</span></span></span><br><span class="line"><span class="tag">  <span class="attr">border</span>=<span class="string">"1"</span></span></span><br><span class="line"><span class="tag">  <span class="attr">cellpadding</span>=<span class="string">"5"</span></span></span><br><span class="line"><span class="tag">  <span class="attr">cellspacing</span>=<span class="string">"0"</span></span></span><br><span class="line"><span class="tag">  <span class="attr">width</span>=<span class="string">"100"</span></span></span><br><span class="line"><span class="tag">  <span class="attr">height</span>=<span class="string">"100"</span></span></span><br><span class="line"><span class="tag">&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 表头区 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">thead</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">      <span class="comment">&lt;!-- 表头单元格 --&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">th</span>&gt;</span></span><br><span class="line">        单个单元格</span><br><span class="line">      <span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">thead</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">&lt;!-- 内容区 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">tbody</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 行 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">      <span class="comment">&lt;!-- 单元格 --&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">td</span>&gt;</span></span><br><span class="line">        单个单元格</span><br><span class="line">      <span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">tbody</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="列表标签"><a href="#列表标签" class="headerlink" title="列表标签"></a>列表标签</h2><h3 id="无序列表"><a href="#无序列表" class="headerlink" title="无序列表"></a>无序列表</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>1<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>2<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>3<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="有序列表"><a href="#有序列表" class="headerlink" title="有序列表"></a>有序列表</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ol</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>1<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>2<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>3<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ol</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="自定义列表"><a href="#自定义列表" class="headerlink" title="自定义列表"></a>自定义列表</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dl</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">dt</span>&gt;</span>关注我们<span class="tag">&lt;/<span class="name">dt</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">dd</span>&gt;</span>新浪微博<span class="tag">&lt;/<span class="name">dd</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">dd</span>&gt;</span>官方微信<span class="tag">&lt;/<span class="name">dd</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dl</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="表单"><a href="#表单" class="headerlink" title="表单"></a>表单</h2><ul>
+<li>表单控件</li>
+<li>提示信息</li>
+<li>表单域</li>
+</ul>
+<h3 id="表单域"><a href="#表单域" class="headerlink" title="表单域"></a>表单域</h3><p>包含表单元素的区域</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">"url地址"</span> <span class="attr">method</span>=<span class="string">"提交方式"</span> <span class="attr">name</span>=<span class="string">"表单名称"</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 表单元素控件 --&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="表单元素-input"><a href="#表单元素-input" class="headerlink" title="表单元素 input"></a>表单元素 input</h3><ul>
+<li><p>type 类型</p>
+<ul>
+<li>text: 文本框</li>
+<li>password: 密码</li>
+<li>radio: 单选</li>
+<li>checkbox: 复选框</li>
+<li>submit: 提交按钮</li>
+<li>reset: 重置按钮</li>
+<li>button: 点击按钮</li>
+<li>file: 文件域(上传文件)</li>
+</ul>
+</li>
+<li><p>name: 表单名</p>
+</li>
+<li><p>value: 值</p>
+</li>
+<li><p>checked: 默认被选中</p>
+</li>
+<li><p>maxlength: 输入最大值</p>
+</li>
+<li></li>
+</ul>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">"url"</span> <span class="attr">method</span>=<span class="string">"GET"</span> <span class="attr">name</span>=<span class="string">"login"</span>&gt;</span></span><br><span class="line">  用户名:<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"username"</span> <span class="attr">maxlength</span>=<span class="string">"6"</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">hr</span> /&gt;</span></span><br><span class="line">  密码:<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"password"</span> <span class="attr">name</span>=<span class="string">"password"</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">hr</span> /&gt;</span></span><br><span class="line">  性别: 男<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"radio"</span> <span class="attr">checked</span> <span class="attr">name</span>=<span class="string">"sex"</span> /&gt;</span> 女<span class="tag">&lt;<span class="name">input</span></span></span><br><span class="line"><span class="tag">    <span class="attr">type</span>=<span class="string">"radio"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">name</span>=<span class="string">"sex"</span></span></span><br><span class="line"><span class="tag">  /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">hr</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="label-标签"><a href="#label-标签" class="headerlink" title="label 标签"></a>label 标签</h3><p>label 为 input 元素定义标注 通过 <code>for</code> 与 表单元素的 <code>id</code> 绑定</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">name</span>=<span class="string">"login"</span> <span class="attr">action</span>=<span class="string">"url"</span> <span class="attr">method</span>=<span class="string">"GET"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"sex"</span>&gt;</span> 男: <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"radio"</span> <span class="attr">id</span>=<span class="string">"sex"</span> /&gt;</span> <span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="下拉标签"><a href="#下拉标签" class="headerlink" title="下拉标签"></a>下拉标签</h2><p>属性:</p>
+<ul>
+<li>selected: 默认选择</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">option</span> <span class="attr">selected</span>&gt;</span>请选择<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">option</span>&gt;</span>北京<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">option</span>&gt;</span>上海<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">option</span>&gt;</span>湖南<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="文本域"><a href="#文本域" class="headerlink" title="文本域"></a>文本域</h2><p>属性:</p>
+<ul>
+<li>cols: 多少行字</li>
+<li>rows: 多少列字</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">"url"</span> <span class="attr">method</span>=<span class="string">"GET"</span> <span class="attr">name</span>=<span class="string">"login"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">textarea</span> <span class="attr">name</span>=<span class="string">""</span> <span class="attr">id</span>=<span class="string">""</span> <span class="attr">cols</span>=<span class="string">"30"</span> <span class="attr">rows</span>=<span class="string">"10"</span>&gt;</span><span class="tag">&lt;/<span class="name">textarea</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>HTML</category>
+      </categories>
+      <tags>
+        <tag>HTML</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>vue-routerHTML5History模式</title>
+    <url>/2020/03/05/vue-routerHTML5History%E6%A8%A1%E5%BC%8F/</url>
+    <content><![CDATA[<h2 id="HTML5-History-模式"><a href="#HTML5-History-模式" class="headerlink" title="HTML5 History 模式"></a>HTML5 History 模式</h2><p><code>vur-router</code> 默认 hash 模式–使用 URL 的 hash 来模拟一个完整的 URL, 于是当 URL 改变时, 页面不会重新加载</p>
+<p>如果不想要很丑的 hash, 我们可以用路由的 history 模式. 这种模式冲分利用 <code>history.pushState</code> API 来完成 URL 跳转而无须重新加载页面</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> VueRouter(&#123;</span><br><span class="line">  mode: <span class="string">'history'</span>,</span><br><span class="line">  routes: [...]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>当你使用 history 模式时, URL 就像正常的 url. 不过 history 模式需要后台配置支持, 需要在后台配置如果 URL 匹配不到任何静态资源, 则应该返回同一个 <code>index.html</code> 页面, 这个页面就是你 app 依赖的页面</p>
+<h2 id="后端配置例子"><a href="#后端配置例子" class="headerlink" title="后端配置例子"></a>后端配置例子</h2><p>Apache</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">&lt;IfModule mod_rewrite.c&gt;</span><br><span class="line">  RewriteEngine On</span><br><span class="line">  RewriteBase /</span><br><span class="line">  RewriteRule ^index\.html$ - [L]</span><br><span class="line">  RewriteCond %&#123;REQUEST_FILENAME&#125; !-f</span><br><span class="line">  RewriteCond %&#123;REQUEST_FILENAME&#125; !-d</span><br><span class="line">  RewriteRule . /index.html [L]</span><br><span class="line">&lt;/IfModule&gt;</span><br></pre></td></tr></table></figure>
+
+<p>nginx</p>
+<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="attribute">location</span> / &#123;</span><br><span class="line">  <span class="attribute">try_files</span> <span class="variable">$uri</span> <span class="variable">$uri</span>/ /index.html;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Node.js</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> htpp = <span class="built_in">require</span>(<span class="string">'http'</span>)</span><br><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>)</span><br><span class="line"><span class="keyword">const</span> httpPort = <span class="number">80</span></span><br><span class="line">http</span><br><span class="line">  .createServer(<span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">    fs.readFile(<span class="string">'index.html'</span>, <span class="string">'utf-8'</span>, (err, content) =&gt; &#123;</span><br><span class="line">      <span class="keyword">if</span> (err) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'We cannot open "index.htm" file.'</span>)</span><br><span class="line">      &#125;</span><br><span class="line">      res.writeHead(<span class="number">200</span>, &#123;</span><br><span class="line">        <span class="string">'Content-Type'</span>: <span class="string">'text/html; charser=ytf-8'</span></span><br><span class="line">      &#125;)</span><br><span class="line"></span><br><span class="line">      red.end(content)</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;)</span><br><span class="line">  .listen(httpPort, () =&gt; &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'server listening on: http://localhost:%s'</span>, httpPort)</span><br><span class="line">  &#125;)</span><br></pre></td></tr></table></figure>
+
+<p>基于 Node.js 的 Express，请考虑使用 connect-history-api-fallback 中间件</p>
+<h2 id="警告"><a href="#警告" class="headerlink" title="警告"></a>警告</h2><p>这么做之后, 服务器就不再返回 404 错误页面, 因为对于所有路径都会返回 <code>index.html</code> 文件, 为了避免这种情况, 应该在 Vue 应用里面覆盖所有路由的情况下再给出一个 404 页面</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> VueRouter(&#123;</span><br><span class="line">  mode: <span class="string">'history'</span>,</span><br><span class="line">  routes: [</span><br><span class="line">    &#123;</span><br><span class="line">      path: <span class="string">'*'</span>,</span><br><span class="line">      component: NotFoundComponent</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>或者, 如果使用的是 Node.js 服务器, 可以用服务端路由匹配到来的 URL, 并在没有匹配到路由的时候返回 404, 以实现回退</p>
+]]></content>
+      <categories>
+        <category>VueRoute</category>
+      </categories>
+      <tags>
+        <tag>VueRoute</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>vue-router路由组件传参</title>
+    <url>/2020/03/05/vue-router%E8%B7%AF%E7%94%B1%E7%BB%84%E4%BB%B6%E4%BC%A0%E5%8F%82/</url>
+    <content><![CDATA[<h2 id="路由组件传参"><a href="#路由组件传参" class="headerlink" title="路由组件传参"></a>路由组件传参</h2><p>在组件中使用 <code>$route</code> 会使之与其对应的路由形成高度耦合, 从而使组件只能在某些特定的 URL 上使用, 限制了其灵活性</p>
+<p>使用 <code>props</code> 将组件和路由解耦</p>
+<p>取代与 <code>$route</code> 的耦合</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> User = &#123;</span><br><span class="line">  template: <span class="string">`&lt;div&gt; User &#123;&#123; $route.params.id &#125;&#125;&lt;/div&gt;`</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> VueRouter(&#123;</span><br><span class="line">  routes: [</span><br><span class="line">    &#123;</span><br><span class="line">      path: <span class="string">'/user/:id'</span>,</span><br><span class="line">      component: User</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>通过 <code>props</code> 解耦</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> User = &#123;</span><br><span class="line">  props: [<span class="string">'id'</span>],</span><br><span class="line">  template: <span class="string">'&lt;div&gt;User &#123;&#123; id &#125;&#125;&lt;/div&gt;'</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> VueRouter(&#123;</span><br><span class="line">  routes: [</span><br><span class="line">    &#123;</span><br><span class="line">      path: <span class="string">'/user/:id'</span>,</span><br><span class="line">      component: User,</span><br><span class="line">      props: <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 对于包含命名视图的路由, 必须分别为每个命名视图添加 'props' 选项</span></span><br><span class="line">    &#123;</span><br><span class="line">      path: <span class="string">'/user/:id'</span>,</span><br><span class="line">      components:&#123;</span><br><span class="line">        <span class="keyword">default</span>: User,</span><br><span class="line">        sidebar: Sidebar,</span><br><span class="line">        props: &#123;</span><br><span class="line">          <span class="keyword">default</span>: <span class="literal">true</span>,</span><br><span class="line">          sidebar: <span class="literal">false</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="布尔模式"><a href="#布尔模式" class="headerlink" title="布尔模式"></a>布尔模式</h2><p>如果 <code>props</code> 被设置为 <code>true</code>. <code>route.params</code> 将会被设置为组件属性</p>
+<h2 id="对象模式"><a href="#对象模式" class="headerlink" title="对象模式"></a>对象模式</h2><p>如果 <code>props</code> 是一个对象, 它会被按原样设置为组件属性, 当 <code>props</code> 是静态的时候有用</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> VueRouter(&#123;</span><br><span class="line">  routes: [</span><br><span class="line">    &#123;</span><br><span class="line">      path: <span class="string">'/promotion/from-newsletter'</span>,</span><br><span class="line">      component: Promotion,</span><br><span class="line">      Props: &#123;</span><br><span class="line">        newslerrerPopup: <span class="literal">false</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="函数模式"><a href="#函数模式" class="headerlink" title="函数模式"></a>函数模式</h2><p>你可以创建一个函数返回 <code>props</code>. 这样你便可以将参数转换成另一种类型, 将静态值与基于路由的值结合等等.</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> VueRouter(&#123;</span><br><span class="line">  routes: [</span><br><span class="line">    &#123;</span><br><span class="line">      path: <span class="string">'search'</span>,</span><br><span class="line">      component: SearchUser,</span><br><span class="line">      props: <span class="function"><span class="params">route</span> =&gt;</span> (&#123; <span class="attr">query</span>: route.query.q &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>URL <code>/search?q=vue</code> 会将 <code>{query: &#39;vue&#39;}</code> 作为属性传递给 <code>SearchUser</code> 组件</p>
+<blockquote>
+<p>请尽可能保持 props 函数为无状态的，因为它只会在路由发生变化时起作用。如果你需要状态来定义 props，请使用包装组件，这样 Vue 才可以对状态变化做出反应。</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>VueRoute</category>
+      </categories>
+      <tags>
+        <tag>VueRoute</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>vue-router重定向和别名</title>
+    <url>/2020/03/05/vue-router%E9%87%8D%E5%AE%9A%E5%90%91%E5%92%8C%E5%88%AB%E5%90%8D/</url>
+    <content><![CDATA[<h2 id="重定向"><a href="#重定向" class="headerlink" title="重定向"></a>重定向</h2><p>重定向也是通过 <code>toutes</code> 配置来完成的.</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> VueRouter(&#123;</span><br><span class="line">  routes: [</span><br><span class="line">    &#123;</span><br><span class="line">      path: <span class="string">'/a'</span>,</span><br><span class="line">      redirect: <span class="string">'/b'</span></span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>重定向的目标也可以是一个命名的路由:</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> VueRouter(&#123;</span><br><span class="line">  routes: [</span><br><span class="line">    &#123;</span><br><span class="line">      path: <span class="string">'/a'</span>,</span><br><span class="line">      redirect: &#123;</span><br><span class="line">        name: <span class="string">'foo'</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>甚至可以是一个方法, 动态返回重定向目标</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> VueRouter(&#123;</span><br><span class="line">  routes: [</span><br><span class="line">    &#123;</span><br><span class="line">      path: <span class="string">'/a'</span>,</span><br><span class="line">      redirect: <span class="function"><span class="params">to</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="comment">// 方法接受 目标路由 作为参数</span></span><br><span class="line">        <span class="comment">// return 重定向的 字符串路径/路径对象</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意 导航守卫 并没有应用在跳转路由上, 而仅仅应用在其目标上.</p>
+</blockquote>
+<h2 id="别名"><a href="#别名" class="headerlink" title="别名"></a>别名</h2><p><code>/a</code> 的别名是 <code>/b</code>, 意味着, 当用户访问 <code>/b</code> 时, URL 会保持为 <code>/b</code>, 但是路由匹配为 <code>/a</code>, 就像用户访问 <code>/a</code> 一样</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> VueRouter(&#123;</span><br><span class="line">  routes: [</span><br><span class="line">    &#123;</span><br><span class="line">      path: <span class="string">'/a'</span>,</span><br><span class="line">      component: A,</span><br><span class="line">      alias: <span class="string">'/b'</span></span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>“别名”的功能让你可以自由地将 UI 结构映射到任意的 URL，而不是受限于配置的嵌套路由结构。</p>
+]]></content>
+      <categories>
+        <category>VueRoute</category>
+      </categories>
+      <tags>
+        <tag>VueRoute</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>vue-router命名视图</title>
     <url>/2020/03/04/vue-router%E5%91%BD%E5%90%8D%E8%A7%86%E5%9B%BE/</url>
     <content><![CDATA[<h2 id="命名视图"><a href="#命名视图" class="headerlink" title="命名视图"></a>命名视图</h2><p>有时候, 我们想要在一个页面内, 同时展示多个视图. 而不是嵌套展示, 可以使用命名视图.<br>如果 <code>&lt;router-view&gt;</code> 没有设置名字, name 默认为 <code>default</code></p>
