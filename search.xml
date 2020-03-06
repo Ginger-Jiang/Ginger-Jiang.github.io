@@ -1,6 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>vue-router过渡动效</title>
+    <url>/2020/03/06/vue-router%E8%BF%87%E6%B8%A1%E5%8A%A8%E6%95%88/</url>
+    <content><![CDATA[<h2 id="过渡动效"><a href="#过渡动效" class="headerlink" title="过渡动效"></a>过渡动效</h2><p><code>&lt;router-view&gt;</code> 是基本的动态组件, 所以我们可以用 <code>&lt;transition&gt;</code> 组件给他添加一些过渡效果</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">transition</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">router-view</span>&gt;</span><span class="tag">&lt;/<span class="name">router-view</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">transition</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="单个路由的过渡"><a href="#单个路由的过渡" class="headerlink" title="单个路由的过渡"></a>单个路由的过渡</h2><p>上面的用法会给所有的路由设置一样的过渡效果, 如果想让每个路由组件有各自的过渡效果, 可以在各路由组件内使用 <code>&lt;transition&gt;</code> 并设置不同的 name</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> Foo = &#123;</span><br><span class="line">  template: <span class="string">`</span></span><br><span class="line"><span class="string">    &lt;transition&gt;</span></span><br><span class="line"><span class="string">      &lt;div class="foo"&gt; ... &lt;div&gt;</span></span><br><span class="line"><span class="string">    &lt;/transition&gt;</span></span><br><span class="line"><span class="string">  `</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Bar = &#123;</span><br><span class="line">  template: <span class="string">`</span></span><br><span class="line"><span class="string">    &lt;transition&gt;</span></span><br><span class="line"><span class="string">      &lt;div class="bar"&gt; ... &lt;/div&gt;</span></span><br><span class="line"><span class="string">    &lt;/transition&gt;</span></span><br><span class="line"><span class="string">  `</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="基于路由的动态过渡"><a href="#基于路由的动态过渡" class="headerlink" title="基于路由的动态过渡"></a>基于路由的动态过渡</h2><p>还可以基于当前路由与目标路由的变化关系, 动态设置过渡效果</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"> <span class="tag">&lt;<span class="name">transition</span> <span class="attr">:name</span>=<span class="string">"transitionNmae"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">router-view</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">router-view</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">transition</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">wathc: &#123;</span><br><span class="line">  <span class="string">"$route"</span>(to, <span class="keyword">from</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> toDepth = to.path.split(<span class="string">'/'</span>).length</span><br><span class="line">    <span class="keyword">const</span> fromDepth = <span class="keyword">from</span>.path.split(<span class="string">'/'</span>).length</span><br><span class="line">    <span class="keyword">this</span>.transitionName = toDepth &lt; fromDepth ? <span class="string">'slide-right'</span> : <span class="string">'slide-left'</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>VueRoute</category>
+      </categories>
+      <tags>
+        <tag>VueRoute</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>vue-router路由元信息</title>
+    <url>/2020/03/06/vue-router%E8%B7%AF%E7%94%B1%E5%85%83%E4%BF%A1%E6%81%AF/</url>
+    <content><![CDATA[<h2 id="路由元信息"><a href="#路由元信息" class="headerlink" title="路由元信息"></a>路由元信息</h2><p>定义路由的时候可以配置 <code>meta</code> 字段:</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> VueRouter(&#123;</span><br><span class="line">  routes: [</span><br><span class="line">    &#123;</span><br><span class="line">      path: <span class="string">'/foo'</span>,</span><br><span class="line">      component: Foo,</span><br><span class="line">      chidren: [</span><br><span class="line">        &#123;</span><br><span class="line">          path: <span class="string">'/bar'</span>,</span><br><span class="line">          component: Bar,</span><br><span class="line">          meta: &#123;</span><br><span class="line">            <span class="comment">// a meta field</span></span><br><span class="line">            requiresAuth: <span class="literal">true</span></span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      ]</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>我们称呼 <code>routes</code> 配置中的每个路由对象为路由记录, 路由记录可以是嵌套的, 因此, 当一个路由匹配成功后, 他可能匹配多个路由记录</p>
+<p>例如上次面的配置, <code>/for/bar</code> 这个 RUL 将会匹配父路由以及子路由记录</p>
+<p>一个路由匹配到的所有路由记录会暴露为 <code>$route</code> 对象(还有在导航守卫中的路由对象)的 <code>$route.matched</code> 数组. 因此, 我们需要遍历 <code>$route.matched</code> 来检查路由记录中的 <code>meta</code> 字段</p>
+<p>下面的例子展示在全局导航守卫中检查元字段</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">router.beforeEach(<span class="function">(<span class="params">to, <span class="keyword">from</span>, next</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (to.matched.some(<span class="function"><span class="params">record</span> =&gt;</span> record.meta.requiresAuth)) &#123;</span><br><span class="line">    <span class="comment">// this route requires auth, check if logged in</span></span><br><span class="line">    <span class="comment">// if not, redirect to login page.</span></span><br><span class="line">    <span class="keyword">if</span> (!auth.loggedIn()) &#123;</span><br><span class="line">      next(&#123;</span><br><span class="line">        path: <span class="string">'/login'</span>,</span><br><span class="line">        query: &#123;</span><br><span class="line">          redirect: to.fullPath</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      next()</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    next() <span class="comment">// 确保一定要调用 next()</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>VueRoute</category>
+      </categories>
+      <tags>
+        <tag>VueRoute</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>vue-router导航守卫</title>
     <url>/2020/03/06/vue-router%E5%AF%BC%E8%88%AA%E5%AE%88%E5%8D%AB/</url>
     <content><![CDATA[<h2 id="导航守卫"><a href="#导航守卫" class="headerlink" title="导航守卫"></a>导航守卫</h2><p><code>vue-route</code> 提供的导航守卫主要用来通过跳转或取消的方式守卫导航, 有多种机会植入路由导航过程中: 全局、单个路由独享、组件级</p>
