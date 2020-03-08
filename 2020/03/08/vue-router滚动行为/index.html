@@ -46,18 +46,20 @@
   };
 </script>
 
-  <meta name="description" content="未来可期">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Ginger">
-<meta property="og:url" content="http://yoursite.com/archives/2020/03/page/2/index.html">
+  <meta name="description" content="滚动行为使用前端路由, 当切换到新路由时, 想要页面滚到顶部, 或者是保持原先的滚动位置, 就像重新加载页面那样. vue-router 能做到, 而且更好, 它让你可以自定义路由切换时页面如何滚动.  注意: 这个功能只在支持 history.pushState 的浏览器中可用  当创建一个 Router 实例, 可以提供一个 scrollBehavior 方法: 123456const rou">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue-router滚动行为">
+<meta property="og:url" content="http://yoursite.com/2020/03/08/vue-router%E6%BB%9A%E5%8A%A8%E8%A1%8C%E4%B8%BA/index.html">
 <meta property="og:site_name" content="Ginger">
-<meta property="og:description" content="未来可期">
+<meta property="og:description" content="滚动行为使用前端路由, 当切换到新路由时, 想要页面滚到顶部, 或者是保持原先的滚动位置, 就像重新加载页面那样. vue-router 能做到, 而且更好, 它让你可以自定义路由切换时页面如何滚动.  注意: 这个功能只在支持 history.pushState 的浏览器中可用  当创建一个 Router 实例, 可以提供一个 scrollBehavior 方法: 123456const rou">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-03-08T10:50:28.000Z">
+<meta property="article:modified_time" content="2020-03-08T10:50:42.220Z">
 <meta property="article:author" content="Ginger">
-<meta property="article:tag" content="Web Node.js Vue React HTML CSS">
+<meta property="article:tag" content="VueRoute">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://yoursite.com/archives/2020/03/page/2/">
+<link rel="canonical" href="http://yoursite.com/2020/03/08/vue-router%E6%BB%9A%E5%8A%A8%E8%A1%8C%E4%B8%BA/">
 
 
 <script id="page-configurations">
@@ -65,11 +67,11 @@
   CONFIG.page = {
     sidebar: "",
     isHome: false,
-    isPost: false
+    isPost: true
   };
 </script>
 
-  <title>归档 | Ginger</title>
+  <title>vue-router滚动行为 | Ginger</title>
   
 
 
@@ -208,197 +210,152 @@
           <div class="content">
             
 
+  <div class="posts-expand">
+      
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        
-        <span class="collection-header">不错! 目前共计 70 篇日志。 继续努力。</span>
-      </div>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/08/vue-router%E6%BB%9A%E5%8A%A8%E8%A1%8C%E4%B8%BA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head_pic.jpeg">
+      <meta itemprop="name" content="Ginger">
+      <meta itemprop="description" content="未来可期">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ginger">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          vue-router滚动行为
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-03-08 18:50:28 / 修改时间：18:50:42" itemprop="dateCreated datePublished" datetime="2020-03-08T18:50:28+08:00">2020-03-08</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/VueRoute/" itemprop="url" rel="index">
+                    <span itemprop="name">VueRoute</span>
+                  </a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <h1 class="collection-header">2020</h1>
-    </div>
+        <h2 id="滚动行为"><a href="#滚动行为" class="headerlink" title="滚动行为"></a>滚动行为</h2><p>使用前端路由, 当切换到新路由时, 想要页面滚到顶部, 或者是保持原先的滚动位置, 就像重新加载页面那样. <code>vue-router</code> 能做到, 而且更好, 它让你可以自定义路由切换时页面如何滚动.</p>
+<blockquote>
+<p>注意: 这个功能只在支持 <code>history.pushState</code> 的浏览器中可用</p>
+</blockquote>
+<p>当创建一个 Router 实例, 可以提供一个 <code>scrollBehavior</code> 方法:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> VueRouter(&#123;</span><br><span class="line">  routes: [...],</span><br><span class="line">  scrollBehavior(to, <span class="keyword">from</span>, savedPosition) &#123;</span><br><span class="line">    <span class="comment">// return 期望滚动到哪个位置</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+<p><code>scrollBehavior</code> 方法接受 <code>to</code> 和 <code>from</code> 路由对象, 第三个参数 <code>savedPosition</code> 并且仅当 <code>popstate</code> 导航时才可用.</p>
+<p>这个方法返回滚动位置的对象信息:</p>
+<ul>
+<li><code>{x: number, y: number}</code></li>
+<li><code>{selector: string, offset: {x: number, y: number}}</code></li>
+</ul>
+<p>如果返回一个 falsy 的值, 或者是一个空对象,那么不会发生滚动</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">scrollBehavior(to, <span class="keyword">from</span>, savePosition) &#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;<span class="attr">x</span>:<span class="number">0</span>, <span class="attr">y</span>:<span class="number">0</span>&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-03-05T08:30:07+08:00"
-              content="2020-03-05">
-          03-05
-        </time>
-      </div>
+<p>对于所有路由导航, 简单地让页面滚动到顶部</p>
+<p>返回 <code>savedPosition</code>, 在按下 后退/前进 按钮时, 就会像浏览器的原生表现那样:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">scrollBehavior (to, <span class="keyword">from</span>, savedPosition) &#123;</span><br><span class="line">  <span class="keyword">if</span> (savedPosition) &#123;</span><br><span class="line">    <span class="keyword">return</span> savedPosition</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123; <span class="attr">x</span>: <span class="number">0</span>, <span class="attr">y</span>: <span class="number">0</span> &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2020/03/05/vue-router%E9%87%8D%E5%AE%9A%E5%90%91%E5%92%8C%E5%88%AB%E5%90%8D/" itemprop="url">
-            <span itemprop="name">vue-router重定向和别名</span>
-          </a>
-      </h2>
+<p>如果要模拟 滚动到锚点 的行为:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">scrollBehavior (to, <span class="keyword">from</span>, savedPosition) &#123;</span><br><span class="line">  <span class="keyword">if</span> (to.hash) &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      selector: to.hash</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-    </header>
-  </article>
+<h2 id="异步滚动"><a href="#异步滚动" class="headerlink" title="异步滚动"></a>异步滚动</h2><p>也可以返回一个 Promise 来得出预期的位置描述</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">scrollBehavior (to, <span class="keyword">from</span>, savedPosition) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      resolve(&#123; <span class="attr">x</span>: <span class="number">0</span>, <span class="attr">y</span>: <span class="number">0</span> &#125;)</span><br><span class="line">    &#125;, <span class="number">500</span>)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-03-04T11:24:14+08:00"
-              content="2020-03-04">
-          03-04
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2020/03/04/vue-router%E5%91%BD%E5%90%8D%E8%A7%86%E5%9B%BE/" itemprop="url">
-            <span itemprop="name">vue-router命名视图</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-03-04T11:06:50+08:00"
-              content="2020-03-04">
-          03-04
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2020/03/04/vue-router%E5%91%BD%E5%90%8D%E8%B7%AF%E7%94%B1/" itemprop="url">
-            <span itemprop="name">vue-router命名路由</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-03-04T10:49:12+08:00"
-              content="2020-03-04">
-          03-04
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2020/03/04/vue-router%E7%BC%96%E7%A8%8B%E5%BC%8F%E5%AF%BC%E8%88%AA/" itemprop="url">
-            <span itemprop="name">vue-router编程式导航</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-03-04T10:47:57+08:00"
-              content="2020-03-04">
-          03-04
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2020/03/04/vue-router%E5%B5%8C%E5%A5%97%E8%B7%AF%E7%94%B1/" itemprop="url">
-            <span itemprop="name">vue-router嵌套路由</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-03-03T20:53:22+08:00"
-              content="2020-03-03">
-          03-03
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2020/03/03/vue-router%E5%8A%A8%E6%80%81%E8%B7%AF%E7%94%B1%E5%8C%B9%E9%85%8D/" itemprop="url">
-            <span itemprop="name">vue-router动态路由匹配</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-03-03T20:51:15+08:00"
-              content="2020-03-03">
-          03-03
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2020/03/03/vue-router%E8%B5%B7%E6%AD%A5/" itemprop="url">
-            <span itemprop="name">vue-router起步</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-03-03T18:19:41+08:00"
-              content="2020-03-03">
-          03-03
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2020/03/03/vue-router%E4%BB%8B%E7%BB%8D%E4%B8%8E%E5%AE%89%E8%A3%85/" itemprop="url">
-            <span itemprop="name">vue-route介绍与安装</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
+<p>将其挂载到从页面级别的过渡组件的事件上，令其滚动行为和页面过渡一起良好运行是可能的。但是考虑到用例的多样性和复杂性，我们仅提供这个原始的接口，以支持不同用户场景的具体实现。</p>
 
     </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div>请作者喝杯咖啡</div>
+  <button disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.jpg" alt="Ginger 微信支付">
+        <p>微信支付</p>
+      </div>
+
   </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/VueRoute/" rel="tag"># VueRoute</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/07/vue-router%E8%8E%B7%E5%8F%96%E6%95%B0%E6%8D%AE/" rel="prev" title="vue-router获取数据">
+      <i class="fa fa-chevron-left"></i> vue-router获取数据
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
   
   
   
 
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/archives/2020/03/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/archives/2020/03/">1</a><span class="page-number current">2</span>
-  </nav>
-
+  </div>
 
 
           </div>
           
+    <div class="comments" id="gitalk-container"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -445,6 +402,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#滚动行为"><span class="nav-number">1.</span> <span class="nav-text">滚动行为</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#异步滚动"><span class="nav-number">2.</span> <span class="nav-text">异步滚动</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -703,6 +661,25 @@ window.addEventListener('pjax:success', () => {
 
   
 
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID: 'a5e0a164b4c7c72f9f25',
+      clientSecret: 'fb8d8950376aa9315351770b8dd8deb9fd66ab2c',
+      repo: 'Ginger-Jiang.github.io',
+      owner: 'Ginger-Jiang',
+      admin: ['Ginger-Jiang'],
+      id: '0c6618beb98e881773260346a40bbf26',
+        language: 'zh-CN',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
 
     </div>
 </body>

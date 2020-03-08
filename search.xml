@@ -1,6 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>vue-router滚动行为</title>
+    <url>/2020/03/08/vue-router%E6%BB%9A%E5%8A%A8%E8%A1%8C%E4%B8%BA/</url>
+    <content><![CDATA[<h2 id="滚动行为"><a href="#滚动行为" class="headerlink" title="滚动行为"></a>滚动行为</h2><p>使用前端路由, 当切换到新路由时, 想要页面滚到顶部, 或者是保持原先的滚动位置, 就像重新加载页面那样. <code>vue-router</code> 能做到, 而且更好, 它让你可以自定义路由切换时页面如何滚动.</p>
+<blockquote>
+<p>注意: 这个功能只在支持 <code>history.pushState</code> 的浏览器中可用</p>
+</blockquote>
+<p>当创建一个 Router 实例, 可以提供一个 <code>scrollBehavior</code> 方法:</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> VueRouter(&#123;</span><br><span class="line">  routes: [...],</span><br><span class="line">  scrollBehavior(to, <span class="keyword">from</span>, savedPosition) &#123;</span><br><span class="line">    <span class="comment">// return 期望滚动到哪个位置</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p><code>scrollBehavior</code> 方法接受 <code>to</code> 和 <code>from</code> 路由对象, 第三个参数 <code>savedPosition</code> 并且仅当 <code>popstate</code> 导航时才可用.</p>
+<p>这个方法返回滚动位置的对象信息:</p>
+<ul>
+<li><code>{x: number, y: number}</code></li>
+<li><code>{selector: string, offset: {x: number, y: number}}</code></li>
+</ul>
+<p>如果返回一个 falsy 的值, 或者是一个空对象,那么不会发生滚动</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">scrollBehavior(to, <span class="keyword">from</span>, savePosition) &#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;<span class="attr">x</span>:<span class="number">0</span>, <span class="attr">y</span>:<span class="number">0</span>&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>对于所有路由导航, 简单地让页面滚动到顶部</p>
+<p>返回 <code>savedPosition</code>, 在按下 后退/前进 按钮时, 就会像浏览器的原生表现那样:</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">scrollBehavior (to, <span class="keyword">from</span>, savedPosition) &#123;</span><br><span class="line">  <span class="keyword">if</span> (savedPosition) &#123;</span><br><span class="line">    <span class="keyword">return</span> savedPosition</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123; <span class="attr">x</span>: <span class="number">0</span>, <span class="attr">y</span>: <span class="number">0</span> &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果要模拟 滚动到锚点 的行为:</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">scrollBehavior (to, <span class="keyword">from</span>, savedPosition) &#123;</span><br><span class="line">  <span class="keyword">if</span> (to.hash) &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      selector: to.hash</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="异步滚动"><a href="#异步滚动" class="headerlink" title="异步滚动"></a>异步滚动</h2><p>也可以返回一个 Promise 来得出预期的位置描述</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">scrollBehavior (to, <span class="keyword">from</span>, savedPosition) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      resolve(&#123; <span class="attr">x</span>: <span class="number">0</span>, <span class="attr">y</span>: <span class="number">0</span> &#125;)</span><br><span class="line">    &#125;, <span class="number">500</span>)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>将其挂载到从页面级别的过渡组件的事件上，令其滚动行为和页面过渡一起良好运行是可能的。但是考虑到用例的多样性和复杂性，我们仅提供这个原始的接口，以支持不同用户场景的具体实现。</p>
+]]></content>
+      <categories>
+        <category>VueRoute</category>
+      </categories>
+      <tags>
+        <tag>VueRoute</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>vue-router获取数据</title>
     <url>/2020/03/07/vue-router%E8%8E%B7%E5%8F%96%E6%95%B0%E6%8D%AE/</url>
     <content><![CDATA[<h2 id="数据获取"><a href="#数据获取" class="headerlink" title="数据获取"></a>数据获取</h2><p>有时候, 进入某个路由后, 需要从服务器获取数据, 例如, 在渲染用户信息时, 需要从服务器获取用户的数据. 我们可以通过两种方式来实现:</p>
