@@ -1,6 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>vue-router路由懒加载</title>
+    <url>/2020/03/09/vue-router%E8%B7%AF%E7%94%B1%E6%87%92%E5%8A%A0%E8%BD%BD/</url>
+    <content><![CDATA[<h2 id="路由懒加载"><a href="#路由懒加载" class="headerlink" title="路由懒加载"></a>路由懒加载</h2><p>当打包构建应用时, JavaScript 包会变得非常大, 影响页面加载. 如果我们能把不同路由对相应的组件分隔成不同的代码块, 然后当路由被访问的时候才加载对应组件, 这就更加高效了</p>
+<p>结合 Vue 的异步组件和 Webpack 的代码分隔功能, 轻松实现路由组建的懒加载</p>
+<p>首先, 可以将异步组件定义为返回一个 Promise 的工厂函数(该函数返回的 Promise 应该 resolve 组件本身)</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> Foo = <span class="function"><span class="params">()</span> =&gt;</span></span><br><span class="line">  <span class="built_in">Promise</span>.resolve(&#123;</span><br><span class="line">    <span class="comment">/* 组件定义对象 */</span></span><br><span class="line">  &#125;)</span><br></pre></td></tr></table></figure>
+
+<p>第二, 在 Webpack2 中, 我们可以使用动态 import 语法来定义代码分快点</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span>(<span class="string">'./Foo.vue'</span>) <span class="comment">// 返回 Promise</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>如果您使用的是 Babel，你将需要添加 syntax-dynamic-import 插件，才能使 Babel 可以正确地解析语法。</p>
+</blockquote>
+<p>结合这两者, 这就是如果定义一个能够被 Webpack 自动代码分隔的异步组件</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> Foo = <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="string">'./Foo.vue'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>在路由配置中什么都不需要改变, 只需要像往常一样使用 Foo</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> VueRouter(&#123;</span><br><span class="line">  routes: [</span><br><span class="line">    &#123;</span><br><span class="line">      path: <span class="string">'/foo'</span>,</span><br><span class="line">      component: Foo</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="把组件按组分块"><a href="#把组件按组分块" class="headerlink" title="把组件按组分块"></a>把组件按组分块</h2><p>有时候我们想把某个路由下的所有组件都打包在同个异步块 (chunk) 中。只需要使用 命名 chunk，一个特殊的注释语法来提供 chunk name (需要 Webpack &gt; 2.4)。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> Foo = <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="comment">/* webpackChunkName: "group-foo" */</span> <span class="string">'./Foo.vue'</span>)</span><br><span class="line"><span class="keyword">const</span> Bar = <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="comment">/* webpackChunkName: "group-foo" */</span> <span class="string">'./Bar.vue'</span>)</span><br><span class="line"><span class="keyword">const</span> Baz = <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="comment">/* webpackChunkName: "group-foo" */</span> <span class="string">'./Baz.vue'</span>)</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>VueRoute</category>
+      </categories>
+      <tags>
+        <tag>VueRoute</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>vue-router滚动行为</title>
     <url>/2020/03/08/vue-router%E6%BB%9A%E5%8A%A8%E8%A1%8C%E4%B8%BA/</url>
     <content><![CDATA[<h2 id="滚动行为"><a href="#滚动行为" class="headerlink" title="滚动行为"></a>滚动行为</h2><p>使用前端路由, 当切换到新路由时, 想要页面滚到顶部, 或者是保持原先的滚动位置, 就像重新加载页面那样. <code>vue-router</code> 能做到, 而且更好, 它让你可以自定义路由切换时页面如何滚动.</p>
