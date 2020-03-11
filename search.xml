@@ -1,6 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>vue-router构建选项</title>
+    <url>/2020/03/11/vue-router%E6%9E%84%E5%BB%BA%E9%80%89%E9%A1%B9/</url>
+    <content><![CDATA[<h2 id="routes"><a href="#routes" class="headerlink" title="routes"></a>routes</h2><ul>
+<li><p>类型: Array<RouteConfig><br>RouteConfig 的类型定义:</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">interface</span> RouteConfig = &#123;</span><br><span class="line">  path: <span class="built_in">string</span>,</span><br><span class="line">  component?: Component,</span><br><span class="line">  name?: <span class="built_in">string</span>, <span class="comment">// 命名路由</span></span><br><span class="line">  components?: &#123; [name: <span class="built_in">string</span>]: Component &#125;, <span class="comment">// 命名视图组件</span></span><br><span class="line">  redirect?: <span class="built_in">string</span> | Location | <span class="built_in">Function</span>,</span><br><span class="line">  props?: <span class="built_in">boolean</span> | <span class="built_in">Object</span> | <span class="built_in">Function</span>,</span><br><span class="line">  alias?: <span class="built_in">string</span> | <span class="built_in">Array</span>&lt;<span class="built_in">string</span>&gt;,</span><br><span class="line">  children?: <span class="built_in">Array</span>&lt;RouteConfig&gt;, <span class="comment">// 嵌套路由</span></span><br><span class="line">  beforeEnter?: <span class="function">(<span class="params">to: Route, <span class="keyword">from</span>: Route, next: <span class="built_in">Function</span></span>) =&gt;</span> <span class="built_in">void</span>,</span><br><span class="line">  meta?: <span class="built_in">any</span>,</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 2.6.0+</span></span><br><span class="line">  caseSensitive?: <span class="built_in">boolean</span>, <span class="comment">// 匹配规则是否大小写敏感？(默认值：false)</span></span><br><span class="line">  pathToRegexpOptions?: <span class="built_in">Object</span> <span class="comment">// 编译正则的选项</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="mode"><a href="#mode" class="headerlink" title="mode"></a>mode</h2><ul>
+<li>类型: string</li>
+<li>默认值: hash | abstract</li>
+<li>可选值: hash | history | abstract<br>配置路由模式:<ul>
+<li>hash: 使用 URL hash 值来作路由. 支持所有浏览器, 包括不支持 HTML5 History Api 的浏览器</li>
+<li>history: 依赖 HTML5 History API 和服务器配置</li>
+<li>abstract: 支持所有 JavaScript 运行环境, 如 Node.js 服务器端, 如果发现没有浏览器的 API, 路由会自动强制进入这个模式</li>
+</ul>
+</li>
+</ul>
+<h2 id="base"><a href="#base" class="headerlink" title="base"></a>base</h2><ul>
+<li>类型: string</li>
+<li>默认值: ‘/‘<br>应用的基路径, 例如, 如果整个单页应用服务在 <code>/app/</code> 下, 然后 base 就应该设为 <code>/app/</code></li>
+</ul>
+<h2 id="linkActiveClass"><a href="#linkActiveClass" class="headerlink" title="linkActiveClass"></a>linkActiveClass</h2><ul>
+<li>类型: string</li>
+<li>默认值: router-link-active<br>全局配置 <code>&lt;router-link&gt;</code> 默认的激活 class</li>
+</ul>
+<h2 id="linkExactActiveClass"><a href="#linkExactActiveClass" class="headerlink" title="linkExactActiveClass"></a>linkExactActiveClass</h2><ul>
+<li>类型: string</li>
+<li>默认值: router-link-exact-active<br>全局配置 <code>&lt;router-link&gt;</code> 默认的精确激活的 class</li>
+</ul>
+<h2 id="scrollBehavior"><a href="#scrollBehavior" class="headerlink" title="scrollBehavior"></a>scrollBehavior</h2><ul>
+<li><p>类型: Function<br>签名:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">type PositionDescriptor &#x3D;</span><br><span class="line">&#123; x: number, y: number &#125; |</span><br><span class="line">&#123; selector: string &#125; |</span><br><span class="line">?&#123;&#125;</span><br><span class="line"></span><br><span class="line">type scrollBehaviorHandler &#x3D; (</span><br><span class="line">to: Route,</span><br><span class="line">from: Route,</span><br><span class="line">savedPosition?: &#123; x: number, y: number &#125;</span><br><span class="line">) &#x3D;&gt; PositionDescriptor | Promise&lt;PositionDescriptor&gt;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="parseQuery-stringifyQuery"><a href="#parseQuery-stringifyQuery" class="headerlink" title="parseQuery / stringifyQuery"></a>parseQuery / stringifyQuery</h2><ul>
+<li>类型: Function<br>提供自定义查询字符串的解析/反解析函数</li>
+</ul>
+<h2 id="fallback"><a href="#fallback" class="headerlink" title="fallback"></a>fallback</h2><ul>
+<li>类型: boolean<br>当浏览器不支持 <code>history.pushState</code> 控制路由是否应该回退到 hash 模式. 默认为 <code>true</code></li>
+</ul>
+]]></content>
+      <categories>
+        <category>VueRoute</category>
+      </categories>
+      <tags>
+        <tag>VueRoute</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>vue-router-router-link</title>
     <url>/2020/03/10/vue-router-router-link/</url>
     <content><![CDATA[<h2 id="lt-router-link-gt"><a href="#lt-router-link-gt" class="headerlink" title="&lt;router-link&gt;"></a><code>&lt;router-link&gt;</code></h2><p><code>&lt;router-link&gt;</code> 组件支持用户在具有路由功能的应用中导航, 通过 <code>to</code> 属性指定目标地址, 默认渲染程带有正确连接的 <code>&lt;a&gt;</code> 标签, 可以通过配置 <code>tag</code> 属性生成别的标签. 另外, 当目标路由成功激活时, 连接元素自动设置一个表示激活的 CSS 类名</p>

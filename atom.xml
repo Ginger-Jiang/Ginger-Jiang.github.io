@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-03-10T12:49:05.574Z</updated>
+  <updated>2020-03-11T06:52:06.961Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>vue-router构建选项</title>
+    <link href="http://yoursite.com/2020/03/11/vue-router%E6%9E%84%E5%BB%BA%E9%80%89%E9%A1%B9/"/>
+    <id>http://yoursite.com/2020/03/11/vue-router%E6%9E%84%E5%BB%BA%E9%80%89%E9%A1%B9/</id>
+    <published>2020-03-11T06:51:56.000Z</published>
+    <updated>2020-03-11T06:52:06.961Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="routes"><a href="#routes" class="headerlink" title="routes"></a>routes</h2><ul><li><p>类型: Array<RouteConfig><br>RouteConfig 的类型定义:</p><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> RouteConfig = &#123;</span><br><span class="line">  path: <span class="built_in">string</span>,</span><br><span class="line">  component?: Component,</span><br><span class="line">  name?: <span class="built_in">string</span>, <span class="comment">// 命名路由</span></span><br><span class="line">  components?: &#123; [name: <span class="built_in">string</span>]: Component &#125;, <span class="comment">// 命名视图组件</span></span><br><span class="line">  redirect?: <span class="built_in">string</span> | Location | <span class="built_in">Function</span>,</span><br><span class="line">  props?: <span class="built_in">boolean</span> | <span class="built_in">Object</span> | <span class="built_in">Function</span>,</span><br><span class="line">  alias?: <span class="built_in">string</span> | <span class="built_in">Array</span>&lt;<span class="built_in">string</span>&gt;,</span><br><span class="line">  children?: <span class="built_in">Array</span>&lt;RouteConfig&gt;, <span class="comment">// 嵌套路由</span></span><br><span class="line">  beforeEnter?: <span class="function">(<span class="params">to: Route, <span class="keyword">from</span>: Route, next: <span class="built_in">Function</span></span>) =&gt;</span> <span class="built_in">void</span>,</span><br><span class="line">  meta?: <span class="built_in">any</span>,</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 2.6.0+</span></span><br><span class="line">  caseSensitive?: <span class="built_in">boolean</span>, <span class="comment">// 匹配规则是否大小写敏感？(默认值：false)</span></span><br><span class="line">  pathToRegexpOptions?: <span class="built_in">Object</span> <span class="comment">// 编译正则的选项</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li></ul><h2 id="mode"><a href="#mode" class="headerlink" title="mode"></a>mode</h2><ul><li>类型: string</li><li>默认值: hash | abstract</li><li>可选值: hash | history | abstract<br>配置路由模式:<ul><li>hash: 使用 URL hash 值来作路由. 支持所有浏览器, 包括不支持 HTML5 History Api 的浏览器</li><li>history: 依赖 HTML5 History API 和服务器配置</li><li>abstract: 支持所有 JavaScript 运行环境, 如 Node.js 服务器端, 如果发现没有浏览器的 API, 路由会自动强制进入这个模式</li></ul></li></ul><h2 id="base"><a href="#base" class="headerlink" title="base"></a>base</h2><ul><li>类型: string</li><li>默认值: ‘/‘<br>应用的基路径, 例如, 如果整个单页应用服务在 <code>/app/</code> 下, 然后 base 就应该设为 <code>/app/</code></li></ul><h2 id="linkActiveClass"><a href="#linkActiveClass" class="headerlink" title="linkActiveClass"></a>linkActiveClass</h2><ul><li>类型: string</li><li>默认值: router-link-active<br>全局配置 <code>&lt;router-link&gt;</code> 默认的激活 class</li></ul><h2 id="linkExactActiveClass"><a href="#linkExactActiveClass" class="headerlink" title="linkExactActiveClass"></a>linkExactActiveClass</h2><ul><li>类型: string</li><li>默认值: router-link-exact-active<br>全局配置 <code>&lt;router-link&gt;</code> 默认的精确激活的 class</li></ul><h2 id="scrollBehavior"><a href="#scrollBehavior" class="headerlink" title="scrollBehavior"></a>scrollBehavior</h2><ul><li><p>类型: Function<br>签名:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">type PositionDescriptor &#x3D;</span><br><span class="line">&#123; x: number, y: number &#125; |</span><br><span class="line">&#123; selector: string &#125; |</span><br><span class="line">?&#123;&#125;</span><br><span class="line"></span><br><span class="line">type scrollBehaviorHandler &#x3D; (</span><br><span class="line">to: Route,</span><br><span class="line">from: Route,</span><br><span class="line">savedPosition?: &#123; x: number, y: number &#125;</span><br><span class="line">) &#x3D;&gt; PositionDescriptor | Promise&lt;PositionDescriptor&gt;</span><br></pre></td></tr></table></figure></li></ul><h2 id="parseQuery-stringifyQuery"><a href="#parseQuery-stringifyQuery" class="headerlink" title="parseQuery / stringifyQuery"></a>parseQuery / stringifyQuery</h2><ul><li>类型: Function<br>提供自定义查询字符串的解析/反解析函数</li></ul><h2 id="fallback"><a href="#fallback" class="headerlink" title="fallback"></a>fallback</h2><ul><li>类型: boolean<br>当浏览器不支持 <code>history.pushState</code> 控制路由是否应该回退到 hash 模式. 默认为 <code>true</code></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;routes&quot;&gt;&lt;a href=&quot;#routes&quot; class=&quot;headerlink&quot; title=&quot;routes&quot;&gt;&lt;/a&gt;routes&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;类型: Array&lt;RouteConfig&gt;&lt;br&gt;RouteConfig 的类型定义:&lt;
+      
+    
+    </summary>
+    
+    
+      <category term="VueRoute" scheme="http://yoursite.com/categories/VueRoute/"/>
+    
+    
+      <category term="VueRoute" scheme="http://yoursite.com/tags/VueRoute/"/>
+    
+  </entry>
   
   <entry>
     <title>vue-router-router-link</title>
@@ -504,32 +531,6 @@
       
       
         &lt;h2 id=&quot;起步&quot;&gt;&lt;a href=&quot;#起步&quot; class=&quot;headerlink&quot; title=&quot;起步&quot;&gt;&lt;/a&gt;起步&lt;/h2&gt;&lt;p&gt;用 Vue.js + Vue Router 创建单页面应用, 通过 Vue 组合组件来组成应用程序, 将 Vue Router 添加进来. 
-      
-    
-    </summary>
-    
-    
-      <category term="VueRoute" scheme="http://yoursite.com/categories/VueRoute/"/>
-    
-    
-      <category term="VueRoute" scheme="http://yoursite.com/tags/VueRoute/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>vue-route介绍与安装</title>
-    <link href="http://yoursite.com/2020/03/03/vue-router%E4%BB%8B%E7%BB%8D%E4%B8%8E%E5%AE%89%E8%A3%85/"/>
-    <id>http://yoursite.com/2020/03/03/vue-router%E4%BB%8B%E7%BB%8D%E4%B8%8E%E5%AE%89%E8%A3%85/</id>
-    <published>2020-03-03T10:19:41.000Z</published>
-    <updated>2020-03-03T12:50:23.930Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>Vue Router 是 Vue.js 官方的路由管理器. 他和 Vue.js 的核心深度集成. 让构建单页面应用变得易如反掌. 包含的功能有:</p><ul><li>嵌套的路由/视图表</li><li>模块化的、基于组件的路由配置</li><li>路由参数、查询、通配符</li><li>基于 Vue.js 过渡系统的试图过渡效果</li><li>细粒度的导航控制</li><li>带有自动激活的 CSS class 的链接</li><li>HTML5 历史模式或 hash 模式, 在 IE9 中自动降级</li><li>自定义的滚动条行为</li></ul><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><h3 id="直接下载-CDN"><a href="#直接下载-CDN" class="headerlink" title="直接下载/CDN"></a>直接下载/CDN</h3><p><a href="https://unpkg.com/vue-router/dist/vue-router.js" target="_blank" rel="noopener">https://unpkg.com/vue-router/dist/vue-router.js</a></p><p>在 Vue 后面加载 <code>vur-router</code>, 他会自动安装:</p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"vue.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"vue-router.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure><h3 id="NPM"><a href="#NPM" class="headerlink" title="NPM"></a>NPM</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install vue-router</span><br></pre></td></tr></table></figure><p>如果在一个模块化工程中使用它, 必须要通过<code>Vue.use()</code>地安装路由功能:</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">'vue'</span></span><br><span class="line"><span class="keyword">import</span> VueRouter <span class="keyword">from</span> <span class="string">'vue-router'</span></span><br><span class="line"></span><br><span class="line">Vue.use(VueRouter)</span><br></pre></td></tr></table></figure><p>构建开发板</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/vuejs/vue-router.git node_modules/vue-router</span><br><span class="line"><span class="built_in">cd</span> node_modules/vue-router</span><br><span class="line">npm install</span><br><span class="line">npm run build</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h2 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h2&gt;&lt;p&gt;Vue Router 是 Vue.js 官方的路由管理器. 他和 Vue.js 的核心深度集成. 让构建单页面应用变得易如反掌. 包含的功能
       
     
     </summary>
