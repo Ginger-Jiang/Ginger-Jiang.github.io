@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-03-12T07:15:17.829Z</updated>
+  <updated>2020-03-16T05:11:32.704Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>vue-router路由对象与组件注入</title>
+    <link href="http://yoursite.com/2020/03/16/vue-router%E8%B7%AF%E7%94%B1%E5%AF%B9%E8%B1%A1%E4%B8%8E%E7%BB%84%E4%BB%B6%E6%B3%A8%E5%85%A5/"/>
+    <id>http://yoursite.com/2020/03/16/vue-router%E8%B7%AF%E7%94%B1%E5%AF%B9%E8%B1%A1%E4%B8%8E%E7%BB%84%E4%BB%B6%E6%B3%A8%E5%85%A5/</id>
+    <published>2020-03-16T05:11:19.000Z</published>
+    <updated>2020-03-16T05:11:32.704Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="路由对象"><a href="#路由对象" class="headerlink" title="路由对象"></a>路由对象</h2><p>一个路由对象表示当前激活的路由的状态信息, 包含了当前 URL 解析得到的信息, 还有 URL 匹配到的路由记录</p><p>路由对象是不可变的, 每次成功导航后都会产生一个新的对象</p><p>路由对象出现在多个地方:</p><ul><li><p>组件内, <code>this.$route</code></p></li><li><p>在 <code>$route</code> 观察者回调内</p></li><li><p><code>router.match(localtion)</code> 返回值</p></li><li><p>导航守卫的参数:</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">router.beforeEach(<span class="function">(<span class="params">to, <span class="keyword">from</span>, next</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// to 和 from 都是路由对象</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></li><li><p><code>scrollBehavior</code> 方法的参数:</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> VurRouter(&#123;</span><br><span class="line">  scrollBehavior(to, <span class="keyword">from</span>, savedPosition)=&gt; &#123;</span><br><span class="line">    <span class="comment">// to 和 from 都是路由对象</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></li></ul><h2 id="路由对象属性"><a href="#路由对象属性" class="headerlink" title="路由对象属性"></a>路由对象属性</h2><ul><li><code>$route.path</code><ul><li>类型: string<br>字符串, 对应当前路由的路径, 总是解析为绝对路径,如: ‘/foo/bar’</li></ul></li><li><code>$route.params</code><ul><li>类型: Object<br>一个 key/value 对象, 包含了动态片段和全匹配片段, 如果没有路由参数, 就是一个空对象</li></ul></li><li><code>$route.query</code><ul><li>类型: Object<br>一个 key/value 对象，表示 URL 查询参数。例如，对于路径 <code>/foo?user=1</code>，则有 <code>$route.query.user == 1</code>，如果没有查询参数，则是个空对象。</li></ul></li><li><code>$route.hash</code><ul><li>类型: string<br>当前路由的 hash 值(带#), 如果没有 hash 值, 则为空字符串</li></ul></li><li><code>$route.fullPath</code><ul><li>类型: string<br>完成解析后的 url, 包含查询参数核 hash 的完整路径</li></ul></li><li><code>$route.matched</code><ul><li>类型: Array<RouteRecord><br>一个数组，包含当前路由的所有嵌套路径片段的路由记录 。路由记录就是 routes 配置数组中的对象副本 (还有在 children 数组)。</li></ul></li></ul><pre><code>当 URL 为 `/foo/bar`，`$route.matched` 将会是一个包含从上到下的所有对象 (副本)。<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> VueRouter(&#123;</span><br><span class="line">  routes: [</span><br><span class="line">    <span class="comment">// 下面的对象就是路由记录</span></span><br><span class="line">    &#123;</span><br><span class="line">      path: <span class="string">'/foo'</span>,</span><br><span class="line">      component: Foo,</span><br><span class="line">      children: [</span><br><span class="line">        <span class="comment">// 这也是个路由记录</span></span><br><span class="line">        &#123; <span class="attr">path</span>: <span class="string">'bar'</span>, <span class="attr">component</span>: Bar &#125;</span><br><span class="line">      ]</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></code></pre><ul><li><p><code>$route.name</code><br>当前路由的名称</p></li><li><p><code>$route.redirectedFrom</code><br>如果存在重定向, 即为重定向来源的路由的名字</p></li></ul><h2 id="组件注入"><a href="#组件注入" class="headerlink" title="组件注入"></a>组件注入</h2><h3 id="注入的属性"><a href="#注入的属性" class="headerlink" title="注入的属性"></a>注入的属性</h3><p>通过在 Vue 根实例的 router 配置传入 router 实例，下面这些属性成员会被注入到每个子组件。</p><ul><li><p><code>this.$router</code></p></li><li><p>router 实例。</p></li><li><p><code>this.$route</code></p></li></ul><p>当前激活的路由信息对象。这个属性是只读的，里面的属性是 immutable (不可变) 的，不过你可以 watch (监测变化) 它。</p><h3 id="增加的组件配置选项"><a href="#增加的组件配置选项" class="headerlink" title="增加的组件配置选项"></a>增加的组件配置选项</h3><ul><li><p>beforeRouteEnter</p></li><li><p>beforeRouteUpdate</p></li><li><p>beforeRouteLeave</p></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;路由对象&quot;&gt;&lt;a href=&quot;#路由对象&quot; class=&quot;headerlink&quot; title=&quot;路由对象&quot;&gt;&lt;/a&gt;路由对象&lt;/h2&gt;&lt;p&gt;一个路由对象表示当前激活的路由的状态信息, 包含了当前 URL 解析得到的信息, 还有 URL 匹配到的路由记录&lt;/p&gt;
+&lt;
+      
+    
+    </summary>
+    
+    
+      <category term="VueRoute" scheme="http://yoursite.com/categories/VueRoute/"/>
+    
+    
+      <category term="VueRoute" scheme="http://yoursite.com/tags/VueRoute/"/>
+    
+  </entry>
   
   <entry>
     <title>vue-router实例</title>
@@ -508,32 +535,6 @@
       
       
         &lt;h2 id=&quot;嵌套路由&quot;&gt;&lt;a href=&quot;#嵌套路由&quot; class=&quot;headerlink&quot; title=&quot;嵌套路由&quot;&gt;&lt;/a&gt;嵌套路由&lt;/h2&gt;&lt;p&gt;实际生活中的应用界面, 通常由多层嵌套的组件组合而成. URL 中各段动态路径也按某种结构对应嵌套的各层组件&lt;br&gt;借助 &lt;
-      
-    
-    </summary>
-    
-    
-      <category term="VueRoute" scheme="http://yoursite.com/categories/VueRoute/"/>
-    
-    
-      <category term="VueRoute" scheme="http://yoursite.com/tags/VueRoute/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>vue-router动态路由匹配</title>
-    <link href="http://yoursite.com/2020/03/03/vue-router%E5%8A%A8%E6%80%81%E8%B7%AF%E7%94%B1%E5%8C%B9%E9%85%8D/"/>
-    <id>http://yoursite.com/2020/03/03/vue-router%E5%8A%A8%E6%80%81%E8%B7%AF%E7%94%B1%E5%8C%B9%E9%85%8D/</id>
-    <published>2020-03-03T12:53:22.000Z</published>
-    <updated>2020-03-03T12:53:35.241Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="动态路由匹配"><a href="#动态路由匹配" class="headerlink" title="动态路由匹配"></a>动态路由匹配</h2><p>我们经常需要把某种模式匹配到的所有路由, 全部映射到同个组件.<br>如: 我们有个 User 组件, 对于所有 ID 各不相同的用户, 都要使用这个组件来渲染, 那么,我们可以在 vue-router 的路由路径中使用 动态路径参数来达到这个效果:</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> User = &#123;</span><br><span class="line">  template: <span class="string">'&lt;div&gt;User&lt;/div&gt;'</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> routed = [</span><br><span class="line">  <span class="comment">// 动态路径参数以冒号开头</span></span><br><span class="line">  &#123;</span><br><span class="line">    path: <span class="string">'/user/:id'</span>,</span><br><span class="line">    component: User</span><br><span class="line">  &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure><p>现在, 像 <code>/user/foo</code> 和 <code>/user/bar</code> 都将映射到相同的路由</p><p>一个”路径参数”使用冒号<code>:</code>标记, 当匹配到一个路由时, 参数值会被设置到 <code>this.$route.params</code>. 可以在每个组件内使用.</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 输出用户id</span></span><br><span class="line"><span class="keyword">const</span> User = &#123;</span><br><span class="line">  template: <span class="string">'&lt;div&gt;&#123;&#123; this.$route.params.id &#125;&#125;&lt;/div'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>可以在一个路由中设置多段”路径参数”, 对应的值都会设置到 <code>$route.params</code>中</p><ul><li><code>/user/:username</code> 匹配: <code>/user/ginger</code> params: <code>{username: &quot;ginger&quot;}</code></li><li><code>/user/:username/post/:postid</code> 匹配: <code>/user/ginger/post/123</code> params: <code>{username: &quot;ginger&quot;, postid: 123}</code></li></ul><h2 id="响应路由参数的变化"><a href="#响应路由参数的变化" class="headerlink" title="响应路由参数的变化"></a>响应路由参数的变化</h2><blockquote><p>从 <code>/user/foo</code>导航到 <code>/user/bar</code>，原来的组件实例会被复用, 这意味着组件的生命周期钩子不会再被调用</p></blockquote><p>复用组件事, 想对路由参数的变化做出响应的话, 可以简单的 <code>watch</code> <code>$route</code> 对象</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> user = &#123;</span><br><span class="line">  template: <span class="string">'...'</span>,</span><br><span class="line">  watch: &#123;</span><br><span class="line">    <span class="string">'$route'</span>: (to, <span class="keyword">from</span>) &#123;</span><br><span class="line">      <span class="comment">// 对路由变化做出响应</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>或者使用 <code>beforeRouteUpdate</code> 导航守卫</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> User = &#123;</span><br><span class="line">  template: <span class="string">'...'</span></span><br><span class="line">  beforeRouteUpdate(to , <span class="keyword">from</span>. next) &#123;</span><br><span class="line">    <span class="comment">// react to route changes...</span></span><br><span class="line">    <span class="comment">// don't forget to call next()</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2 id="捕获所有路由或-404-Not-found-路由"><a href="#捕获所有路由或-404-Not-found-路由" class="headerlink" title="捕获所有路由或 404 Not found 路由"></a>捕获所有路由或 404 Not found 路由</h2><p>常规参数智慧匹配被 <code>/</code> 分隔的 URL 片段中的字符, 如果想匹配任意路径, 我们可以使用通配符 (<code>*</code>)</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="comment">// 匹配所有路径</span></span><br><span class="line">  path: <span class="string">'*'</span></span><br><span class="line">&#125;</span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">// 匹配user开头的所有路径</span></span><br><span class="line">  path: <span class="string">'/user-*'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>当使用通配符时吗请确保路由的顺序是正确的, 也就是说含有通配符的路由应该放在最后, 路由(path: <code>*</code>)通常用于客户端 404 错误, 如果你使用了 History 模式, 需要配置服务器支持</p><p>当使用一个通配符时, <code>$route.params</code> 内会自动添加一个名为 <code>pathMatch</code> 参数, 它包含了 URl 通过通配符被匹配的部分</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 给出一个路由 ( path: 'user-*')</span></span><br><span class="line"><span class="keyword">this</span>.$route.push(<span class="string">'user-admin'</span>)</span><br><span class="line"><span class="keyword">this</span>.$route.params.pathMatch <span class="comment">// admin</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 给出一个路由 &#123; path: '*' &#125;</span></span><br><span class="line"><span class="keyword">this</span>.$route.push(<span class="string">'/non-existing'</span>)</span><br><span class="line"><span class="keyword">this</span>.$route.params.pathMatch <span class="comment">// '/non-existing'</span></span><br></pre></td></tr></table></figure><h2 id="高级匹配模式"><a href="#高级匹配模式" class="headerlink" title="高级匹配模式"></a>高级匹配模式</h2><p><code>vue-router</code> 使用 <code>path-to-regexp</code> 作为路径匹配引擎, 所以支持很多高级的匹配模式</p><h2 id="匹配优先级"><a href="#匹配优先级" class="headerlink" title="匹配优先级"></a>匹配优先级</h2><p>路由匹配优先级按照路由的定义顺序, 谁先定义的, 谁的优先即就最高</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h2 id=&quot;动态路由匹配&quot;&gt;&lt;a href=&quot;#动态路由匹配&quot; class=&quot;headerlink&quot; title=&quot;动态路由匹配&quot;&gt;&lt;/a&gt;动态路由匹配&lt;/h2&gt;&lt;p&gt;我们经常需要把某种模式匹配到的所有路由, 全部映射到同个组件.&lt;br&gt;如: 我们有个 User 组件, 对于
       
     
     </summary>
