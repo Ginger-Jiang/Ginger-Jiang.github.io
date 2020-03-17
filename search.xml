@@ -1,6 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>vuex安装介绍与起步</title>
+    <url>/2020/03/17/vuex%E5%AE%89%E8%A3%85%E4%BB%8B%E7%BB%8D%E4%B8%8E%E8%B5%B7%E6%AD%A5/</url>
+    <content><![CDATA[<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><ul>
+<li>直接下载 || CDN 引用 <a href="https://unpkg.com/vuex" target="_blank" rel="noopener">vuex</a></li>
+</ul>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"/path/to/vue.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"/path/to/vuex.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>NPM</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">npm install vuex --save</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Yarn</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">yarn add vuex</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>在一个模块化的打包系统中, 必须显示地通过 <code>Vue.use()</code> 来安装 <code>Vuex</code></li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">'vue'</span></span><br><span class="line"><span class="keyword">import</span> Vuex <span class="keyword">from</span> <span class="string">'vuex'</span></span><br><span class="line"></span><br><span class="line">Vue.use(Vuex)</span><br></pre></td></tr></table></figure>
+
+<h2 id="Vuex-是什么"><a href="#Vuex-是什么" class="headerlink" title="Vuex 是什么?"></a>Vuex 是什么?</h2><p>Vuex 是一个专门为 Vue.js 应用程序开发的状态管理模式. 它采用集中式存储管理应用的所有组件的状态, 并已相应的规则保证状态以一种可预测的方式发生变化. Vuex 也集成到 Vue 的官方调试工具 devtools extension, 提供了诸如零配置的 time-travel 调试、状态快照导入导出等高级调试功能</p>
+<h2 id="什么是状态管理模式"><a href="#什么是状态管理模式" class="headerlink" title="什么是状态管理模式?"></a>什么是状态管理模式?</h2><p>已一个简单的 Vue 记数应用开始:</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  <span class="comment">// state</span></span><br><span class="line">  data() &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      count: <span class="number">0</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// view</span></span><br><span class="line">  template: <span class="string">'&lt;div&gt; &#123;&#123; count &#125;&#125; &lt;/div&gt;'</span>,</span><br><span class="line">  <span class="comment">// actions</span></span><br><span class="line">  methods: &#123;</span><br><span class="line">    increment() &#123;</span><br><span class="line">      <span class="keyword">this</span>.count++</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>这个状态管理应用包含以下几个部分:</p>
+<ul>
+<li>state: 驱动应用的数据源</li>
+<li>view: 以声明方式将 state 映射到试图</li>
+<li>actions: 响应在 view 上的用户输入导致的状态变化</li>
+</ul>
+<p>以下是一个表示单项数据流理念的简单示意图:</p>
+<p><img data-src="../../image/flow.png" alt="flow"></p>
+<p>当我们遇到多个组件共享状态时, 单项数据流的简洁性很容易被破坏:</p>
+<ul>
+<li>多个视图依赖于同一状态</li>
+<li>来自不同视图的行为需要变更同一状态</li>
+</ul>
+<p>对于问题一, 传参的方法对于多层嵌套的组件将会非常繁琐, 并且对于兄弟组件间的状态传递无能为力<br>对于问题二, 我们经常会采用父子组件直接引用或者通过事件来变更和同步状态的多份拷贝.</p>
+<p>因此, 我们为什么不把组件的共享状态抽取出来, 以一个全局单例模式管理呢? 在这种模式下, 我们组件树构成了一个巨大的试图, 不管树在那个位置, 任何组件都能获取状态或者触发行为.</p>
+<p>通过定义和隔离状态管理中的各种概念并通过强制规则维持试图和状态间的独立性,我们的代码将会变得更结构化且易维护</p>
+<p>这就是 Vuex 背后的基本思想，借鉴了 Flux、Redux 和 The Elm Architecture。与其他模式不同的是，Vuex 是专门为 Vue.js 设计的状态管理库，以利用 Vue.js 的细粒度数据响应机制来进行高效的状态更新</p>
+<p><img data-src="../../image/vuex.png" alt="vuex"></p>
+<h2 id="什么情况下应该使用-Vuex"><a href="#什么情况下应该使用-Vuex" class="headerlink" title="什么情况下应该使用 Vuex?"></a>什么情况下应该使用 Vuex?</h2><p>Vuex 可以帮助我们管理共享状态，并附带了更多的概念和框架。这需要对短期和长期效益进行权衡。</p>
+<p>如果您不打算开发大型单页应用，使用 Vuex 可能是繁琐冗余的。确实是如此——如果您的应用够简单，您最好不要使用 Vuex。一个简单的 store 模式就足够您所需了。但是，如果您需要构建一个中大型单页应用，您很可能会考虑如何更好地在组件外部管理状态，Vuex 将会成为自然而然的选择。</p>
+<h2 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h2><p>每个 Vuex 应用的核心就是 store. store 基本上就是个容器, 它包含着你的应用中大部分的状态(state). Vuex 和单纯的全局对象有以下两个点不同</p>
+<ol>
+<li><p>Vuex 的状态存储是响应式的. 当 Vue 组件从 store 中读取状态的时候, 若 store 中的状态发生改变, 那么相应的组件也会响应的得到高效更新</p>
+</li>
+<li><p>不能直接修改 store 中的状态. 改变 store 中的状态的唯一途径就是显示的提交(commit)mutation. 这样使得我们可以方便的跟踪没一个状态的变化, 从而让我们能够实现一些工具帮助我们更好的了解我们的应用</p>
+</li>
+</ol>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>安装 Vuex 之后, 我们可以创建一个 store.</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> store = <span class="keyword">new</span> Vuex.Store(&#123;</span><br><span class="line">  state: &#123;</span><br><span class="line">    count: <span class="number">0</span></span><br><span class="line">  &#125;,</span><br><span class="line">  mutations: &#123;</span><br><span class="line">    increment(state) &#123;</span><br><span class="line">      state.count++</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>现在, 可以通过 <code>store.state</code> 来获取状态对象, 以及通过 <code>store.commit</code> 方法触发状态变更</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">store.commit(<span class="string">'increment'</span>)</span><br><span class="line"><span class="built_in">console</span>.log(store.state.count) <span class="comment">// -&gt; 1</span></span><br></pre></td></tr></table></figure>
+
+<p>我们通过提交 mutation 的方式，而非直接改变 store.state.count，是因为我们想要更明确地追踪到状态的变化。这个简单的约定能够让你的意图更加明显，这样你在阅读代码的时候能更容易地解读应用内部的状态改变。此外，这样也让我们有机会去实现一些能记录每次状态改变，保存状态快照的调试工具。有了它，我们甚至可以实现如时间穿梭般的调试体验。</p>
+<p>由于 store 中的状态是响应式的, 在组件中调用 store 中的状态简单到仅需要在计算属性中返回即可. 触发变化也仅仅是在组件的 methods 中提交 mutation</p>
+]]></content>
+      <categories>
+        <category>Vue</category>
+      </categories>
+      <tags>
+        <tag>Vue</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>vue-router路由对象与组件注入</title>
     <url>/2020/03/16/vue-router%E8%B7%AF%E7%94%B1%E5%AF%B9%E8%B1%A1%E4%B8%8E%E7%BB%84%E4%BB%B6%E6%B3%A8%E5%85%A5/</url>
     <content><![CDATA[<h2 id="路由对象"><a href="#路由对象" class="headerlink" title="路由对象"></a>路由对象</h2><p>一个路由对象表示当前激活的路由的状态信息, 包含了当前 URL 解析得到的信息, 还有 URL 匹配到的路由记录</p>
