@@ -46,20 +46,20 @@
   };
 </script>
 
-  <meta name="description" content="vm.$data 类型: Object 详细:Vue 实例观察的数据对象. Vue 实例代理了对其 data 对象属性的访问  vm.$props 类型: Object 详细:当前组件接受到的 props 对象. Vue 实例代理了对其 props 对象属性的访问  vm.$el 类型: Elemnt 只读 详细:Vue 实例使用的根 DOM 元素  vm.$options 类型: Object">
+  <meta name="description" content="StateVuex 使用 单一状态树 用一个对象就包含了全部的应用层级状态. 至此它便作为一个唯一数据源而存在. 意味着, 每个应用将仅仅包含一个 store 实例. 单一状态树让我们能够直接地定位任一特定的状态片段, 在调试的过程中也能轻易地取得整个当前应用状态的快照. 在组件中获得 Vuex 状态由于 Vuex 的状态储存是响应式的, 从 store 实例中读取状态的最简单的方法就是在计算属性">
 <meta property="og:type" content="article">
-<meta property="og:title" content="vue实例属性">
-<meta property="og:url" content="http://yoursite.com/2020/02/25/vue%E5%AE%9E%E4%BE%8B%E5%B1%9E%E6%80%A7/index.html">
+<meta property="og:title" content="vuex核心-State">
+<meta property="og:url" content="http://yoursite.com/2020/03/17/vuex%E6%A0%B8%E5%BF%83-State/index.html">
 <meta property="og:site_name" content="Ginger">
-<meta property="og:description" content="vm.$data 类型: Object 详细:Vue 实例观察的数据对象. Vue 实例代理了对其 data 对象属性的访问  vm.$props 类型: Object 详细:当前组件接受到的 props 对象. Vue 实例代理了对其 props 对象属性的访问  vm.$el 类型: Elemnt 只读 详细:Vue 实例使用的根 DOM 元素  vm.$options 类型: Object">
+<meta property="og:description" content="StateVuex 使用 单一状态树 用一个对象就包含了全部的应用层级状态. 至此它便作为一个唯一数据源而存在. 意味着, 每个应用将仅仅包含一个 store 实例. 单一状态树让我们能够直接地定位任一特定的状态片段, 在调试的过程中也能轻易地取得整个当前应用状态的快照. 在组件中获得 Vuex 状态由于 Vuex 的状态储存是响应式的, 从 store 实例中读取状态的最简单的方法就是在计算属性">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-02-25T14:08:12.000Z">
-<meta property="article:modified_time" content="2020-02-25T14:08:27.441Z">
+<meta property="article:published_time" content="2020-03-17T07:30:16.000Z">
+<meta property="article:modified_time" content="2020-03-17T07:30:29.821Z">
 <meta property="article:author" content="Ginger">
 <meta property="article:tag" content="Vue">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://yoursite.com/2020/02/25/vue%E5%AE%9E%E4%BE%8B%E5%B1%9E%E6%80%A7/">
+<link rel="canonical" href="http://yoursite.com/2020/03/17/vuex%E6%A0%B8%E5%BF%83-State/">
 
 
 <script id="page-configurations">
@@ -71,7 +71,7 @@
   };
 </script>
 
-  <title>vue实例属性 | Ginger</title>
+  <title>vuex核心-State | Ginger</title>
   
 
 
@@ -215,7 +215,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/25/vue%E5%AE%9E%E4%BE%8B%E5%B1%9E%E6%80%A7/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/17/vuex%E6%A0%B8%E5%BF%83-State/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/head_pic.jpeg">
@@ -228,7 +228,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          vue实例属性
+          vuex核心-State
         </h1>
 
         <div class="post-meta">
@@ -239,7 +239,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-02-25 22:08:12 / 修改时间：22:08:27" itemprop="dateCreated datePublished" datetime="2020-02-25T22:08:12+08:00">2020-02-25</time>
+              <time title="创建时间：2020-03-17 15:30:16 / 修改时间：15:30:29" itemprop="dateCreated datePublished" datetime="2020-03-17T15:30:16+08:00">2020-03-17</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -259,7 +259,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.9k</span>
+              <span>1.7k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -278,86 +278,28 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="vm-data"><a href="#vm-data" class="headerlink" title="vm.$data"></a>vm.$data</h2><ul>
-<li>类型: Object</li>
-<li>详细:<br>Vue 实例观察的数据对象. Vue 实例代理了对其 data 对象属性的访问</li>
-</ul>
-<h2 id="vm-props"><a href="#vm-props" class="headerlink" title="vm.$props"></a>vm.$props</h2><ul>
-<li>类型: Object</li>
-<li>详细:<br>当前组件接受到的 props 对象. Vue 实例代理了对其 props 对象属性的访问</li>
-</ul>
-<h2 id="vm-el"><a href="#vm-el" class="headerlink" title="vm.$el"></a>vm.$el</h2><ul>
-<li>类型: Elemnt</li>
-<li>只读</li>
-<li>详细:<br>Vue 实例使用的根 DOM 元素</li>
-</ul>
-<h2 id="vm-options"><a href="#vm-options" class="headerlink" title="vm.$options"></a>vm.$options</h2><ul>
-<li>类型: Object</li>
-<li>只读</li>
-<li>详细:<br>用于当前 Vue 实例的初始化选项. 需要在选项中包含自定义属性时会有用处<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  customOption: <span class="string">'foo'</span>,</span><br><span class="line">  created: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.$options.customOption) <span class="comment">// =&gt; foo</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+        <h2 id="State"><a href="#State" class="headerlink" title="State"></a>State</h2><p>Vuex 使用 <strong>单一状态树</strong> 用一个对象就包含了全部的应用层级状态. 至此它便作为一个唯一数据源而存在. 意味着, 每个应用将仅仅包含一个 store 实例. 单一状态树让我们能够直接地定位任一特定的状态片段, 在调试的过程中也能轻易地取得整个当前应用状态的快照.</p>
+<h3 id="在组件中获得-Vuex-状态"><a href="#在组件中获得-Vuex-状态" class="headerlink" title="在组件中获得 Vuex 状态"></a>在组件中获得 Vuex 状态</h3><p>由于 Vuex 的状态储存是响应式的, 从 store 实例中读取状态的最简单的方法就是在计算属性中返回某个状态:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Counter - &#123;</span><br><span class="line">  template: <span class="string">'&lt;div&gt;&#123;&#123; count &#125;&#125;&lt;/div&gt;'</span></span><br><span class="line">  computed: &#123;</span><br><span class="line">    count() &#123;</span><br><span class="line">      <span class="keyword">return</span> store.state.count</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-</li>
-</ul>
-<h2 id="vm-parent"><a href="#vm-parent" class="headerlink" title="vm.$parent"></a>vm.$parent</h2><ul>
-<li>类型: Vue instance</li>
-<li>只读</li>
-<li>详细:<br>父实例</li>
-</ul>
-<h2 id="vm-root"><a href="#vm-root" class="headerlink" title="vm.$root"></a>vm.$root</h2><ul>
-<li>类型: Vue instance</li>
-<li>只读</li>
-<li>详细:<br>当前组件树的根 Vue 实例. 如果当前实例没有父实例, 此实例将会是其自己.</li>
-</ul>
-<h2 id="vm-children"><a href="#vm-children" class="headerlink" title="vm.$children"></a>vm.$children</h2><ul>
-<li>类型: Array<Vue instance></li>
-<li>只读</li>
-<li>详细:<br>当前实例的直接子组件. 不保证顺序, 也不是响应式的</li>
-</ul>
-<h2 id="vm-slots"><a href="#vm-slots" class="headerlink" title="vm.$slots"></a>vm.$slots</h2><ul>
-<li><p>类型: { [name: string]: ?Array<VNode>}</p>
-</li>
-<li><p>只读</p>
-</li>
-<li><p>详细:<br>用来访问被插槽分发的内容. 每个具名插槽有其相应的属性.</p>
-</li>
-<li><p>示例:</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">blog-post</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">template</span> <span class="attr">v-slot:header</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>About Me<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">    Here's some page content, which will be included in vm.$slots.default,</span><br><span class="line">    because it's not inside a named slot.</span><br><span class="line">  <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">template</span> <span class="attr">v-slot:footer</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>Copyright 2016 Evan You<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">    If I have some content down here, it will also be included in</span><br><span class="line">    vm.$slots.default.</span><br><span class="line">  <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">blog-post</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>每当 <code>store.state.count</code> 变化的时候, 都会重新求取计算属性, 并且触发更新相关联的 DOM</p>
+<p>然而, 这种模式导致组件依赖全局状态单例. 在模块化的构建系统中, 在每个需要使用 state 的组件中需要频繁的导入, 并且在测试组件时需要模拟状态</p>
+<p>Vuex 通过 <code>store</code> 选项, 提供了一种机制将状态从根组件注入到每一个子组件中</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> app = <span class="keyword">new</span> Vuex(&#123;</span><br><span class="line">  el: <span class="string">'app'</span>,</span><br><span class="line">  store,</span><br><span class="line">  components: &#123; Counter &#125;,</span><br><span class="line">  template: <span class="string">`</span></span><br><span class="line"><span class="string">  &lt;div class='app'&gt;</span></span><br><span class="line"><span class="string">    &lt;counter&gt;&lt;/counter&gt;</span></span><br><span class="line"><span class="string">  &lt;/div&gt;`</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Vue.component(<span class="string">'blog-post'</span>,</span><br><span class="line">  render: <span class="function"><span class="keyword">function</span>(<span class="params">createElement</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> header = <span class="keyword">this</span>.$slots.header</span><br><span class="line">    <span class="keyword">var</span>  body = <span class="keyword">this</span>.$slots.default</span><br><span class="line">    <span class="keyword">var</span> footer = <span class="keyword">this</span>.$slots.footer</span><br><span class="line">    <span class="keyword">return</span> createElement(<span class="string">'div'</span>, [</span><br><span class="line">      createElement(<span class="string">'header'</span>, hdaer)</span><br><span class="line">      createElement(<span class="string">'main'</span>, body)</span><br><span class="line">      createElement(<span class="string">'footer'</span>, footer)</span><br><span class="line">    ])</span><br><span class="line">  &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>通过在根实例中注册 <code>store</code> 选项, 该 store 实例会注入到根组件下的所有子组件中, 且子组件能通过 <code>this.$store</code> 访问到</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Counter = &#123;</span><br><span class="line">  template: <span class="string">'&lt;div&gt; &#123;&#123; count &#125;&#125; &lt;/div&gt;'</span>,</span><br><span class="line">  computed: &#123;</span><br><span class="line">    count() &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">this</span>.$store.state.count</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-</li>
-</ul>
-<h2 id="vm-scopedSlots"><a href="#vm-scopedSlots" class="headerlink" title="vm.$scopedSlots"></a>vm.$scopedSlots</h2><ul>
-<li><p>类型: { [name: string]: props =&gt; Array<VNode> | undefined }</p>
-</li>
-<li><p>只读</p>
-</li>
-<li><p>详细:<br>用来访问作用域插槽. 对于包括默认 slot 在内的每一个插槽. 该对象都包含一个返回相应 VNode 的函数</p>
-</li>
-<li><p>注意:<br>作用域插槽函数现在保证返回一个 VNode 数组，除非在返回值无效的情况下返回 undefined。</p>
-<p>所有的 <code>$slots</code> 现在都会作为函数暴露在 <code>$scopedSlots</code> 中。如果你在使用渲染函数，不论当前插槽是否带有作用域，我们都推荐始终通过 <code>$scopedSlots</code> 访问它们。这不仅仅使得在未来添加作用域变得简单，也可以让你最终轻松迁移到所有插槽都是函数的 Vue 3。</p>
-</li>
-</ul>
-<h2 id="vm-refs"><a href="#vm-refs" class="headerlink" title="vm.$refs"></a>vm.$refs</h2><ul>
-<li>类型: Object</li>
-<li>只读</li>
-<li>详细:<br>一个对象, 持有注册过 <code>ref</code> 特性的所有 DOM 元素和组件实例</li>
-</ul>
-<h2 id="vm-isServer"><a href="#vm-isServer" class="headerlink" title="vm.$isServer"></a>vm.$isServer</h2><ul>
-<li>类型: boolean</li>
-<li>只读</li>
-<li>详细:<br>当前 Vue 实例是否运行于服务器</li>
-</ul>
-<h2 id="vm-attrs"><a href="#vm-attrs" class="headerlink" title="vm.$attrs"></a>vm.$attrs</h2><ul>
-<li>类型: { [key: string]: string}</li>
-<li>只读</li>
-<li>详细:<br>包含了父作用域中不作为 prop 被识别的特性绑定(<code>class</code>和<code>style</code>除外). 当一个组件没有声明任何 prop 时, 这里会包含所有父作用域的绑定, 并且可以通过 <code>v-bind=&quot;$attrs</code> 传入内部组件</li>
-</ul>
-<h2 id="vm-listeners"><a href="#vm-listeners" class="headerlink" title="vm.$listeners"></a>vm.$listeners</h2><ul>
-<li>类型: { [key: string]: Function | Array<Function> }</li>
-<li>只读</li>
-<li>详细:<br>包含了父作用域中<code>v-on</code>事件监听器, 他可以通过<code>v-on=$listeners</code>传入内部组件</li>
-</ul>
+<h3 id="mapState-辅助函数"><a href="#mapState-辅助函数" class="headerlink" title="mapState 辅助函数"></a>mapState 辅助函数</h3><p>当一个组件需要获取多个状态的时候, 将这些状态都声明为计算属性会有些重复和冗余, 为了解决这个问题, 我们可以使用 <code>mapState</code> 辅助函数帮助我们生成计算属性</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在单独构建的版本中辅助函数为 Vuex.mapState</span></span><br><span class="line"><span class="keyword">import</span> &#123; mapState &#125; <span class="keyword">from</span> <span class="string">'vuex'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  computed: mapState(&#123;</span><br><span class="line">    <span class="comment">// 箭头函数更简洁</span></span><br><span class="line">    count: <span class="function"><span class="params">state</span> =&gt;</span> state.count,</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 传字符串参数 count 等同于 state =&gt; state.count</span></span><br><span class="line">    countAlias: <span class="string">'count'</span>,</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 为了能够使用 `this` 获取局部状态，必须使用常规函数</span></span><br><span class="line">    countPlusLocalState(state) &#123;</span><br><span class="line">      <span class="keyword">return</span> state.count + <span class="keyword">this</span>.localCount</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当映射的计算属性名称与 state 的子节点名称相同时, 我们也可以给 <code>mapState</code> 传一个字符串数组</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 映射 this.count 为 store.state.count</span></span><br><span class="line">computed: mapState([<span class="string">'count'</span>])</span><br></pre></td></tr></table></figure>
+
+<h3 id="对象展开运算符"><a href="#对象展开运算符" class="headerlink" title="对象展开运算符"></a>对象展开运算符</h3><p><code>mapState</code> 函数返回的是一个对象, 可以通过展开运算符将它与局部计算属性混合使用</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">computed: &#123;</span><br><span class="line">  <span class="comment">// 使用对象展开运算符将此对象混入到外部对象中</span></span><br><span class="line">  ...mapState([<span class="string">'count'</span>]),</span><br><span class="line">  localComputed() &#123;</span><br><span class="line">    <span class="comment">// ..</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="组件仍保有局部状态"><a href="#组件仍保有局部状态" class="headerlink" title="组件仍保有局部状态"></a>组件仍保有局部状态</h3><p>使用 Vuex 并不意味着需要将所有的状态放入 Vuex. 如果有些状态严格属于单个组件, 最好还是作为组件的局部状态.</p>
 
     </div>
 
@@ -391,13 +333,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/02/24/vue%E9%80%89%E9%A1%B9%E5%85%B6%E4%BB%96/" rel="prev" title="vue选项其他">
-      <i class="fa fa-chevron-left"></i> vue选项其他
+    <a href="/2020/03/17/vuex%E5%AE%89%E8%A3%85%E4%BB%8B%E7%BB%8D%E4%B8%8E%E8%B5%B7%E6%AD%A5/" rel="prev" title="vuex安装介绍与起步">
+      <i class="fa fa-chevron-left"></i> vuex安装介绍与起步
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/02/26/vue%E5%AE%9E%E4%BE%8B%E6%96%B9%E6%B3%95%E6%95%B0%E6%8D%AE/" rel="next" title="vue实例方法数据">
-      vue实例方法数据 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -458,7 +397,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#vm-data"><span class="nav-number">1.</span> <span class="nav-text">vm.$data</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vm-props"><span class="nav-number">2.</span> <span class="nav-text">vm.$props</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vm-el"><span class="nav-number">3.</span> <span class="nav-text">vm.$el</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vm-options"><span class="nav-number">4.</span> <span class="nav-text">vm.$options</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vm-parent"><span class="nav-number">5.</span> <span class="nav-text">vm.$parent</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vm-root"><span class="nav-number">6.</span> <span class="nav-text">vm.$root</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vm-children"><span class="nav-number">7.</span> <span class="nav-text">vm.$children</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vm-slots"><span class="nav-number">8.</span> <span class="nav-text">vm.$slots</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vm-scopedSlots"><span class="nav-number">9.</span> <span class="nav-text">vm.$scopedSlots</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vm-refs"><span class="nav-number">10.</span> <span class="nav-text">vm.$refs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vm-isServer"><span class="nav-number">11.</span> <span class="nav-text">vm.$isServer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vm-attrs"><span class="nav-number">12.</span> <span class="nav-text">vm.$attrs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vm-listeners"><span class="nav-number">13.</span> <span class="nav-text">vm.$listeners</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#State"><span class="nav-number">1.</span> <span class="nav-text">State</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#在组件中获得-Vuex-状态"><span class="nav-number">1.1.</span> <span class="nav-text">在组件中获得 Vuex 状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mapState-辅助函数"><span class="nav-number">1.2.</span> <span class="nav-text">mapState 辅助函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对象展开运算符"><span class="nav-number">1.3.</span> <span class="nav-text">对象展开运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#组件仍保有局部状态"><span class="nav-number">1.4.</span> <span class="nav-text">组件仍保有局部状态</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -728,7 +667,7 @@ NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
       repo: 'Ginger-Jiang.github.io',
       owner: 'Ginger-Jiang',
       admin: ['Ginger-Jiang'],
-      id: '390f317332674b7cf509c2e4b41d7ac4',
+      id: 'fbe3f108ee1dd4a7d0aabc8993bc02f7',
         language: 'zh-CN',
       distractionFreeMode: true
     });
