@@ -213,6 +213,96 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/04/vue-router%E5%91%BD%E5%90%8D%E8%B7%AF%E7%94%B1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head_pic.jpeg">
+      <meta itemprop="name" content="Ginger">
+      <meta itemprop="description" content="未来可期">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ginger">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/04/vue-router%E5%91%BD%E5%90%8D%E8%B7%AF%E7%94%B1/" class="post-title-link" itemprop="url">vue-router命名路由</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-03-04 11:06:50 / 修改时间：11:07:04" itemprop="dateCreated datePublished" datetime="2020-03-04T11:06:50+08:00">2020-03-04</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/VueRoute/" itemprop="url" rel="index">
+                    <span itemprop="name">VueRoute</span>
+                  </a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>432</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="命名路由"><a href="#命名路由" class="headerlink" title="命名路由"></a>命名路由</h2><p>有时候, 通过一个名称来标识一个路由显得更方便一些, 特别是在链接一个路由, 或者是执行一些跳转的时候<br>可以在创建 Router 实例的时候, 在 <code>routes</code> 配置中给某个路由设置名称</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> VueRouter(&#123;</span><br><span class="line">  routes: [</span><br><span class="line">    &#123;</span><br><span class="line">      path: <span class="string">'/user/:userid'</span>,</span><br><span class="line">      name: <span class="string">'user'</span>,</span><br><span class="line">      component: User</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>要链接到一个命名路由, 可以给 <code>router-link</code> 的 <code>to</code> 属性传一个对象</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 声明式 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">router-link</span> <span class="attr">:to</span>=<span class="string">"&#123;name: 'user', params: &#123;userId: 123&#125;&#125;"</span>&gt;</span> <span class="tag">&lt;/<span class="name">router-link</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 编程式</span></span><br><span class="line">router.push(&#123;</span><br><span class="line">  name: <span class="string">'user'</span>,</span><br><span class="line">  params: &#123;</span><br><span class="line">    userId: <span class="number">123</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/04/vue-router%E7%BC%96%E7%A8%8B%E5%BC%8F%E5%AF%BC%E8%88%AA/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1379,121 +1469,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/26/vue%E5%AE%9E%E4%BE%8B%E6%96%B9%E6%B3%95%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/head_pic.jpeg">
-      <meta itemprop="name" content="Ginger">
-      <meta itemprop="description" content="未来可期">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ginger">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/02/26/vue%E5%AE%9E%E4%BE%8B%E6%96%B9%E6%B3%95%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" class="post-title-link" itemprop="url">vue实例方法生命周期</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-02-26 16:16:58 / 修改时间：16:17:14" itemprop="dateCreated datePublished" datetime="2020-02-26T16:16:58+08:00">2020-02-26</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Vue/" itemprop="url" rel="index">
-                    <span itemprop="name">Vue</span>
-                  </a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.1k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="vm-mount-elementOrSeletor"><a href="#vm-mount-elementOrSeletor" class="headerlink" title="vm.$mount([elementOrSeletor])"></a>vm.$mount([elementOrSeletor])</h2><ul>
-<li><p>参数:</p>
-<ul>
-<li>{Element | string} [elementOrSelector]</li>
-<li>{boolean} [hydrating]</li>
-</ul>
-</li>
-<li><p>返回值: <code>vm</code> - 实例自身</p>
-</li>
-<li><p>用法:<br>如果 Vue 实例在实例化时没有收到 el 选项, 则它处于未挂载状态, 没有关联的 DOM 元素.可以使用 <code>vm.$mount()</code> 手动挂载一个未挂载的实例<br>如果没有提供 <code>elementOrSelector</code> 参数, 模板将被渲染为文档之外的元素, 并且你必须使用原生 DOM API 把它插入文档中<br>这个方法返回实例自身, 因而可以链式调用其他实例方法</p>
-</li>
-<li><p>示例:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> MyComponent = Vue.extend(&#123;</span><br><span class="line">  template: <span class="string">'&lt;div&gt;Hi&lt;/div&gt;'</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建并挂载到 #app (会替换 #app)</span></span><br><span class="line"><span class="keyword">new</span> MyComponent().$mount(<span class="string">'#app'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 同上</span></span><br><span class="line"><span class="keyword">new</span> MyComponent(&#123; <span class="attr">el</span>: <span class="string">'#app'</span> &#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 或者，在文档之外渲染并且随后挂载</span></span><br><span class="line"><span class="keyword">var</span> component = <span class="keyword">new</span> MyComponent().$mount()</span><br><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">'app'</span>).appendChild(component.$el)</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h2 id="vm-forceUpdate"><a href="#vm-forceUpdate" class="headerlink" title="vm.$forceUpdate()"></a>vm.$forceUpdate()</h2><ul>
-<li>示例<br>迫使 Vue 实例重新渲染, 注意他仅仅影响实例本身和插入插槽的子组件</li>
-</ul>
-<h2 id="vm-nextTick-callback"><a href="#vm-nextTick-callback" class="headerlink" title="vm.$nextTick([callback])"></a>vm.$nextTick([callback])</h2><ul>
-<li>参数:<ul>
-<li>{Function} [callback]</li>
-</ul>
-</li>
-<li>用法:<br>将回调延迟到下次 DOM 更新循环之后执行. 在修改数据之后立即使用它, 然后等待 DOM 更新. 它跟全局方法 <code>Vue.nextTick</code> 一样, 不同的是回调的 <code>this</code> 自动绑定到调用它的实例上</li>
-<li>示例:<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  methods: &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">    example: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="comment">// 修改数据</span></span><br><span class="line">      <span class="keyword">this</span>.message = <span class="string">'changed'</span></span><br><span class="line">      <span class="comment">// DOM 现在还没更新</span></span><br><span class="line">      <span class="keyword">this</span>.$nextTick(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="comment">// DOM 现在更新了</span></span><br><span class="line">        <span class="comment">// this 绑定到当前实例</span></span><br><span class="line">        <span class="keyword">this</span>.doSomethingElse()</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h2 id="vm-destroy"><a href="#vm-destroy" class="headerlink" title="vm.$destroy()"></a>vm.$destroy()</h2><ul>
-<li>用法:<br>完全销毁一个实例. 清理他与其他实例的链接. 解绑他的全部指令及事件监听器<br>触发 <code>beforeDestroy</code> 和 <code>destroyed</code> 的钩子</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1566,7 +1541,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">77</span>
+          <span class="site-state-item-count">78</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1621,12 +1596,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">163k</span>
+    <span title="站点总字数">165k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">2:28</span>
+    <span title="站点阅读时长">2:30</span>
 </div>
 
 
