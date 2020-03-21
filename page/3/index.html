@@ -213,6 +213,108 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/05/vue-routerHTML5History%E6%A8%A1%E5%BC%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head_pic.jpeg">
+      <meta itemprop="name" content="Ginger">
+      <meta itemprop="description" content="未来可期">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ginger">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/05/vue-routerHTML5History%E6%A8%A1%E5%BC%8F/" class="post-title-link" itemprop="url">vue-routerHTML5History模式</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-03-05 09:16:03 / 修改时间：09:16:18" itemprop="dateCreated datePublished" datetime="2020-03-05T09:16:03+08:00">2020-03-05</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/VueRoute/" itemprop="url" rel="index">
+                    <span itemprop="name">VueRoute</span>
+                  </a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="HTML5-History-模式"><a href="#HTML5-History-模式" class="headerlink" title="HTML5 History 模式"></a>HTML5 History 模式</h2><p><code>vur-router</code> 默认 hash 模式–使用 URL 的 hash 来模拟一个完整的 URL, 于是当 URL 改变时, 页面不会重新加载</p>
+<p>如果不想要很丑的 hash, 我们可以用路由的 history 模式. 这种模式冲分利用 <code>history.pushState</code> API 来完成 URL 跳转而无须重新加载页面</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> VueRouter(&#123;</span><br><span class="line">  mode: <span class="string">'history'</span>,</span><br><span class="line">  routes: [...]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>当你使用 history 模式时, URL 就像正常的 url. 不过 history 模式需要后台配置支持, 需要在后台配置如果 URL 匹配不到任何静态资源, 则应该返回同一个 <code>index.html</code> 页面, 这个页面就是你 app 依赖的页面</p>
+<h2 id="后端配置例子"><a href="#后端配置例子" class="headerlink" title="后端配置例子"></a>后端配置例子</h2><p>Apache</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;IfModule mod_rewrite.c&gt;</span><br><span class="line">  RewriteEngine On</span><br><span class="line">  RewriteBase /</span><br><span class="line">  RewriteRule ^index\.html$ - [L]</span><br><span class="line">  RewriteCond %&#123;REQUEST_FILENAME&#125; !-f</span><br><span class="line">  RewriteCond %&#123;REQUEST_FILENAME&#125; !-d</span><br><span class="line">  RewriteRule . /index.html [L]</span><br><span class="line">&lt;/IfModule&gt;</span><br></pre></td></tr></table></figure>
+
+<p>nginx</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">location</span> / &#123;</span><br><span class="line">  <span class="attribute">try_files</span> <span class="variable">$uri</span> <span class="variable">$uri</span>/ /index.html;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Node.js</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> htpp = <span class="built_in">require</span>(<span class="string">'http'</span>)</span><br><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>)</span><br><span class="line"><span class="keyword">const</span> httpPort = <span class="number">80</span></span><br><span class="line">http</span><br><span class="line">  .createServer(<span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">    fs.readFile(<span class="string">'index.html'</span>, <span class="string">'utf-8'</span>, (err, content) =&gt; &#123;</span><br><span class="line">      <span class="keyword">if</span> (err) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'We cannot open "index.htm" file.'</span>)</span><br><span class="line">      &#125;</span><br><span class="line">      res.writeHead(<span class="number">200</span>, &#123;</span><br><span class="line">        <span class="string">'Content-Type'</span>: <span class="string">'text/html; charser=ytf-8'</span></span><br><span class="line">      &#125;)</span><br><span class="line"></span><br><span class="line">      red.end(content)</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;)</span><br><span class="line">  .listen(httpPort, () =&gt; &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'server listening on: http://localhost:%s'</span>, httpPort)</span><br><span class="line">  &#125;)</span><br></pre></td></tr></table></figure>
+
+<p>基于 Node.js 的 Express，请考虑使用 connect-history-api-fallback 中间件</p>
+<h2 id="警告"><a href="#警告" class="headerlink" title="警告"></a>警告</h2><p>这么做之后, 服务器就不再返回 404 错误页面, 因为对于所有路径都会返回 <code>index.html</code> 文件, 为了避免这种情况, 应该在 Vue 应用里面覆盖所有路由的情况下再给出一个 404 页面</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> VueRouter(&#123;</span><br><span class="line">  mode: <span class="string">'history'</span>,</span><br><span class="line">  routes: [</span><br><span class="line">    &#123;</span><br><span class="line">      path: <span class="string">'*'</span>,</span><br><span class="line">      component: NotFoundComponent</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>或者, 如果使用的是 Node.js 服务器, 可以用服务端路由匹配到来的 URL, 并在没有匹配到路由的时候返回 404, 以实现回退</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/05/vue-router%E8%B7%AF%E7%94%B1%E7%BB%84%E4%BB%B6%E4%BC%A0%E5%8F%82/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1115,103 +1217,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/29/HTML-%E4%BB%80%E4%B9%88%E6%98%AFhtml/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/head_pic.jpeg">
-      <meta itemprop="name" content="Ginger">
-      <meta itemprop="description" content="未来可期">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ginger">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/02/29/HTML-%E4%BB%80%E4%B9%88%E6%98%AFhtml/" class="post-title-link" itemprop="url">HTML_什么是html</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-02-29 15:48:15 / 修改时间：15:48:33" itemprop="dateCreated datePublished" datetime="2020-02-29T15:48:15+08:00">2020-02-29</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/HTML/" itemprop="url" rel="index">
-                    <span itemprop="name">HTML</span>
-                  </a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>855</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="什么是-HTML"><a href="#什么是-HTML" class="headerlink" title="什么是 HTML"></a>什么是 HTML</h2><p>HTML 是用来描述网页的一种语言</p>
-<pre><code>- HTML 指的是超文本标记语言(Hyper Markuo Language)
-- HTMl 是一种标记语言
-- 标记语言是一套标记标签
-- HTML 使用标记标签来描述网页</code></pre><h3 id="W3C-简介"><a href="#W3C-简介" class="headerlink" title="W3C 简介"></a>W3C 简介</h3><pre><code>万维网联盟（英语：World Wide Web Consortium，缩写W3C），又称W3C理事会，是万维网的主要国际标准组织[2]。为半自治非政府组织（quasi-autonomous non-governmental organisation）。</code></pre><h3 id="MDN-简介"><a href="#MDN-简介" class="headerlink" title="MDN 简介"></a>MDN 简介</h3><pre><code>MDN Web Docs（旧称Mozilla Developer Network、Mozilla Developer Center，简称MDN）是一个汇集众多Mozilla基金会产品和网络技术开发文档的免费网站[1]。</code></pre><h2 id="HTMl-标签"><a href="#HTMl-标签" class="headerlink" title="HTMl 标签"></a>HTMl 标签</h2><p>HTML 标记标签通常被称为 HTMl 标签</p>
-<pre><code>- HTML 标签是由**尖括号**包围的关键词
-- HTML 标签通常是**成对**出现的
-- 标签对中的第一个标签是**开始标签**, 第二个标签是**结束标签**
-- 开始和结束标签也被称为**开放标签**和**闭合标签**</code></pre><h2 id="HTML-文档-网页"><a href="#HTML-文档-网页" class="headerlink" title="HTML 文档 = 网页"></a>HTML 文档 = 网页</h2><pre><code>- HTML 文档**描述网页**
-- HTML 文档**包含 HTML 标签** 和纯文本
-- HTML 文档也被称为**网页**</code></pre><h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><p>Web 浏览器的作用是读取 HTML 文档, 并以网页的形式显示出他们. 浏览器不会显示 HTML 标签, 而是使用标签来解释页面的内容</p>
-<pre><code><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span></span><br><span class="line">      第一个标签</span><br><span class="line">    <span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>段落<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure></code></pre><h2 id="例子解释"><a href="#例子解释" class="headerlink" title="例子解释"></a>例子解释</h2><pre><code>- `&lt;html&gt;` 与 `&lt;/html&gt;` 之间的文本描述网页
-- `&lt;body&gt;` 与 `&lt;/body&gt;` 之间的文本是可见的页面内容
-- `&lt;h1&gt;` 与 `&lt;h1&gt;` 之间的文本被显示为标题
-- `&lt;p&gt;` 与 `&lt;/p&gt;` 之间的文本被显示为段落</code></pre>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1284,14 +1289,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">81</span>
+          <span class="site-state-item-count">82</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -1339,12 +1344,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">176k</span>
+    <span title="站点总字数">180k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">2:40</span>
+    <span title="站点阅读时长">2:43</span>
 </div>
 
 

@@ -1,6 +1,159 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>vuex-api</title>
+    <url>/2020/03/21/vuex-api/</url>
+    <content><![CDATA[<h2 id="Vuex-Store"><a href="#Vuex-Store" class="headerlink" title="Vuex.Store"></a>Vuex.Store</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> Vuex <span class="keyword">from</span> <span class="string">'vuex'</span></span><br><span class="line"><span class="keyword">const</span> store = <span class="keyword">new</span> Vuex.Store(&#123; ...options &#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="Vuex-Store-构造器选项"><a href="#Vuex-Store-构造器选项" class="headerlink" title="Vuex.Store 构造器选项"></a>Vuex.Store 构造器选项</h2><h3 id="state"><a href="#state" class="headerlink" title="state"></a>state</h3><ul>
+<li><p>类型: <code>Object | Function</code><br>Vuex store 实例的根 state 对象</p>
+<p>如果传入返回一个对象的函数, 其返回的对象会被用作根 state.</p>
+</li>
+</ul>
+<h3 id="mutations"><a href="#mutations" class="headerlink" title="mutations"></a>mutations</h3><ul>
+<li>类型: <code>{ [type: string ]: Function }</code><br>在 store 上注册 mutation, 处理函数总是接受 <code>state</code> 作为第一个参数(如果定义在模块中, 则为模块的局部状态), <code>payload</code>作为第二个参数</li>
+</ul>
+<h3 id="sctions"><a href="#sctions" class="headerlink" title="sctions"></a>sctions</h3><ul>
+<li><p>类型: <code>{ [type: string]: Function }</code><br>在 store 上注册 action. 处理函数总是接受 <code>context</code> 作为第一个参数, <code>payload</code> 作为第二个参数</p>
+<p><code>context</code> 对象包含以下属性:</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  state, <span class="comment">// 等同于 `store.state`，若在模块中则为局部状态</span></span><br><span class="line">    rootState, <span class="comment">// 等同于 `store.state`，只存在于模块中</span></span><br><span class="line">    commit, <span class="comment">// 等同于 `store.commit`</span></span><br><span class="line">    dispatch, <span class="comment">// 等同于 `store.dispatch`</span></span><br><span class="line">    getters, <span class="comment">// 等同于 `store.getters`</span></span><br><span class="line">    rootGetters <span class="comment">// 等同于 `store.getters`，只存在于模块中</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="getters"><a href="#getters" class="headerlink" title="getters"></a>getters</h3><ul>
+<li><p>类型: <code>{ [type: string ]: Function}</code></p>
+<p>在 store 上注册 getter, getter 方法接受以下参数:</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">state, getters</span><br></pre></td></tr></table></figure>
+
+<p>当定义在一个模块粒时会特别一些:</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">state, <span class="comment">// 如果在模块中定义则为模块的局部状态</span></span><br><span class="line">  getters, <span class="comment">// 等同于 store.getters</span></span><br><span class="line">  rootState, <span class="comment">// 等同于 store.state</span></span><br><span class="line">  rootGetters <span class="comment">// 所有 getters</span></span><br></pre></td></tr></table></figure>
+
+<p>注册的 getter 为暴露为 getters</p>
+</li>
+</ul>
+<h3 id="modules"><a href="#modules" class="headerlink" title="modules"></a>modules</h3><ul>
+<li>类型: <code>Object</code><br>包含了子模块的对象, 会被合并到 store<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  key: &#123;</span><br><span class="line">    state,</span><br><span class="line">    namespaced?,</span><br><span class="line">    mutations,</span><br><span class="line">    actions?,</span><br><span class="line">    getters?,</span><br><span class="line">    modules?</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+与根模块的选项一样, 每个模块也包含 <code>state</code> 和 <code>mutations</code> 选项. 模块的状态使用 <code>key</code> 关联到 store 的根状态. 模块的 mutation 和 getter 只会接受 module 的局部状态作为第一个参数, 而不是根状态, 并且模块的 action 的 <code>context.state</code> 同样指向局部状态</li>
+</ul>
+<h3 id="pulgins"><a href="#pulgins" class="headerlink" title="pulgins"></a>pulgins</h3><ul>
+<li>类型: <code>Array&lt;Function&gt;</code><br>一个数组, 包含应用在 store 上的插件方法. 这些插件直接接受 store 作为唯一参数, 可以监听 mutation 或者提交 mutation</li>
+</ul>
+<h3 id="strict"><a href="#strict" class="headerlink" title="strict"></a>strict</h3><ul>
+<li>类型: <code>Boolean</code></li>
+<li>默认值: <code>false</code><br>使 Vuex store 进入严格模式, 在严格模式下, 任何 mutation 处理函数以外修改 Vuex state 都会抛出错误</li>
+</ul>
+<h3 id="devtools"><a href="#devtools" class="headerlink" title="devtools"></a>devtools</h3><ul>
+<li>类型: <code>Boolean</code><br>为某个特定的 Vuex 实例打开或关闭 devtools. 对于传入 false 的实例来说 Vuex store 不会订阅到 devtools 插件<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  devtools: <span class="literal">false</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="Vuex-Store-实例属性"><a href="#Vuex-Store-实例属性" class="headerlink" title="Vuex.Store 实例属性"></a>Vuex.Store 实例属性</h2><h3 id="state-1"><a href="#state-1" class="headerlink" title="state"></a>state</h3><ul>
+<li>类型: <code>Object</code><br>根状态, 只读</li>
+</ul>
+<h3 id="getters-1"><a href="#getters-1" class="headerlink" title="getters"></a>getters</h3><ul>
+<li>类型: <code>Object</code><br>暴露出注册的 getter, 只读</li>
+</ul>
+<h2 id="Vuex-Store-实例方法"><a href="#Vuex-Store-实例方法" class="headerlink" title="Vuex.Store 实例方法"></a>Vuex.Store 实例方法</h2><h3 id="commit"><a href="#commit" class="headerlink" title="commit"></a>commit</h3><ul>
+<li><p><code>commit(type: string, payload?:any, options?: Object)</code></p>
+</li>
+<li><p><code>commit(mutation: Object, options?: Object)</code></p>
+<p>提交 mutation, <code>options</code> 里可以有 <code>root: true</code>, 它允许在命名空间模块里提交根的 mutation</p>
+</li>
+</ul>
+<h3 id="dispatch"><a href="#dispatch" class="headerlink" title="dispatch"></a>dispatch</h3><ul>
+<li><p><code>dispatch(type: string, payload?:any, options?: Pbject)</code></p>
+</li>
+<li><p><code>dispatch(action: Object, options?: Object)</code></p>
+<p>分发 action. <code>options</code> 里可以有 <code>root: true</code>, 它允许在命名空间模块里分发根的 action. 返回一个解析所有被触发的 action 处理器的 Promise</p>
+</li>
+</ul>
+<h3 id="replaceState"><a href="#replaceState" class="headerlink" title="replaceState"></a>replaceState</h3><ul>
+<li><p><code>replaceState(state: Object)</code></p>
+<p>替换 store 的根状态, 仅用状态合并或时光旅行调试</p>
+</li>
+</ul>
+<h3 id="wathc"><a href="#wathc" class="headerlink" title="wathc"></a>wathc</h3><ul>
+<li><p><code>watch(fn: Function, callback: Funtion, options?: Object): Function</code></p>
+<p>响应式的侦听 <code>fn</code> 的返回值, 当值改变时调用回调函数. <code>fn</code> 接受 store 的 state 作为第一个参数, 其 getter 作为第二个参数, 最后接受一个可选对象参数表示 Vue 的<code>vm.$watch</code>方法的参数</p>
+<p>要停止侦听, 调用此方法返回的函数即可停止侦听</p>
+</li>
+</ul>
+<h3 id="subscribe"><a href="#subscribe" class="headerlink" title="subscribe"></a>subscribe</h3><ul>
+<li><p><code>subscribe(handler: Function):Function</code></p>
+<p>订阅 store 的 mutation. <code>hanlder</code> 会在每个 mutation 完成后调用, 接受 mutation 和经过 mutation 后的状态作为参数</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">store.subscribe(<span class="function">(<span class="params">mutation, state</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(mutation.type)</span><br><span class="line">  <span class="built_in">console</span>.log(mutation.paylaod)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>要停止订阅, 调用此方法返回的函数可停止订阅</p>
+</li>
+</ul>
+<h3 id="subscribeAction"><a href="#subscribeAction" class="headerlink" title="subscribeAction"></a>subscribeAction</h3><ul>
+<li><p><code>subscribeAction(handler: Function): Function</code></p>
+<p>订阅 store 的 action。handler 会在每个 action 分发的时候调用并接收 action 描述和当前的 store 的 state 这两个参数：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">store.subscribeAction(<span class="function">(<span class="params">action, state</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(action.type)</span><br><span class="line">  <span class="built_in">console</span>.log(action.payload)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>要停止订阅，调用此方法返回的函数即可停止订阅。</p>
+<p>从 3.1.0 起，subscribeAction 也可以指定订阅处理函数的被调用时机应该在一个 action 分发之前还是之后 (默认行为是之前)：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">store.subscribeAction(&#123;</span><br><span class="line">  before: <span class="function">(<span class="params">action, state</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`before action <span class="subst">$&#123;action.type&#125;</span>`</span>)</span><br><span class="line">  &#125;,</span><br><span class="line">  after: <span class="function">(<span class="params">action, state</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`after action <span class="subst">$&#123;action.type&#125;</span>`</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="registerModule"><a href="#registerModule" class="headerlink" title="registerModule"></a>registerModule</h3><ul>
+<li><p><code>registerModule(path: string | Array&lt;string&gt;, module: Module, options?: Object)</code></p>
+<p>注册一个动态模块</p>
+<p>options 可以包含 <code>preserveState: true</code> 以允许保留之前的 state。用于服务端渲染。</p>
+</li>
+</ul>
+<h3 id="unregisterModule"><a href="#unregisterModule" class="headerlink" title="unregisterModule"></a>unregisterModule</h3><ul>
+<li><p><code>unregisterModule(path: string | Array&lt;string&gt;)</code></p>
+<p>卸载一个动态模块。</p>
+</li>
+</ul>
+<h3 id="hotUpdate"><a href="#hotUpdate" class="headerlink" title="hotUpdate"></a>hotUpdate</h3><ul>
+<li><p><code>hotUpdate(newOptions: Object)</code></p>
+<p>热替换新的 action 和 mutation。详细介绍</p>
+</li>
+</ul>
+<h2 id="组件绑定的辅助函数"><a href="#组件绑定的辅助函数" class="headerlink" title="组件绑定的辅助函数"></a>组件绑定的辅助函数</h2><h3 id="mapState"><a href="#mapState" class="headerlink" title="mapState"></a>mapState</h3><ul>
+<li><p><code>mapState(namespace?: string, map: Array&lt;string&gt; | Object&lt;string | Function&gt;): Object</code></p>
+<p>为组件创建计算属性以返回 Vuex store 中的状态</p>
+<p>第一个参数是可选的, 可以是一个命名空间字符串</p>
+<p>对象形式的第二个参数的成员可以是一个函数</p>
+</li>
+</ul>
+<h3 id="mapGetters"><a href="#mapGetters" class="headerlink" title="mapGetters"></a>mapGetters</h3><ul>
+<li><p><code>mapGetters(namespace?: string, map: Array&lt;string&gt; | Object&lt;string&gt;): Object</code></p>
+<p>为组件创建计算属性以返回 getter 的返回值</p>
+<p>第一个参数是可选的, 可以是一个命名空间字符串</p>
+</li>
+</ul>
+<h3 id="mapActions"><a href="#mapActions" class="headerlink" title="mapActions"></a>mapActions</h3><ul>
+<li><p><code>mapActions(namespace?: string, map: Array&lt;string&gt; | Object&lt;string | function&gt;): Object</code></p>
+<p>创建组件方法分发 action</p>
+<p>第一个参数是可选的, 可以是一个命名空间字符串</p>
+<p>对象形式的第二个参数的成员可以是一个函数 <code>function(dispatch: function, ...args: any[])</code></p>
+</li>
+</ul>
+<h3 id="mapMutations"><a href="#mapMutations" class="headerlink" title="mapMutations"></a>mapMutations</h3><ul>
+<li><p><code>mapMutations(namespace?: string, map: Array&lt;string&gt; | Object&lt;string | function&gt;): Object</code></p>
+<p>创建组件方法提交的 mutation</p>
+<p>第一个参数是可选的, 可以是一个命名空间字符串</p>
+<p>对象形式的第二个参数的成员可以是一个函数 <code>function(commit: function, ...args: any[])</code></p>
+</li>
+</ul>
+<h3 id="createNamespacedHelpers"><a href="#createNamespacedHelpers" class="headerlink" title="createNamespacedHelpers"></a>createNamespacedHelpers</h3><ul>
+<li><p><code>createNamespacedHelpers(namespace: string): Object</code></p>
+<p>创建基于命名空间的组件绑定辅助函数。其返回一个包含 mapState、mapGetters、mapActions 和 mapMutations 的对象。它们都已经绑定在了给定的命名空间上</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Vue</category>
+      </categories>
+      <tags>
+        <tag>Vue</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>vuex核心-Module</title>
     <url>/2020/03/20/vuex%E6%A0%B8%E5%BF%83-Module/</url>
     <content><![CDATA[<h2 id="Module"><a href="#Module" class="headerlink" title="Module"></a>Module</h2><p>由于使用单一状态树, 应用的所有状态会集中到一个比较大的对象. 当应用变得非常复杂时, store 对象就有可能变得相当臃肿</p>
@@ -108,7 +261,7 @@
 </blockquote>
 ]]></content>
       <categories>
-        <category>Vuew</category>
+        <category>Vue</category>
       </categories>
       <tags>
         <tag>Vue</tag>

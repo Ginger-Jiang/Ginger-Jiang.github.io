@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://yoursite.com').hostname,
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"mac"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: true,
+    pangu: false,
+    comments: {"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"activeClass":"gitalk"},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":5,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="Vuex.Store12import Vuex from &#39;vuex&#39;const store &#x3D; new Vuex.Store(&amp;#123; ...options &amp;#125;)  Vuex.Store 构造器选项state 类型: Object | FunctionVuex store 实例的根 state 对象 如果传入返回一个对象的函数, 其返回的对象会被用作根 state.   mutat">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vuex-api">
+<meta property="og:url" content="http://yoursite.com/2020/03/21/vuex-api/index.html">
+<meta property="og:site_name" content="Ginger">
+<meta property="og:description" content="Vuex.Store12import Vuex from &#39;vuex&#39;const store &#x3D; new Vuex.Store(&amp;#123; ...options &amp;#125;)  Vuex.Store 构造器选项state 类型: Object | FunctionVuex store 实例的根 state 对象 如果传入返回一个对象的函数, 其返回的对象会被用作根 state.   mutat">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-03-21T01:40:44.000Z">
+<meta property="article:modified_time" content="2020-03-21T01:41:01.823Z">
+<meta property="article:author" content="Ginger">
+<meta property="article:tag" content="Vue">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2020/03/21/vuex-api/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>vuex-api | Ginger</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Ginger" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ginger</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">一个前端er~</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/Ginger-Jiang" class="github-corner" title="Ginger GitHub" aria-label="Ginger GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/21/vuex-api/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head_pic.jpeg">
+      <meta itemprop="name" content="Ginger">
+      <meta itemprop="description" content="未来可期">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ginger">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          vuex-api
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-03-21 09:40:44 / 修改时间：09:41:01" itemprop="dateCreated datePublished" datetime="2020-03-21T09:40:44+08:00">2020-03-21</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Vue/" itemprop="url" rel="index">
+                    <span itemprop="name">Vue</span>
+                  </a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="Vuex-Store"><a href="#Vuex-Store" class="headerlink" title="Vuex.Store"></a>Vuex.Store</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Vuex <span class="keyword">from</span> <span class="string">'vuex'</span></span><br><span class="line"><span class="keyword">const</span> store = <span class="keyword">new</span> Vuex.Store(&#123; ...options &#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="Vuex-Store-构造器选项"><a href="#Vuex-Store-构造器选项" class="headerlink" title="Vuex.Store 构造器选项"></a>Vuex.Store 构造器选项</h2><h3 id="state"><a href="#state" class="headerlink" title="state"></a>state</h3><ul>
+<li><p>类型: <code>Object | Function</code><br>Vuex store 实例的根 state 对象</p>
+<p>如果传入返回一个对象的函数, 其返回的对象会被用作根 state.</p>
+</li>
+</ul>
+<h3 id="mutations"><a href="#mutations" class="headerlink" title="mutations"></a>mutations</h3><ul>
+<li>类型: <code>{ [type: string ]: Function }</code><br>在 store 上注册 mutation, 处理函数总是接受 <code>state</code> 作为第一个参数(如果定义在模块中, 则为模块的局部状态), <code>payload</code>作为第二个参数</li>
+</ul>
+<h3 id="sctions"><a href="#sctions" class="headerlink" title="sctions"></a>sctions</h3><ul>
+<li><p>类型: <code>{ [type: string]: Function }</code><br>在 store 上注册 action. 处理函数总是接受 <code>context</code> 作为第一个参数, <code>payload</code> 作为第二个参数</p>
+<p><code>context</code> 对象包含以下属性:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  state, <span class="comment">// 等同于 `store.state`，若在模块中则为局部状态</span></span><br><span class="line">    rootState, <span class="comment">// 等同于 `store.state`，只存在于模块中</span></span><br><span class="line">    commit, <span class="comment">// 等同于 `store.commit`</span></span><br><span class="line">    dispatch, <span class="comment">// 等同于 `store.dispatch`</span></span><br><span class="line">    getters, <span class="comment">// 等同于 `store.getters`</span></span><br><span class="line">    rootGetters <span class="comment">// 等同于 `store.getters`，只存在于模块中</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="getters"><a href="#getters" class="headerlink" title="getters"></a>getters</h3><ul>
+<li><p>类型: <code>{ [type: string ]: Function}</code></p>
+<p>在 store 上注册 getter, getter 方法接受以下参数:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">state, getters</span><br></pre></td></tr></table></figure>
+
+<p>当定义在一个模块粒时会特别一些:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">state, <span class="comment">// 如果在模块中定义则为模块的局部状态</span></span><br><span class="line">  getters, <span class="comment">// 等同于 store.getters</span></span><br><span class="line">  rootState, <span class="comment">// 等同于 store.state</span></span><br><span class="line">  rootGetters <span class="comment">// 所有 getters</span></span><br></pre></td></tr></table></figure>
+
+<p>注册的 getter 为暴露为 getters</p>
+</li>
+</ul>
+<h3 id="modules"><a href="#modules" class="headerlink" title="modules"></a>modules</h3><ul>
+<li>类型: <code>Object</code><br>包含了子模块的对象, 会被合并到 store<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  key: &#123;</span><br><span class="line">    state,</span><br><span class="line">    namespaced?,</span><br><span class="line">    mutations,</span><br><span class="line">    actions?,</span><br><span class="line">    getters?,</span><br><span class="line">    modules?</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+与根模块的选项一样, 每个模块也包含 <code>state</code> 和 <code>mutations</code> 选项. 模块的状态使用 <code>key</code> 关联到 store 的根状态. 模块的 mutation 和 getter 只会接受 module 的局部状态作为第一个参数, 而不是根状态, 并且模块的 action 的 <code>context.state</code> 同样指向局部状态</li>
+</ul>
+<h3 id="pulgins"><a href="#pulgins" class="headerlink" title="pulgins"></a>pulgins</h3><ul>
+<li>类型: <code>Array&lt;Function&gt;</code><br>一个数组, 包含应用在 store 上的插件方法. 这些插件直接接受 store 作为唯一参数, 可以监听 mutation 或者提交 mutation</li>
+</ul>
+<h3 id="strict"><a href="#strict" class="headerlink" title="strict"></a>strict</h3><ul>
+<li>类型: <code>Boolean</code></li>
+<li>默认值: <code>false</code><br>使 Vuex store 进入严格模式, 在严格模式下, 任何 mutation 处理函数以外修改 Vuex state 都会抛出错误</li>
+</ul>
+<h3 id="devtools"><a href="#devtools" class="headerlink" title="devtools"></a>devtools</h3><ul>
+<li>类型: <code>Boolean</code><br>为某个特定的 Vuex 实例打开或关闭 devtools. 对于传入 false 的实例来说 Vuex store 不会订阅到 devtools 插件<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  devtools: <span class="literal">false</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="Vuex-Store-实例属性"><a href="#Vuex-Store-实例属性" class="headerlink" title="Vuex.Store 实例属性"></a>Vuex.Store 实例属性</h2><h3 id="state-1"><a href="#state-1" class="headerlink" title="state"></a>state</h3><ul>
+<li>类型: <code>Object</code><br>根状态, 只读</li>
+</ul>
+<h3 id="getters-1"><a href="#getters-1" class="headerlink" title="getters"></a>getters</h3><ul>
+<li>类型: <code>Object</code><br>暴露出注册的 getter, 只读</li>
+</ul>
+<h2 id="Vuex-Store-实例方法"><a href="#Vuex-Store-实例方法" class="headerlink" title="Vuex.Store 实例方法"></a>Vuex.Store 实例方法</h2><h3 id="commit"><a href="#commit" class="headerlink" title="commit"></a>commit</h3><ul>
+<li><p><code>commit(type: string, payload?:any, options?: Object)</code></p>
+</li>
+<li><p><code>commit(mutation: Object, options?: Object)</code></p>
+<p>提交 mutation, <code>options</code> 里可以有 <code>root: true</code>, 它允许在命名空间模块里提交根的 mutation</p>
+</li>
+</ul>
+<h3 id="dispatch"><a href="#dispatch" class="headerlink" title="dispatch"></a>dispatch</h3><ul>
+<li><p><code>dispatch(type: string, payload?:any, options?: Pbject)</code></p>
+</li>
+<li><p><code>dispatch(action: Object, options?: Object)</code></p>
+<p>分发 action. <code>options</code> 里可以有 <code>root: true</code>, 它允许在命名空间模块里分发根的 action. 返回一个解析所有被触发的 action 处理器的 Promise</p>
+</li>
+</ul>
+<h3 id="replaceState"><a href="#replaceState" class="headerlink" title="replaceState"></a>replaceState</h3><ul>
+<li><p><code>replaceState(state: Object)</code></p>
+<p>替换 store 的根状态, 仅用状态合并或时光旅行调试</p>
+</li>
+</ul>
+<h3 id="wathc"><a href="#wathc" class="headerlink" title="wathc"></a>wathc</h3><ul>
+<li><p><code>watch(fn: Function, callback: Funtion, options?: Object): Function</code></p>
+<p>响应式的侦听 <code>fn</code> 的返回值, 当值改变时调用回调函数. <code>fn</code> 接受 store 的 state 作为第一个参数, 其 getter 作为第二个参数, 最后接受一个可选对象参数表示 Vue 的<code>vm.$watch</code>方法的参数</p>
+<p>要停止侦听, 调用此方法返回的函数即可停止侦听</p>
+</li>
+</ul>
+<h3 id="subscribe"><a href="#subscribe" class="headerlink" title="subscribe"></a>subscribe</h3><ul>
+<li><p><code>subscribe(handler: Function):Function</code></p>
+<p>订阅 store 的 mutation. <code>hanlder</code> 会在每个 mutation 完成后调用, 接受 mutation 和经过 mutation 后的状态作为参数</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">store.subscribe(<span class="function">(<span class="params">mutation, state</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(mutation.type)</span><br><span class="line">  <span class="built_in">console</span>.log(mutation.paylaod)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>要停止订阅, 调用此方法返回的函数可停止订阅</p>
+</li>
+</ul>
+<h3 id="subscribeAction"><a href="#subscribeAction" class="headerlink" title="subscribeAction"></a>subscribeAction</h3><ul>
+<li><p><code>subscribeAction(handler: Function): Function</code></p>
+<p>订阅 store 的 action。handler 会在每个 action 分发的时候调用并接收 action 描述和当前的 store 的 state 这两个参数：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">store.subscribeAction(<span class="function">(<span class="params">action, state</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(action.type)</span><br><span class="line">  <span class="built_in">console</span>.log(action.payload)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>要停止订阅，调用此方法返回的函数即可停止订阅。</p>
+<p>从 3.1.0 起，subscribeAction 也可以指定订阅处理函数的被调用时机应该在一个 action 分发之前还是之后 (默认行为是之前)：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">store.subscribeAction(&#123;</span><br><span class="line">  before: <span class="function">(<span class="params">action, state</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`before action <span class="subst">$&#123;action.type&#125;</span>`</span>)</span><br><span class="line">  &#125;,</span><br><span class="line">  after: <span class="function">(<span class="params">action, state</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`after action <span class="subst">$&#123;action.type&#125;</span>`</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="registerModule"><a href="#registerModule" class="headerlink" title="registerModule"></a>registerModule</h3><ul>
+<li><p><code>registerModule(path: string | Array&lt;string&gt;, module: Module, options?: Object)</code></p>
+<p>注册一个动态模块</p>
+<p>options 可以包含 <code>preserveState: true</code> 以允许保留之前的 state。用于服务端渲染。</p>
+</li>
+</ul>
+<h3 id="unregisterModule"><a href="#unregisterModule" class="headerlink" title="unregisterModule"></a>unregisterModule</h3><ul>
+<li><p><code>unregisterModule(path: string | Array&lt;string&gt;)</code></p>
+<p>卸载一个动态模块。</p>
+</li>
+</ul>
+<h3 id="hotUpdate"><a href="#hotUpdate" class="headerlink" title="hotUpdate"></a>hotUpdate</h3><ul>
+<li><p><code>hotUpdate(newOptions: Object)</code></p>
+<p>热替换新的 action 和 mutation。详细介绍</p>
+</li>
+</ul>
+<h2 id="组件绑定的辅助函数"><a href="#组件绑定的辅助函数" class="headerlink" title="组件绑定的辅助函数"></a>组件绑定的辅助函数</h2><h3 id="mapState"><a href="#mapState" class="headerlink" title="mapState"></a>mapState</h3><ul>
+<li><p><code>mapState(namespace?: string, map: Array&lt;string&gt; | Object&lt;string | Function&gt;): Object</code></p>
+<p>为组件创建计算属性以返回 Vuex store 中的状态</p>
+<p>第一个参数是可选的, 可以是一个命名空间字符串</p>
+<p>对象形式的第二个参数的成员可以是一个函数</p>
+</li>
+</ul>
+<h3 id="mapGetters"><a href="#mapGetters" class="headerlink" title="mapGetters"></a>mapGetters</h3><ul>
+<li><p><code>mapGetters(namespace?: string, map: Array&lt;string&gt; | Object&lt;string&gt;): Object</code></p>
+<p>为组件创建计算属性以返回 getter 的返回值</p>
+<p>第一个参数是可选的, 可以是一个命名空间字符串</p>
+</li>
+</ul>
+<h3 id="mapActions"><a href="#mapActions" class="headerlink" title="mapActions"></a>mapActions</h3><ul>
+<li><p><code>mapActions(namespace?: string, map: Array&lt;string&gt; | Object&lt;string | function&gt;): Object</code></p>
+<p>创建组件方法分发 action</p>
+<p>第一个参数是可选的, 可以是一个命名空间字符串</p>
+<p>对象形式的第二个参数的成员可以是一个函数 <code>function(dispatch: function, ...args: any[])</code></p>
+</li>
+</ul>
+<h3 id="mapMutations"><a href="#mapMutations" class="headerlink" title="mapMutations"></a>mapMutations</h3><ul>
+<li><p><code>mapMutations(namespace?: string, map: Array&lt;string&gt; | Object&lt;string | function&gt;): Object</code></p>
+<p>创建组件方法提交的 mutation</p>
+<p>第一个参数是可选的, 可以是一个命名空间字符串</p>
+<p>对象形式的第二个参数的成员可以是一个函数 <code>function(commit: function, ...args: any[])</code></p>
+</li>
+</ul>
+<h3 id="createNamespacedHelpers"><a href="#createNamespacedHelpers" class="headerlink" title="createNamespacedHelpers"></a>createNamespacedHelpers</h3><ul>
+<li><p><code>createNamespacedHelpers(namespace: string): Object</code></p>
+<p>创建基于命名空间的组件绑定辅助函数。其返回一个包含 mapState、mapGetters、mapActions 和 mapMutations 的对象。它们都已经绑定在了给定的命名空间上</p>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div>请作者喝杯咖啡</div>
+  <button disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.jpg" alt="Ginger 微信支付">
+        <p>微信支付</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Vue/" rel="tag"># Vue</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/20/vuex%E6%A0%B8%E5%BF%83-Module/" rel="prev" title="vuex核心-Module">
+      <i class="fa fa-chevron-left"></i> vuex核心-Module
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Vuex-Store"><span class="nav-number">1.</span> <span class="nav-text">Vuex.Store</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vuex-Store-构造器选项"><span class="nav-number">2.</span> <span class="nav-text">Vuex.Store 构造器选项</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#state"><span class="nav-number">2.1.</span> <span class="nav-text">state</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mutations"><span class="nav-number">2.2.</span> <span class="nav-text">mutations</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sctions"><span class="nav-number">2.3.</span> <span class="nav-text">sctions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#getters"><span class="nav-number">2.4.</span> <span class="nav-text">getters</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#modules"><span class="nav-number">2.5.</span> <span class="nav-text">modules</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pulgins"><span class="nav-number">2.6.</span> <span class="nav-text">pulgins</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#strict"><span class="nav-number">2.7.</span> <span class="nav-text">strict</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#devtools"><span class="nav-number">2.8.</span> <span class="nav-text">devtools</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vuex-Store-实例属性"><span class="nav-number">3.</span> <span class="nav-text">Vuex.Store 实例属性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#state-1"><span class="nav-number">3.1.</span> <span class="nav-text">state</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#getters-1"><span class="nav-number">3.2.</span> <span class="nav-text">getters</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vuex-Store-实例方法"><span class="nav-number">4.</span> <span class="nav-text">Vuex.Store 实例方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#commit"><span class="nav-number">4.1.</span> <span class="nav-text">commit</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dispatch"><span class="nav-number">4.2.</span> <span class="nav-text">dispatch</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#replaceState"><span class="nav-number">4.3.</span> <span class="nav-text">replaceState</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#wathc"><span class="nav-number">4.4.</span> <span class="nav-text">wathc</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#subscribe"><span class="nav-number">4.5.</span> <span class="nav-text">subscribe</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#subscribeAction"><span class="nav-number">4.6.</span> <span class="nav-text">subscribeAction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#registerModule"><span class="nav-number">4.7.</span> <span class="nav-text">registerModule</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#unregisterModule"><span class="nav-number">4.8.</span> <span class="nav-text">unregisterModule</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hotUpdate"><span class="nav-number">4.9.</span> <span class="nav-text">hotUpdate</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#组件绑定的辅助函数"><span class="nav-number">5.</span> <span class="nav-text">组件绑定的辅助函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#mapState"><span class="nav-number">5.1.</span> <span class="nav-text">mapState</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mapGetters"><span class="nav-number">5.2.</span> <span class="nav-text">mapGetters</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mapActions"><span class="nav-number">5.3.</span> <span class="nav-text">mapActions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mapMutations"><span class="nav-number">5.4.</span> <span class="nav-text">mapMutations</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#createNamespacedHelpers"><span class="nav-number">5.5.</span> <span class="nav-text">createNamespacedHelpers</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Ginger"
+      src="/images/head_pic.jpeg">
+  <p class="site-author-name" itemprop="name">Ginger</p>
+  <div class="site-description" itemprop="description">未来可期</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">82</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Ginger-Jiang" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Ginger-Jiang" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:346600397@qq.com" title="E-Mail → mailto:346600397@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ginger</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">180k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">2:43</span>
+</div>
+
+
+  <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+  <span>本站已运行<span id="htmer_time"></span></span>
+  <script>
+      function secondToDate(second) {
+          if (!second) {
+              return 0;
+          }
+          var time = new Array(0, 0, 0, 0, 0);
+          if (second >= 365 * 24 * 3600) {
+              time[0] = parseInt(second / (365 * 24 * 3600));
+              second %= 365 * 24 * 3600;
+          }
+          if (second >= 24 * 3600) {
+              time[1] = parseInt(second / (24 * 3600));
+              second %= 24 * 3600;
+          }
+          if (second >= 3600) {
+              time[2] = parseInt(second / 3600);
+              second %= 3600;
+          }
+          if (second >= 60) {
+              time[3] = parseInt(second / 60);
+              second %= 60;
+          }
+          if (second > 0) {
+              time[4] = second;
+          }
+          return time;
+      }
+      </script>
+
+  <script type="text/javascript" language="javascript">
+      function setTime() {
+          var create_time = Math.round(new Date(Date.UTC(2019, 11, 31)).getTime() / 1000);  //这里设置建站时间
+          var timestamp = Math.round((new Date().getTime() + 8 * 60 * 60 * 1000) / 1000);
+          currentTime = secondToDate((timestamp - create_time));
+          currentTimeHtml = currentTime[0] + '年' + currentTime[1] + '天'
+                  + currentTime[2] + '时' + currentTime[3] + '分' + currentTime[4]
+                  + '秒';
+          document.getElementById("htmer_time").innerHTML = currentTimeHtml;
+      }    setInterval(setTime, 1000);
+
+          $(function(){
+              $("#learnmore").click(function(){
+                  if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
+                      var $target = $(this.hash);
+                      $target = $target.length && $target || $('[name=' + this.hash.slice(1) + ']');
+                      if ($target.length) {
+                          var targetOffset = $target.offset().top;
+                      $('html,body').animate({scrollTop: targetOffset},800);
+                      return false;
+                      }
+                  }
+              });
+          });
+
+  </script> 
+
+
+
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.getAttribute('pjax') !== null) {
+      element.setAttribute('pjax', '');
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+  <script defer src="/js/three.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID: 'a5e0a164b4c7c72f9f25',
+      clientSecret: 'fb8d8950376aa9315351770b8dd8deb9fd66ab2c',
+      repo: 'Ginger-Jiang.github.io',
+      owner: 'Ginger-Jiang',
+      admin: ['Ginger-Jiang'],
+      id: '2044ae9f4c5d6c84e4088cc1f181b849',
+        language: 'zh-CN',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+    </div>
+</body>
+</html>
