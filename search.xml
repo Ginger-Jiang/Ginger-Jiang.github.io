@@ -1,6 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>jQuery源码-总体架构</title>
+    <url>/2020/03/23/jQuery%E6%BA%90%E7%A0%81-%E6%80%BB%E4%BD%93%E6%9E%B6%E6%9E%84/</url>
+    <content><![CDATA[<h1 id="总体架构"><a href="#总体架构" class="headerlink" title="总体架构"></a>总体架构</h1><p>jQuery 的模块总体分为三大部分:</p>
+<ul>
+<li>入口模块(构造 jQuery 对象模块)</li>
+<li>功能模块</li>
+<li>底层支持模块</li>
+</ul>
+<p><img data-src="../images/01%E6%80%BB%E4%BD%93%E6%9E%B6%E6%9E%84/jQuery.png" alt="模块导图"></p>
+<h2 id="入口模块"><a href="#入口模块" class="headerlink" title="入口模块"></a>入口模块</h2><p>入口模块主要功能是构造 jQuery 对象, 如果在调用构造函数 <code>jQuery()</code> 创建 jQuery 对象时传入了选择器表达式, 则会调用功能模块中的选择器 <code>Sizzle</code> 遍历文档, 查找与之匹配的 DOM 元素, 并创建一个包含了这些 DOM 元素引用的 jQuery 对象</p>
+<h2 id="功能模块"><a href="#功能模块" class="headerlink" title="功能模块"></a>功能模块</h2><p>在功能模块中, 事件系统提供了统一的事件绑定、响应、手动触发和移除机制, 它并没有将事件直接绑定到 DOM 元素上, 而是基于数据缓存模块来管理事件</p>
+<h3 id="Ajax-模块"><a href="#Ajax-模块" class="headerlink" title="Ajax 模块"></a>Ajax 模块</h3><p>Ajax 模块允许从服务器上加载数据, 而不用刷新页面, 它基于异步队列模块来管理核触发回调函数</p>
+<h3 id="动画模块"><a href="#动画模块" class="headerlink" title="动画模块"></a>动画模块</h3><p>动画模块用于向网页中添加动画效果, 它基于队列模块来管理和执行动画函数</p>
+<h3 id="属性操作模块"><a href="#属性操作模块" class="headerlink" title="属性操作模块"></a>属性操作模块</h3><p>属性操作模块时用于对 HTML 属性和 DOM 属性进行读取、设置和移除操作</p>
+<h3 id="DOM-遍历模块"><a href="#DOM-遍历模块" class="headerlink" title="DOM 遍历模块"></a>DOM 遍历模块</h3><p>DOM 遍历模块用于在 DOM 树中遍历父元素、子元素和兄弟元素</p>
+<h3 id="DOM-操作模块"><a href="#DOM-操作模块" class="headerlink" title="DOM 操作模块"></a>DOM 操作模块</h3><p>DOM 操作模块用于插入、移除、复制和替换 DOM 元素</p>
+<h3 id="样式操作模块"><a href="#样式操作模块" class="headerlink" title="样式操作模块"></a>样式操作模块</h3><p>样式操作模块用于获取计算样式或设置内联样式</p>
+<h3 id="坐标模块"><a href="#坐标模块" class="headerlink" title="坐标模块"></a>坐标模块</h3><p>坐标模块用于读取或设置 DOM 元素的文档坐标</p>
+<h3 id="尺寸模块"><a href="#尺寸模块" class="headerlink" title="尺寸模块"></a>尺寸模块</h3><p>尺寸模块用于获取 DOM 元素的高度和宽度</p>
+<h2 id="底层支持模块"><a href="#底层支持模块" class="headerlink" title="底层支持模块"></a>底层支持模块</h2><p>底层支持模块又分为诸多子模块:</p>
+<ul>
+<li>工具方法: Utilities</li>
+<li>回调函数列表: Callbacks Object</li>
+<li>异步队列: Deferred Object</li>
+<li>浏览器功能测试: Support</li>
+<li>数据缓存: Data</li>
+<li>队列: Queue</li>
+<li>选择器: Sizzle</li>
+</ul>
+<h3 id="工具方法模块"><a href="#工具方法模块" class="headerlink" title="工具方法模块"></a>工具方法模块</h3><p>工具方法模块提供了一些编程辅助方法, 用于简化对 jQuery 对象、DOM 元素、数组、对象、字符串等的操作, 其他模块都会用到工具方法模块</p>
+<h3 id="回调函数列表模块"><a href="#回调函数列表模块" class="headerlink" title="回调函数列表模块"></a>回调函数列表模块</h3><p>回调函数列表模块用于增强对回调函数的管理，支持添加、移除、触发、锁定、禁用回调函数等功能；</p>
+<h3 id="异步队列模块"><a href="#异步队列模块" class="headerlink" title="异步队列模块"></a>异步队列模块</h3><p>异步队列模块用于解耦异步任务和回调函数, 他再回调列表的基础上为回调函数增加了状态, 并提供多个回调函数列表, 支持传播任意同步或异步回调函数的成功或失败状态</p>
+<h3 id="浏览器功能测试模块"><a href="#浏览器功能测试模块" class="headerlink" title="浏览器功能测试模块"></a>浏览器功能测试模块</h3><p>浏览器功能测试模块提供了针对不同浏览器功能和 bug 的测试结果, 其他模块基于这些测试结果来解决浏览器之间的兼容性问题</p>
+<h3 id="数据缓存模块"><a href="#数据缓存模块" class="headerlink" title="数据缓存模块"></a>数据缓存模块</h3><p>数据缓存模块用于为 DOM 元素和 JavaScript 对象附加任意类型的数据</p>
+<h3 id="队列模块"><a href="#队列模块" class="headerlink" title="队列模块"></a>队列模块</h3><p>队列模块用于管理一组函数, 支持函数的入队核出队操作, 并确保函数按顺序执行, 它基于数据缓存模块实现</p>
+<h3 id="选择器模块"><a href="#选择器模块" class="headerlink" title="选择器模块"></a>选择器模块</h3><p>选择器 <code>sizzle</code> 是一个纯 JavaScript 实现的 CSS 选择器引擎, 用于查找与选择表达式匹配的元素集合</p>
+<h2 id="源码结构"><a href="#源码结构" class="headerlink" title="源码结构"></a>源码结构</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params">window, undefined</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> jQuery = (</span><br><span class="line">    <span class="keyword">var</span> jQuery = (<span class="function"><span class="keyword">function</span>(<span class="params">selector, context</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">new</span> jQuery.fn.init(selector, context, rootjQuery)</span><br><span class="line">    &#125;)()</span><br><span class="line">    <span class="keyword">return</span> jQuery</span><br><span class="line">  )()</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 工具方法</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 回调函数列表</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 异步队列</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 浏览器功能测试</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 数据缓存</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 属性操作</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 事件系统</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 选择器</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// DOM 遍历</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// DOM 操作</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 样式操作 CSS</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 异步请求</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 动画</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 坐标</span></span><br><span class="line">  <span class="built_in">window</span>.jQuery = <span class="built_in">window</span>.$ = jQuery</span><br><span class="line">&#125;)(<span class="built_in">window</span>)</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>jQuery源码</category>
+      </categories>
+      <tags>
+        <tag>jQuery源码</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>vuex-api</title>
     <url>/2020/03/21/vuex-api/</url>
     <content><![CDATA[<h2 id="Vuex-Store"><a href="#Vuex-Store" class="headerlink" title="Vuex.Store"></a>Vuex.Store</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> Vuex <span class="keyword">from</span> <span class="string">'vuex'</span></span><br><span class="line"><span class="keyword">const</span> store = <span class="keyword">new</span> Vuex.Store(&#123; ...options &#125;)</span><br></pre></td></tr></table></figure>

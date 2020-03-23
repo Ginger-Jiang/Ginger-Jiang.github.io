@@ -213,6 +213,124 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/23/jQuery%E6%BA%90%E7%A0%81-%E6%80%BB%E4%BD%93%E6%9E%B6%E6%9E%84/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head_pic.jpeg">
+      <meta itemprop="name" content="Ginger">
+      <meta itemprop="description" content="未来可期">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ginger">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/23/jQuery%E6%BA%90%E7%A0%81-%E6%80%BB%E4%BD%93%E6%9E%B6%E6%9E%84/" class="post-title-link" itemprop="url">jQuery源码-总体架构</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-03-23 14:47:26 / 修改时间：14:47:59" itemprop="dateCreated datePublished" datetime="2020-03-23T14:47:26+08:00">2020-03-23</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/jQuery%E6%BA%90%E7%A0%81/" itemprop="url" rel="index">
+                    <span itemprop="name">jQuery源码</span>
+                  </a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="总体架构"><a href="#总体架构" class="headerlink" title="总体架构"></a>总体架构</h1><p>jQuery 的模块总体分为三大部分:</p>
+<ul>
+<li>入口模块(构造 jQuery 对象模块)</li>
+<li>功能模块</li>
+<li>底层支持模块</li>
+</ul>
+<p><img data-src="../images/01%E6%80%BB%E4%BD%93%E6%9E%B6%E6%9E%84/jQuery.png" alt="模块导图"></p>
+<h2 id="入口模块"><a href="#入口模块" class="headerlink" title="入口模块"></a>入口模块</h2><p>入口模块主要功能是构造 jQuery 对象, 如果在调用构造函数 <code>jQuery()</code> 创建 jQuery 对象时传入了选择器表达式, 则会调用功能模块中的选择器 <code>Sizzle</code> 遍历文档, 查找与之匹配的 DOM 元素, 并创建一个包含了这些 DOM 元素引用的 jQuery 对象</p>
+<h2 id="功能模块"><a href="#功能模块" class="headerlink" title="功能模块"></a>功能模块</h2><p>在功能模块中, 事件系统提供了统一的事件绑定、响应、手动触发和移除机制, 它并没有将事件直接绑定到 DOM 元素上, 而是基于数据缓存模块来管理事件</p>
+<h3 id="Ajax-模块"><a href="#Ajax-模块" class="headerlink" title="Ajax 模块"></a>Ajax 模块</h3><p>Ajax 模块允许从服务器上加载数据, 而不用刷新页面, 它基于异步队列模块来管理核触发回调函数</p>
+<h3 id="动画模块"><a href="#动画模块" class="headerlink" title="动画模块"></a>动画模块</h3><p>动画模块用于向网页中添加动画效果, 它基于队列模块来管理和执行动画函数</p>
+<h3 id="属性操作模块"><a href="#属性操作模块" class="headerlink" title="属性操作模块"></a>属性操作模块</h3><p>属性操作模块时用于对 HTML 属性和 DOM 属性进行读取、设置和移除操作</p>
+<h3 id="DOM-遍历模块"><a href="#DOM-遍历模块" class="headerlink" title="DOM 遍历模块"></a>DOM 遍历模块</h3><p>DOM 遍历模块用于在 DOM 树中遍历父元素、子元素和兄弟元素</p>
+<h3 id="DOM-操作模块"><a href="#DOM-操作模块" class="headerlink" title="DOM 操作模块"></a>DOM 操作模块</h3><p>DOM 操作模块用于插入、移除、复制和替换 DOM 元素</p>
+<h3 id="样式操作模块"><a href="#样式操作模块" class="headerlink" title="样式操作模块"></a>样式操作模块</h3><p>样式操作模块用于获取计算样式或设置内联样式</p>
+<h3 id="坐标模块"><a href="#坐标模块" class="headerlink" title="坐标模块"></a>坐标模块</h3><p>坐标模块用于读取或设置 DOM 元素的文档坐标</p>
+<h3 id="尺寸模块"><a href="#尺寸模块" class="headerlink" title="尺寸模块"></a>尺寸模块</h3><p>尺寸模块用于获取 DOM 元素的高度和宽度</p>
+<h2 id="底层支持模块"><a href="#底层支持模块" class="headerlink" title="底层支持模块"></a>底层支持模块</h2><p>底层支持模块又分为诸多子模块:</p>
+<ul>
+<li>工具方法: Utilities</li>
+<li>回调函数列表: Callbacks Object</li>
+<li>异步队列: Deferred Object</li>
+<li>浏览器功能测试: Support</li>
+<li>数据缓存: Data</li>
+<li>队列: Queue</li>
+<li>选择器: Sizzle</li>
+</ul>
+<h3 id="工具方法模块"><a href="#工具方法模块" class="headerlink" title="工具方法模块"></a>工具方法模块</h3><p>工具方法模块提供了一些编程辅助方法, 用于简化对 jQuery 对象、DOM 元素、数组、对象、字符串等的操作, 其他模块都会用到工具方法模块</p>
+<h3 id="回调函数列表模块"><a href="#回调函数列表模块" class="headerlink" title="回调函数列表模块"></a>回调函数列表模块</h3><p>回调函数列表模块用于增强对回调函数的管理，支持添加、移除、触发、锁定、禁用回调函数等功能；</p>
+<h3 id="异步队列模块"><a href="#异步队列模块" class="headerlink" title="异步队列模块"></a>异步队列模块</h3><p>异步队列模块用于解耦异步任务和回调函数, 他再回调列表的基础上为回调函数增加了状态, 并提供多个回调函数列表, 支持传播任意同步或异步回调函数的成功或失败状态</p>
+<h3 id="浏览器功能测试模块"><a href="#浏览器功能测试模块" class="headerlink" title="浏览器功能测试模块"></a>浏览器功能测试模块</h3><p>浏览器功能测试模块提供了针对不同浏览器功能和 bug 的测试结果, 其他模块基于这些测试结果来解决浏览器之间的兼容性问题</p>
+<h3 id="数据缓存模块"><a href="#数据缓存模块" class="headerlink" title="数据缓存模块"></a>数据缓存模块</h3><p>数据缓存模块用于为 DOM 元素和 JavaScript 对象附加任意类型的数据</p>
+<h3 id="队列模块"><a href="#队列模块" class="headerlink" title="队列模块"></a>队列模块</h3><p>队列模块用于管理一组函数, 支持函数的入队核出队操作, 并确保函数按顺序执行, 它基于数据缓存模块实现</p>
+<h3 id="选择器模块"><a href="#选择器模块" class="headerlink" title="选择器模块"></a>选择器模块</h3><p>选择器 <code>sizzle</code> 是一个纯 JavaScript 实现的 CSS 选择器引擎, 用于查找与选择表达式匹配的元素集合</p>
+<h2 id="源码结构"><a href="#源码结构" class="headerlink" title="源码结构"></a>源码结构</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params">window, undefined</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> jQuery = (</span><br><span class="line">    <span class="keyword">var</span> jQuery = (<span class="function"><span class="keyword">function</span>(<span class="params">selector, context</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">new</span> jQuery.fn.init(selector, context, rootjQuery)</span><br><span class="line">    &#125;)()</span><br><span class="line">    <span class="keyword">return</span> jQuery</span><br><span class="line">  )()</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 工具方法</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 回调函数列表</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 异步队列</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 浏览器功能测试</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 数据缓存</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 属性操作</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 事件系统</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 选择器</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// DOM 遍历</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// DOM 操作</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 样式操作 CSS</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 异步请求</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 动画</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 坐标</span></span><br><span class="line">  <span class="built_in">window</span>.jQuery = <span class="built_in">window</span>.$ = jQuery</span><br><span class="line">&#125;)(<span class="built_in">window</span>)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/21/vuex-api/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1505,129 +1623,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/11/vue-router%E6%9E%84%E5%BB%BA%E9%80%89%E9%A1%B9/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/head_pic.jpeg">
-      <meta itemprop="name" content="Ginger">
-      <meta itemprop="description" content="未来可期">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ginger">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/11/vue-router%E6%9E%84%E5%BB%BA%E9%80%89%E9%A1%B9/" class="post-title-link" itemprop="url">vue-router构建选项</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-03-11 14:51:56 / 修改时间：14:52:06" itemprop="dateCreated datePublished" datetime="2020-03-11T14:51:56+08:00">2020-03-11</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/VueRoute/" itemprop="url" rel="index">
-                    <span itemprop="name">VueRoute</span>
-                  </a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.4k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="routes"><a href="#routes" class="headerlink" title="routes"></a>routes</h2><ul>
-<li><p>类型: Array<RouteConfig><br>RouteConfig 的类型定义:</p>
-<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> RouteConfig = &#123;</span><br><span class="line">  path: <span class="built_in">string</span>,</span><br><span class="line">  component?: Component,</span><br><span class="line">  name?: <span class="built_in">string</span>, <span class="comment">// 命名路由</span></span><br><span class="line">  components?: &#123; [name: <span class="built_in">string</span>]: Component &#125;, <span class="comment">// 命名视图组件</span></span><br><span class="line">  redirect?: <span class="built_in">string</span> | Location | <span class="built_in">Function</span>,</span><br><span class="line">  props?: <span class="built_in">boolean</span> | <span class="built_in">Object</span> | <span class="built_in">Function</span>,</span><br><span class="line">  alias?: <span class="built_in">string</span> | <span class="built_in">Array</span>&lt;<span class="built_in">string</span>&gt;,</span><br><span class="line">  children?: <span class="built_in">Array</span>&lt;RouteConfig&gt;, <span class="comment">// 嵌套路由</span></span><br><span class="line">  beforeEnter?: <span class="function">(<span class="params">to: Route, <span class="keyword">from</span>: Route, next: <span class="built_in">Function</span></span>) =&gt;</span> <span class="built_in">void</span>,</span><br><span class="line">  meta?: <span class="built_in">any</span>,</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 2.6.0+</span></span><br><span class="line">  caseSensitive?: <span class="built_in">boolean</span>, <span class="comment">// 匹配规则是否大小写敏感？(默认值：false)</span></span><br><span class="line">  pathToRegexpOptions?: <span class="built_in">Object</span> <span class="comment">// 编译正则的选项</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h2 id="mode"><a href="#mode" class="headerlink" title="mode"></a>mode</h2><ul>
-<li>类型: string</li>
-<li>默认值: hash | abstract</li>
-<li>可选值: hash | history | abstract<br>配置路由模式:<ul>
-<li>hash: 使用 URL hash 值来作路由. 支持所有浏览器, 包括不支持 HTML5 History Api 的浏览器</li>
-<li>history: 依赖 HTML5 History API 和服务器配置</li>
-<li>abstract: 支持所有 JavaScript 运行环境, 如 Node.js 服务器端, 如果发现没有浏览器的 API, 路由会自动强制进入这个模式</li>
-</ul>
-</li>
-</ul>
-<h2 id="base"><a href="#base" class="headerlink" title="base"></a>base</h2><ul>
-<li>类型: string</li>
-<li>默认值: ‘/‘<br>应用的基路径, 例如, 如果整个单页应用服务在 <code>/app/</code> 下, 然后 base 就应该设为 <code>/app/</code></li>
-</ul>
-<h2 id="linkActiveClass"><a href="#linkActiveClass" class="headerlink" title="linkActiveClass"></a>linkActiveClass</h2><ul>
-<li>类型: string</li>
-<li>默认值: router-link-active<br>全局配置 <code>&lt;router-link&gt;</code> 默认的激活 class</li>
-</ul>
-<h2 id="linkExactActiveClass"><a href="#linkExactActiveClass" class="headerlink" title="linkExactActiveClass"></a>linkExactActiveClass</h2><ul>
-<li>类型: string</li>
-<li>默认值: router-link-exact-active<br>全局配置 <code>&lt;router-link&gt;</code> 默认的精确激活的 class</li>
-</ul>
-<h2 id="scrollBehavior"><a href="#scrollBehavior" class="headerlink" title="scrollBehavior"></a>scrollBehavior</h2><ul>
-<li><p>类型: Function<br>签名:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">type PositionDescriptor &#x3D;</span><br><span class="line">&#123; x: number, y: number &#125; |</span><br><span class="line">&#123; selector: string &#125; |</span><br><span class="line">?&#123;&#125;</span><br><span class="line"></span><br><span class="line">type scrollBehaviorHandler &#x3D; (</span><br><span class="line">to: Route,</span><br><span class="line">from: Route,</span><br><span class="line">savedPosition?: &#123; x: number, y: number &#125;</span><br><span class="line">) &#x3D;&gt; PositionDescriptor | Promise&lt;PositionDescriptor&gt;</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h2 id="parseQuery-stringifyQuery"><a href="#parseQuery-stringifyQuery" class="headerlink" title="parseQuery / stringifyQuery"></a>parseQuery / stringifyQuery</h2><ul>
-<li>类型: Function<br>提供自定义查询字符串的解析/反解析函数</li>
-</ul>
-<h2 id="fallback"><a href="#fallback" class="headerlink" title="fallback"></a>fallback</h2><ul>
-<li>类型: boolean<br>当浏览器不支持 <code>history.pushState</code> 控制路由是否应该回退到 hash 模式. 默认为 <code>true</code></li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1700,20 +1695,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">82</span>
+          <span class="site-state-item-count">83</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">8</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -1755,12 +1750,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">180k</span>
+    <span title="站点总字数">181k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">2:43</span>
+    <span title="站点阅读时长">2:45</span>
 </div>
 
 

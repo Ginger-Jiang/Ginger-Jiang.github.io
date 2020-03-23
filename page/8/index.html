@@ -213,6 +213,109 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/25/%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head_pic.jpeg">
+      <meta itemprop="name" content="Ginger">
+      <meta itemprop="description" content="未来可期">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ginger">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/01/25/%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/" class="post-title-link" itemprop="url">原型模式</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-01-25 22:09:38 / 修改时间：22:09:58" itemprop="dateCreated datePublished" datetime="2020-01-25T22:09:38+08:00">2020-01-25</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" itemprop="url" rel="index">
+                    <span itemprop="name">设计模式</span>
+                  </a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="原型模式"><a href="#原型模式" class="headerlink" title="原型模式"></a>原型模式</h2><blockquote>
+<p>在 JavaScript 中, Object.create() 是对原型模式的最好实现.</p>
+</blockquote>
+<h2 id="prototype-原型模式的应用"><a href="#prototype-原型模式的应用" class="headerlink" title="prototype 原型模式的应用"></a>prototype 原型模式的应用</h2><blockquote>
+<p>JavaScript 中不存在 class , ES6 中 class 也只是原型继承的语法糖, 在 js 中我们常用的是通过 prototype 模拟类来得到类的实例, 实现实例间数据、方法的共享.</p>
+</blockquote>
+<h2 id="JavaScript-的原型与原型链"><a href="#JavaScript-的原型与原型链" class="headerlink" title="JavaScript 的原型与原型链"></a>JavaScript 的原型与原型链</h2><p>在 JavaScript 中, 创建一个对象有多种方式</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 通过 Object 构造函数创建对象</span></span><br><span class="line"><span class="keyword">const</span> obj = <span class="keyword">new</span> <span class="built_in">Object</span>(&#123;&#125;)</span><br><span class="line"><span class="comment">// 通过 create 创建对象</span></span><br><span class="line"><span class="keyword">const</span> obj2 = <span class="built_in">Object</span>.create(&#123;&#125;)</span><br><span class="line"><span class="comment">// 字面量方式创建对象</span></span><br><span class="line"><span class="keyword">const</span> obj3 = &#123;<span class="attr">name</span>: <span class="string">'Ginger'</span>&#125;</span><br><span class="line"><span class="comment">// ...</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>在 JavaScript 中每一个构造函数都有一个 prototype 属性, 该原型对象指向构造函数的原型对象, 原型对象中 construtor 指回该构造函数</li>
+<li>每个实例对象, 都有一个 <code>__proto__</code> 属性, 该属性指向创建该实例对象的构造函数的原型对象</li>
+</ul>
+<p>通过 new 关键字, 获得 Fn 构造函数的实例对象, f 实例对象上并没有 hi 方法, 但是我们可以调用成功, 便是因为原型链的存在.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Fn</span>(<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name = name</span><br><span class="line">  <span class="keyword">this</span>.age = age</span><br><span class="line">&#125;</span><br><span class="line">Fn.prototype.hi = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'Hi'</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> f = <span class="keyword">new</span> Fn()</span><br><span class="line">f.hi() <span class="comment">// Hi</span></span><br><span class="line"><span class="built_in">console</span>.log(f.__proto__ === Fn.prototype) <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="一个简单的深拷贝"><a href="#一个简单的深拷贝" class="headerlink" title="一个简单的深拷贝"></a>一个简单的深拷贝</h2><p>通过两个 api 对 obj 对象进行拷贝, 得到 obj2 改变 obj2 后, obj 内容未发生改变, 但是如果 obj 不是一个严格 json 格式的数据, 他的值是还是一个对象的时候, 这个就无法处理了</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">  name:<span class="string">'Ginger'</span>,</span><br><span class="line">  age:<span class="number">24</span>,</span><br><span class="line">  web:[<span class="string">'html'</span>, <span class="string">'js'</span>, <span class="string">'css'</span>]</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> obj2 = <span class="built_in">JSON</span>.parse(<span class="built_in">JSON</span>.stringify(obj))</span><br><span class="line">obj2.web.splice(<span class="number">0</span>,<span class="number">1</span>)</span><br><span class="line"><span class="built_in">console</span>.log(obj.web) <span class="comment">// ['html', 'js', 'css']</span></span><br><span class="line"><span class="built_in">console</span>.log(obj2.web) <span class="comment">// ["js", "css"]</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="另外一个深拷贝"><a href="#另外一个深拷贝" class="headerlink" title="另外一个深拷贝"></a>另外一个深拷贝</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">DeepClone</span>(<span class="params">obj</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 边界判断</span></span><br><span class="line">  <span class="keyword">if</span>(<span class="keyword">typeof</span> obj !== <span class="string">'object'</span> || obj === <span class="literal">null</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> obj</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 初始化结果值</span></span><br><span class="line">  <span class="keyword">let</span> res = &#123;&#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 如果是数组</span></span><br><span class="line">  <span class="keyword">if</span>(obj.constructor === <span class="string">'array'</span>) &#123;</span><br><span class="line">    res = []</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">let</span> i <span class="keyword">in</span> obj) &#123;</span><br><span class="line">    <span class="keyword">if</span>(obj.hasOwnProperty(i)) &#123;</span><br><span class="line">      <span class="comment">// 如果值是对象 递归调用</span></span><br><span class="line">      res[i] = DeepClone(obj[i])</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> res</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/25/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1144,134 +1247,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/30/myForm/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/head_pic.jpeg">
-      <meta itemprop="name" content="Ginger">
-      <meta itemprop="description" content="未来可期">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ginger">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/12/30/myForm/" class="post-title-link" itemprop="url">实现一个简单的 Form 表单组件</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2019-12-30 14:26:20 / 修改时间：15:10:21" itemprop="dateCreated datePublished" datetime="2019-12-30T14:26:20+08:00">2019-12-30</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Vue/" itemprop="url" rel="index">
-                    <span itemprop="name">Vue</span>
-                  </a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>3.3k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>3 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>&emsp;&emsp;本文主要通过实现一个简单的 Form 组件来学习 Vue 中相关知识点.</p>
-<h3 id="相关知识点"><a href="#相关知识点" class="headerlink" title="相关知识点"></a>相关知识点</h3><ul>
-<li>v-model 指令的实质</li>
-<li>父子组件定义属性传值 props $emit</li>
-<li>子孙组件传值 provide inject</li>
-<li>slot 插槽</li>
-<li>在生命周期中监听自定义事件</li>
-</ul>
-<h3 id="需求分析"><a href="#需求分析" class="headerlink" title="需求分析"></a>需求分析</h3><ul>
-<li>数据双向绑定</li>
-<li>单个规则校验</li>
-<li>label</li>
-<li>error 错误提示</li>
-<li>数据获取</li>
-<li>数据传递</li>
-<li>全局校验</li>
-</ul>
-<h3 id="组件拆分-单一性"><a href="#组件拆分-单一性" class="headerlink" title="组件拆分(单一性)"></a>组件拆分(单一性)</h3><ul>
-<li>Input 组件</li>
-<li>FormItem 组件</li>
-<li>Form 组件</li>
-</ul>
-<h3 id="组件功能划分"><a href="#组件功能划分" class="headerlink" title="组件功能划分"></a>组件功能划分</h3><hr>
-<blockquote>
-<p>Input 组件</p>
-</blockquote>
-<p>数据双向绑定<br>触发规则校验</p>
-<hr>
-<blockquote>
-<p>FormItme 组件</p>
-</blockquote>
-<p>label<br>prop<br>error</p>
-<hr>
-<blockquote>
-<p>Form 组件</p>
-</blockquote>
-<p>数据模型持有<br>校验规则持有<br>数据传递<br>全局校验</p>
-<hr>
-<h3 id="功能实现"><a href="#功能实现" class="headerlink" title="功能实现"></a>功能实现</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Input 组件</span></span><br><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;input type=<span class="string">"text"</span> :value=<span class="string">"value"</span> @input=<span class="string">"onInput"</span> /&gt;</span><br><span class="line">  &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 职能</span></span><br><span class="line"><span class="comment"> * 1.双向绑定</span></span><br><span class="line"><span class="comment"> * 2.触发校验</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  name: <span class="string">'KInput'</span>,</span><br><span class="line">  props: &#123;</span><br><span class="line">    value: &#123;</span><br><span class="line">      type: <span class="built_in">String</span>,</span><br><span class="line">      <span class="keyword">default</span>: <span class="string">''</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    onInput(e) &#123;</span><br><span class="line">      <span class="comment">// v-model 监听 input</span></span><br><span class="line">      <span class="keyword">this</span>.$emit(<span class="string">'input'</span>, e.target.value)</span><br><span class="line">      <span class="comment">// 触发校验</span></span><br><span class="line">      <span class="keyword">this</span>.$parent.$emit(<span class="string">'validate'</span>)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// FormItem 组件</span></span><br><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;label v-<span class="keyword">if</span>=<span class="string">"label"</span>&gt;&#123;&#123; label &#125;&#125;&lt;<span class="regexp">/label&gt;</span></span><br><span class="line"><span class="regexp">    &lt;slot /</span>&gt;</span><br><span class="line">    &lt;span v-show=<span class="string">"error"</span>&gt;&#123;&#123; error &#125;&#125;&lt;<span class="regexp">/span&gt;</span></span><br><span class="line"><span class="regexp">  &lt;/</span>div&gt;</span><br><span class="line">&lt;<span class="regexp">/template&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">&lt;script&gt;</span></span><br><span class="line"><span class="regexp">/</span>**</span><br><span class="line"> * 职能</span><br><span class="line"> * <span class="number">1.</span>校验</span><br><span class="line"> * <span class="number">2.</span>label</span><br><span class="line"> * <span class="number">3.</span>error</span><br><span class="line"> *<span class="regexp">/</span></span><br><span class="line"><span class="regexp">import Schema from 'async-validator'</span></span><br><span class="line"><span class="regexp">export default &#123;</span></span><br><span class="line"><span class="regexp">  inject: ['form'],</span></span><br><span class="line"><span class="regexp">  props: &#123;</span></span><br><span class="line"><span class="regexp">    label: &#123;</span></span><br><span class="line"><span class="regexp">      type: String,</span></span><br><span class="line"><span class="regexp">      default: ''</span></span><br><span class="line"><span class="regexp">    &#125;,</span></span><br><span class="line"><span class="regexp">    prop: &#123;</span></span><br><span class="line"><span class="regexp">      type: String,</span></span><br><span class="line"><span class="regexp">      default: ''</span></span><br><span class="line"><span class="regexp">    &#125;</span></span><br><span class="line"><span class="regexp">  &#125;,</span></span><br><span class="line"><span class="regexp">  data() &#123;</span></span><br><span class="line"><span class="regexp">    return &#123;</span></span><br><span class="line"><span class="regexp">      error: ''</span></span><br><span class="line"><span class="regexp">    &#125;</span></span><br><span class="line"><span class="regexp">  &#125;,</span></span><br><span class="line"><span class="regexp">  mounted() &#123;</span></span><br><span class="line"><span class="regexp">    this.$on('validate', () =&gt; &#123;</span></span><br><span class="line"><span class="regexp">      this.validate()</span></span><br><span class="line"><span class="regexp">    &#125;)</span></span><br><span class="line"><span class="regexp">  &#125;,</span></span><br><span class="line"><span class="regexp">  methods: &#123;</span></span><br><span class="line"><span class="regexp">    validate() &#123;</span></span><br><span class="line"><span class="regexp">      /</span>**</span><br><span class="line">       * 引入 sync-validate 插件</span><br><span class="line">       * 获取校验规则与校验值</span><br><span class="line">       *<span class="regexp">/</span></span><br><span class="line"><span class="regexp">      const value = this.form.model[this.prop]</span></span><br><span class="line"><span class="regexp">      const rule = this.form.rules[this.prop]</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">      const schema = new Schema(&#123; [this.prop]: rule &#125;)</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">      return schema.validate(</span></span><br><span class="line"><span class="regexp">        &#123; [this.prop]: value.trim() &#125;,</span></span><br><span class="line"><span class="regexp">        errors =&gt; (this.error = errors ? errors[0].message : '')</span></span><br><span class="line"><span class="regexp">      )</span></span><br><span class="line"><span class="regexp">    &#125;</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp">&lt;/</span>script&gt;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Form 组件</span></span><br><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;slot /&gt;</span><br><span class="line">  &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 职能</span></span><br><span class="line"><span class="comment"> * 1.数据持有丶传递</span></span><br><span class="line"><span class="comment"> * 2.全局校验</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  props: &#123;</span><br><span class="line">    model: &#123;</span><br><span class="line">      type: <span class="built_in">Object</span></span><br><span class="line">    &#125;,</span><br><span class="line">    rules: &#123;</span><br><span class="line">      type: <span class="built_in">Object</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  provide() &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      form: <span class="keyword">this</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    validate(cb) &#123;</span><br><span class="line">      <span class="comment">/**</span></span><br><span class="line"><span class="comment">       * 全局校验</span></span><br><span class="line"><span class="comment">       * 获取所有子组件</span></span><br><span class="line"><span class="comment">       * 找到带有prop验证的</span></span><br><span class="line"><span class="comment">       * 调用子组件自身的校验方法</span></span><br><span class="line"><span class="comment">       */</span></span><br><span class="line">      <span class="keyword">const</span> tasks = <span class="keyword">this</span>.$children</span><br><span class="line">        .filter(<span class="function"><span class="params">item</span> =&gt;</span> item.prop)</span><br><span class="line">        .map(<span class="function"><span class="params">item</span> =&gt;</span> item.validate())</span><br><span class="line"></span><br><span class="line">      <span class="built_in">Promise</span>.all(tasks)</span><br><span class="line">        .then(<span class="function"><span class="params">()</span> =&gt;</span> cb(<span class="literal">true</span>))</span><br><span class="line">        .catch(<span class="function"><span class="params">()</span> =&gt;</span> cb(<span class="literal">false</span>))</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 测试</span></span><br><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;KFrom ref=<span class="string">"form"</span> :model=<span class="string">"model"</span> :rules=<span class="string">"rules"</span>&gt;</span><br><span class="line">      &lt;KFormitem lable=<span class="string">"用户名"</span> prop=<span class="string">"uname"</span>&gt;</span><br><span class="line">        &lt;KInput v-model=<span class="string">"model.uname"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">KInput</span>&gt;</span></span></span><br><span class="line">      &lt;<span class="regexp">/KFormitem&gt;</span></span><br><span class="line"><span class="regexp">      &lt;KFormitem lable="密码" prop="pwd"&gt;</span></span><br><span class="line"><span class="regexp">        &lt;KInput v-model="model.pwd"&gt;&lt;/</span>KInput&gt;</span><br><span class="line">      &lt;<span class="regexp">/KFormitem&gt;</span></span><br><span class="line"><span class="regexp">      &lt;KFormitem&gt;</span></span><br><span class="line"><span class="regexp">        &lt;button @click="submit"&gt;校验&lt;/</span>button&gt;</span><br><span class="line">      &lt;<span class="regexp">/KFormitem&gt;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>KFrom&gt;</span><br><span class="line">  &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">import</span> KFrom <span class="keyword">from</span> <span class="string">'./KForm'</span></span><br><span class="line"><span class="keyword">import</span> KFormitem <span class="keyword">from</span> <span class="string">'./KFormitem'</span></span><br><span class="line"><span class="keyword">import</span> KInput <span class="keyword">from</span> <span class="string">'./KInput'</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  components: &#123; KFrom, KFormitem, KInput &#125;,</span><br><span class="line">  data() &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      model: &#123;</span><br><span class="line">        uname: <span class="string">''</span>,</span><br><span class="line">        pwd: <span class="string">''</span></span><br><span class="line">      &#125;,</span><br><span class="line">      rules: &#123;</span><br><span class="line">        uname: [&#123; <span class="attr">required</span>: <span class="literal">true</span>, <span class="attr">message</span>: <span class="string">'用户名不能为空'</span> &#125;],</span><br><span class="line">        pwd: [&#123; <span class="attr">required</span>: <span class="literal">true</span>, <span class="attr">message</span>: <span class="string">'密码不能为空'</span> &#125;]</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    submit() &#123;</span><br><span class="line">      <span class="keyword">this</span>.$refs.form.validate(<span class="function"><span class="params">isValidate</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (isValidate) &#123;</span><br><span class="line">          alert(<span class="string">'校验通过'</span>)</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          alert(<span class="string">'校验失败'</span>)</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1344,20 +1319,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">82</span>
+          <span class="site-state-item-count">83</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">8</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -1399,12 +1374,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">180k</span>
+    <span title="站点总字数">181k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">2:43</span>
+    <span title="站点阅读时长">2:45</span>
 </div>
 
 
