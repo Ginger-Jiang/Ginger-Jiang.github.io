@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://yoursite.com').hostname,
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"mac"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: true,
+    pangu: false,
+    comments: {"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"activeClass":"gitalk"},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":5,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="构造函数 jQuery构造函数 jQuery 有七种用法:  jQuery(select [,context]): 接受一个 CSS 选择器表达式和可选的选择器上下文, 返回一个包含了匹配的 DOM 元素的 jQuery 对象 jQuery(html,[, ownerDocument])、jQuery(html, props): 用提供的 HTML 代码创建 DOM 元素 jQuery(eleme">
+<meta property="og:type" content="article">
+<meta property="og:title" content="jQuery源码-构造函数jQuery">
+<meta property="og:url" content="http://yoursite.com/2020/03/25/jQuery%E6%BA%90%E7%A0%81-%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0jQuery/index.html">
+<meta property="og:site_name" content="Ginger">
+<meta property="og:description" content="构造函数 jQuery构造函数 jQuery 有七种用法:  jQuery(select [,context]): 接受一个 CSS 选择器表达式和可选的选择器上下文, 返回一个包含了匹配的 DOM 元素的 jQuery 对象 jQuery(html,[, ownerDocument])、jQuery(html, props): 用提供的 HTML 代码创建 DOM 元素 jQuery(eleme">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-03-25T07:51:57.000Z">
+<meta property="article:modified_time" content="2020-03-25T07:52:07.862Z">
+<meta property="article:author" content="Ginger">
+<meta property="article:tag" content="jQuery源码">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2020/03/25/jQuery%E6%BA%90%E7%A0%81-%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0jQuery/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>jQuery源码-构造函数jQuery | Ginger</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Ginger" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ginger</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">一个前端er~</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/Ginger-Jiang" class="github-corner" title="Ginger GitHub" aria-label="Ginger GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/25/jQuery%E6%BA%90%E7%A0%81-%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0jQuery/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head_pic.jpeg">
+      <meta itemprop="name" content="Ginger">
+      <meta itemprop="description" content="未来可期">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ginger">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          jQuery源码-构造函数jQuery
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-03-25 15:51:57 / 修改时间：15:52:07" itemprop="dateCreated datePublished" datetime="2020-03-25T15:51:57+08:00">2020-03-25</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/jQuery%E6%BA%90%E7%A0%81/" itemprop="url" rel="index">
+                    <span itemprop="name">jQuery源码</span>
+                  </a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.8k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="构造函数-jQuery"><a href="#构造函数-jQuery" class="headerlink" title="构造函数 jQuery"></a>构造函数 jQuery</h1><p>构造函数 jQuery 有七种用法:</p>
+<ul>
+<li>jQuery(select [,context]): 接受一个 CSS 选择器表达式和可选的选择器上下文, 返回一个包含了匹配的 DOM 元素的 jQuery 对象</li>
+<li>jQuery(html,[, ownerDocument])、jQuery(html, props): 用提供的 HTML 代码创建 DOM 元素</li>
+<li>jQuery(element)、jQuery(elementArray): 封装 DOM 元素为 jQuery 对象</li>
+<li>jQuery(object): 封装普通对象为 jQuery 对象</li>
+<li>jQuery(callback): 绑定 ready 事件监听函数, 当 DOM 结构加载完成时执行</li>
+<li>jQuery(jQuery object): 接受一个 jQuery 对象, 返回该 jQuery 对象的拷贝副本</li>
+<li>jQuery(): 创建一个 jQuery 对象</li>
+</ul>
+<h2 id="jQuery-select-context"><a href="#jQuery-select-context" class="headerlink" title="jQuery(select [,context])"></a>jQuery(select [,context])</h2><p>如果传入一个字符串参数, jQuery 会检查这个字符串是选择器表达式还是 HTML 代码. 如果是选择器表达式, 则遍历文档, 查找与之匹配的 DOM 元素, 并创建一个包含了这些 DOM 元素引用的 jQuery 对象. 如果没有元素与之匹配, 则创建一个空 jQuery 对象, 其中不包含任何元素, 其属性 length 等于 0.</p>
+<p>默认情况下, 对匹配元素的查找将从根元素 document 对象开始, 即查找范围是整个文档树, 不过也可以传入第二个参数 context 来限定查找范围</p>
+<p>如果选择器表达式 selector 是简单的 <code>#id</code>, 且没有指定上下文 context, 则调用浏览器原生方法 document.getElementById() 查找属性 id 等于指定值的元素; 如果是比 <code>#id</code> 复杂的选择器表达式或指定了上下文, 则通过 jQuery 方法 <code>.find()</code> 查找, 因此 <code>$(&#39;span&#39;, this)</code> 等价于 <code>$(this).find(&#39;span&#39;)</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'#app'</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// $('span', this).html(222);</span></span><br><span class="line">  $(<span class="keyword">this</span>)</span><br><span class="line">    .find(<span class="string">'span'</span>)</span><br><span class="line">    .html(<span class="string">'find'</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="jQuery-html-ownerDocument-、jQuery-html-props"><a href="#jQuery-html-ownerDocument-、jQuery-html-props" class="headerlink" title="jQuery(html [,ownerDocument])、jQuery(html, props)"></a>jQuery(html [,ownerDocument])、jQuery(html, props)</h2><h3 id="第一个参数"><a href="#第一个参数" class="headerlink" title="第一个参数"></a>第一个参数</h3><p>如果传入的字符串参数看起来像一段 HTML 代码, jQuery 则尝试用这段 HTML 代码创建新的 DOM 元素, 并创建一个包含了这些 DOM 元素引用的 jQuery 对象.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'&lt;button&gt;CLICK ME&lt;/button&gt;'</span>).appendTo(<span class="string">'body'</span>);</span><br></pre></td></tr></table></figure>
+
+<p>如果 HTML 代码是一个单独标签, jQuery 会使用浏览器原生方法 document.createElement() 创建 DOM 元素</p>
+<p>如果是多层嵌套 HTML 片段, 则利用浏览器的 innerHTML 机制创建 DOM 元素, 这个过程由 <code>jQuery.buildFragment()</code> 和 <code>jQuery.clean()</code> 实现</p>
+<h3 id="第二个参数"><a href="#第二个参数" class="headerlink" title="第二个参数"></a>第二个参数</h3><p>ownerDocument 用于指定创建新 DOM 元素的文档对象, 如果不传入, 则默认为当前文档对象</p>
+<p>如果 HTML 代码是一个单独标签, 那么第二个参数还可以是 props, props 是一个包含了属性、事件的普通对象; 在调用 document.createElement() 创建 DOM 元素后, 参数 props 会被传给 jQuery 方法 <code>.attr()</code>, 然后由 <code>.attr()</code> 负责把 props 中的属性、事件设置到新穿创建的 DOM 元素上</p>
+<p>参数 props 的属性可以是任意的事件类型（如”click”），此时属性值应该是事件监听函数，它将被绑定到新创建的 DOM 元素上；参数 props 可以含有以下特殊属性：val、css、html、text、data、width、height、offset，相应的 jQuery 方法：<code>.val()</code>、<code>.css()</code>、<code>.html()</code>、<code>.text()</code>、<code>.data()</code>、<code>.width()</code>、<code>.height()</code>、`.offset()将被执行，并且属性值会作为参数传入；其他类型的属性则会被设置到新创建的 DOM 元素上，某些特殊属性还会做跨浏览器兼容（如 type、value、tabindex 等）；可以通过属性名 class 设置类样式，但要用引号把 class 包裹起来，因为 class 是 JavaScript 保留字。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'&lt;div /&gt;'</span>, &#123;</span><br><span class="line">  text: <span class="string">'哈哈'</span>,</span><br><span class="line">  class: 'active',</span><br><span class="line">  click: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log((<span class="keyword">this</span>.innerHTML = <span class="string">'嘻嘻'</span>));</span><br><span class="line">  &#125;</span><br><span class="line">&#125;).appendTo(<span class="string">'body'</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="jQuery-element-、jQuery-elementArray"><a href="#jQuery-element-、jQuery-elementArray" class="headerlink" title="jQuery(element)、jQuery(elementArray)"></a>jQuery(element)、jQuery(elementArray)</h2><p>如果传入一个 DOM 元素或 DOM 元素数组, 则把 DOM 元素封装到 jQuery 对象中并返回</p>
+<p>这个功能常见于事件监听函数, 即把关键字 this 因用那个的 DOM 元素封装为 jQuery 对象, 然后在该 jQuery 对象上调用 jQuery 方法</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'div'</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  $(<span class="keyword">this</span>).slideUp();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="jQuery-object"><a href="#jQuery-object" class="headerlink" title="jQuery(object)"></a>jQuery(object)</h2><p>如果传入一个普通 JavaScript 对象, 则把该对象封装到 jQuery 对象中并返回</p>
+<p>这个功能可以方便的在普通 JavaScript 对象上实现自定义事件的绑定和触发</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> $foo = $(&#123; <span class="attr">foo</span>: <span class="string">'bar'</span>, <span class="attr">hello</span>: <span class="string">'worldd'</span> &#125;);</span><br><span class="line">$foo.on(<span class="string">'custom'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>.foo);</span><br><span class="line">&#125;);</span><br><span class="line">$foo.trigger(<span class="string">'custom'</span>); <span class="comment">// -&gt; foo</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="jQuery-callback"><a href="#jQuery-callback" class="headerlink" title="jQuery(callback)"></a>jQuery(callback)</h2><p>如果传入一个函数, 则在 document 上绑定一个 ready 事件监听函数, 当 DOM 结构加载完成时执行. ready 事件的触发要早于 load 事件.</p>
+<p>ready 事件并不是浏览器原生事件, 而是 DOMContentLoaded 事件、onreadystatechange 事件和函数 doScrollCheck() 的统称</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'DOM 加载完毕'</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="jQuery-jQuery-object"><a href="#jQuery-jQuery-object" class="headerlink" title="jQuery(jQuery object)"></a>jQuery(jQuery object)</h2><p>如果传入一个 jQuery 对象, 则创建该 jQuery 对象的一个副本并返回, 副本与传入的 jQuery 对象引用完全相同的 DOM 元素</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> $app = $(<span class="string">'#app'</span>);</span><br><span class="line">$app.html(<span class="string">'xuxu'</span>); <span class="comment">// -&gt; $('#app').html('xuxu')</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="jQuery"><a href="#jQuery" class="headerlink" title="jQuery()"></a>jQuery()</h2><p>如果不传入任何参数, 则返回一个空的 jQuery 对象, 属性 length 为 0.</p>
+<p>这个功能可以用来复用 jQuery 对象</p>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div>请作者喝杯咖啡</div>
+  <button disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.jpg" alt="Ginger 微信支付">
+        <p>微信支付</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/jQuery%E6%BA%90%E7%A0%81/" rel="tag"># jQuery源码</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/23/jQuery%E6%BA%90%E7%A0%81-%E6%80%BB%E4%BD%93%E6%9E%B6%E6%9E%84/" rel="prev" title="jQuery源码-总体架构">
+      <i class="fa fa-chevron-left"></i> jQuery源码-总体架构
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/03/25/jQuery%E6%BA%90%E7%A0%81-%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0jQuery%E6%BA%90%E7%A0%81%E7%BB%93%E6%9E%84/" rel="next" title="jQuery源码-构造函数jQuery源码结构">
+      jQuery源码-构造函数jQuery源码结构 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#构造函数-jQuery"><span class="nav-number">1.</span> <span class="nav-text">构造函数 jQuery</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#jQuery-select-context"><span class="nav-number">1.1.</span> <span class="nav-text">jQuery(select [,context])</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jQuery-html-ownerDocument-、jQuery-html-props"><span class="nav-number">1.2.</span> <span class="nav-text">jQuery(html [,ownerDocument])、jQuery(html, props)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#第一个参数"><span class="nav-number">1.2.1.</span> <span class="nav-text">第一个参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第二个参数"><span class="nav-number">1.2.2.</span> <span class="nav-text">第二个参数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jQuery-element-、jQuery-elementArray"><span class="nav-number">1.3.</span> <span class="nav-text">jQuery(element)、jQuery(elementArray)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jQuery-object"><span class="nav-number">1.4.</span> <span class="nav-text">jQuery(object)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jQuery-callback"><span class="nav-number">1.5.</span> <span class="nav-text">jQuery(callback)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jQuery-jQuery-object"><span class="nav-number">1.6.</span> <span class="nav-text">jQuery(jQuery object)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jQuery"><span class="nav-number">1.7.</span> <span class="nav-text">jQuery()</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Ginger"
+      src="/images/head_pic.jpeg">
+  <p class="site-author-name" itemprop="name">Ginger</p>
+  <div class="site-description" itemprop="description">未来可期</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">85</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Ginger-Jiang" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Ginger-Jiang" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:346600397@qq.com" title="E-Mail → mailto:346600397@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ginger</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">186k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">2:49</span>
+</div>
+
+
+  <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+  <span>本站已运行<span id="htmer_time"></span></span>
+  <script>
+      function secondToDate(second) {
+          if (!second) {
+              return 0;
+          }
+          var time = new Array(0, 0, 0, 0, 0);
+          if (second >= 365 * 24 * 3600) {
+              time[0] = parseInt(second / (365 * 24 * 3600));
+              second %= 365 * 24 * 3600;
+          }
+          if (second >= 24 * 3600) {
+              time[1] = parseInt(second / (24 * 3600));
+              second %= 24 * 3600;
+          }
+          if (second >= 3600) {
+              time[2] = parseInt(second / 3600);
+              second %= 3600;
+          }
+          if (second >= 60) {
+              time[3] = parseInt(second / 60);
+              second %= 60;
+          }
+          if (second > 0) {
+              time[4] = second;
+          }
+          return time;
+      }
+      </script>
+
+  <script type="text/javascript" language="javascript">
+      function setTime() {
+          var create_time = Math.round(new Date(Date.UTC(2019, 11, 31)).getTime() / 1000);  //这里设置建站时间
+          var timestamp = Math.round((new Date().getTime() + 8 * 60 * 60 * 1000) / 1000);
+          currentTime = secondToDate((timestamp - create_time));
+          currentTimeHtml = currentTime[0] + '年' + currentTime[1] + '天'
+                  + currentTime[2] + '时' + currentTime[3] + '分' + currentTime[4]
+                  + '秒';
+          document.getElementById("htmer_time").innerHTML = currentTimeHtml;
+      }    setInterval(setTime, 1000);
+
+          $(function(){
+              $("#learnmore").click(function(){
+                  if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
+                      var $target = $(this.hash);
+                      $target = $target.length && $target || $('[name=' + this.hash.slice(1) + ']');
+                      if ($target.length) {
+                          var targetOffset = $target.offset().top;
+                      $('html,body').animate({scrollTop: targetOffset},800);
+                      return false;
+                      }
+                  }
+              });
+          });
+
+  </script> 
+
+
+
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.getAttribute('pjax') !== null) {
+      element.setAttribute('pjax', '');
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+  <script defer src="/js/three.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID: 'a5e0a164b4c7c72f9f25',
+      clientSecret: 'fb8d8950376aa9315351770b8dd8deb9fd66ab2c',
+      repo: 'Ginger-Jiang.github.io',
+      owner: 'Ginger-Jiang',
+      admin: ['Ginger-Jiang'],
+      id: 'da473b8612e22bdbaba96106080c61a5',
+        language: 'zh-CN',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+    </div>
+</body>
+</html>
