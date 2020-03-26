@@ -213,6 +213,138 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/26/jQuery%E6%BA%90%E7%A0%81-jQuery-fn-init/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head_pic.jpeg">
+      <meta itemprop="name" content="Ginger">
+      <meta itemprop="description" content="未来可期">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ginger">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/26/jQuery%E6%BA%90%E7%A0%81-jQuery-fn-init/" class="post-title-link" itemprop="url">jQuery源码-jQuery.fn.init</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-03-26 15:29:26 / 修改时间：15:29:38" itemprop="dateCreated datePublished" datetime="2020-03-26T15:29:26+08:00">2020-03-26</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/jQuery%E6%BA%90%E7%A0%81/" itemprop="url" rel="index">
+                    <span itemprop="name">jQuery源码</span>
+                  </a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>5.3k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>5 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="jQuery-fn-init-selector-context-rootjQuery"><a href="#jQuery-fn-init-selector-context-rootjQuery" class="headerlink" title="jQuery.fn.init(selector, context, rootjQuery)"></a>jQuery.fn.init(selector, context, rootjQuery)</h1><p>构造函数 jQuery.fn.init() 负责解析参数 selector 和 context 的类型, 并执行相应的逻辑, 最后返回 jQuery.fn.init() 的实例.</p>
+<blockquote>
+<p>解析参数 selector 和 context 公有 12 个有效分支</p>
+</blockquote>
+<p><img data-src="../../images/02%E6%9E%84%E9%80%A0jQuery%E5%AF%B9%E8%B1%A1/jQuery.fn.init.png" alt="jQuery.fn.init"></p>
+<h2 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h2><h3 id="定义-jQuery-fn-init-selector-context-rootjQuery"><a href="#定义-jQuery-fn-init-selector-context-rootjQuery" class="headerlink" title="定义 jQuery.fn.init(selector, context, rootjQuery)"></a>定义 jQuery.fn.init(selector, context, rootjQuery)</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">jQuery.fn = jQuery.prototype = &#123;</span><br><span class="line">  <span class="keyword">constructor</span>: jQuery,</span><br><span class="line">  init: function(selector, context, rootjQuery) &#123;</span><br><span class="line">    <span class="keyword">var</span> match, elem, ret, doc;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>在 <code>init()</code> 构造函数定义中接受三个参数 selector、context、rootjQuery</p>
+<ul>
+<li>selector: 可以是任意类型的值, 但只有 undefined、DOM 元素、字符串、函数、jQuery 对象、普通 JavaScript 对象这几种类型有效</li>
+<li>context: 可以不传入, 或者传入 DOM 元素、jQuery 对象、普通 JavaScript 对象之一</li>
+<li>rootjQuery: 包含了 document 对象的 jQuery 对象, 用于 document.getElementById()查找失败、selector 是选择器表达式且未指定 context、selector 是函数的情况.</li>
+</ul>
+<p>rootjQuery 定义与应用场景</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// document.getElementById() 查找失败</span></span><br><span class="line"><span class="keyword">return</span> rootjQuery.find(selector);</span><br><span class="line"></span><br><span class="line"><span class="comment">// slector 是选择器且未指定 context</span></span><br><span class="line"><span class="keyword">return</span> (context || rootjQuery).find(selector);</span><br><span class="line"></span><br><span class="line"><span class="comment">// selector 是函数</span></span><br><span class="line"><span class="keyword">return</span> rootjQuery.ready(selector);</span><br><span class="line"></span><br><span class="line"><span class="comment">// rootjQuery 定义</span></span><br><span class="line">rootjQuery = jQuery(doucment);</span><br></pre></td></tr></table></figure>
+
+<h2 id="参数-selector-可以转换为-false"><a href="#参数-selector-可以转换为-false" class="headerlink" title="参数 selector 可以转换为 false"></a>参数 selector 可以转换为 false</h2><p>参数 selector 可以转换为 false, 例如: undefined、空字符串、null 等, 则直接返回 this, 此时 this 是空 jQuery 对象, 其属性 length 等于 0.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Handle $('')、$(null) or $(undefined)</span></span><br><span class="line"><span class="keyword">if</span> (!selector) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="参数-selector-是-DOM-元素"><a href="#参数-selector-是-DOM-元素" class="headerlink" title="参数 selector 是 DOM 元素"></a>参数 selector 是 DOM 元素</h2><p>如果参数 selector 有属性 nodeType, 则认为 selector 是 DOM 元素, 手动设置第一个元素和属性 context 指向该 DOM 元素、属性 length 为 1, 然后返回包含了该 DOM 元素引用的 jQuery 对象</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Handle $(DOMELement)</span></span><br><span class="line"><span class="keyword">if</span> (selector.nodeType) &#123;</span><br><span class="line">  <span class="keyword">this</span>.context = <span class="keyword">this</span>[<span class="number">0</span>] = selector;</span><br><span class="line">  <span class="keyword">this</span>.length = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="参数-selector-是字符串-‘body’"><a href="#参数-selector-是字符串-‘body’" class="headerlink" title="参数 selector 是字符串 ‘body’"></a>参数 selector 是字符串 ‘body’</h2><p>如果参数 selector 是字符串 “body”, 手动设置属性 context 指向 document 对象、第一个元素指向 body 元素、属性 length 为 1, 最后返回包含了 body 元素引用的 jQuery 对象</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// The body element only exists once, optimize finding it</span></span><br><span class="line"><span class="keyword">if</span> (selector === <span class="string">'body'</span> &amp;&amp; !context &amp;&amp; <span class="built_in">document</span>.body) &#123;</span><br><span class="line">  <span class="keyword">this</span>.context = <span class="built_in">document</span>;</span><br><span class="line">  <span class="keyword">this</span>[<span class="number">0</span>] = <span class="built_in">document</span>.body;</span><br><span class="line">  <span class="keyword">this</span>.selector = selector;</span><br><span class="line">  <span class="keyword">this</span>.length = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="参数-selector-是其他字符串"><a href="#参数-selector-是其他字符串" class="headerlink" title="参数 selector 是其他字符串"></a>参数 selector 是其他字符串</h2><p>如果参数 selector 是其他字符串, 则先检测 selector 是 HTML 代码还是 <code>#id</code>.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 处理参数是字符串</span></span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">typeof</span> selector === <span class="string">'string'</span>) &#123;</span><br><span class="line">  <span class="comment">// 判断是 HTML 代码 还是 #ID</span></span><br><span class="line">  <span class="keyword">if</span> (</span><br><span class="line">    selector.charAt(<span class="number">0</span>) === <span class="string">'&lt;'</span> &amp;&amp;</span><br><span class="line">    selector.charAt(selector.length - <span class="number">1</span>) === <span class="string">'&gt;'</span> &amp;&amp;</span><br><span class="line">    selector.length &gt;= <span class="number">3</span></span><br><span class="line">  ) &#123;</span><br><span class="line">    <span class="comment">// 如果是以 `&lt;` 开头 `&gt;` 结尾的  并且长度大于等于 3  跳过 正则 检查</span></span><br><span class="line">    match = [<span class="literal">null</span>, selector, mull];</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 使用正则检查  quickExpr = /^(?:[^#&lt;]*(&lt;[\w\W]+&gt;)[^&gt;]*$|#([\w\-]*)$)/</span></span><br><span class="line"><span class="comment">     * 依次匹配 HTML 代码和 id 如果匹配成功 match 数组第一个元素为参数 selector, 第二个元素为匹配的 HTML 代码或 undefined 第三个元素为匹配的 id 或 undefined</span></span><br><span class="line"><span class="comment">     * quickExpr.exec('#target'); // ["#target",undefined,"target"]</span></span><br><span class="line"><span class="comment">     * quickExpr.exec('&lt;div&gt;'); // ["&lt;div&gt;","&lt;div&gt;",undefined]</span></span><br><span class="line"><span class="comment">     * quickExpr.exec('abc&lt;div&gt;'); // ["abc&lt;div&gt;","&lt;div&gt;",undefined]</span></span><br><span class="line"><span class="comment">     * quickExpr.exec('abc&lt;div&gt;abc#id'); // ["abc&lt;div&gt;abc#id","&lt;div&gt;",undefined]</span></span><br><span class="line"><span class="comment">     * quickExpr.exec('div'); // null</span></span><br><span class="line"><span class="comment">     * quickExpr.exec('&lt;div&gt;&lt;img&gt;&lt;/div&gt;'); // ["&lt;div&gt;&lt;img&gt;&lt;/div&gt;","&lt;div&gt;&lt;img&gt;&lt;/div&gt;",undefined]</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    match = quickExpr.exec(selector);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="如果-selector-是单独标签"><a href="#如果-selector-是单独标签" class="headerlink" title="如果 selector 是单独标签"></a>如果 selector 是单独标签</h2><p>如果 selector 是单独标签, 就调用 document.createElement() 创建标签对应的 DOM 元素</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 检查正则匹配结果</span></span><br><span class="line"><span class="comment"> * 如果 match[1] 不是 undefined 即 selector 是 HTML 代码 或者 match[2] 不是 undefined, 即参数 selector 是 #id 并且未传入 context</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">if</span> (match &amp;&amp; (match[<span class="number">1</span>] || !context)) &#123;</span><br><span class="line">  <span class="comment">// HANDLE: $(html) -&gt; $(array)</span></span><br><span class="line">  <span class="keyword">if</span> (match[<span class="number">1</span>]) &#123;</span><br><span class="line">    context = context <span class="keyword">instanceof</span> jQuery ? context[<span class="number">0</span>] : context;</span><br><span class="line"></span><br><span class="line">    doc = context ? context.ownerDocument || context : <span class="built_in">document</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 如果传入单个字符 并且是个单标签 直接创建 跳过其他</span></span><br><span class="line">    <span class="comment">// rsingleTag = /^&lt;(\w+)\s*\/?&gt;(?:&lt;\/\1&gt;)?$/,</span></span><br><span class="line">    ret = rsingleTag.exec(selector);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (ret) &#123;</span><br><span class="line">      <span class="comment">// jQuery.isPlainObject() 用于检测对象是否是纯粹的对象 即用对象直接量 &#123;&#125; 或者 new Object() 创建的对象</span></span><br><span class="line">      <span class="keyword">if</span> (jQuery.isPlainObject(context)) &#123;</span><br><span class="line">        selector = [<span class="built_in">document</span>.createElement(ret[<span class="number">1</span>])];</span><br><span class="line">        <span class="comment">// attr() 遇到特殊属性和事件类型时会执行同名 jQuery 方法</span></span><br><span class="line">        jQuery.fn.attr.call(selector, context, <span class="literal">true</span>);</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        selector = [doc.createElement(res[<span class="number">1</span>])];</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>之所以把创建的 DOM 源码放入数组中, 是为了后面方便的调用 jQuery.merge() 方法, 此方法用于合并两个数组的元素到一个数组</p>
+</blockquote>
+<h2 id="参数-selector-是复杂-HTML-代码"><a href="#参数-selector-是复杂-HTML-代码" class="headerlink" title="参数 selector 是复杂 HTML 代码"></a>参数 selector 是复杂 HTML 代码</h2><p>如果参数 selector 是复杂 HTML 代码, 则利用浏览器 innerHTML 创建 DOM 元素</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line"> <span class="keyword">else</span> &#123;</span><br><span class="line">   <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 创建过程由 buildFragment 和 clean 实现</span></span><br><span class="line"><span class="comment">    * buildFragment 返回 -&gt; &#123; fragment: 含有转换后的 DOM 元素的文档片段 , cacheable: HTML代码是否满足缓存条件&#125;</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">   ret = jQuery.buildFragment([ match[<span class="number">1</span>] ], [ doc ])</span><br><span class="line">   <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 如果满足缓存条件, 在使用前 先复制一份</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">   selector = (ret.cacheable ? jQuery.clone(ret.fragment): rest.fragment).childNodes</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> <span class="comment">// 将创建的 DOM 元素 合并到当前 jQuery 对象中返回</span></span><br><span class="line"> <span class="keyword">return</span> jQuery.merage(<span class="keyword">this</span>, selector)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="如果参数-selector-是-id-且未指定参数-context"><a href="#如果参数-selector-是-id-且未指定参数-context" class="headerlink" title="如果参数 selector 是 #id, 且未指定参数 context"></a>如果参数 selector 是 <code>#id</code>, 且未指定参数 context</h2><p>如果参数 selector 是 <code>#id</code>, 且未指定参数 context, 则调用 document.getElementById() 查找含有指定 id 属性的 DOM 元素</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="comment">// 查找含有指定 id 属性的 DOM 元素</span></span><br><span class="line">  elem = <span class="built_in">document</span>.getElementById(mathc[<span class="number">2</span>]);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (elem &amp;&amp; elem.parentNode) &#123;</span><br><span class="line">    <span class="comment">// 检查 id 是否相等</span></span><br><span class="line">    <span class="keyword">if</span> (elem.id !== match[<span class="number">2</span>]) &#123;</span><br><span class="line">      <span class="keyword">return</span> rootjQuery.find(selector);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">this</span>.length = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">this</span>[<span class="number">0</span>] = elem;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">this</span>.context = <span class="built_in">document</span>;</span><br><span class="line">  <span class="keyword">this</span>.selector = selector;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="参数-selector-是选择器表达式"><a href="#参数-selector-是选择器表达式" class="headerlink" title="参数 selector 是选择器表达式"></a>参数 selector 是选择器表达式</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// HANDLE: $(expr, $(...))</span></span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (!context || context.jquery) &#123;</span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * 如果执行了上下文 且上下文是 jQuery 对象 执行 context.find() 方法</span></span><br><span class="line"><span class="comment">   * 如果没有指定上下文 就执行 rootjQuery.find()</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">  <span class="keyword">return</span> (context || rootjQuery).find(selector);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// HANDLE: $(expr, context)</span></span><br><span class="line">  <span class="comment">// (which is just equivalent to: $(context).find(expr)</span></span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  <span class="comment">// 如果指定了上下文 但上下文不是jQuery对象 则执行方法先创建一个包含 context 的 jQuery 对象, 然后调用 find() 方法</span></span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">this</span>.constructor(context).find(selector);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="参数-selector-是函数"><a href="#参数-selector-是函数" class="headerlink" title="参数 selector 是函数"></a>参数 selector 是函数</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 如果是函数 就绑定 ready 事件</span></span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (jQuery.isFunction(selector))&#123;</span><br><span class="line">  <span class="keyword">return</span> rootjQuery.ready(selector)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="如果参数-selector-是-jQuery-对象"><a href="#如果参数-selector-是-jQuery-对象" class="headerlink" title="如果参数 selector 是 jQuery 对象"></a>如果参数 selector 是 jQuery 对象</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 如果参数包含 selector 就认为是 jQuery 对象</span></span><br><span class="line"><span class="keyword">if</span> (selector.selector !== <span class="literal">undefined</span>) &#123;</span><br><span class="line">  <span class="comment">// 复制他的属性 selector 和 context</span></span><br><span class="line">  <span class="keyword">this</span>.selector = selector.selector;</span><br><span class="line">  <span class="keyword">this</span>.context = selector.context;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="参数-selector-是任意其他值"><a href="#参数-selector-是任意其他值" class="headerlink" title="参数 selector 是任意其他值"></a>参数 selector 是任意其他值</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 如果 selector 是数组或伪数组, 则添加到当前 jQuery 对象中</span></span><br><span class="line"><span class="comment"> * 如果 selector 是 JavaScript 对象, 则作为第一个元素放入当前 jQuery 对象中</span></span><br><span class="line"><span class="comment"> * 如果是其他类型的值, 则作为第一个元素放入当前 jQuery 对象中</span></span><br><span class="line"><span class="comment"> * 最后返回当前 jQuery 对象</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">return</span> jQuery.makeArray(selector, <span class="keyword">this</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="总览"><a href="#总览" class="headerlink" title="总览"></a>总览</h2><p><img data-src="../../images/02%E6%9E%84%E9%80%A0jQuery%E5%AF%B9%E8%B1%A1/jQuery.fn.init_.png" alt="jQuery.fn.init_"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/25/jQuery%E6%BA%90%E7%A0%81-%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0jQuery%E6%BA%90%E7%A0%81%E7%BB%93%E6%9E%84/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1382,148 +1514,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/17/vuex%E5%AE%89%E8%A3%85%E4%BB%8B%E7%BB%8D%E4%B8%8E%E8%B5%B7%E6%AD%A5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/head_pic.jpeg">
-      <meta itemprop="name" content="Ginger">
-      <meta itemprop="description" content="未来可期">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ginger">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/17/vuex%E5%AE%89%E8%A3%85%E4%BB%8B%E7%BB%8D%E4%B8%8E%E8%B5%B7%E6%AD%A5/" class="post-title-link" itemprop="url">vuex安装介绍与起步</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-03-17 15:02:31 / 修改时间：15:02:47" itemprop="dateCreated datePublished" datetime="2020-03-17T15:02:31+08:00">2020-03-17</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Vue/" itemprop="url" rel="index">
-                    <span itemprop="name">Vue</span>
-                  </a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>2.1k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><ul>
-<li>直接下载 || CDN 引用 <a href="https://unpkg.com/vuex" target="_blank" rel="noopener">vuex</a></li>
-</ul>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"/path/to/vue.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"/path/to/vuex.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>NPM</li>
-</ul>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install vuex --save</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>Yarn</li>
-</ul>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn add vuex</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>在一个模块化的打包系统中, 必须显示地通过 <code>Vue.use()</code> 来安装 <code>Vuex</code></li>
-</ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">'vue'</span></span><br><span class="line"><span class="keyword">import</span> Vuex <span class="keyword">from</span> <span class="string">'vuex'</span></span><br><span class="line"></span><br><span class="line">Vue.use(Vuex)</span><br></pre></td></tr></table></figure>
-
-<h2 id="Vuex-是什么"><a href="#Vuex-是什么" class="headerlink" title="Vuex 是什么?"></a>Vuex 是什么?</h2><p>Vuex 是一个专门为 Vue.js 应用程序开发的状态管理模式. 它采用集中式存储管理应用的所有组件的状态, 并已相应的规则保证状态以一种可预测的方式发生变化. Vuex 也集成到 Vue 的官方调试工具 devtools extension, 提供了诸如零配置的 time-travel 调试、状态快照导入导出等高级调试功能</p>
-<h2 id="什么是状态管理模式"><a href="#什么是状态管理模式" class="headerlink" title="什么是状态管理模式?"></a>什么是状态管理模式?</h2><p>已一个简单的 Vue 记数应用开始:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  <span class="comment">// state</span></span><br><span class="line">  data() &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      count: <span class="number">0</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// view</span></span><br><span class="line">  template: <span class="string">'&lt;div&gt; &#123;&#123; count &#125;&#125; &lt;/div&gt;'</span>,</span><br><span class="line">  <span class="comment">// actions</span></span><br><span class="line">  methods: &#123;</span><br><span class="line">    increment() &#123;</span><br><span class="line">      <span class="keyword">this</span>.count++</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>这个状态管理应用包含以下几个部分:</p>
-<ul>
-<li>state: 驱动应用的数据源</li>
-<li>view: 以声明方式将 state 映射到试图</li>
-<li>actions: 响应在 view 上的用户输入导致的状态变化</li>
-</ul>
-<p>以下是一个表示单项数据流理念的简单示意图:</p>
-<p><img data-src="../../image/flow.png" alt="flow"></p>
-<p>当我们遇到多个组件共享状态时, 单项数据流的简洁性很容易被破坏:</p>
-<ul>
-<li>多个视图依赖于同一状态</li>
-<li>来自不同视图的行为需要变更同一状态</li>
-</ul>
-<p>对于问题一, 传参的方法对于多层嵌套的组件将会非常繁琐, 并且对于兄弟组件间的状态传递无能为力<br>对于问题二, 我们经常会采用父子组件直接引用或者通过事件来变更和同步状态的多份拷贝.</p>
-<p>因此, 我们为什么不把组件的共享状态抽取出来, 以一个全局单例模式管理呢? 在这种模式下, 我们组件树构成了一个巨大的试图, 不管树在那个位置, 任何组件都能获取状态或者触发行为.</p>
-<p>通过定义和隔离状态管理中的各种概念并通过强制规则维持试图和状态间的独立性,我们的代码将会变得更结构化且易维护</p>
-<p>这就是 Vuex 背后的基本思想，借鉴了 Flux、Redux 和 The Elm Architecture。与其他模式不同的是，Vuex 是专门为 Vue.js 设计的状态管理库，以利用 Vue.js 的细粒度数据响应机制来进行高效的状态更新</p>
-<p><img data-src="../../image/vuex.png" alt="vuex"></p>
-<h2 id="什么情况下应该使用-Vuex"><a href="#什么情况下应该使用-Vuex" class="headerlink" title="什么情况下应该使用 Vuex?"></a>什么情况下应该使用 Vuex?</h2><p>Vuex 可以帮助我们管理共享状态，并附带了更多的概念和框架。这需要对短期和长期效益进行权衡。</p>
-<p>如果您不打算开发大型单页应用，使用 Vuex 可能是繁琐冗余的。确实是如此——如果您的应用够简单，您最好不要使用 Vuex。一个简单的 store 模式就足够您所需了。但是，如果您需要构建一个中大型单页应用，您很可能会考虑如何更好地在组件外部管理状态，Vuex 将会成为自然而然的选择。</p>
-<h2 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h2><p>每个 Vuex 应用的核心就是 store. store 基本上就是个容器, 它包含着你的应用中大部分的状态(state). Vuex 和单纯的全局对象有以下两个点不同</p>
-<ol>
-<li><p>Vuex 的状态存储是响应式的. 当 Vue 组件从 store 中读取状态的时候, 若 store 中的状态发生改变, 那么相应的组件也会响应的得到高效更新</p>
-</li>
-<li><p>不能直接修改 store 中的状态. 改变 store 中的状态的唯一途径就是显示的提交(commit)mutation. 这样使得我们可以方便的跟踪没一个状态的变化, 从而让我们能够实现一些工具帮助我们更好的了解我们的应用</p>
-</li>
-</ol>
-<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>安装 Vuex 之后, 我们可以创建一个 store.</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> store = <span class="keyword">new</span> Vuex.Store(&#123;</span><br><span class="line">  state: &#123;</span><br><span class="line">    count: <span class="number">0</span></span><br><span class="line">  &#125;,</span><br><span class="line">  mutations: &#123;</span><br><span class="line">    increment(state) &#123;</span><br><span class="line">      state.count++</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>现在, 可以通过 <code>store.state</code> 来获取状态对象, 以及通过 <code>store.commit</code> 方法触发状态变更</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">store.commit(<span class="string">'increment'</span>)</span><br><span class="line"><span class="built_in">console</span>.log(store.state.count) <span class="comment">// -&gt; 1</span></span><br></pre></td></tr></table></figure>
-
-<p>我们通过提交 mutation 的方式，而非直接改变 store.state.count，是因为我们想要更明确地追踪到状态的变化。这个简单的约定能够让你的意图更加明显，这样你在阅读代码的时候能更容易地解读应用内部的状态改变。此外，这样也让我们有机会去实现一些能记录每次状态改变，保存状态快照的调试工具。有了它，我们甚至可以实现如时间穿梭般的调试体验。</p>
-<p>由于 store 中的状态是响应式的, 在组件中调用 store 中的状态简单到仅需要在计算属性中返回即可. 触发变化也仅仅是在组件的 methods 中提交 mutation</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1596,7 +1586,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">85</span>
+          <span class="site-state-item-count">86</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1651,12 +1641,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">186k</span>
+    <span title="站点总字数">191k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">2:49</span>
+    <span title="站点阅读时长">2:54</span>
 </div>
 
 
