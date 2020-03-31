@@ -1,6 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>jQuery源码-buildFragment方法</title>
+    <url>/2020/03/31/jQuery%E6%BA%90%E7%A0%81-buildFragment%E6%96%B9%E6%B3%95/</url>
+    <content><![CDATA[<h2 id="实现原理"><a href="#实现原理" class="headerlink" title="实现原理"></a>实现原理</h2><p>方法 jQuery.builfFragment(args, nodes, scripts)先创建一个文档片段 DocumentFragment, 然后调用方法 jQuery.clean(elems, context, fragment, scripts)将 HTML 代码转换为 DOM 元素, 并存储在创建的文档片段中</p>
+<p>文档片段 DocumentFragment 表示文档的一部分, 但不属于文档树. 当把 DocumentFragment 插入文档树时, 插入的不是 DocumentFragment 自身, 而是他的所有子孙节点, 即可以一次向文档树中插入多个节点. 当需要插入大量节点时, 相比逐个插入节点, 使用 ocumentFragment 一次插入多个节点, 性能的提升会非常明显</p>
+<p>如果 HTML 代码符合缓存条件, 方法 jQuery.buildFragment()还会把转换后的 DOM 元素缓存起来, 下次转换相同的代码时, 直接从缓存中读取, 不需要重复转换</p>
+<h2 id="方法执行步骤"><a href="#方法执行步骤" class="headerlink" title="方法执行步骤"></a>方法执行步骤</h2><p>jQuery.buildFragment(args, nodes, scripts)执行步骤:</p>
+<ol>
+<li>如果 HTML 代码符合缓存条件, 则尝试从缓存对象 jQuery.fragments 中读取缓存的 DOM 元素</li>
+<li>创建文档片段 DocumentFragment</li>
+<li>调用方法 jQuery.clean(elems, context, Fragment, scripts) 将 HTML 代码转换为 DOM 元素, 并存储在创建的文档片段中</li>
+<li>如果 HTML 代码符合缓存条件,则把转换后的 DOM 元素防褥缓存对象 jQuery.Fragments</li>
+<li>最后返回文档片段和缓存状态 { fragment: fragment, cacheable: cacheable }</li>
+</ol>
+<h2 id="jQuery-buildFragment-方法源码"><a href="#jQuery-buildFragment-方法源码" class="headerlink" title="jQuery.buildFragment() 方法源码"></a>jQuery.buildFragment() 方法源码</h2><h3 id="方法定义"><a href="#方法定义" class="headerlink" title="方法定义"></a>方法定义</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">jQuery.buildFragment(args, nodes, scripts) &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>参数:</p>
+<ul>
+<li>ages: 数组, 含有待转换的 DOM 元素的 HTML 代码</li>
+<li>nodes: 数组, 含有文档对象、jQuery 对象或 DOM 元素, 用于修正创建文档片段 DocumentFragment 的文档对象</li>
+<li>scripts: 数组, 用于存放 HTML 代码中的 script 元素. 方法 jQuery.Fragment() 会把该参数传给方法 jQuery.clean(), 后者把 HTML 代码转换为 DOM 元素后, 会提取其中的 script 元素并存入数组 scrtips</li>
+</ul>
+<h3 id="定义局部变量-修正文档对象-doc"><a href="#定义局部变量-修正文档对象-doc" class="headerlink" title="定义局部变量, 修正文档对象 doc"></a>定义局部变量, 修正文档对象 doc</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> Fragment, <span class="comment">// 指向稍后可能创建的文档片段 Document Fragment</span></span><br><span class="line">  eacheable, <span class="comment">// 表示 HTML 代码 是否符合缓存条件</span></span><br><span class="line">  eacheresults, <span class="comment">// 指向从缓存对象 jQuery.ftagment 中提取到的文档片段 包含了缓存的DOM元素</span></span><br><span class="line">  doc, <span class="comment">// 表示创建文档片段的文档对象</span></span><br><span class="line">  fitst = args[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 修正文档对象 doc</span></span><br><span class="line"><span class="comment"> * nodes 可能包含一个明确的文档对象, 也可能包含jQuery对象或DOM元素</span></span><br><span class="line"><span class="comment"> * 先尝试读取nodes[0]的属性 ownerDocuemt 并赋值给doc</span></span><br><span class="line"><span class="comment"> * 如果不存在 则假定nodes[0]为文档对象并赋值给doc</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">if</span> (nodes &amp;&amp; nodes[<span class="number">0</span>]) &#123;</span><br><span class="line">  doc = nodes[<span class="number">0</span>].ownerDocument || node[<span class="number">0</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 检查传入参数对象是不是文档对象 如果不是文档对象 而是 JavaScript 对象 就修正 doc 为当前文档对象 document</span></span><br><span class="line"><span class="keyword">if</span> (!doc.createDocumentFragment) &#123;</span><br><span class="line">  doc = <span class="built_in">document</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="尝试从缓存对象-jQuery-fragments-中读取缓存的-DOM-元素"><a href="#尝试从缓存对象-jQuery-fragments-中读取缓存的-DOM-元素" class="headerlink" title="尝试从缓存对象 jQuery.fragments 中读取缓存的 DOM 元素"></a>尝试从缓存对象 jQuery.fragments 中读取缓存的 DOM 元素</h3><p>如果 HTML 代码符合缓存条件, 则尝试从缓存对象 jQuery.fragments 中读取缓存的 DOM 元素</p>
+<ul>
+<li>数组 args 长度为 1, 且第一个元素是字符串, 即数组 args 中只有一段 HTML 代码</li>
+<li>HTML 代码长度小于 512, 否则可能会导致缓存占用内存过大</li>
+<li>文档对象 doc 是当前文档对象, 即之缓存为当前文档创建的 DOM 元素</li>
+<li>HTML 代码已左尖括号开头, 即只缓存 DOM 元素, 不缓存文本节点</li>
+<li>HTML 代码中不能含有 <code>&lt;script&gt;</code> <code>&lt;object&gt;</code> <code>&lt;embed&gt;</code> <code>&lt;option&gt;</code> <code>&lt;style&gt;</code>标签</li>
+<li>当前浏览器可以正确的复制单选按钮核复选框的选中状态 checked, 或者 HTML 代码中的单选按钮和复选按钮没有被选中</li>
+<li>当前浏览器可以正确的赋值 HTML5 元素, 或者 HTML 代码中不含有 HTML5 标签</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(args.length === <span class="number">1</span></span><br><span class="line">&amp;&amp; <span class="keyword">typeof</span> first === <span class="string">'string'</span></span><br><span class="line">&amp;&amp; first.length &lt; <span class="number">512</span></span><br><span class="line">&amp;&amp; doc === <span class="built_in">document</span></span><br><span class="line">&amp;&amp; first.charAt(<span class="number">0</span>) === <span class="string">'&lt;'</span></span><br><span class="line">&amp;&amp; !rnocache.test(first)</span><br><span class="line">&amp;&amp; (jQuery.support.checkClone || !rchecked.test(first))</span><br><span class="line">&amp;&amp; (jQuery.support.html5Clone || !rnshimcache.text(first))&#123;</span><br><span class="line"></span><br><span class="line">  cacheable = <span class="literal">true</span>; <span class="comment">// 如果遍历为 true 必须先赋值一份再使用</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * 尝试从缓存对象jQuery.fragment中读取缓存的DOM元素</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">  cacheresults = jQuery.fragments[first];</span><br><span class="line">  <span class="keyword">if</span> (cacheresults &amp;&amp; cacheresults !== <span class="number">1</span>) &#123;</span><br><span class="line">    fragment = cacheresults;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">jQuery.fragments = &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="转换-HTML-代码为-DOM-元素"><a href="#转换-HTML-代码为-DOM-元素" class="headerlink" title="转换 HTML 代码为 DOM 元素"></a>转换 HTML 代码为 DOM 元素</h2><p>先创建一个文档片段 DocumentFragment, 然后调用方法 jQuery.clean(elems, context, fragment, scripts) 将 HTML 代码转换为 DOM 元素, 并存储在创建的文档片段中</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 如果为 true 表示需要直型转换过程</span></span><br><span class="line"><span class="keyword">if</span> (!fragment) &#123;</span><br><span class="line">  <span class="comment">// 调用原生方法 创建文档片段</span></span><br><span class="line">  fragment = doc.createDocumentFragment();</span><br><span class="line">  <span class="comment">// 将片段转换为 DOM 元素</span></span><br><span class="line">  jQuery.clean(args, doc, fragment, scripts);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="把转换后的-DOM-元素防褥缓存对象-jQuery-fragments"><a href="#把转换后的-DOM-元素防褥缓存对象-jQuery-fragments" class="headerlink" title="把转换后的 DOM 元素防褥缓存对象 jQuery.fragments"></a>把转换后的 DOM 元素防褥缓存对象 jQuery.fragments</h2><p>如果 HTML 代码符合缓存条件, 则把转换后的 DOM 元素放入缓存对象 jQuery.fragment 中</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 如果符合缓存条件 就缓存</span></span><br><span class="line"><span class="keyword">if</span> (cacheable) &#123;</span><br><span class="line">  jQuery.fragments[first] = cacheresults ? fragment : <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="返回文档片段和缓存状态"><a href="#返回文档片段和缓存状态" class="headerlink" title="返回文档片段和缓存状态"></a>返回文档片段和缓存状态</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">  返回一个包含了文档片段 fragment 和缓存状态 cacheable 的对象</span></span><br><span class="line"><span class="comment">  fragment 中包含了转换后的 DOM 元素, 缓存状态 cacheable 则指示了如果使用这些 DOM 元素</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">return</span> &#123;</span><br><span class="line">  fragment: fragment,</span><br><span class="line">  cacheable: cacheable</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><img data-src="../../images/02%E6%9E%84%E9%80%A0jQuery%E5%AF%B9%E8%B1%A1/jQuery.buildFragment.png" alt="1"></p>
+]]></content>
+      <categories>
+        <category>jQuery源码</category>
+      </categories>
+      <tags>
+        <tag>jQuery源码</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>jQuery源码-jQuery.fn.init</title>
     <url>/2020/03/26/jQuery%E6%BA%90%E7%A0%81-jQuery-fn-init/</url>
     <content><![CDATA[<h1 id="jQuery-fn-init-selector-context-rootjQuery"><a href="#jQuery-fn-init-selector-context-rootjQuery" class="headerlink" title="jQuery.fn.init(selector, context, rootjQuery)"></a>jQuery.fn.init(selector, context, rootjQuery)</h1><p>构造函数 jQuery.fn.init() 负责解析参数 selector 和 context 的类型, 并执行相应的逻辑, 最后返回 jQuery.fn.init() 的实例.</p>

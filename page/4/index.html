@@ -213,6 +213,117 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/04/vue-router%E7%BC%96%E7%A8%8B%E5%BC%8F%E5%AF%BC%E8%88%AA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head_pic.jpeg">
+      <meta itemprop="name" content="Ginger">
+      <meta itemprop="description" content="未来可期">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ginger">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/04/vue-router%E7%BC%96%E7%A8%8B%E5%BC%8F%E5%AF%BC%E8%88%AA/" class="post-title-link" itemprop="url">vue-router编程式导航</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-03-04 10:49:12 / 修改时间：10:49:28" itemprop="dateCreated datePublished" datetime="2020-03-04T10:49:12+08:00">2020-03-04</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/VueRoute/" itemprop="url" rel="index">
+                    <span itemprop="name">VueRoute</span>
+                  </a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="编程式导航"><a href="#编程式导航" class="headerlink" title="编程式导航"></a>编程式导航</h2><p>除了使用 <code>&lt;vue-router&gt;</code> 创建 <code>a</code> 标签来定义导航链接, 我们还可以借助 router 的实例方法, 通过编写代码来实现</p>
+<h3 id="router-push-location-onComplete-onAbort"><a href="#router-push-location-onComplete-onAbort" class="headerlink" title="router.push(location, onComplete?, onAbort)"></a>router.push(location, onComplete?, onAbort)</h3><blockquote>
+<p>在 Vue 实例内部, 可以通过 <code>$router</code> 访问路由实例, 因此可以调用 <code>this.$router.push</code></p>
+</blockquote>
+<p>想到导航到不同的 URL, 则使用 <code>router.push</code> 方法. 这个方法会想 history 栈添加一个新的记录, 所以当用户点击浏览器后退按钮时, 则回到之前的 URL</p>
+<p>当点击 <code>&lt;router-linke&gt;</code> 时, 这个方法会在内部调用, 所以点击 <code>&lt;router-link&gt;</code> 等同于调用 <code>router.push()</code></p>
+<ul>
+<li><code>&lt;router-link to=&quot;&quot;&gt;</code> 声明式</li>
+<li><code>router.replace</code> 编程式</li>
+</ul>
+<p>该方法的参数可以是一个字符串路径, 或者一个描述地址的对象</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 字符串</span></span><br><span class="line">router.push(<span class="string">'foo'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 对象</span></span><br><span class="line">router.push(&#123;</span><br><span class="line">  path: <span class="string">'home'</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 命名的路由</span></span><br><span class="line">router.push(&#123;</span><br><span class="line">  name: <span class="string">'user'</span>,</span><br><span class="line">  params: &#123;</span><br><span class="line">    userId: <span class="number">123</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">//  带查询参数</span></span><br><span class="line">router.push(&#123;</span><br><span class="line">  path: <span class="string">'register'</span>,</span><br><span class="line">  query: &#123;</span><br><span class="line">    plan: <span class="string">'private'</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>如果提供了 path，params 会被忽略</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> userId = <span class="string">'123'</span></span><br><span class="line"></span><br><span class="line">router.push(&#123;</span><br><span class="line">  <span class="comment">// -&gt; /user/123</span></span><br><span class="line">  name: <span class="string">'user'</span>,</span><br><span class="line">  params: &#123;</span><br><span class="line">    userId</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line">router.push(&#123;</span><br><span class="line">  <span class="comment">// -&gt; /user/123</span></span><br><span class="line">  path: <span class="string">`/user/<span class="subst">$&#123;userId&#125;</span>`</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">router.push(&#123;</span><br><span class="line">  <span class="comment">// -&gt; /user</span></span><br><span class="line">  path: <span class="string">'/user'</span>,</span><br><span class="line">  params: &#123; userId &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>如果目的地和当前路由相同，只有参数发生了改变 (比如从一个用户资料到另一个 /users/1 -&gt; /users/2)，你需要使用 beforeRouteUpdate 来响应这个变化 (比如抓取用户信息)。</p>
+</blockquote>
+<h2 id="router-replace-location-onComplete-onAbort"><a href="#router-replace-location-onComplete-onAbort" class="headerlink" title="router.replace(location, onComplete, onAbort)"></a>router.replace(location, onComplete, onAbort)</h2><p>跟 <code>router.push</code> 很像, 唯一的不同是, 他不会向 history 添加新纪录, 而是跟他的方法名一样, 替换掉当前的 history 记录</p>
+<ul>
+<li><code>&lt;router-link to=&quot;&quot; replace&gt;</code> 声明式</li>
+<li><code>router.replace</code> 编程式</li>
+</ul>
+<h2 id="router-go-n"><a href="#router-go-n" class="headerlink" title="router.go(n)"></a>router.go(n)</h2><p>这个方法的参数是一个整数, 意思是在 history 记录中向前或者后退多少步, 类似 <code>window.history.go(n)</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//  在浏览器记录中前进一步, 等同于 history.forward()</span></span><br><span class="line">router.go(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 后退一步记录 等同与 window.back()</span></span><br><span class="line">router.go(<span class="number">-1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 前进 3 步记录</span></span><br><span class="line">router.go(<span class="number">3</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 如果 history 不够, 默认失败</span></span><br><span class="line">router.go(<span class="number">100</span>)</span><br><span class="line">router.go(<span class="number">-100</span>)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/04/vue-router%E5%B5%8C%E5%A5%97%E8%B7%AF%E7%94%B1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1383,143 +1494,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/26/vue%E5%AE%9E%E4%BE%8B%E6%96%B9%E6%B3%95%E4%BA%8B%E4%BB%B6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/head_pic.jpeg">
-      <meta itemprop="name" content="Ginger">
-      <meta itemprop="description" content="未来可期">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ginger">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/02/26/vue%E5%AE%9E%E4%BE%8B%E6%96%B9%E6%B3%95%E4%BA%8B%E4%BB%B6/" class="post-title-link" itemprop="url">vue实例方法事件</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-02-26 15:42:13 / 修改时间：15:42:25" itemprop="dateCreated datePublished" datetime="2020-02-26T15:42:13+08:00">2020-02-26</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Vue/" itemprop="url" rel="index">
-                    <span itemprop="name">Vue</span>
-                  </a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.6k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="vm-on-event-callback"><a href="#vm-on-event-callback" class="headerlink" title="vm.$on(event, callback)"></a>vm.$on(event, callback)</h2><ul>
-<li>参数:<ul>
-<li>{string | Array<string>} event</li>
-<li>{Function} callback</li>
-</ul>
-</li>
-<li>用法:<br>监听当前实例上的自定义事件, 事件可以由 <code>vm.$emit</code> 触发. 回调函数会接受所有传入事件触发函数的额外参数</li>
-<li>示例:<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vm.$on(<span class="string">'test'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">msg</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(msg)</span><br><span class="line">&#125;)</span><br><span class="line">vm.$emit(<span class="string">'test'</span>, <span class="string">'Ginger'</span>)</span><br><span class="line"><span class="comment">// =&gt; Ginger</span></span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h2 id="vm-once-event-target"><a href="#vm-once-event-target" class="headerlink" title="vm.$once(event, target)"></a>vm.$once(event, target)</h2><ul>
-<li>参数:<ul>
-<li>{string} event</li>
-<li>{Function} callback</li>
-</ul>
-</li>
-<li>用法:<br>监听一个自定义事件, 但是只触发一次, 一旦触发之后, 监听器就会被移除</li>
-</ul>
-<h2 id="vm-off-event-callback"><a href="#vm-off-event-callback" class="headerlink" title="vm.$off(event, callback)"></a>vm.$off(event, callback)</h2><ul>
-<li>参数:<ul>
-<li>{string | Array<string>} event</li>
-<li>{Function} [callback]</li>
-</ul>
-</li>
-<li>用法<br>移除自定义事件监听器<ul>
-<li>如果没有提供参数, 则移除所有事件监听器</li>
-<li>如果只提供了事件, 则移除该事件的所有监听器</li>
-<li>如果同时提供了事件与回调, 则只移除这个回调的监听器</li>
-</ul>
-</li>
-</ul>
-<h2 id="vm-emit-eventName-…args"><a href="#vm-emit-eventName-…args" class="headerlink" title="vm.$emit(eventName, […args])"></a>vm.$emit(eventName, […args])</h2><ul>
-<li><p>参数:</p>
-<ul>
-<li>{string} eventName</li>
-<li>[…args]<br>触发当前实例上的事件</li>
-</ul>
-</li>
-<li><p>示例:<br>只配合一个事件名使用 <code>$emit</code></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Vue.component(<span class="string">'welcome-button'</span>, &#123;</span><br><span class="line">  template: <span class="string">`</span></span><br><span class="line"><span class="string">  &lt;button v-on:click="$emit('welcome')"&gt;</span></span><br><span class="line"><span class="string">    Click me to be welcomed</span></span><br><span class="line"><span class="string">  &lt;/button&gt;</span></span><br><span class="line"><span class="string">`</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"emit-example-simple"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">welcome-button</span> <span class="attr">v-on:welcome</span>=<span class="string">"sayHi"</span>&gt;</span><span class="tag">&lt;/<span class="name">welcome-button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">'#emit-example-simple'</span>,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    sayHi: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      alert(<span class="string">'Hi!'</span>)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>配合额外的参数使用 <code>$emit</code></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">Vue.component(<span class="string">'magic-eight-ball'</span>, &#123;</span><br><span class="line">  data: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      possibleAdvice: [<span class="string">'Yes'</span>, <span class="string">'No'</span>, <span class="string">'Maybe'</span>]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    giveAdvice: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">var</span> randomAdviceIndex = <span class="built_in">Math</span>.floor(</span><br><span class="line">        <span class="built_in">Math</span>.random() * <span class="keyword">this</span>.possibleAdvice.length</span><br><span class="line">      )</span><br><span class="line">      <span class="keyword">this</span>.$emit(<span class="string">'give-advice'</span>, <span class="keyword">this</span>.possibleAdvice[randomAdviceIndex])</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  template: <span class="string">`</span></span><br><span class="line"><span class="string">  &lt;button v-on:click="giveAdvice"&gt;</span></span><br><span class="line"><span class="string">    Click me for advice</span></span><br><span class="line"><span class="string">  &lt;/button&gt;</span></span><br><span class="line"><span class="string">`</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"emit-example-argument"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">magic-eight-ball</span> <span class="attr">v-on:give-advice</span>=<span class="string">"showAdvice"</span>&gt;</span><span class="tag">&lt;/<span class="name">magic-eight-ball</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">'#emit-example-argument'</span>,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    showAdvice: <span class="function"><span class="keyword">function</span>(<span class="params">advice</span>) </span>&#123;</span><br><span class="line">      alert(advice)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1592,7 +1566,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">86</span>
+          <span class="site-state-item-count">87</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1647,12 +1621,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">191k</span>
+    <span title="站点总字数">194k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">2:54</span>
+    <span title="站点阅读时长">2:56</span>
 </div>
 
 

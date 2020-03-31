@@ -213,6 +213,97 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/06/vue-router%E8%B7%AF%E7%94%B1%E5%85%83%E4%BF%A1%E6%81%AF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head_pic.jpeg">
+      <meta itemprop="name" content="Ginger">
+      <meta itemprop="description" content="未来可期">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ginger">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/06/vue-router%E8%B7%AF%E7%94%B1%E5%85%83%E4%BF%A1%E6%81%AF/" class="post-title-link" itemprop="url">vue-router路由元信息</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-03-06 21:08:57 / 修改时间：21:09:11" itemprop="dateCreated datePublished" datetime="2020-03-06T21:08:57+08:00">2020-03-06</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/VueRoute/" itemprop="url" rel="index">
+                    <span itemprop="name">VueRoute</span>
+                  </a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>817</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="路由元信息"><a href="#路由元信息" class="headerlink" title="路由元信息"></a>路由元信息</h2><p>定义路由的时候可以配置 <code>meta</code> 字段:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> VueRouter(&#123;</span><br><span class="line">  routes: [</span><br><span class="line">    &#123;</span><br><span class="line">      path: <span class="string">'/foo'</span>,</span><br><span class="line">      component: Foo,</span><br><span class="line">      chidren: [</span><br><span class="line">        &#123;</span><br><span class="line">          path: <span class="string">'/bar'</span>,</span><br><span class="line">          component: Bar,</span><br><span class="line">          meta: &#123;</span><br><span class="line">            <span class="comment">// a meta field</span></span><br><span class="line">            requiresAuth: <span class="literal">true</span></span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      ]</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>我们称呼 <code>routes</code> 配置中的每个路由对象为路由记录, 路由记录可以是嵌套的, 因此, 当一个路由匹配成功后, 他可能匹配多个路由记录</p>
+<p>例如上次面的配置, <code>/for/bar</code> 这个 RUL 将会匹配父路由以及子路由记录</p>
+<p>一个路由匹配到的所有路由记录会暴露为 <code>$route</code> 对象(还有在导航守卫中的路由对象)的 <code>$route.matched</code> 数组. 因此, 我们需要遍历 <code>$route.matched</code> 来检查路由记录中的 <code>meta</code> 字段</p>
+<p>下面的例子展示在全局导航守卫中检查元字段</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">router.beforeEach(<span class="function">(<span class="params">to, <span class="keyword">from</span>, next</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (to.matched.some(<span class="function"><span class="params">record</span> =&gt;</span> record.meta.requiresAuth)) &#123;</span><br><span class="line">    <span class="comment">// this route requires auth, check if logged in</span></span><br><span class="line">    <span class="comment">// if not, redirect to login page.</span></span><br><span class="line">    <span class="keyword">if</span> (!auth.loggedIn()) &#123;</span><br><span class="line">      next(&#123;</span><br><span class="line">        path: <span class="string">'/login'</span>,</span><br><span class="line">        query: &#123;</span><br><span class="line">          redirect: to.fullPath</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      next()</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    next() <span class="comment">// 确保一定要调用 next()</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/06/vue-router%E5%AF%BC%E8%88%AA%E5%AE%88%E5%8D%AB/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1259,117 +1350,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/04/vue-router%E7%BC%96%E7%A8%8B%E5%BC%8F%E5%AF%BC%E8%88%AA/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/head_pic.jpeg">
-      <meta itemprop="name" content="Ginger">
-      <meta itemprop="description" content="未来可期">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ginger">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/04/vue-router%E7%BC%96%E7%A8%8B%E5%BC%8F%E5%AF%BC%E8%88%AA/" class="post-title-link" itemprop="url">vue-router编程式导航</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-03-04 10:49:12 / 修改时间：10:49:28" itemprop="dateCreated datePublished" datetime="2020-03-04T10:49:12+08:00">2020-03-04</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/VueRoute/" itemprop="url" rel="index">
-                    <span itemprop="name">VueRoute</span>
-                  </a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.4k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="编程式导航"><a href="#编程式导航" class="headerlink" title="编程式导航"></a>编程式导航</h2><p>除了使用 <code>&lt;vue-router&gt;</code> 创建 <code>a</code> 标签来定义导航链接, 我们还可以借助 router 的实例方法, 通过编写代码来实现</p>
-<h3 id="router-push-location-onComplete-onAbort"><a href="#router-push-location-onComplete-onAbort" class="headerlink" title="router.push(location, onComplete?, onAbort)"></a>router.push(location, onComplete?, onAbort)</h3><blockquote>
-<p>在 Vue 实例内部, 可以通过 <code>$router</code> 访问路由实例, 因此可以调用 <code>this.$router.push</code></p>
-</blockquote>
-<p>想到导航到不同的 URL, 则使用 <code>router.push</code> 方法. 这个方法会想 history 栈添加一个新的记录, 所以当用户点击浏览器后退按钮时, 则回到之前的 URL</p>
-<p>当点击 <code>&lt;router-linke&gt;</code> 时, 这个方法会在内部调用, 所以点击 <code>&lt;router-link&gt;</code> 等同于调用 <code>router.push()</code></p>
-<ul>
-<li><code>&lt;router-link to=&quot;&quot;&gt;</code> 声明式</li>
-<li><code>router.replace</code> 编程式</li>
-</ul>
-<p>该方法的参数可以是一个字符串路径, 或者一个描述地址的对象</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 字符串</span></span><br><span class="line">router.push(<span class="string">'foo'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 对象</span></span><br><span class="line">router.push(&#123;</span><br><span class="line">  path: <span class="string">'home'</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 命名的路由</span></span><br><span class="line">router.push(&#123;</span><br><span class="line">  name: <span class="string">'user'</span>,</span><br><span class="line">  params: &#123;</span><br><span class="line">    userId: <span class="number">123</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">//  带查询参数</span></span><br><span class="line">router.push(&#123;</span><br><span class="line">  path: <span class="string">'register'</span>,</span><br><span class="line">  query: &#123;</span><br><span class="line">    plan: <span class="string">'private'</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>如果提供了 path，params 会被忽略</p>
-</blockquote>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> userId = <span class="string">'123'</span></span><br><span class="line"></span><br><span class="line">router.push(&#123;</span><br><span class="line">  <span class="comment">// -&gt; /user/123</span></span><br><span class="line">  name: <span class="string">'user'</span>,</span><br><span class="line">  params: &#123;</span><br><span class="line">    userId</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line">router.push(&#123;</span><br><span class="line">  <span class="comment">// -&gt; /user/123</span></span><br><span class="line">  path: <span class="string">`/user/<span class="subst">$&#123;userId&#125;</span>`</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">router.push(&#123;</span><br><span class="line">  <span class="comment">// -&gt; /user</span></span><br><span class="line">  path: <span class="string">'/user'</span>,</span><br><span class="line">  params: &#123; userId &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>如果目的地和当前路由相同，只有参数发生了改变 (比如从一个用户资料到另一个 /users/1 -&gt; /users/2)，你需要使用 beforeRouteUpdate 来响应这个变化 (比如抓取用户信息)。</p>
-</blockquote>
-<h2 id="router-replace-location-onComplete-onAbort"><a href="#router-replace-location-onComplete-onAbort" class="headerlink" title="router.replace(location, onComplete, onAbort)"></a>router.replace(location, onComplete, onAbort)</h2><p>跟 <code>router.push</code> 很像, 唯一的不同是, 他不会向 history 添加新纪录, 而是跟他的方法名一样, 替换掉当前的 history 记录</p>
-<ul>
-<li><code>&lt;router-link to=&quot;&quot; replace&gt;</code> 声明式</li>
-<li><code>router.replace</code> 编程式</li>
-</ul>
-<h2 id="router-go-n"><a href="#router-go-n" class="headerlink" title="router.go(n)"></a>router.go(n)</h2><p>这个方法的参数是一个整数, 意思是在 history 记录中向前或者后退多少步, 类似 <code>window.history.go(n)</code></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//  在浏览器记录中前进一步, 等同于 history.forward()</span></span><br><span class="line">router.go(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 后退一步记录 等同与 window.back()</span></span><br><span class="line">router.go(<span class="number">-1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 前进 3 步记录</span></span><br><span class="line">router.go(<span class="number">3</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 如果 history 不够, 默认失败</span></span><br><span class="line">router.go(<span class="number">100</span>)</span><br><span class="line">router.go(<span class="number">-100</span>)</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1442,7 +1422,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">86</span>
+          <span class="site-state-item-count">87</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1497,12 +1477,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">191k</span>
+    <span title="站点总字数">194k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">2:54</span>
+    <span title="站点阅读时长">2:56</span>
 </div>
 
 
