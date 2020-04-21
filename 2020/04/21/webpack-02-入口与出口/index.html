@@ -46,20 +46,20 @@
   };
 </script>
 
-  <meta name="description" content="全局配置Vue.config 是一个对象, 包含 Vue 的全局配置. slient 类型: boolean 默认: false 用法:  12&#x2F;&#x2F; 取消 Vue 所有的日志与警告Vue.config.slient &#x3D; true  optionMergeStrategies 类型: { [key: string]: Function } 默认: {} 用法:  123456789&#x2F;&#x2F; 自定义合并策">
+  <meta name="description" content="入口(entry)入口起点(entry point)指示 webpack 应该使用哪个模块, 来作为构建其内部依赖图的开始. 进入入口后, webpack 会找出有哪些模块和库是入口起点(直接和简介)依赖的 属性 entery: String|Array  CODEentry 属性的单个入口语法 12345678910&#x2F;&#x2F; 简写module.exports &#x3D; &amp;#123;  entry: &#39;.&#x2F;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="vue全局配置">
-<meta property="og:url" content="http://yoursite.com/2020/02/18/vue%E5%85%A8%E5%B1%80%E9%85%8D%E7%BD%AE/index.html">
+<meta property="og:title" content="webpack-02-入口与出口">
+<meta property="og:url" content="http://yoursite.com/2020/04/21/webpack-02-%E5%85%A5%E5%8F%A3%E4%B8%8E%E5%87%BA%E5%8F%A3/index.html">
 <meta property="og:site_name" content="Ginger">
-<meta property="og:description" content="全局配置Vue.config 是一个对象, 包含 Vue 的全局配置. slient 类型: boolean 默认: false 用法:  12&#x2F;&#x2F; 取消 Vue 所有的日志与警告Vue.config.slient &#x3D; true  optionMergeStrategies 类型: { [key: string]: Function } 默认: {} 用法:  123456789&#x2F;&#x2F; 自定义合并策">
+<meta property="og:description" content="入口(entry)入口起点(entry point)指示 webpack 应该使用哪个模块, 来作为构建其内部依赖图的开始. 进入入口后, webpack 会找出有哪些模块和库是入口起点(直接和简介)依赖的 属性 entery: String|Array  CODEentry 属性的单个入口语法 12345678910&#x2F;&#x2F; 简写module.exports &#x3D; &amp;#123;  entry: &#39;.&#x2F;">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-02-18T14:37:12.000Z">
-<meta property="article:modified_time" content="2020-02-18T14:37:27.025Z">
+<meta property="article:published_time" content="2020-04-21T14:58:29.000Z">
+<meta property="article:modified_time" content="2020-04-21T14:58:44.332Z">
 <meta property="article:author" content="Ginger">
-<meta property="article:tag" content="Vue">
+<meta property="article:tag" content="webpack">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://yoursite.com/2020/02/18/vue%E5%85%A8%E5%B1%80%E9%85%8D%E7%BD%AE/">
+<link rel="canonical" href="http://yoursite.com/2020/04/21/webpack-02-%E5%85%A5%E5%8F%A3%E4%B8%8E%E5%87%BA%E5%8F%A3/">
 
 
 <script id="page-configurations">
@@ -71,7 +71,7 @@
   };
 </script>
 
-  <title>vue全局配置 | Ginger</title>
+  <title>webpack-02-入口与出口 | Ginger</title>
   
 
 
@@ -215,7 +215,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/18/vue%E5%85%A8%E5%B1%80%E9%85%8D%E7%BD%AE/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/21/webpack-02-%E5%85%A5%E5%8F%A3%E4%B8%8E%E5%87%BA%E5%8F%A3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/head_pic.jpeg">
@@ -228,7 +228,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          vue全局配置
+          webpack-02-入口与出口
         </h1>
 
         <div class="post-meta">
@@ -239,7 +239,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-02-18 22:37:12 / 修改时间：22:37:27" itemprop="dateCreated datePublished" datetime="2020-02-18T22:37:12+08:00">2020-02-18</time>
+              <time title="创建时间：2020-04-21 22:58:29 / 修改时间：22:58:44" itemprop="dateCreated datePublished" datetime="2020-04-21T22:58:29+08:00">2020-04-21</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -247,8 +247,8 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Vue/" itemprop="url" rel="index">
-                    <span itemprop="name">Vue</span>
+                  <a href="/categories/webpack/" itemprop="url" rel="index">
+                    <span itemprop="name">webpack</span>
                   </a>
                 </span>
             </span>
@@ -278,66 +278,39 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="全局配置"><a href="#全局配置" class="headerlink" title="全局配置"></a>全局配置</h2><p><code>Vue.config</code> 是一个对象, 包含 Vue 的全局配置.</p>
-<h3 id="slient"><a href="#slient" class="headerlink" title="slient"></a>slient</h3><ul>
-<li>类型: boolean</li>
-<li>默认: false</li>
-<li>用法:</li>
+        <h2 id="入口-entry"><a href="#入口-entry" class="headerlink" title="入口(entry)"></a>入口(entry)</h2><p><strong>入口起点</strong>(entry point)指示 webpack 应该使用哪个模块, 来作为构建其内部依赖图的开始. 进入入口后, webpack 会找出有哪些模块和库是入口起点(直接和简介)依赖的</p>
+<h3 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h3><ul>
+<li>entery: String|Array<string></li>
 </ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 取消 Vue 所有的日志与警告</span></span><br><span class="line">Vue.config.slient = <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<h3 id="CODE"><a href="#CODE" class="headerlink" title="CODE"></a>CODE</h3><p><code>entry</code> 属性的单个入口语法</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 简写</span></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  entry: <span class="string">'./src/index.js'</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 非简写</span></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  entry: &#123;</span><br><span class="line">    main: <span class="string">'./src/index.js'</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="optionMergeStrategies"><a href="#optionMergeStrategies" class="headerlink" title="optionMergeStrategies"></a>optionMergeStrategies</h3><ul>
-<li>类型: { [key: string]: Function }</li>
-<li>默认: {}</li>
-<li>用法:</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 自定义合并策略的选项。</span></span><br><span class="line">Vue.config.optionMergeStrategies._my_option = <span class="function"><span class="keyword">function</span>(<span class="params">parent, child, vm</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> child + <span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Profile = Vue.extend(&#123;</span><br><span class="line">  _my_option: <span class="number">1</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// Profile.options._my_option = 2</span></span><br></pre></td></tr></table></figure>
+<p><code>entry</code> 多入口写法 - 对象写法: </p>
+<p>用法: `entry: {[entruChunkName: string]: string|Array<string>}</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> config = &#123;</span><br><span class="line">  entry: &#123;</span><br><span class="line">    app: <span class="string">'./src/app.js'</span>,</span><br><span class="line">    vendors: <span class="string">'./src/vendors.js'</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">module</span>.exports = config</span><br></pre></td></tr></table></figure>
 
 <blockquote>
-<p>合并策略选项分别接收在父实例和子实例上定义的该选项的值作为第一个和第二个参数，Vue 实例上下文被作为第三个参数传入。</p>
+<p>可应用于多页面程序</p>
 </blockquote>
-<h3 id="errorHandle"><a href="#errorHandle" class="headerlink" title="errorHandle"></a>errorHandle</h3><ul>
-<li>类型: Function</li>
-<li>默认值: undefined</li>
-<li>用法:</li>
+<h2 id="出口-output"><a href="#出口-output" class="headerlink" title="出口(output)"></a>出口(output)</h2><p><strong>output</strong>属性告诉 webpack 在哪里输出它所创建的 bundles, 以及如何命名这些文件, 默认值为 <code>./dist</code>. 整个应用程序结构, 都会被编译到指定的输出路径的文件夹中, </p>
+<h3 id="属性-1"><a href="#属性-1" class="headerlink" title="属性"></a>属性</h3><ul>
+<li>output: Object <code>output</code> 选项可以控制 webpack 如何向硬盘写入编译文件<ul>
+<li>filename: String 打包后的文件名</li>
+<li>path: String 打包输出路径</li>
 </ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Vue.config.errorHandle = <span class="function"><span class="keyword">function</span>(<span class="params">err, vm, info</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// handle error</span></span><br><span class="line">  <span class="comment">// info 是 Vue 特定的错误信息, 比如错误所在的生命周期钩子</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>指定组件的渲染和观察期间未捕获错误的处理函数。这个处理函数被调用时，可获取错误信息和 Vue 实例。</p>
-</blockquote>
-<h3 id="warnHandle"><a href="#warnHandle" class="headerlink" title="warnHandle"></a>warnHandle</h3><ul>
-<li>类型: Function</li>
-<li>默认值: undefined</li>
-<li>用法:</li>
+</li>
 </ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Vue.config.warnHandle = <span class="function"><span class="keyword">function</span>(<span class="params">msg, vm, trace</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// trace 是组件的继承关系追踪</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="CODE-1"><a href="#CODE-1" class="headerlink" title="CODE"></a>CODE</h3><p>单入口</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 借助 NodeJS 的 path 核心模块</span></span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>)</span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  entry: <span class="string">'./src/index.js'</span>,</span><br><span class="line">  output: &#123;</span><br><span class="line">    filename: <span class="string">'bundle.js'</span>,</span><br><span class="line">    path: path.resolve(__dirname, <span class="string">'dist'</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="ignoredElements"><a href="#ignoredElements" class="headerlink" title="ignoredElements"></a>ignoredElements</h3><ul>
-<li>类型 Array&lt;string | RegExp&gt;</li>
-<li>默认值: {}</li>
-<li>用法:</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Vue.config.ignoredElements = [</span><br><span class="line">  <span class="string">'my-custom-web-component'</span>,</span><br><span class="line">  <span class="string">'another-web-component'</span>,</span><br><span class="line">  <span class="comment">// 用一个 `RegExp` 忽略所有“ion-”开头的元素</span></span><br><span class="line">  <span class="comment">// 仅在 2.5+ 支持</span></span><br><span class="line">  /^ion-<span class="regexp">/</span></span><br><span class="line"><span class="regexp">]</span></span><br></pre></td></tr></table></figure>
+<p>多个入口</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> config = &#123;</span><br><span class="line">  entry: &#123;</span><br><span class="line">    app: <span class="string">'./src/app.js'</span>,</span><br><span class="line">    search: <span class="string">'./src/search.js'</span></span><br><span class="line">  &#125;,</span><br><span class="line">  output: &#123;</span><br><span class="line">    filename: <span class="string">'[name].js'</span>,</span><br><span class="line">    path: __dirname + <span class="string">'/dist'</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 写入到硬盘：./dist/app.js, ./dist/search.js</span></span><br></pre></td></tr></table></figure>
 
-<blockquote>
-<p>须使 Vue 忽略在 Vue 之外的自定义元素 (e.g. 使用了 Web Components APIs)。否则，它会假设你忘记注册全局组件或者拼错了组件名称，从而抛出一个关于 Unknown custom element 的警告。</p>
-</blockquote>
-<h3 id="keyCodes"><a href="#keyCodes" class="headerlink" title="keyCodes"></a>keyCodes</h3><ul>
-<li>类型: { [key: string]: number | Array<number> }</li>
-<li>默认值: {}</li>
-<li>用法:</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 给 v-on 自定义键位别名。</span></span><br><span class="line">Vue.config.keyCodes = &#123;</span><br><span class="line">  v: <span class="number">86</span>,</span><br><span class="line">  f1: <span class="number">112</span>,</span><br><span class="line">  <span class="comment">// camelCase 不可用</span></span><br><span class="line">  mediaPlayPause: <span class="number">179</span>,</span><br><span class="line">  <span class="comment">// 取而代之的事 kebab-case 且用双引号括起来</span></span><br><span class="line">  <span class="string">'media-play-pause'</span>: <span class="number">179</span>,</span><br><span class="line">  up: [<span class="number">38</span>, <span class="number">87</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="高级进阶"><a href="#高级进阶" class="headerlink" title="高级进阶"></a>高级进阶</h3><p>使用 CDN 和资源 hash 的复杂示例</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">output: &#123;</span><br><span class="line">  path: <span class="string">'/home/proj/cnd/assets/[hash]'</span>,</span><br><span class="line">  publicPath: <span class="string">"http://cdn.example.com/assets/[hash]/"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> @<span class="attr">media-play-pause</span>=<span class="string">"method"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="productionTip"><a href="#productionTip" class="headerlink" title="productionTip"></a>productionTip</h3><ul>
-<li>类型: boolean</li>
-<li>默认值: true</li>
-<li>用法:<br>设置为 false 以阻止 vue 在启动时生成生产提示</li>
-</ul>
-
+<p>在编译时不知道最终输出文件的 publicPath 的情况下，publicPath 可以留空，并且在入口起点文件运行时动态设置。如果你在编译时不知道 publicPath，你可以先忽略它，并且在入口起点设置 <strong>webpack_public_path</strong>。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">__webpack_public_path__ = myRuntimePublicPath</span><br></pre></td></tr></table></figure>
     </div>
 
     
@@ -361,7 +334,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/Vue/" rel="tag"># Vue</a>
+              <a href="/tags/webpack/" rel="tag"># webpack</a>
           </div>
 
         
@@ -370,13 +343,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/02/16/vue%E8%BF%87%E6%BB%A4%E5%99%A8/" rel="prev" title="vue过滤器">
-      <i class="fa fa-chevron-left"></i> vue过滤器
+    <a href="/2020/04/20/webpack-01-%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/" rel="prev" title="webpack-01-安装与使用">
+      <i class="fa fa-chevron-left"></i> webpack-01-安装与使用
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/02/19/vue%E5%85%A8%E5%B1%80API/" rel="next" title="vue全局API">
-      vue全局API <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -437,7 +407,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#全局配置"><span class="nav-number">1.</span> <span class="nav-text">全局配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#slient"><span class="nav-number">1.1.</span> <span class="nav-text">slient</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#optionMergeStrategies"><span class="nav-number">1.2.</span> <span class="nav-text">optionMergeStrategies</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#errorHandle"><span class="nav-number">1.3.</span> <span class="nav-text">errorHandle</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#warnHandle"><span class="nav-number">1.4.</span> <span class="nav-text">warnHandle</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ignoredElements"><span class="nav-number">1.5.</span> <span class="nav-text">ignoredElements</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#keyCodes"><span class="nav-number">1.6.</span> <span class="nav-text">keyCodes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#productionTip"><span class="nav-number">1.7.</span> <span class="nav-text">productionTip</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#入口-entry"><span class="nav-number">1.</span> <span class="nav-text">入口(entry)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#属性"><span class="nav-number">1.1.</span> <span class="nav-text">属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CODE"><span class="nav-number">1.2.</span> <span class="nav-text">CODE</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#出口-output"><span class="nav-number">2.</span> <span class="nav-text">出口(output)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#属性-1"><span class="nav-number">2.1.</span> <span class="nav-text">属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CODE-1"><span class="nav-number">2.2.</span> <span class="nav-text">CODE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#高级进阶"><span class="nav-number">2.3.</span> <span class="nav-text">高级进阶</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -707,7 +677,7 @@ NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
       repo: 'Ginger-Jiang.github.io',
       owner: 'Ginger-Jiang',
       admin: ['Ginger-Jiang'],
-      id: 'a05e602fcdd0dd54617a9e78f84b2009',
+      id: '7cf3f791feb7356f602a3a24d8834ebf',
         language: 'zh-CN',
       distractionFreeMode: true
     });

@@ -1,6 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>webpack-02-入口与出口</title>
+    <url>/2020/04/21/webpack-02-%E5%85%A5%E5%8F%A3%E4%B8%8E%E5%87%BA%E5%8F%A3/</url>
+    <content><![CDATA[<h2 id="入口-entry"><a href="#入口-entry" class="headerlink" title="入口(entry)"></a>入口(entry)</h2><p><strong>入口起点</strong>(entry point)指示 webpack 应该使用哪个模块, 来作为构建其内部依赖图的开始. 进入入口后, webpack 会找出有哪些模块和库是入口起点(直接和简介)依赖的</p>
+<h3 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h3><ul>
+<li>entery: String|Array<string></li>
+</ul>
+<h3 id="CODE"><a href="#CODE" class="headerlink" title="CODE"></a>CODE</h3><p><code>entry</code> 属性的单个入口语法</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 简写</span></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  entry: <span class="string">'./src/index.js'</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 非简写</span></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  entry: &#123;</span><br><span class="line">    main: <span class="string">'./src/index.js'</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>entry</code> 多入口写法 - 对象写法: </p>
+<p>用法: `entry: {[entruChunkName: string]: string|Array<string>}</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> config = &#123;</span><br><span class="line">  entry: &#123;</span><br><span class="line">    app: <span class="string">'./src/app.js'</span>,</span><br><span class="line">    vendors: <span class="string">'./src/vendors.js'</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">module</span>.exports = config</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>可应用于多页面程序</p>
+</blockquote>
+<h2 id="出口-output"><a href="#出口-output" class="headerlink" title="出口(output)"></a>出口(output)</h2><p><strong>output</strong>属性告诉 webpack 在哪里输出它所创建的 bundles, 以及如何命名这些文件, 默认值为 <code>./dist</code>. 整个应用程序结构, 都会被编译到指定的输出路径的文件夹中, </p>
+<h3 id="属性-1"><a href="#属性-1" class="headerlink" title="属性"></a>属性</h3><ul>
+<li>output: Object <code>output</code> 选项可以控制 webpack 如何向硬盘写入编译文件<ul>
+<li>filename: String 打包后的文件名</li>
+<li>path: String 打包输出路径</li>
+</ul>
+</li>
+</ul>
+<h3 id="CODE-1"><a href="#CODE-1" class="headerlink" title="CODE"></a>CODE</h3><p>单入口</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 借助 NodeJS 的 path 核心模块</span></span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>)</span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  entry: <span class="string">'./src/index.js'</span>,</span><br><span class="line">  output: &#123;</span><br><span class="line">    filename: <span class="string">'bundle.js'</span>,</span><br><span class="line">    path: path.resolve(__dirname, <span class="string">'dist'</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>多个入口</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> config = &#123;</span><br><span class="line">  entry: &#123;</span><br><span class="line">    app: <span class="string">'./src/app.js'</span>,</span><br><span class="line">    search: <span class="string">'./src/search.js'</span></span><br><span class="line">  &#125;,</span><br><span class="line">  output: &#123;</span><br><span class="line">    filename: <span class="string">'[name].js'</span>,</span><br><span class="line">    path: __dirname + <span class="string">'/dist'</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 写入到硬盘：./dist/app.js, ./dist/search.js</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="高级进阶"><a href="#高级进阶" class="headerlink" title="高级进阶"></a>高级进阶</h3><p>使用 CDN 和资源 hash 的复杂示例</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">output: &#123;</span><br><span class="line">  path: <span class="string">'/home/proj/cnd/assets/[hash]'</span>,</span><br><span class="line">  publicPath: <span class="string">"http://cdn.example.com/assets/[hash]/"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在编译时不知道最终输出文件的 publicPath 的情况下，publicPath 可以留空，并且在入口起点文件运行时动态设置。如果你在编译时不知道 publicPath，你可以先忽略它，并且在入口起点设置 <strong>webpack_public_path</strong>。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">__webpack_public_path__ = myRuntimePublicPath</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>webpack</category>
+      </categories>
+      <tags>
+        <tag>webpack</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>webpack-01-安装与使用</title>
     <url>/2020/04/20/webpack-01-%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/</url>
     <content><![CDATA[<blockquote>
