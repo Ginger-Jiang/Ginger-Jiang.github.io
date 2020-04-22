@@ -213,6 +213,125 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/03/vue%E6%9D%A1%E4%BB%B6%E6%B8%B2%E6%9F%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head_pic.jpeg">
+      <meta itemprop="name" content="Ginger">
+      <meta itemprop="description" content="未来可期">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ginger">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/02/03/vue%E6%9D%A1%E4%BB%B6%E6%B8%B2%E6%9F%93/" class="post-title-link" itemprop="url">vue条件渲染</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-02-03 20:25:41" itemprop="dateCreated datePublished" datetime="2020-02-03T20:25:41+08:00">2020-02-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-02-04 00:14:29" itemprop="dateModified" datetime="2020-02-04T00:14:29+08:00">2020-02-04</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Vue/" itemprop="url" rel="index">
+                    <span itemprop="name">Vue</span>
+                  </a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="v-if"><a href="#v-if" class="headerlink" title="v-if"></a>v-if</h2><p><code>v-if</code> 指令用于条件性的渲染一块内容. 该内容只有在表达式结果返回 <code>true</code> 值的时候被渲染</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">v-if</span>=<span class="string">"true"</span>&gt;</span>v-if表达式结果为真时显示<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="lt-template-gt-元素"><a href="#lt-template-gt-元素" class="headerlink" title="&lt;template&gt; 元素"></a><code>&lt;template&gt;</code> 元素</h3><p><code>&lt;template&gt;</code> 元素是 Vue 给我们提供的内置元素, 它不会显示在页面中<br>如果我们要对多个元素使用<code>v-if</code>指令, 可以使用 <code>&lt;template&gt;</code> 元素包裹所有需要作用的元素</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span> <span class="attr">v-if</span>=<span class="string">"true"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">h3</span>&gt;</span>title<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>...content<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="v-else"><a href="#v-else" class="headerlink" title="v-else"></a>v-else</h3><p>可以使用 <code>v-else</code> 指令来表示 <code>v-if</code> 的’else’块<br><code>v-else</code> 元素必须紧跟在带 <code>v-if</code> 或者 <code>v-else-if</code> 的元素后面, 否则它将不会被识别</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">v-if</span>=<span class="string">"Math.random() &gt; 0.5"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">v-else</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="v-else-if"><a href="#v-else-if" class="headerlink" title="v-else-if"></a>v-else-if</h3><p><code>v-else-if</code>, 可以充当<code>v-if</code>的’else-if’块, 可以连续使用, 也必须紧跟在带<code>v-if</code>或者<code>v-else-if</code>元素之后</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">v-if</span>=<span class="string">"type==='A'"</span>&gt;</span>A<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">v-else-if</span>=<span class="string">"type==='B'"</span>&gt;</span>B<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">v-else-if</span>=<span class="string">"type==='C'"</span>&gt;</span>C<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">v-else</span>=<span class="string">"type==='D'"</span>&gt;</span>A<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="key"><a href="#key" class="headerlink" title="key"></a>key</h3><p>Vue 会尽可能高效的渲染元素, 通常会复用已有元素而不是从头开始渲染, 这么做会使 Vue 变得非常快<br>但有时候, 我们并不希望使用此特性, Vue 为我们一种方式来表达不复用, 只需要添加一个具有唯一值的<code>key</code>属性即可</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div class&#x3D;&quot;hello&quot;&gt;</span><br><span class="line">    &lt;template v-if&#x3D;&quot;loginType&quot;&gt;</span><br><span class="line">      &lt;label&gt;Username&lt;&#x2F;label&gt;</span><br><span class="line">      &lt;input placeholder&#x3D;&quot;Enter your username&quot; key&#x3D;&quot;username&quot; &#x2F;&gt;</span><br><span class="line">    &lt;&#x2F;template&gt;</span><br><span class="line">    &lt;template v-else&gt;</span><br><span class="line">      &lt;label&gt;Email&lt;&#x2F;label&gt;</span><br><span class="line">      &lt;input placeholder&#x3D;&quot;Enter your email address&quot; key&#x3D;&quot;pwd&quot; &#x2F;&gt;</span><br><span class="line">    &lt;&#x2F;template&gt;</span><br><span class="line">    &lt;button @click&#x3D;&quot;handle&quot;&gt;toog&lt;&#x2F;button&gt;</span><br><span class="line">  &lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">  name: &#39;HelloWorld&#39;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    handle() &#123;</span><br><span class="line">      this.loginType &#x3D; !this.loginType</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  data() &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">      loginType: true</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="v-show"><a href="#v-show" class="headerlink" title="v-show"></a>v-show</h2><p>另一个根据条件展示元素的选项是<code>v-show</code>指令, 用法与<code>v-if</code>大致一样:</p>
+<blockquote>
+<p>v-show 不支持 <code>&lt;template&gt;</code> 元素, 也不支持 v-else</p>
+</blockquote>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h1</span> <span class="attr">v-show</span>=<span class="string">"true"</span>&gt;</span>Ginger<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="v-if-vs-v-show"><a href="#v-if-vs-v-show" class="headerlink" title="v-if vs v-show"></a>v-if vs v-show</h2><ul>
+<li>v-if 是真正的条件渲染, 他会在切换过程中适当的将事件监听器和子组件适当地被销毁和重建</li>
+<li>v-if 是惰性的, 如果在初始渲染时条件为假, 元素便不会渲染, 只到条件第一次为真时, 才会开始渲染</li>
+<li>v-show 不管初始条件是什么, 元素总是会被渲染, 并且只是基于 CSS 进行切换</li>
+</ul>
+<h2 id="v-if-与-v-show-一起使用"><a href="#v-if-与-v-show-一起使用" class="headerlink" title="v-if 与 v-show 一起使用"></a>v-if 与 v-show 一起使用</h2><p>当<code>v-if</code>与<code>v-for</code>一起使用时, <code>v-for</code>具有比<code>v-if</code>更高的优先级</p>
+<blockquote>
+<p>不推荐同时使用 <code>v-if</code> 和 <code>v-else</code></p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/03/vue%E4%B8%ADclass%E4%B8%8Estyle%E7%BB%91%E5%AE%9A/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1138,116 +1257,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/22/%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/head_pic.jpeg">
-      <meta itemprop="name" content="Ginger">
-      <meta itemprop="description" content="未来可期">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ginger">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/01/22/%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/" class="post-title-link" itemprop="url">简单工厂模式</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-01-22 16:07:02 / 修改时间：16:07:54" itemprop="dateCreated datePublished" datetime="2020-01-22T16:07:02+08:00">2020-01-22</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" itemprop="url" rel="index">
-                    <span itemprop="name">设计模式</span>
-                  </a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.9k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <ul>
-<li>构造器模式</li>
-<li>简单工厂模式</li>
-</ul>
-<h2 id="构造器模式-抽象每个对象的变与不变"><a href="#构造器模式-抽象每个对象的变与不变" class="headerlink" title="构造器模式-抽象每个对象的变与不变"></a>构造器模式-抽象每个对象的变与不变</h2><p>你正在开发一个学生管理系统, 开发时只有自己, 于是创建自己的用户信息:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 字面量</span></span><br><span class="line"><span class="keyword">const</span> zhangsan = &#123;</span><br><span class="line">  name: <span class="string">'张三'</span>,</span><br><span class="line">  age: <span class="number">22</span>,</span><br><span class="line">  gender: <span class="number">0</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>过了两天, 你的同事过来说让你加上他的用户信息, 他要使用用户信息, 于是你:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 字面量</span></span><br><span class="line"><span class="keyword">const</span> zhangsan = &#123;</span><br><span class="line">  name: <span class="string">'张三'</span>,</span><br><span class="line">  age: <span class="number">22</span>,</span><br><span class="line">  gender: <span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> lisi = &#123;</span><br><span class="line">  name: <span class="string">'李四'</span>,</span><br><span class="line">  age: <span class="number">20</span>,</span><br><span class="line">  gender: <span class="number">1</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>过了两个星期,产品经理跟你说, 我这里有一点点(1000 个)测试数据, 你给我录入下, 于是你写了个构造函数(构造器)</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 构造器</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Students</span>(<span class="params">name, age, gender</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name = name</span><br><span class="line">  <span class="keyword">this</span>.age = age</span><br><span class="line">  <span class="keyword">this</span>.gender = genger</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// ... 此处省略读取数据, 遍历调用构造器</span></span><br><span class="line"><span class="keyword">const</span> student = <span class="keyword">new</span> Students(name, age, gender)</span><br></pre></td></tr></table></figure>
-
-<h3 id="思考-变与不变"><a href="#思考-变与不变" class="headerlink" title="思考 变与不变"></a>思考 变与不变</h3><p>不变的是每个学生都有姓名、年龄、性别三个属性,这叫<strong>共性</strong><br>变化的是三个属性的值,这叫<strong>个性</strong></p>
-<blockquote>
-<p>案例中构造器在整个过程中就是抽象了学生这个对象, 将赋值的过程进行了封装, 确定不变的部分, 使每个学生对象都有自己的姓名、年龄、性别三个属性, 在确保不变的同时, 将变化的三个属性的值进行开放, 由用户自己传入, 保证了个性的灵活度</p>
-</blockquote>
-<h2 id="工厂模式-抽象不同构造器之间的变与不变"><a href="#工厂模式-抽象不同构造器之间的变与不变" class="headerlink" title="工厂模式-抽象不同构造器之间的变与不变"></a>工厂模式-抽象不同构造器之间的变与不变</h2><p>第一期交付后一个月, 学校方面打来电话, 表示要对学生中的班干部进行区分, 备注班干部职责, 于是你加了一个班干部的构造器用来生成班干部的信息,</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Students</span>(<span class="params">name, age, gender</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 普通学生</span></span><br><span class="line">  <span class="keyword">this</span>.name = name</span><br><span class="line">  <span class="keyword">this</span>.age = age</span><br><span class="line">  <span class="keyword">this</span>.gender = genger</span><br><span class="line">  <span class="keyword">this</span>.identity = <span class="string">'student'</span></span><br><span class="line">  <span class="keyword">this</span>.duties = [<span class="string">'学习'</span>]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Cadres</span>(<span class="params">name, age, gender</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 班干部</span></span><br><span class="line">  <span class="keyword">this</span>.name = name</span><br><span class="line">  <span class="keyword">this</span>.age = age</span><br><span class="line">  <span class="keyword">this</span>.gender = genger</span><br><span class="line">  <span class="keyword">this</span>.identity = <span class="string">'cadre'</span></span><br><span class="line">  <span class="keyword">this</span>.duties = [<span class="string">'点名'</span>,<span class="string">'出黑板报'</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这时候, 你发现又出现了 <strong>变数</strong> identity, 你还需要一个方法来判断调用哪一个构造器</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Factory</span>(<span class="params">name, age, gender, identity</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">switch</span>(identity) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">'student'</span>:</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">new</span> Students(name, age, gender)</span><br><span class="line">      <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">case</span> <span class="string">'cadre'</span>:</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">new</span> Cadres(name, age, gender)</span><br><span class="line">      <span class="keyword">break</span></span><br><span class="line">    <span class="comment">// 此处省略无数个班干部</span></span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">      <span class="keyword">break</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>写完后, 你发现每类班干部职责实在太多了, 难道要写几十个构造器么</p>
-<h3 id="重新思考-变与不变"><a href="#重新思考-变与不变" class="headerlink" title="重新思考 变与不变"></a>重新思考 变与不变</h3><p>在我们的学生与班干部两个构造器中, 都拥有不变的姓名、年龄、性别三个共性, 变化是的身份与职责, 由此可以看出我们的问题, 共性封装不够、共性与个性分离不彻底, 于是我们重新封装下:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Student</span>(<span class="params">name, age, gender, identity, duties</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name = name</span><br><span class="line">  <span class="keyword">this</span>.age = age</span><br><span class="line">  <span class="keyword">this</span>.gender = gender</span><br><span class="line">  <span class="keyword">this</span>.identity = identity</span><br><span class="line">  <span class="keyword">this</span>.duties = duties</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Factory</span>(<span class="params">name, age, gender, identity</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> duties</span><br><span class="line">  <span class="keyword">switch</span>(identity)&#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">'student'</span>:</span><br><span class="line">      duties = [<span class="string">'学习'</span>,<span class="string">'做作业'</span>]</span><br><span class="line">      <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">case</span> <span class="string">'cadre'</span>:</span><br><span class="line">      duties = [<span class="string">'组织活动'</span>,<span class="string">'点名'</span>]</span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">      <span class="keyword">break</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> Student(name, age, gender, identity, duties)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<pre><code>工厂模式就是对创建对象的过程进行封装, 我们不需要在关心封装内做的事情,只需要拿到工厂交付给我们的结果即可.</code></pre>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1320,7 +1329,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">89</span>
+          <span class="site-state-item-count">90</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1375,7 +1384,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">196k</span>
+    <span title="站点总字数">197k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>

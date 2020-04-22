@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-04-21T14:58:44.332Z</updated>
+  <updated>2020-04-22T15:15:34.560Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>webpack-03-loader</title>
+    <link href="http://yoursite.com/2020/04/22/webpack-03-loader/"/>
+    <id>http://yoursite.com/2020/04/22/webpack-03-loader/</id>
+    <published>2020-04-22T15:15:21.000Z</published>
+    <updated>2020-04-22T15:15:34.560Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="loader"><a href="#loader" class="headerlink" title="loader"></a>loader</h2><p>loader 用于对模块的源代码进行转换. loader 可以使你在 <code>import</code> 或 “加载” 模块时预处理文件. loader 可以将文件从不同的语言转换为 JavaScript, 或将内联图像转换为 data URL, loader 甚至允许直接在 JavaScript 模块中 <code>import</code> CSS 文件</p><h2 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h2><ul><li>loader 支持链式传递, 一组链式的 loader 按照相反的顺序执行, loader 链中的第一个 loader 返回值给下一个 loader. 在最后一个 loader 返回 webpack 所预期的 JavaScript</li><li>loader 可以是同步的, 也可以是异步的</li><li>loader 运行在 Node.js 中, 并且能够执行任何可能的操作</li><li>loader 接受查询参数, 用于对 loader 传递配置</li><li>loader 也能够使用 options 对象进行配置</li><li>除了使用 <code>package.json</code> 常见的 <code>main</code> 属性, 还可以将普通的 <code>npm</code> 模块导出为 loader, 做法是在 <code>package.json</code> 里定义一个 loader 字段</li><li>插件(plugin)可以为 loader 带来更多特性</li><li>loader 能够产生额外的任意文件</li></ul><h2 id="css-loader"><a href="#css-loader" class="headerlink" title="css-loader"></a>css-loader</h2><p>可以使用 loader 告诉 webpack 加载 CSS 文件</p><p>先安装对应的loader</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -D css-loader</span><br></pre></td></tr></table></figure><p>然后配置 <code>webpack.config.js</code> 文件, 告诉 webpack 对每个 <code>.css</code> 使用 css-loader</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="built_in">module</span>: &#123;</span><br><span class="line">    rules: [</span><br><span class="line">      &#123;</span><br><span class="line">        test: <span class="regexp">/\.css$/</span>,</span><br><span class="line">        use: [</span><br><span class="line">          &#123;</span><br><span class="line">            loader: <span class="string">'style-loader'</span></span><br><span class="line">          &#125;,</span><br><span class="line">          &#123;</span><br><span class="line">            loader: <span class="string">'css-loader'</span>,</span><br><span class="line">            options: <span class="literal">true</span></span><br><span class="line">          &#125;</span><br><span class="line">        ]</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;loader&quot;&gt;&lt;a href=&quot;#loader&quot; class=&quot;headerlink&quot; title=&quot;loader&quot;&gt;&lt;/a&gt;loader&lt;/h2&gt;&lt;p&gt;loader 用于对模块的源代码进行转换. loader 可以使你在 &lt;code&gt;import&lt;/code&gt;
+      
+    
+    </summary>
+    
+    
+      <category term="webpack" scheme="http://yoursite.com/categories/webpack/"/>
+    
+    
+      <category term="webpack" scheme="http://yoursite.com/tags/webpack/"/>
+    
+  </entry>
   
   <entry>
     <title>webpack-02-入口与出口</title>
@@ -515,32 +541,6 @@
       
       
         &lt;h2 id=&quot;路由懒加载&quot;&gt;&lt;a href=&quot;#路由懒加载&quot; class=&quot;headerlink&quot; title=&quot;路由懒加载&quot;&gt;&lt;/a&gt;路由懒加载&lt;/h2&gt;&lt;p&gt;当打包构建应用时, JavaScript 包会变得非常大, 影响页面加载. 如果我们能把不同路由对相应的组件分隔成不
-      
-    
-    </summary>
-    
-    
-      <category term="VueRoute" scheme="http://yoursite.com/categories/VueRoute/"/>
-    
-    
-      <category term="VueRoute" scheme="http://yoursite.com/tags/VueRoute/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>vue-router滚动行为</title>
-    <link href="http://yoursite.com/2020/03/08/vue-router%E6%BB%9A%E5%8A%A8%E8%A1%8C%E4%B8%BA/"/>
-    <id>http://yoursite.com/2020/03/08/vue-router%E6%BB%9A%E5%8A%A8%E8%A1%8C%E4%B8%BA/</id>
-    <published>2020-03-08T10:50:28.000Z</published>
-    <updated>2020-03-08T10:50:42.220Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="滚动行为"><a href="#滚动行为" class="headerlink" title="滚动行为"></a>滚动行为</h2><p>使用前端路由, 当切换到新路由时, 想要页面滚到顶部, 或者是保持原先的滚动位置, 就像重新加载页面那样. <code>vue-router</code> 能做到, 而且更好, 它让你可以自定义路由切换时页面如何滚动.</p><blockquote><p>注意: 这个功能只在支持 <code>history.pushState</code> 的浏览器中可用</p></blockquote><p>当创建一个 Router 实例, 可以提供一个 <code>scrollBehavior</code> 方法:</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> VueRouter(&#123;</span><br><span class="line">  routes: [...],</span><br><span class="line">  scrollBehavior(to, <span class="keyword">from</span>, savedPosition) &#123;</span><br><span class="line">    <span class="comment">// return 期望滚动到哪个位置</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure><p><code>scrollBehavior</code> 方法接受 <code>to</code> 和 <code>from</code> 路由对象, 第三个参数 <code>savedPosition</code> 并且仅当 <code>popstate</code> 导航时才可用.</p><p>这个方法返回滚动位置的对象信息:</p><ul><li><code>{x: number, y: number}</code></li><li><code>{selector: string, offset: {x: number, y: number}}</code></li></ul><p>如果返回一个 falsy 的值, 或者是一个空对象,那么不会发生滚动</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">scrollBehavior(to, <span class="keyword">from</span>, savePosition) &#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;<span class="attr">x</span>:<span class="number">0</span>, <span class="attr">y</span>:<span class="number">0</span>&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>对于所有路由导航, 简单地让页面滚动到顶部</p><p>返回 <code>savedPosition</code>, 在按下 后退/前进 按钮时, 就会像浏览器的原生表现那样:</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">scrollBehavior (to, <span class="keyword">from</span>, savedPosition) &#123;</span><br><span class="line">  <span class="keyword">if</span> (savedPosition) &#123;</span><br><span class="line">    <span class="keyword">return</span> savedPosition</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123; <span class="attr">x</span>: <span class="number">0</span>, <span class="attr">y</span>: <span class="number">0</span> &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>如果要模拟 滚动到锚点 的行为:</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">scrollBehavior (to, <span class="keyword">from</span>, savedPosition) &#123;</span><br><span class="line">  <span class="keyword">if</span> (to.hash) &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      selector: to.hash</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2 id="异步滚动"><a href="#异步滚动" class="headerlink" title="异步滚动"></a>异步滚动</h2><p>也可以返回一个 Promise 来得出预期的位置描述</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">scrollBehavior (to, <span class="keyword">from</span>, savedPosition) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      resolve(&#123; <span class="attr">x</span>: <span class="number">0</span>, <span class="attr">y</span>: <span class="number">0</span> &#125;)</span><br><span class="line">    &#125;, <span class="number">500</span>)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>将其挂载到从页面级别的过渡组件的事件上，令其滚动行为和页面过渡一起良好运行是可能的。但是考虑到用例的多样性和复杂性，我们仅提供这个原始的接口，以支持不同用户场景的具体实现。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h2 id=&quot;滚动行为&quot;&gt;&lt;a href=&quot;#滚动行为&quot; class=&quot;headerlink&quot; title=&quot;滚动行为&quot;&gt;&lt;/a&gt;滚动行为&lt;/h2&gt;&lt;p&gt;使用前端路由, 当切换到新路由时, 想要页面滚到顶部, 或者是保持原先的滚动位置, 就像重新加载页面那样. &lt;code&gt;vu
       
     
     </summary>
