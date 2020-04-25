@@ -1,6 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>webpack-04-mode</title>
+    <url>/2020/04/25/webpack-04-mode/</url>
+    <content><![CDATA[<h2 id="模式"><a href="#模式" class="headerlink" title="模式"></a>模式</h2><p>提供 <code>mode</code> 配置选项, 告知 webpack 使用相应的模式的内置优化</p>
+<h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><p>只在配置中提供 <code>mode</code> 选项</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  mode: <span class="string">'production'</span>, <span class="comment">// 生产环境</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>或者在 CLI 参数中传递</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">webpack --mode=production</span><br></pre></td></tr></table></figure>
+
+<h2 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h2><ul>
+<li><p>development:<br>会将 <code>process.env.NODE_ENV</code> 的值设为 <code>development</code>. 启用 <code>NamedChunksPlugin</code> 和 <code>NamedModulesPlugin</code></p>
+</li>
+<li><p>production:<br>会将 <code>process.env.NODE_ENV</code> 的值设为 <code>production</code>. 启用 <code>FlagDependencyUsagePlugin</code>, <code>FlagIncludedChunksPlugin</code>, <code>ModuleConcatenationPlugin</code>, <code>NoEmitOnErrorsPlugin</code>, <code>OccurrenceOrderPlugin</code>, <code>SideEffectsFlagPlugin</code> 和 <code>UglifyJsPlugin</code>.</p>
+</li>
+</ul>
+<h2 id="codes"><a href="#codes" class="headerlink" title="codes"></a>codes</h2><p>mode: development</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// webpack.development.config.js</span></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">+ mode: <span class="string">'development'</span></span><br><span class="line">- plugins: [</span><br><span class="line">-   <span class="keyword">new</span> webpack.NamedModulesPlugin(),</span><br><span class="line">-   <span class="keyword">new</span> webpack.DefinePlugin(&#123; <span class="string">"process.env.NODE_ENV"</span>: <span class="built_in">JSON</span>.stringify(<span class="string">"development"</span>) &#125;),</span><br><span class="line">- ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>mode: production</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// webpack.development.config.js</span></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">+ mode: <span class="string">'development'</span></span><br><span class="line">- plugins: [</span><br><span class="line">-   <span class="keyword">new</span> webpack.NamedModulesPlugin(),</span><br><span class="line">-   <span class="keyword">new</span> webpack.DefinePlugin(&#123; <span class="string">"process.env.NODE_ENV"</span>: <span class="built_in">JSON</span>.stringify(<span class="string">"development"</span>) &#125;),</span><br><span class="line">- ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>webpack</category>
+      </categories>
+      <tags>
+        <tag>webpack</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>service-服务器篇</title>
     <url>/2020/04/25/service-%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AF%87/</url>
     <content><![CDATA[<h1 id="云服务器"><a href="#云服务器" class="headerlink" title="云服务器"></a>云服务器</h1><p>每个程序员都应该有一台自己的云服务器</p>
