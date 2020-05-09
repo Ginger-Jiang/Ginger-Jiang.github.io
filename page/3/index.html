@@ -213,6 +213,295 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/12/vue-router%E5%AE%9E%E4%BE%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head_pic.jpeg">
+      <meta itemprop="name" content="Ginger">
+      <meta itemprop="description" content="未来可期">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ginger">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/12/vue-router%E5%AE%9E%E4%BE%8B/" class="post-title-link" itemprop="url">vue-router实例</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-03-12 15:15:07 / 修改时间：15:15:17" itemprop="dateCreated datePublished" datetime="2020-03-12T15:15:07+08:00">2020-03-12</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/VueRoute/" itemprop="url" rel="index">
+                    <span itemprop="name">VueRoute</span>
+                  </a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.6k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Router-实例属性"><a href="#Router-实例属性" class="headerlink" title="Router 实例属性"></a>Router 实例属性</h2><ul>
+<li><p>router.app</p>
+</li>
+<li><p>类型: Vue instance<br>配置了 router 的 Vue 根实例</p>
+</li>
+<li><p>router.mode</p>
+</li>
+<li><p>类型: string<br>路由使用的模式</p>
+</li>
+<li><p>router.currentRoute</p>
+</li>
+<li><p>类型 Route<br>当前路由对应的路由信息对象</p>
+</li>
+</ul>
+<h2 id="Router-实例方法"><a href="#Router-实例方法" class="headerlink" title="Router 实例方法"></a>Router 实例方法</h2><h3 id="全局导航守卫"><a href="#全局导航守卫" class="headerlink" title="全局导航守卫"></a>全局导航守卫</h3><ul>
+<li><p>router.beforeEach</p>
+</li>
+<li><p>router.beforeResolv</p>
+</li>
+<li><p>router.afterResolve</p>
+</li>
+<li><p>router.afterEach</p>
+<p>函数签名:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 都返回一个移除已注册的守卫/钩子的函数。</span></span><br><span class="line"></span><br><span class="line">router.beforeEach(<span class="function">(<span class="params">to, <span class="keyword">from</span>, next</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">/* 必须调用 `next` */</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">router.beforeResolve(<span class="function">(<span class="params">to, <span class="keyword">from</span>, next</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">/* 必须调用 `next` */</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">router.afterEach(<span class="function">(<span class="params">to, <span class="keyword">from</span></span>) =&gt;</span> &#123;&#125;)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="动态导航到一个新的-URL"><a href="#动态导航到一个新的-URL" class="headerlink" title="动态导航到一个新的 URL"></a>动态导航到一个新的 URL</h3><ul>
+<li><p>router.push</p>
+</li>
+<li><p>router.replace</p>
+</li>
+<li><p>router.go</p>
+</li>
+<li><p>router.back</p>
+</li>
+<li><p>router.forward</p>
+<p>函数签名:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">router.push(location, onComplete?, onAbort?)</span><br><span class="line">router.push(location).then(onComplete).catch(onAbort)</span><br><span class="line">router.replace(location, onComplete?, onAbort?)</span><br><span class="line">router.replace(location).then(onComplete).catch(onAbort)</span><br><span class="line">router.go(n)</span><br><span class="line">router.back()</span><br><span class="line">router.forward()</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="返回目标位置或当前路由匹配的组件数组"><a href="#返回目标位置或当前路由匹配的组件数组" class="headerlink" title="返回目标位置或当前路由匹配的组件数组"></a>返回目标位置或当前路由匹配的组件数组</h3><ul>
+<li><p>router.getMatchedComponents</p>
+<p>函数签名：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 通常在服务端渲染的数据预加载时使用。</span></span><br><span class="line"><span class="keyword">const</span> matchedComponents: <span class="built_in">Array</span>&lt;Component&gt; = router.getMatchedComponents(location?)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="解析目标位置"><a href="#解析目标位置" class="headerlink" title="解析目标位置"></a>解析目标位置</h3><ul>
+<li><p>router.resolve</p>
+<p>函数签名:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> resolved: &#123;</span><br><span class="line">  location: Location;</span><br><span class="line">  route: Route;</span><br><span class="line">  href: string;</span><br><span class="line">&#125; = router.resolve(location, current?, append?)</span><br></pre></td></tr></table></figure>
+
+<p>解析目标位置 (格式和 <router-link> 的 to prop 一样)</p>
+</li>
+<li><p>current 是当前默认的路由 (通常你不需要改变它)</p>
+</li>
+<li><p>append 允许你在 current 路由上附加路径 (如同 router-link)</p>
+</li>
+</ul>
+<h3 id="动态添加更多的路由规则"><a href="#动态添加更多的路由规则" class="headerlink" title="动态添加更多的路由规则"></a>动态添加更多的路由规则</h3><ul>
+<li><p>router.addRoutes</p>
+<p>函数签名:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 动态添加更多的路由规则。参数必须是一个符合 routes 选项要求的数组。</span></span><br><span class="line">router.addRoutes((routes: <span class="built_in">Array</span>&lt;RouteConfig&gt;))</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="router-onReady"><a href="#router-onReady" class="headerlink" title="router.onReady"></a>router.onReady</h3><p>该方法把一个回调排队，在路由完成初始导航时调用，这意味着它可以解析所有的异步进入钩子和路由初始化相关联的异步组件。<br>这可以有效确保服务端渲染时服务端和客户端输出的一致。<br>第二个参数 errorCallback 只在 2.4+ 支持。它会在初始化路由解析运行出错 (比如解析一个异步组件失败) 时被调用。</p>
+<p>函数签名:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">router.onReady(callback, [errorCallback])</span><br></pre></td></tr></table></figure>
+
+<h3 id="router-onError"><a href="#router-onError" class="headerlink" title="router.onError"></a>router.onError</h3><p>注册一个回调，该回调会在路由导航过程中出错时被调用。注意被调用的错误必须是下列情形中的一种：</p>
+<ul>
+<li><p>错误在一个路由守卫函数中被同步抛出；</p>
+</li>
+<li><p>错误在一个路由守卫函数中通过调用 next(err) 的方式异步捕获并处理；</p>
+</li>
+<li><p>渲染一个路由的过程中，需要尝试解析一个异步组件时发生错误。</p>
+</li>
+</ul>
+<p>函数签名:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">router.onError(callback)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/11/vue-router%E6%9E%84%E5%BB%BA%E9%80%89%E9%A1%B9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head_pic.jpeg">
+      <meta itemprop="name" content="Ginger">
+      <meta itemprop="description" content="未来可期">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ginger">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/11/vue-router%E6%9E%84%E5%BB%BA%E9%80%89%E9%A1%B9/" class="post-title-link" itemprop="url">vue-router构建选项</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-03-11 14:51:56 / 修改时间：14:52:06" itemprop="dateCreated datePublished" datetime="2020-03-11T14:51:56+08:00">2020-03-11</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/VueRoute/" itemprop="url" rel="index">
+                    <span itemprop="name">VueRoute</span>
+                  </a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="routes"><a href="#routes" class="headerlink" title="routes"></a>routes</h2><ul>
+<li><p>类型: Array<RouteConfig><br>RouteConfig 的类型定义:</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> RouteConfig = &#123;</span><br><span class="line">  path: <span class="built_in">string</span>,</span><br><span class="line">  component?: Component,</span><br><span class="line">  name?: <span class="built_in">string</span>, <span class="comment">// 命名路由</span></span><br><span class="line">  components?: &#123; [name: <span class="built_in">string</span>]: Component &#125;, <span class="comment">// 命名视图组件</span></span><br><span class="line">  redirect?: <span class="built_in">string</span> | Location | <span class="built_in">Function</span>,</span><br><span class="line">  props?: <span class="built_in">boolean</span> | <span class="built_in">Object</span> | <span class="built_in">Function</span>,</span><br><span class="line">  alias?: <span class="built_in">string</span> | <span class="built_in">Array</span>&lt;<span class="built_in">string</span>&gt;,</span><br><span class="line">  children?: <span class="built_in">Array</span>&lt;RouteConfig&gt;, <span class="comment">// 嵌套路由</span></span><br><span class="line">  beforeEnter?: <span class="function">(<span class="params">to: Route, <span class="keyword">from</span>: Route, next: <span class="built_in">Function</span></span>) =&gt;</span> <span class="built_in">void</span>,</span><br><span class="line">  meta?: <span class="built_in">any</span>,</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 2.6.0+</span></span><br><span class="line">  caseSensitive?: <span class="built_in">boolean</span>, <span class="comment">// 匹配规则是否大小写敏感？(默认值：false)</span></span><br><span class="line">  pathToRegexpOptions?: <span class="built_in">Object</span> <span class="comment">// 编译正则的选项</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="mode"><a href="#mode" class="headerlink" title="mode"></a>mode</h2><ul>
+<li>类型: string</li>
+<li>默认值: hash | abstract</li>
+<li>可选值: hash | history | abstract<br>配置路由模式:<ul>
+<li>hash: 使用 URL hash 值来作路由. 支持所有浏览器, 包括不支持 HTML5 History Api 的浏览器</li>
+<li>history: 依赖 HTML5 History API 和服务器配置</li>
+<li>abstract: 支持所有 JavaScript 运行环境, 如 Node.js 服务器端, 如果发现没有浏览器的 API, 路由会自动强制进入这个模式</li>
+</ul>
+</li>
+</ul>
+<h2 id="base"><a href="#base" class="headerlink" title="base"></a>base</h2><ul>
+<li>类型: string</li>
+<li>默认值: ‘/‘<br>应用的基路径, 例如, 如果整个单页应用服务在 <code>/app/</code> 下, 然后 base 就应该设为 <code>/app/</code></li>
+</ul>
+<h2 id="linkActiveClass"><a href="#linkActiveClass" class="headerlink" title="linkActiveClass"></a>linkActiveClass</h2><ul>
+<li>类型: string</li>
+<li>默认值: router-link-active<br>全局配置 <code>&lt;router-link&gt;</code> 默认的激活 class</li>
+</ul>
+<h2 id="linkExactActiveClass"><a href="#linkExactActiveClass" class="headerlink" title="linkExactActiveClass"></a>linkExactActiveClass</h2><ul>
+<li>类型: string</li>
+<li>默认值: router-link-exact-active<br>全局配置 <code>&lt;router-link&gt;</code> 默认的精确激活的 class</li>
+</ul>
+<h2 id="scrollBehavior"><a href="#scrollBehavior" class="headerlink" title="scrollBehavior"></a>scrollBehavior</h2><ul>
+<li><p>类型: Function<br>签名:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">type PositionDescriptor &#x3D;</span><br><span class="line">&#123; x: number, y: number &#125; |</span><br><span class="line">&#123; selector: string &#125; |</span><br><span class="line">?&#123;&#125;</span><br><span class="line"></span><br><span class="line">type scrollBehaviorHandler &#x3D; (</span><br><span class="line">to: Route,</span><br><span class="line">from: Route,</span><br><span class="line">savedPosition?: &#123; x: number, y: number &#125;</span><br><span class="line">) &#x3D;&gt; PositionDescriptor | Promise&lt;PositionDescriptor&gt;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="parseQuery-stringifyQuery"><a href="#parseQuery-stringifyQuery" class="headerlink" title="parseQuery / stringifyQuery"></a>parseQuery / stringifyQuery</h2><ul>
+<li>类型: Function<br>提供自定义查询字符串的解析/反解析函数</li>
+</ul>
+<h2 id="fallback"><a href="#fallback" class="headerlink" title="fallback"></a>fallback</h2><ul>
+<li>类型: boolean<br>当浏览器不支持 <code>history.pushState</code> 控制路由是否应该回退到 hash 模式. 默认为 <code>true</code></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/10/vue-router-router-link/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1105,322 +1394,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/05/CSS-%E7%AE%80%E4%BB%8B%E4%B8%8E%E4%BB%A3%E7%A0%81%E9%A3%8E%E6%A0%BC/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/head_pic.jpeg">
-      <meta itemprop="name" content="Ginger">
-      <meta itemprop="description" content="未来可期">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ginger">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/05/CSS-%E7%AE%80%E4%BB%8B%E4%B8%8E%E4%BB%A3%E7%A0%81%E9%A3%8E%E6%A0%BC/" class="post-title-link" itemprop="url">CSS-简介与代码风格</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-03-05 17:45:37 / 修改时间：17:47:23" itemprop="dateCreated datePublished" datetime="2020-03-05T17:45:37+08:00">2020-03-05</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/CSS/" itemprop="url" rel="index">
-                    <span itemprop="name">CSS</span>
-                  </a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>985</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a>CSS</h2><ul>
-<li>CSS 指层叠样式表 (Cascading Style Sheets)</li>
-<li>样式定义如何显示 HTML 元素</li>
-<li>样式通常存储在样式表中</li>
-<li>把样式添加到 HTML 4.0 中，是为了解决内容与表现分离的问题</li>
-<li>外部样式表可以极大提高工作效率</li>
-<li>外部样式表通常存储在 CSS 文件中</li>
-<li>多个样式定义可层叠为一</li>
-</ul>
-<h2 id="语法规范"><a href="#语法规范" class="headerlink" title="语法规范"></a>语法规范</h2><p>CSS 规则由两个主要的部分构成：选择器，以及一条或多条声明。</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">selector &#123;declaration1; declaration2; ... declarationN &#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>选择器通常是您需要改变样式的 HTML 元素。</li>
-<li>每条声明由一个属性和一个值组成。</li>
-<li>属性（property）是您希望设置的样式属性（style attribute）。每个属性有一个值。属性和值被冒号分开。</li>
-</ul>
-<p>下面这行代码的作用是将 h1 元素内的文字颜色定义为红色，同时将字体大小设置为 14 像素。<br>在这个例子中，h1 是选择器，color 和 font-size 是属性，red 和 14px 是值。</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">h1</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: red;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">14px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="值的不同写法和单位"><a href="#值的不同写法和单位" class="headerlink" title="值的不同写法和单位"></a>值的不同写法和单位</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">h1</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#fff</span>;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">14px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">p</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: <span class="built_in">rgb</span>(<span class="number">255</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>如果值为若干单词，则要给值加引号：</p>
-</blockquote>
-<p>除了英文单词 red，我们还可以使用十六进制的颜色值 #ff0000：</p>
-<p><img data-src="../../image/css/ct_css_selector.gif" alt="1"></p>
-<h2 id="CSS-代码风格"><a href="#CSS-代码风格" class="headerlink" title="CSS 代码风格"></a>CSS 代码风格</h2><h3 id="多重声明"><a href="#多重声明" class="headerlink" title="多重声明"></a>多重声明</h3><p>如果要定义不止一个声明，则需要用分号将每个声明分开</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">p</span> &#123;</span><br><span class="line">  <span class="attribute">text-align</span>: center;</span><br><span class="line">  <span class="attribute">color</span>: black;</span><br><span class="line">  <span class="attribute">font-family</span>: arial;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="空格和大小写"><a href="#空格和大小写" class="headerlink" title="空格和大小写"></a>空格和大小写</h3><ul>
-<li>推荐使用小写</li>
-<li>推荐在选择器后保留一个空格</li>
-<li>推荐在属性值前面, 冒号后面保留一个空格</li>
-</ul>
-<p>大多数样式表包含不止一条规则，而大多数规则包含不止一个声明。多重声明和空格的使用使得样式表更容易被编辑：</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">body</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#000</span>;</span><br><span class="line">  <span class="attribute">background</span>: <span class="number">#fff</span>;</span><br><span class="line">  <span class="attribute">margin</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">font-family</span>: Georgia, Palatino, serif;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>是否包含空格不会影响 CSS 在浏览器的工作效果，同样，与 XHTML 不同，CSS 对大小写不敏感。不过存在一个例外：如果涉及到与 HTML 文档一起工作的话，class 和 id 名称对大小写是敏感的。</p>
-</blockquote>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/05/HTML-%E5%B8%B8%E8%A7%81%E6%A0%87%E7%AD%BE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/head_pic.jpeg">
-      <meta itemprop="name" content="Ginger">
-      <meta itemprop="description" content="未来可期">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ginger">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/05/HTML-%E5%B8%B8%E8%A7%81%E6%A0%87%E7%AD%BE/" class="post-title-link" itemprop="url">HTML-常见标签</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-03-05 17:44:35 / 修改时间：17:44:54" itemprop="dateCreated datePublished" datetime="2020-03-05T17:44:35+08:00">2020-03-05</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/HTML/" itemprop="url" rel="index">
-                    <span itemprop="name">HTML</span>
-                  </a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>3.2k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>3 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="标题标签"><a href="#标题标签" class="headerlink" title="标题标签"></a>标题标签</h2><p>HTML 标题是通过 <code>&lt;h1&gt;-&lt;h6&gt;</code> 等标签定义<br>head 的缩写, 意为头部、标题<br><code>&lt;h1&gt;</code> 定义最大的标题。<code>&lt;h6&gt;</code> 定义最小的标题。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>一级标题<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h2</span>&gt;</span>二级标题<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h3</span>&gt;</span>三级标题<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h4</span>&gt;</span>四级标题<span class="tag">&lt;/<span class="name">h4</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h5</span>&gt;</span>五级标题<span class="tag">&lt;/<span class="name">h5</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h6</span>&gt;</span>六级标题<span class="tag">&lt;/<span class="name">h6</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="段落标签"><a href="#段落标签" class="headerlink" title="段落标签"></a>段落标签</h2><p>HTML 段落是通过 <code>&lt;p&gt;</code> 标签定义的 单词: paragraph<br>可以将文字分成若干段落</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>这是第一个段落<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>这是第二个段落<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="换行"><a href="#换行" class="headerlink" title="换行"></a>换行</h2><p>可以通过 <code>&lt;br /&gt;</code> 标签进行换行 单词: break</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">  这是第一行内容 <span class="tag">&lt;<span class="name">br</span> /&gt;</span></span><br><span class="line">  这是第二行内容</span><br><span class="line"><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="加粗"><a href="#加粗" class="headerlink" title="加粗"></a>加粗</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">b</span>&gt;</span>加粗<span class="tag">&lt;/<span class="name">b</span>&gt;</span> <span class="tag">&lt;<span class="name">strong</span>&gt;</span>推荐使用 strong 标签进行 加粗<span class="tag">&lt;/<span class="name">strong</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="倾斜"><a href="#倾斜" class="headerlink" title="倾斜"></a>倾斜</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">em</span>&gt;</span>倾斜 推荐使用em<span class="tag">&lt;/<span class="name">em</span>&gt;</span> <span class="tag">&lt;<span class="name">i</span>&gt;</span>倾斜<span class="tag">&lt;/<span class="name">i</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="删除线"><a href="#删除线" class="headerlink" title="删除线"></a>删除线</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">del</span>&gt;</span>删除线<span class="tag">&lt;/<span class="name">del</span>&gt;</span> <span class="tag">&lt;<span class="name">s</span>&gt;</span>删除线<span class="tag">&lt;/<span class="name">s</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="下划线"><a href="#下划线" class="headerlink" title="下划线"></a>下划线</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ins</span>&gt;</span>推荐使用 下划线<span class="tag">&lt;/<span class="name">ins</span>&gt;</span> <span class="tag">&lt;<span class="name">u</span>&gt;</span>下划线<span class="tag">&lt;/<span class="name">u</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="div-and-span"><a href="#div-and-span" class="headerlink" title="div and span"></a>div and span</h2><p><code>&lt;div&gt;``&lt;span&gt;</code> 是两个没有语义的标签</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span>我占满一整行<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">span</span>&gt;</span>我不会占满一行<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="图像"><a href="#图像" class="headerlink" title="图像"></a>图像</h2><p>HTML 图像是通过 <code>&lt;img&gt;</code> 标签定义的</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- src: 指向图片路径; title: 鼠标经过图片显示; alt: 图片未显示时展示文字 --&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- width: 宽度; height: 高度; border: 边框 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">img</span></span></span><br><span class="line"><span class="tag">  <span class="attr">src</span>=<span class="string">"图片链接.jpg"</span></span></span><br><span class="line"><span class="tag">  <span class="attr">title</span>=<span class="string">"我是一张图"</span></span></span><br><span class="line"><span class="tag">  <span class="attr">alt</span>=<span class="string">"如果你看到我, 说明图没显示出来"</span></span></span><br><span class="line"><span class="tag">/&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h2><p>HTML 链接是通过 <code>&lt;a&gt;</code> 标签定义的</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- href: 资源对应路径, 如果给的不是链接而是 `#name(锚点) 将会在页面内进行跳转 --&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- target: 打开方式 _self 默认当前窗口打开; _blank: 新窗口打开 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"https://ginger-jiang.github.io/"</span>&gt;</span>Ginger Blogs<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h2><p>HTML 中的注释内容也会被浏览器忽略, 不会显示出来</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 这就是注释 它不会被浏览器显示出现 --&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="特殊字符"><a href="#特殊字符" class="headerlink" title="特殊字符"></a>特殊字符</h2><p>特殊字符:</p>
-<ul>
-<li><code>&amp;nbsp;</code>: 空格</li>
-<li><code>&amp;lt;</code>: 小于</li>
-<li><code>&amp;gt;</code>: 大于</li>
-<li><code>&amp;AMP;</code>: &amp;</li>
-<li><code>&amp;yen;</code>: ¥</li>
-<li><code>$copy;</code>: ©</li>
-</ul>
-<h2 id="表格标签"><a href="#表格标签" class="headerlink" title="表格标签"></a>表格标签</h2><p>属性:</p>
-<ul>
-<li>align: {left | center | right} 对齐方式 (弃用)</li>
-<li>border: 边框 (弃用)</li>
-<li>cellpadding: 单元格与内容之间距离</li>
-<li>cellspacing: 单元格之间的空白 默认 2 像素</li>
-<li>width: 宽度</li>
-<li>height: 高度</li>
-</ul>
-<p>合并单元格</p>
-<ul>
-<li>rowspan: 跨行合并</li>
-<li>colspan: 跨列合并</li>
-</ul>
-<p>案例:</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 表格 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">table</span></span></span><br><span class="line"><span class="tag">  <span class="attr">align</span>=<span class="string">"center"</span></span></span><br><span class="line"><span class="tag">  <span class="attr">border</span>=<span class="string">"1"</span></span></span><br><span class="line"><span class="tag">  <span class="attr">cellpadding</span>=<span class="string">"5"</span></span></span><br><span class="line"><span class="tag">  <span class="attr">cellspacing</span>=<span class="string">"0"</span></span></span><br><span class="line"><span class="tag">  <span class="attr">width</span>=<span class="string">"100"</span></span></span><br><span class="line"><span class="tag">  <span class="attr">height</span>=<span class="string">"100"</span></span></span><br><span class="line"><span class="tag">&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 表头区 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">thead</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">      <span class="comment">&lt;!-- 表头单元格 --&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">th</span>&gt;</span></span><br><span class="line">        单个单元格</span><br><span class="line">      <span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">thead</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">&lt;!-- 内容区 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">tbody</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 行 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">      <span class="comment">&lt;!-- 单元格 --&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">td</span>&gt;</span></span><br><span class="line">        单个单元格</span><br><span class="line">      <span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">tbody</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="列表标签"><a href="#列表标签" class="headerlink" title="列表标签"></a>列表标签</h2><h3 id="无序列表"><a href="#无序列表" class="headerlink" title="无序列表"></a>无序列表</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>1<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>2<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>3<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="有序列表"><a href="#有序列表" class="headerlink" title="有序列表"></a>有序列表</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ol</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>1<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>2<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>3<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ol</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="自定义列表"><a href="#自定义列表" class="headerlink" title="自定义列表"></a>自定义列表</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dl</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">dt</span>&gt;</span>关注我们<span class="tag">&lt;/<span class="name">dt</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">dd</span>&gt;</span>新浪微博<span class="tag">&lt;/<span class="name">dd</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">dd</span>&gt;</span>官方微信<span class="tag">&lt;/<span class="name">dd</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dl</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="表单"><a href="#表单" class="headerlink" title="表单"></a>表单</h2><ul>
-<li>表单控件</li>
-<li>提示信息</li>
-<li>表单域</li>
-</ul>
-<h3 id="表单域"><a href="#表单域" class="headerlink" title="表单域"></a>表单域</h3><p>包含表单元素的区域</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">"url地址"</span> <span class="attr">method</span>=<span class="string">"提交方式"</span> <span class="attr">name</span>=<span class="string">"表单名称"</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 表单元素控件 --&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="表单元素-input"><a href="#表单元素-input" class="headerlink" title="表单元素 input"></a>表单元素 input</h3><ul>
-<li><p>type 类型</p>
-<ul>
-<li>text: 文本框</li>
-<li>password: 密码</li>
-<li>radio: 单选</li>
-<li>checkbox: 复选框</li>
-<li>submit: 提交按钮</li>
-<li>reset: 重置按钮</li>
-<li>button: 点击按钮</li>
-<li>file: 文件域(上传文件)</li>
-</ul>
-</li>
-<li><p>name: 表单名</p>
-</li>
-<li><p>value: 值</p>
-</li>
-<li><p>checked: 默认被选中</p>
-</li>
-<li><p>maxlength: 输入最大值</p>
-</li>
-<li></li>
-</ul>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">"url"</span> <span class="attr">method</span>=<span class="string">"GET"</span> <span class="attr">name</span>=<span class="string">"login"</span>&gt;</span></span><br><span class="line">  用户名:<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"username"</span> <span class="attr">maxlength</span>=<span class="string">"6"</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">hr</span> /&gt;</span></span><br><span class="line">  密码:<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"password"</span> <span class="attr">name</span>=<span class="string">"password"</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">hr</span> /&gt;</span></span><br><span class="line">  性别: 男<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"radio"</span> <span class="attr">checked</span> <span class="attr">name</span>=<span class="string">"sex"</span> /&gt;</span> 女<span class="tag">&lt;<span class="name">input</span></span></span><br><span class="line"><span class="tag">    <span class="attr">type</span>=<span class="string">"radio"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">name</span>=<span class="string">"sex"</span></span></span><br><span class="line"><span class="tag">  /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">hr</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="label-标签"><a href="#label-标签" class="headerlink" title="label 标签"></a>label 标签</h3><p>label 为 input 元素定义标注 通过 <code>for</code> 与 表单元素的 <code>id</code> 绑定</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">name</span>=<span class="string">"login"</span> <span class="attr">action</span>=<span class="string">"url"</span> <span class="attr">method</span>=<span class="string">"GET"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"sex"</span>&gt;</span> 男: <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"radio"</span> <span class="attr">id</span>=<span class="string">"sex"</span> /&gt;</span> <span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="下拉标签"><a href="#下拉标签" class="headerlink" title="下拉标签"></a>下拉标签</h2><p>属性:</p>
-<ul>
-<li>selected: 默认选择</li>
-</ul>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">option</span> <span class="attr">selected</span>&gt;</span>请选择<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">option</span>&gt;</span>北京<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">option</span>&gt;</span>上海<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">option</span>&gt;</span>湖南<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="文本域"><a href="#文本域" class="headerlink" title="文本域"></a>文本域</h2><p>属性:</p>
-<ul>
-<li>cols: 多少行字</li>
-<li>rows: 多少列字</li>
-</ul>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">"url"</span> <span class="attr">method</span>=<span class="string">"GET"</span> <span class="attr">name</span>=<span class="string">"login"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">textarea</span> <span class="attr">name</span>=<span class="string">""</span> <span class="attr">id</span>=<span class="string">""</span> <span class="attr">cols</span>=<span class="string">"30"</span> <span class="attr">rows</span>=<span class="string">"10"</span>&gt;</span><span class="tag">&lt;/<span class="name">textarea</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1493,20 +1466,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">92</span>
+          <span class="site-state-item-count">94</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-count">13</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -1548,12 +1521,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">199k</span>
+    <span title="站点总字数">204k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">3:01</span>
+    <span title="站点阅读时长">3:05</span>
 </div>
 
 

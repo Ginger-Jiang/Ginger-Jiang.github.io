@@ -213,6 +213,249 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/25/jQuery%E6%BA%90%E7%A0%81-%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0jQuery/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head_pic.jpeg">
+      <meta itemprop="name" content="Ginger">
+      <meta itemprop="description" content="未来可期">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ginger">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/25/jQuery%E6%BA%90%E7%A0%81-%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0jQuery/" class="post-title-link" itemprop="url">jQuery源码-构造函数jQuery</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-03-25 15:51:57 / 修改时间：15:52:07" itemprop="dateCreated datePublished" datetime="2020-03-25T15:51:57+08:00">2020-03-25</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/jQuery%E6%BA%90%E7%A0%81/" itemprop="url" rel="index">
+                    <span itemprop="name">jQuery源码</span>
+                  </a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.8k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="构造函数-jQuery"><a href="#构造函数-jQuery" class="headerlink" title="构造函数 jQuery"></a>构造函数 jQuery</h1><p>构造函数 jQuery 有七种用法:</p>
+<ul>
+<li>jQuery(select [,context]): 接受一个 CSS 选择器表达式和可选的选择器上下文, 返回一个包含了匹配的 DOM 元素的 jQuery 对象</li>
+<li>jQuery(html,[, ownerDocument])、jQuery(html, props): 用提供的 HTML 代码创建 DOM 元素</li>
+<li>jQuery(element)、jQuery(elementArray): 封装 DOM 元素为 jQuery 对象</li>
+<li>jQuery(object): 封装普通对象为 jQuery 对象</li>
+<li>jQuery(callback): 绑定 ready 事件监听函数, 当 DOM 结构加载完成时执行</li>
+<li>jQuery(jQuery object): 接受一个 jQuery 对象, 返回该 jQuery 对象的拷贝副本</li>
+<li>jQuery(): 创建一个 jQuery 对象</li>
+</ul>
+<h2 id="jQuery-select-context"><a href="#jQuery-select-context" class="headerlink" title="jQuery(select [,context])"></a>jQuery(select [,context])</h2><p>如果传入一个字符串参数, jQuery 会检查这个字符串是选择器表达式还是 HTML 代码. 如果是选择器表达式, 则遍历文档, 查找与之匹配的 DOM 元素, 并创建一个包含了这些 DOM 元素引用的 jQuery 对象. 如果没有元素与之匹配, 则创建一个空 jQuery 对象, 其中不包含任何元素, 其属性 length 等于 0.</p>
+<p>默认情况下, 对匹配元素的查找将从根元素 document 对象开始, 即查找范围是整个文档树, 不过也可以传入第二个参数 context 来限定查找范围</p>
+<p>如果选择器表达式 selector 是简单的 <code>#id</code>, 且没有指定上下文 context, 则调用浏览器原生方法 document.getElementById() 查找属性 id 等于指定值的元素; 如果是比 <code>#id</code> 复杂的选择器表达式或指定了上下文, 则通过 jQuery 方法 <code>.find()</code> 查找, 因此 <code>$(&#39;span&#39;, this)</code> 等价于 <code>$(this).find(&#39;span&#39;)</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'#app'</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// $('span', this).html(222);</span></span><br><span class="line">  $(<span class="keyword">this</span>)</span><br><span class="line">    .find(<span class="string">'span'</span>)</span><br><span class="line">    .html(<span class="string">'find'</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="jQuery-html-ownerDocument-、jQuery-html-props"><a href="#jQuery-html-ownerDocument-、jQuery-html-props" class="headerlink" title="jQuery(html [,ownerDocument])、jQuery(html, props)"></a>jQuery(html [,ownerDocument])、jQuery(html, props)</h2><h3 id="第一个参数"><a href="#第一个参数" class="headerlink" title="第一个参数"></a>第一个参数</h3><p>如果传入的字符串参数看起来像一段 HTML 代码, jQuery 则尝试用这段 HTML 代码创建新的 DOM 元素, 并创建一个包含了这些 DOM 元素引用的 jQuery 对象.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'&lt;button&gt;CLICK ME&lt;/button&gt;'</span>).appendTo(<span class="string">'body'</span>);</span><br></pre></td></tr></table></figure>
+
+<p>如果 HTML 代码是一个单独标签, jQuery 会使用浏览器原生方法 document.createElement() 创建 DOM 元素</p>
+<p>如果是多层嵌套 HTML 片段, 则利用浏览器的 innerHTML 机制创建 DOM 元素, 这个过程由 <code>jQuery.buildFragment()</code> 和 <code>jQuery.clean()</code> 实现</p>
+<h3 id="第二个参数"><a href="#第二个参数" class="headerlink" title="第二个参数"></a>第二个参数</h3><p>ownerDocument 用于指定创建新 DOM 元素的文档对象, 如果不传入, 则默认为当前文档对象</p>
+<p>如果 HTML 代码是一个单独标签, 那么第二个参数还可以是 props, props 是一个包含了属性、事件的普通对象; 在调用 document.createElement() 创建 DOM 元素后, 参数 props 会被传给 jQuery 方法 <code>.attr()</code>, 然后由 <code>.attr()</code> 负责把 props 中的属性、事件设置到新穿创建的 DOM 元素上</p>
+<p>参数 props 的属性可以是任意的事件类型（如”click”），此时属性值应该是事件监听函数，它将被绑定到新创建的 DOM 元素上；参数 props 可以含有以下特殊属性：val、css、html、text、data、width、height、offset，相应的 jQuery 方法：<code>.val()</code>、<code>.css()</code>、<code>.html()</code>、<code>.text()</code>、<code>.data()</code>、<code>.width()</code>、<code>.height()</code>、`.offset()将被执行，并且属性值会作为参数传入；其他类型的属性则会被设置到新创建的 DOM 元素上，某些特殊属性还会做跨浏览器兼容（如 type、value、tabindex 等）；可以通过属性名 class 设置类样式，但要用引号把 class 包裹起来，因为 class 是 JavaScript 保留字。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'&lt;div /&gt;'</span>, &#123;</span><br><span class="line">  text: <span class="string">'哈哈'</span>,</span><br><span class="line">  class: 'active',</span><br><span class="line">  click: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log((<span class="keyword">this</span>.innerHTML = <span class="string">'嘻嘻'</span>));</span><br><span class="line">  &#125;</span><br><span class="line">&#125;).appendTo(<span class="string">'body'</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="jQuery-element-、jQuery-elementArray"><a href="#jQuery-element-、jQuery-elementArray" class="headerlink" title="jQuery(element)、jQuery(elementArray)"></a>jQuery(element)、jQuery(elementArray)</h2><p>如果传入一个 DOM 元素或 DOM 元素数组, 则把 DOM 元素封装到 jQuery 对象中并返回</p>
+<p>这个功能常见于事件监听函数, 即把关键字 this 因用那个的 DOM 元素封装为 jQuery 对象, 然后在该 jQuery 对象上调用 jQuery 方法</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'div'</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  $(<span class="keyword">this</span>).slideUp();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="jQuery-object"><a href="#jQuery-object" class="headerlink" title="jQuery(object)"></a>jQuery(object)</h2><p>如果传入一个普通 JavaScript 对象, 则把该对象封装到 jQuery 对象中并返回</p>
+<p>这个功能可以方便的在普通 JavaScript 对象上实现自定义事件的绑定和触发</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> $foo = $(&#123; <span class="attr">foo</span>: <span class="string">'bar'</span>, <span class="attr">hello</span>: <span class="string">'worldd'</span> &#125;);</span><br><span class="line">$foo.on(<span class="string">'custom'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>.foo);</span><br><span class="line">&#125;);</span><br><span class="line">$foo.trigger(<span class="string">'custom'</span>); <span class="comment">// -&gt; foo</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="jQuery-callback"><a href="#jQuery-callback" class="headerlink" title="jQuery(callback)"></a>jQuery(callback)</h2><p>如果传入一个函数, 则在 document 上绑定一个 ready 事件监听函数, 当 DOM 结构加载完成时执行. ready 事件的触发要早于 load 事件.</p>
+<p>ready 事件并不是浏览器原生事件, 而是 DOMContentLoaded 事件、onreadystatechange 事件和函数 doScrollCheck() 的统称</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'DOM 加载完毕'</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="jQuery-jQuery-object"><a href="#jQuery-jQuery-object" class="headerlink" title="jQuery(jQuery object)"></a>jQuery(jQuery object)</h2><p>如果传入一个 jQuery 对象, 则创建该 jQuery 对象的一个副本并返回, 副本与传入的 jQuery 对象引用完全相同的 DOM 元素</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> $app = $(<span class="string">'#app'</span>);</span><br><span class="line">$app.html(<span class="string">'xuxu'</span>); <span class="comment">// -&gt; $('#app').html('xuxu')</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="jQuery"><a href="#jQuery" class="headerlink" title="jQuery()"></a>jQuery()</h2><p>如果不传入任何参数, 则返回一个空的 jQuery 对象, 属性 length 为 0.</p>
+<p>这个功能可以用来复用 jQuery 对象</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/23/jQuery%E6%BA%90%E7%A0%81-%E6%80%BB%E4%BD%93%E6%9E%B6%E6%9E%84/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head_pic.jpeg">
+      <meta itemprop="name" content="Ginger">
+      <meta itemprop="description" content="未来可期">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ginger">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/23/jQuery%E6%BA%90%E7%A0%81-%E6%80%BB%E4%BD%93%E6%9E%B6%E6%9E%84/" class="post-title-link" itemprop="url">jQuery源码-总体架构</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-03-23 14:47:26 / 修改时间：14:47:59" itemprop="dateCreated datePublished" datetime="2020-03-23T14:47:26+08:00">2020-03-23</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/jQuery%E6%BA%90%E7%A0%81/" itemprop="url" rel="index">
+                    <span itemprop="name">jQuery源码</span>
+                  </a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="总体架构"><a href="#总体架构" class="headerlink" title="总体架构"></a>总体架构</h1><p>jQuery 的模块总体分为三大部分:</p>
+<ul>
+<li>入口模块(构造 jQuery 对象模块)</li>
+<li>功能模块</li>
+<li>底层支持模块</li>
+</ul>
+<p><img data-src="../images/01%E6%80%BB%E4%BD%93%E6%9E%B6%E6%9E%84/jQuery.png" alt="模块导图"></p>
+<h2 id="入口模块"><a href="#入口模块" class="headerlink" title="入口模块"></a>入口模块</h2><p>入口模块主要功能是构造 jQuery 对象, 如果在调用构造函数 <code>jQuery()</code> 创建 jQuery 对象时传入了选择器表达式, 则会调用功能模块中的选择器 <code>Sizzle</code> 遍历文档, 查找与之匹配的 DOM 元素, 并创建一个包含了这些 DOM 元素引用的 jQuery 对象</p>
+<h2 id="功能模块"><a href="#功能模块" class="headerlink" title="功能模块"></a>功能模块</h2><p>在功能模块中, 事件系统提供了统一的事件绑定、响应、手动触发和移除机制, 它并没有将事件直接绑定到 DOM 元素上, 而是基于数据缓存模块来管理事件</p>
+<h3 id="Ajax-模块"><a href="#Ajax-模块" class="headerlink" title="Ajax 模块"></a>Ajax 模块</h3><p>Ajax 模块允许从服务器上加载数据, 而不用刷新页面, 它基于异步队列模块来管理核触发回调函数</p>
+<h3 id="动画模块"><a href="#动画模块" class="headerlink" title="动画模块"></a>动画模块</h3><p>动画模块用于向网页中添加动画效果, 它基于队列模块来管理和执行动画函数</p>
+<h3 id="属性操作模块"><a href="#属性操作模块" class="headerlink" title="属性操作模块"></a>属性操作模块</h3><p>属性操作模块时用于对 HTML 属性和 DOM 属性进行读取、设置和移除操作</p>
+<h3 id="DOM-遍历模块"><a href="#DOM-遍历模块" class="headerlink" title="DOM 遍历模块"></a>DOM 遍历模块</h3><p>DOM 遍历模块用于在 DOM 树中遍历父元素、子元素和兄弟元素</p>
+<h3 id="DOM-操作模块"><a href="#DOM-操作模块" class="headerlink" title="DOM 操作模块"></a>DOM 操作模块</h3><p>DOM 操作模块用于插入、移除、复制和替换 DOM 元素</p>
+<h3 id="样式操作模块"><a href="#样式操作模块" class="headerlink" title="样式操作模块"></a>样式操作模块</h3><p>样式操作模块用于获取计算样式或设置内联样式</p>
+<h3 id="坐标模块"><a href="#坐标模块" class="headerlink" title="坐标模块"></a>坐标模块</h3><p>坐标模块用于读取或设置 DOM 元素的文档坐标</p>
+<h3 id="尺寸模块"><a href="#尺寸模块" class="headerlink" title="尺寸模块"></a>尺寸模块</h3><p>尺寸模块用于获取 DOM 元素的高度和宽度</p>
+<h2 id="底层支持模块"><a href="#底层支持模块" class="headerlink" title="底层支持模块"></a>底层支持模块</h2><p>底层支持模块又分为诸多子模块:</p>
+<ul>
+<li>工具方法: Utilities</li>
+<li>回调函数列表: Callbacks Object</li>
+<li>异步队列: Deferred Object</li>
+<li>浏览器功能测试: Support</li>
+<li>数据缓存: Data</li>
+<li>队列: Queue</li>
+<li>选择器: Sizzle</li>
+</ul>
+<h3 id="工具方法模块"><a href="#工具方法模块" class="headerlink" title="工具方法模块"></a>工具方法模块</h3><p>工具方法模块提供了一些编程辅助方法, 用于简化对 jQuery 对象、DOM 元素、数组、对象、字符串等的操作, 其他模块都会用到工具方法模块</p>
+<h3 id="回调函数列表模块"><a href="#回调函数列表模块" class="headerlink" title="回调函数列表模块"></a>回调函数列表模块</h3><p>回调函数列表模块用于增强对回调函数的管理，支持添加、移除、触发、锁定、禁用回调函数等功能；</p>
+<h3 id="异步队列模块"><a href="#异步队列模块" class="headerlink" title="异步队列模块"></a>异步队列模块</h3><p>异步队列模块用于解耦异步任务和回调函数, 他再回调列表的基础上为回调函数增加了状态, 并提供多个回调函数列表, 支持传播任意同步或异步回调函数的成功或失败状态</p>
+<h3 id="浏览器功能测试模块"><a href="#浏览器功能测试模块" class="headerlink" title="浏览器功能测试模块"></a>浏览器功能测试模块</h3><p>浏览器功能测试模块提供了针对不同浏览器功能和 bug 的测试结果, 其他模块基于这些测试结果来解决浏览器之间的兼容性问题</p>
+<h3 id="数据缓存模块"><a href="#数据缓存模块" class="headerlink" title="数据缓存模块"></a>数据缓存模块</h3><p>数据缓存模块用于为 DOM 元素和 JavaScript 对象附加任意类型的数据</p>
+<h3 id="队列模块"><a href="#队列模块" class="headerlink" title="队列模块"></a>队列模块</h3><p>队列模块用于管理一组函数, 支持函数的入队核出队操作, 并确保函数按顺序执行, 它基于数据缓存模块实现</p>
+<h3 id="选择器模块"><a href="#选择器模块" class="headerlink" title="选择器模块"></a>选择器模块</h3><p>选择器 <code>sizzle</code> 是一个纯 JavaScript 实现的 CSS 选择器引擎, 用于查找与选择表达式匹配的元素集合</p>
+<h2 id="源码结构"><a href="#源码结构" class="headerlink" title="源码结构"></a>源码结构</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params">window, undefined</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> jQuery = (</span><br><span class="line">    <span class="keyword">var</span> jQuery = (<span class="function"><span class="keyword">function</span>(<span class="params">selector, context</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">new</span> jQuery.fn.init(selector, context, rootjQuery)</span><br><span class="line">    &#125;)()</span><br><span class="line">    <span class="keyword">return</span> jQuery</span><br><span class="line">  )()</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 工具方法</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 回调函数列表</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 异步队列</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 浏览器功能测试</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 数据缓存</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 属性操作</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 事件系统</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 选择器</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// DOM 遍历</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// DOM 操作</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 样式操作 CSS</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 异步请求</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 动画</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 坐标</span></span><br><span class="line">  <span class="built_in">window</span>.jQuery = <span class="built_in">window</span>.$ = jQuery</span><br><span class="line">&#125;)(<span class="built_in">window</span>)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/21/vuex-api/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1339,295 +1582,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/12/vue-router%E5%AE%9E%E4%BE%8B/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/head_pic.jpeg">
-      <meta itemprop="name" content="Ginger">
-      <meta itemprop="description" content="未来可期">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ginger">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/12/vue-router%E5%AE%9E%E4%BE%8B/" class="post-title-link" itemprop="url">vue-router实例</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-03-12 15:15:07 / 修改时间：15:15:17" itemprop="dateCreated datePublished" datetime="2020-03-12T15:15:07+08:00">2020-03-12</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/VueRoute/" itemprop="url" rel="index">
-                    <span itemprop="name">VueRoute</span>
-                  </a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.6k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Router-实例属性"><a href="#Router-实例属性" class="headerlink" title="Router 实例属性"></a>Router 实例属性</h2><ul>
-<li><p>router.app</p>
-</li>
-<li><p>类型: Vue instance<br>配置了 router 的 Vue 根实例</p>
-</li>
-<li><p>router.mode</p>
-</li>
-<li><p>类型: string<br>路由使用的模式</p>
-</li>
-<li><p>router.currentRoute</p>
-</li>
-<li><p>类型 Route<br>当前路由对应的路由信息对象</p>
-</li>
-</ul>
-<h2 id="Router-实例方法"><a href="#Router-实例方法" class="headerlink" title="Router 实例方法"></a>Router 实例方法</h2><h3 id="全局导航守卫"><a href="#全局导航守卫" class="headerlink" title="全局导航守卫"></a>全局导航守卫</h3><ul>
-<li><p>router.beforeEach</p>
-</li>
-<li><p>router.beforeResolv</p>
-</li>
-<li><p>router.afterResolve</p>
-</li>
-<li><p>router.afterEach</p>
-<p>函数签名:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 都返回一个移除已注册的守卫/钩子的函数。</span></span><br><span class="line"></span><br><span class="line">router.beforeEach(<span class="function">(<span class="params">to, <span class="keyword">from</span>, next</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">/* 必须调用 `next` */</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">router.beforeResolve(<span class="function">(<span class="params">to, <span class="keyword">from</span>, next</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">/* 必须调用 `next` */</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">router.afterEach(<span class="function">(<span class="params">to, <span class="keyword">from</span></span>) =&gt;</span> &#123;&#125;)</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h3 id="动态导航到一个新的-URL"><a href="#动态导航到一个新的-URL" class="headerlink" title="动态导航到一个新的 URL"></a>动态导航到一个新的 URL</h3><ul>
-<li><p>router.push</p>
-</li>
-<li><p>router.replace</p>
-</li>
-<li><p>router.go</p>
-</li>
-<li><p>router.back</p>
-</li>
-<li><p>router.forward</p>
-<p>函数签名:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">router.push(location, onComplete?, onAbort?)</span><br><span class="line">router.push(location).then(onComplete).catch(onAbort)</span><br><span class="line">router.replace(location, onComplete?, onAbort?)</span><br><span class="line">router.replace(location).then(onComplete).catch(onAbort)</span><br><span class="line">router.go(n)</span><br><span class="line">router.back()</span><br><span class="line">router.forward()</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h3 id="返回目标位置或当前路由匹配的组件数组"><a href="#返回目标位置或当前路由匹配的组件数组" class="headerlink" title="返回目标位置或当前路由匹配的组件数组"></a>返回目标位置或当前路由匹配的组件数组</h3><ul>
-<li><p>router.getMatchedComponents</p>
-<p>函数签名：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 通常在服务端渲染的数据预加载时使用。</span></span><br><span class="line"><span class="keyword">const</span> matchedComponents: <span class="built_in">Array</span>&lt;Component&gt; = router.getMatchedComponents(location?)</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h3 id="解析目标位置"><a href="#解析目标位置" class="headerlink" title="解析目标位置"></a>解析目标位置</h3><ul>
-<li><p>router.resolve</p>
-<p>函数签名:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> resolved: &#123;</span><br><span class="line">  location: Location;</span><br><span class="line">  route: Route;</span><br><span class="line">  href: string;</span><br><span class="line">&#125; = router.resolve(location, current?, append?)</span><br></pre></td></tr></table></figure>
-
-<p>解析目标位置 (格式和 <router-link> 的 to prop 一样)</p>
-</li>
-<li><p>current 是当前默认的路由 (通常你不需要改变它)</p>
-</li>
-<li><p>append 允许你在 current 路由上附加路径 (如同 router-link)</p>
-</li>
-</ul>
-<h3 id="动态添加更多的路由规则"><a href="#动态添加更多的路由规则" class="headerlink" title="动态添加更多的路由规则"></a>动态添加更多的路由规则</h3><ul>
-<li><p>router.addRoutes</p>
-<p>函数签名:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 动态添加更多的路由规则。参数必须是一个符合 routes 选项要求的数组。</span></span><br><span class="line">router.addRoutes((routes: <span class="built_in">Array</span>&lt;RouteConfig&gt;))</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h3 id="router-onReady"><a href="#router-onReady" class="headerlink" title="router.onReady"></a>router.onReady</h3><p>该方法把一个回调排队，在路由完成初始导航时调用，这意味着它可以解析所有的异步进入钩子和路由初始化相关联的异步组件。<br>这可以有效确保服务端渲染时服务端和客户端输出的一致。<br>第二个参数 errorCallback 只在 2.4+ 支持。它会在初始化路由解析运行出错 (比如解析一个异步组件失败) 时被调用。</p>
-<p>函数签名:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">router.onReady(callback, [errorCallback])</span><br></pre></td></tr></table></figure>
-
-<h3 id="router-onError"><a href="#router-onError" class="headerlink" title="router.onError"></a>router.onError</h3><p>注册一个回调，该回调会在路由导航过程中出错时被调用。注意被调用的错误必须是下列情形中的一种：</p>
-<ul>
-<li><p>错误在一个路由守卫函数中被同步抛出；</p>
-</li>
-<li><p>错误在一个路由守卫函数中通过调用 next(err) 的方式异步捕获并处理；</p>
-</li>
-<li><p>渲染一个路由的过程中，需要尝试解析一个异步组件时发生错误。</p>
-</li>
-</ul>
-<p>函数签名:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">router.onError(callback)</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/11/vue-router%E6%9E%84%E5%BB%BA%E9%80%89%E9%A1%B9/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/head_pic.jpeg">
-      <meta itemprop="name" content="Ginger">
-      <meta itemprop="description" content="未来可期">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ginger">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/11/vue-router%E6%9E%84%E5%BB%BA%E9%80%89%E9%A1%B9/" class="post-title-link" itemprop="url">vue-router构建选项</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-03-11 14:51:56 / 修改时间：14:52:06" itemprop="dateCreated datePublished" datetime="2020-03-11T14:51:56+08:00">2020-03-11</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/VueRoute/" itemprop="url" rel="index">
-                    <span itemprop="name">VueRoute</span>
-                  </a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.4k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="routes"><a href="#routes" class="headerlink" title="routes"></a>routes</h2><ul>
-<li><p>类型: Array<RouteConfig><br>RouteConfig 的类型定义:</p>
-<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> RouteConfig = &#123;</span><br><span class="line">  path: <span class="built_in">string</span>,</span><br><span class="line">  component?: Component,</span><br><span class="line">  name?: <span class="built_in">string</span>, <span class="comment">// 命名路由</span></span><br><span class="line">  components?: &#123; [name: <span class="built_in">string</span>]: Component &#125;, <span class="comment">// 命名视图组件</span></span><br><span class="line">  redirect?: <span class="built_in">string</span> | Location | <span class="built_in">Function</span>,</span><br><span class="line">  props?: <span class="built_in">boolean</span> | <span class="built_in">Object</span> | <span class="built_in">Function</span>,</span><br><span class="line">  alias?: <span class="built_in">string</span> | <span class="built_in">Array</span>&lt;<span class="built_in">string</span>&gt;,</span><br><span class="line">  children?: <span class="built_in">Array</span>&lt;RouteConfig&gt;, <span class="comment">// 嵌套路由</span></span><br><span class="line">  beforeEnter?: <span class="function">(<span class="params">to: Route, <span class="keyword">from</span>: Route, next: <span class="built_in">Function</span></span>) =&gt;</span> <span class="built_in">void</span>,</span><br><span class="line">  meta?: <span class="built_in">any</span>,</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 2.6.0+</span></span><br><span class="line">  caseSensitive?: <span class="built_in">boolean</span>, <span class="comment">// 匹配规则是否大小写敏感？(默认值：false)</span></span><br><span class="line">  pathToRegexpOptions?: <span class="built_in">Object</span> <span class="comment">// 编译正则的选项</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h2 id="mode"><a href="#mode" class="headerlink" title="mode"></a>mode</h2><ul>
-<li>类型: string</li>
-<li>默认值: hash | abstract</li>
-<li>可选值: hash | history | abstract<br>配置路由模式:<ul>
-<li>hash: 使用 URL hash 值来作路由. 支持所有浏览器, 包括不支持 HTML5 History Api 的浏览器</li>
-<li>history: 依赖 HTML5 History API 和服务器配置</li>
-<li>abstract: 支持所有 JavaScript 运行环境, 如 Node.js 服务器端, 如果发现没有浏览器的 API, 路由会自动强制进入这个模式</li>
-</ul>
-</li>
-</ul>
-<h2 id="base"><a href="#base" class="headerlink" title="base"></a>base</h2><ul>
-<li>类型: string</li>
-<li>默认值: ‘/‘<br>应用的基路径, 例如, 如果整个单页应用服务在 <code>/app/</code> 下, 然后 base 就应该设为 <code>/app/</code></li>
-</ul>
-<h2 id="linkActiveClass"><a href="#linkActiveClass" class="headerlink" title="linkActiveClass"></a>linkActiveClass</h2><ul>
-<li>类型: string</li>
-<li>默认值: router-link-active<br>全局配置 <code>&lt;router-link&gt;</code> 默认的激活 class</li>
-</ul>
-<h2 id="linkExactActiveClass"><a href="#linkExactActiveClass" class="headerlink" title="linkExactActiveClass"></a>linkExactActiveClass</h2><ul>
-<li>类型: string</li>
-<li>默认值: router-link-exact-active<br>全局配置 <code>&lt;router-link&gt;</code> 默认的精确激活的 class</li>
-</ul>
-<h2 id="scrollBehavior"><a href="#scrollBehavior" class="headerlink" title="scrollBehavior"></a>scrollBehavior</h2><ul>
-<li><p>类型: Function<br>签名:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">type PositionDescriptor &#x3D;</span><br><span class="line">&#123; x: number, y: number &#125; |</span><br><span class="line">&#123; selector: string &#125; |</span><br><span class="line">?&#123;&#125;</span><br><span class="line"></span><br><span class="line">type scrollBehaviorHandler &#x3D; (</span><br><span class="line">to: Route,</span><br><span class="line">from: Route,</span><br><span class="line">savedPosition?: &#123; x: number, y: number &#125;</span><br><span class="line">) &#x3D;&gt; PositionDescriptor | Promise&lt;PositionDescriptor&gt;</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h2 id="parseQuery-stringifyQuery"><a href="#parseQuery-stringifyQuery" class="headerlink" title="parseQuery / stringifyQuery"></a>parseQuery / stringifyQuery</h2><ul>
-<li>类型: Function<br>提供自定义查询字符串的解析/反解析函数</li>
-</ul>
-<h2 id="fallback"><a href="#fallback" class="headerlink" title="fallback"></a>fallback</h2><ul>
-<li>类型: boolean<br>当浏览器不支持 <code>history.pushState</code> 控制路由是否应该回退到 hash 模式. 默认为 <code>true</code></li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1700,20 +1654,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">92</span>
+          <span class="site-state-item-count">94</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-count">13</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -1755,12 +1709,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">199k</span>
+    <span title="站点总字数">204k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">3:01</span>
+    <span title="站点阅读时长">3:05</span>
 </div>
 
 
