@@ -213,6 +213,119 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/03/vue-router%E5%8A%A8%E6%80%81%E8%B7%AF%E7%94%B1%E5%8C%B9%E9%85%8D/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head_pic.jpeg">
+      <meta itemprop="name" content="Ginger">
+      <meta itemprop="description" content="未来可期">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ginger">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/03/vue-router%E5%8A%A8%E6%80%81%E8%B7%AF%E7%94%B1%E5%8C%B9%E9%85%8D/" class="post-title-link" itemprop="url">vue-router动态路由匹配</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-03-03 20:53:22 / 修改时间：20:53:35" itemprop="dateCreated datePublished" datetime="2020-03-03T20:53:22+08:00">2020-03-03</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/VueRoute/" itemprop="url" rel="index">
+                    <span itemprop="name">VueRoute</span>
+                  </a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.6k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="动态路由匹配"><a href="#动态路由匹配" class="headerlink" title="动态路由匹配"></a>动态路由匹配</h2><p>我们经常需要把某种模式匹配到的所有路由, 全部映射到同个组件.<br>如: 我们有个 User 组件, 对于所有 ID 各不相同的用户, 都要使用这个组件来渲染, 那么,我们可以在 vue-router 的路由路径中使用 动态路径参数来达到这个效果:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> User = &#123;</span><br><span class="line">  template: <span class="string">'&lt;div&gt;User&lt;/div&gt;'</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> routed = [</span><br><span class="line">  <span class="comment">// 动态路径参数以冒号开头</span></span><br><span class="line">  &#123;</span><br><span class="line">    path: <span class="string">'/user/:id'</span>,</span><br><span class="line">    component: User</span><br><span class="line">  &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<p>现在, 像 <code>/user/foo</code> 和 <code>/user/bar</code> 都将映射到相同的路由</p>
+<p>一个”路径参数”使用冒号<code>:</code>标记, 当匹配到一个路由时, 参数值会被设置到 <code>this.$route.params</code>. 可以在每个组件内使用.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 输出用户id</span></span><br><span class="line"><span class="keyword">const</span> User = &#123;</span><br><span class="line">  template: <span class="string">'&lt;div&gt;&#123;&#123; this.$route.params.id &#125;&#125;&lt;/div'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以在一个路由中设置多段”路径参数”, 对应的值都会设置到 <code>$route.params</code>中</p>
+<ul>
+<li><code>/user/:username</code> 匹配: <code>/user/ginger</code> params: <code>{username: &quot;ginger&quot;}</code></li>
+<li><code>/user/:username/post/:postid</code> 匹配: <code>/user/ginger/post/123</code> params: <code>{username: &quot;ginger&quot;, postid: 123}</code></li>
+</ul>
+<h2 id="响应路由参数的变化"><a href="#响应路由参数的变化" class="headerlink" title="响应路由参数的变化"></a>响应路由参数的变化</h2><blockquote>
+<p>从 <code>/user/foo</code>导航到 <code>/user/bar</code>，原来的组件实例会被复用, 这意味着组件的生命周期钩子不会再被调用</p>
+</blockquote>
+<p>复用组件事, 想对路由参数的变化做出响应的话, 可以简单的 <code>watch</code> <code>$route</code> 对象</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> user = &#123;</span><br><span class="line">  template: <span class="string">'...'</span>,</span><br><span class="line">  watch: &#123;</span><br><span class="line">    <span class="string">'$route'</span>: (to, <span class="keyword">from</span>) &#123;</span><br><span class="line">      <span class="comment">// 对路由变化做出响应</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>或者使用 <code>beforeRouteUpdate</code> 导航守卫</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> User = &#123;</span><br><span class="line">  template: <span class="string">'...'</span></span><br><span class="line">  beforeRouteUpdate(to , <span class="keyword">from</span>. next) &#123;</span><br><span class="line">    <span class="comment">// react to route changes...</span></span><br><span class="line">    <span class="comment">// don't forget to call next()</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="捕获所有路由或-404-Not-found-路由"><a href="#捕获所有路由或-404-Not-found-路由" class="headerlink" title="捕获所有路由或 404 Not found 路由"></a>捕获所有路由或 404 Not found 路由</h2><p>常规参数智慧匹配被 <code>/</code> 分隔的 URL 片段中的字符, 如果想匹配任意路径, 我们可以使用通配符 (<code>*</code>)</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="comment">// 匹配所有路径</span></span><br><span class="line">  path: <span class="string">'*'</span></span><br><span class="line">&#125;</span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">// 匹配user开头的所有路径</span></span><br><span class="line">  path: <span class="string">'/user-*'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当使用通配符时吗请确保路由的顺序是正确的, 也就是说含有通配符的路由应该放在最后, 路由(path: <code>*</code>)通常用于客户端 404 错误, 如果你使用了 History 模式, 需要配置服务器支持</p>
+<p>当使用一个通配符时, <code>$route.params</code> 内会自动添加一个名为 <code>pathMatch</code> 参数, 它包含了 URl 通过通配符被匹配的部分</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 给出一个路由 ( path: 'user-*')</span></span><br><span class="line"><span class="keyword">this</span>.$route.push(<span class="string">'user-admin'</span>)</span><br><span class="line"><span class="keyword">this</span>.$route.params.pathMatch <span class="comment">// admin</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 给出一个路由 &#123; path: '*' &#125;</span></span><br><span class="line"><span class="keyword">this</span>.$route.push(<span class="string">'/non-existing'</span>)</span><br><span class="line"><span class="keyword">this</span>.$route.params.pathMatch <span class="comment">// '/non-existing'</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="高级匹配模式"><a href="#高级匹配模式" class="headerlink" title="高级匹配模式"></a>高级匹配模式</h2><p><code>vue-router</code> 使用 <code>path-to-regexp</code> 作为路径匹配引擎, 所以支持很多高级的匹配模式</p>
+<h2 id="匹配优先级"><a href="#匹配优先级" class="headerlink" title="匹配优先级"></a>匹配优先级</h2><p>路由匹配优先级按照路由的定义顺序, 谁先定义的, 谁的优先即就最高</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/03/vue-router%E8%B5%B7%E6%AD%A5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1442,169 +1555,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/25/vue%E5%AE%9E%E4%BE%8B%E5%B1%9E%E6%80%A7/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/head_pic.jpeg">
-      <meta itemprop="name" content="Ginger">
-      <meta itemprop="description" content="未来可期">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ginger">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/02/25/vue%E5%AE%9E%E4%BE%8B%E5%B1%9E%E6%80%A7/" class="post-title-link" itemprop="url">vue实例属性</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-02-25 22:08:12 / 修改时间：22:08:27" itemprop="dateCreated datePublished" datetime="2020-02-25T22:08:12+08:00">2020-02-25</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Vue/" itemprop="url" rel="index">
-                    <span itemprop="name">Vue</span>
-                  </a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.9k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="vm-data"><a href="#vm-data" class="headerlink" title="vm.$data"></a>vm.$data</h2><ul>
-<li>类型: Object</li>
-<li>详细:<br>Vue 实例观察的数据对象. Vue 实例代理了对其 data 对象属性的访问</li>
-</ul>
-<h2 id="vm-props"><a href="#vm-props" class="headerlink" title="vm.$props"></a>vm.$props</h2><ul>
-<li>类型: Object</li>
-<li>详细:<br>当前组件接受到的 props 对象. Vue 实例代理了对其 props 对象属性的访问</li>
-</ul>
-<h2 id="vm-el"><a href="#vm-el" class="headerlink" title="vm.$el"></a>vm.$el</h2><ul>
-<li>类型: Elemnt</li>
-<li>只读</li>
-<li>详细:<br>Vue 实例使用的根 DOM 元素</li>
-</ul>
-<h2 id="vm-options"><a href="#vm-options" class="headerlink" title="vm.$options"></a>vm.$options</h2><ul>
-<li>类型: Object</li>
-<li>只读</li>
-<li>详细:<br>用于当前 Vue 实例的初始化选项. 需要在选项中包含自定义属性时会有用处<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  customOption: <span class="string">'foo'</span>,</span><br><span class="line">  created: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.$options.customOption) <span class="comment">// =&gt; foo</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h2 id="vm-parent"><a href="#vm-parent" class="headerlink" title="vm.$parent"></a>vm.$parent</h2><ul>
-<li>类型: Vue instance</li>
-<li>只读</li>
-<li>详细:<br>父实例</li>
-</ul>
-<h2 id="vm-root"><a href="#vm-root" class="headerlink" title="vm.$root"></a>vm.$root</h2><ul>
-<li>类型: Vue instance</li>
-<li>只读</li>
-<li>详细:<br>当前组件树的根 Vue 实例. 如果当前实例没有父实例, 此实例将会是其自己.</li>
-</ul>
-<h2 id="vm-children"><a href="#vm-children" class="headerlink" title="vm.$children"></a>vm.$children</h2><ul>
-<li>类型: Array<Vue instance></li>
-<li>只读</li>
-<li>详细:<br>当前实例的直接子组件. 不保证顺序, 也不是响应式的</li>
-</ul>
-<h2 id="vm-slots"><a href="#vm-slots" class="headerlink" title="vm.$slots"></a>vm.$slots</h2><ul>
-<li><p>类型: { [name: string]: ?Array<VNode>}</p>
-</li>
-<li><p>只读</p>
-</li>
-<li><p>详细:<br>用来访问被插槽分发的内容. 每个具名插槽有其相应的属性.</p>
-</li>
-<li><p>示例:</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">blog-post</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">template</span> <span class="attr">v-slot:header</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>About Me<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">    Here's some page content, which will be included in vm.$slots.default,</span><br><span class="line">    because it's not inside a named slot.</span><br><span class="line">  <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">template</span> <span class="attr">v-slot:footer</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>Copyright 2016 Evan You<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">    If I have some content down here, it will also be included in</span><br><span class="line">    vm.$slots.default.</span><br><span class="line">  <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">blog-post</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Vue.component(<span class="string">'blog-post'</span>,</span><br><span class="line">  render: <span class="function"><span class="keyword">function</span>(<span class="params">createElement</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> header = <span class="keyword">this</span>.$slots.header</span><br><span class="line">    <span class="keyword">var</span>  body = <span class="keyword">this</span>.$slots.default</span><br><span class="line">    <span class="keyword">var</span> footer = <span class="keyword">this</span>.$slots.footer</span><br><span class="line">    <span class="keyword">return</span> createElement(<span class="string">'div'</span>, [</span><br><span class="line">      createElement(<span class="string">'header'</span>, hdaer)</span><br><span class="line">      createElement(<span class="string">'main'</span>, body)</span><br><span class="line">      createElement(<span class="string">'footer'</span>, footer)</span><br><span class="line">    ])</span><br><span class="line">  &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h2 id="vm-scopedSlots"><a href="#vm-scopedSlots" class="headerlink" title="vm.$scopedSlots"></a>vm.$scopedSlots</h2><ul>
-<li><p>类型: { [name: string]: props =&gt; Array<VNode> | undefined }</p>
-</li>
-<li><p>只读</p>
-</li>
-<li><p>详细:<br>用来访问作用域插槽. 对于包括默认 slot 在内的每一个插槽. 该对象都包含一个返回相应 VNode 的函数</p>
-</li>
-<li><p>注意:<br>作用域插槽函数现在保证返回一个 VNode 数组，除非在返回值无效的情况下返回 undefined。</p>
-<p>所有的 <code>$slots</code> 现在都会作为函数暴露在 <code>$scopedSlots</code> 中。如果你在使用渲染函数，不论当前插槽是否带有作用域，我们都推荐始终通过 <code>$scopedSlots</code> 访问它们。这不仅仅使得在未来添加作用域变得简单，也可以让你最终轻松迁移到所有插槽都是函数的 Vue 3。</p>
-</li>
-</ul>
-<h2 id="vm-refs"><a href="#vm-refs" class="headerlink" title="vm.$refs"></a>vm.$refs</h2><ul>
-<li>类型: Object</li>
-<li>只读</li>
-<li>详细:<br>一个对象, 持有注册过 <code>ref</code> 特性的所有 DOM 元素和组件实例</li>
-</ul>
-<h2 id="vm-isServer"><a href="#vm-isServer" class="headerlink" title="vm.$isServer"></a>vm.$isServer</h2><ul>
-<li>类型: boolean</li>
-<li>只读</li>
-<li>详细:<br>当前 Vue 实例是否运行于服务器</li>
-</ul>
-<h2 id="vm-attrs"><a href="#vm-attrs" class="headerlink" title="vm.$attrs"></a>vm.$attrs</h2><ul>
-<li>类型: { [key: string]: string}</li>
-<li>只读</li>
-<li>详细:<br>包含了父作用域中不作为 prop 被识别的特性绑定(<code>class</code>和<code>style</code>除外). 当一个组件没有声明任何 prop 时, 这里会包含所有父作用域的绑定, 并且可以通过 <code>v-bind=&quot;$attrs</code> 传入内部组件</li>
-</ul>
-<h2 id="vm-listeners"><a href="#vm-listeners" class="headerlink" title="vm.$listeners"></a>vm.$listeners</h2><ul>
-<li>类型: { [key: string]: Function | Array<Function> }</li>
-<li>只读</li>
-<li>详细:<br>包含了父作用域中<code>v-on</code>事件监听器, 他可以通过<code>v-on=$listeners</code>传入内部组件</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1677,7 +1627,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">94</span>
+          <span class="site-state-item-count">95</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1732,12 +1682,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">204k</span>
+    <span title="站点总字数">208k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">3:05</span>
+    <span title="站点阅读时长">3:09</span>
 </div>
 
 
