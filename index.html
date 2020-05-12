@@ -213,6 +213,209 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/12/service-Jenkins%E7%AF%87/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head_pic.jpeg">
+      <meta itemprop="name" content="Ginger">
+      <meta itemprop="description" content="未来可期">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ginger">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/12/service-Jenkins%E7%AF%87/" class="post-title-link" itemprop="url">service-Jenkins篇</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-05-12 22:23:39 / 修改时间：22:25:50" itemprop="dateCreated datePublished" datetime="2020-05-12T22:23:39+08:00">2020-05-12</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CI-CD/" itemprop="url" rel="index">
+                    <span itemprop="name">CI&CD</span>
+                  </a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.5k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Jenkins"><a href="#Jenkins" class="headerlink" title="Jenkins"></a>Jenkins</h1><p>Jenkins 是一个独立的开源软件项目，是基于 Java 开发的一种持续集成工具，用于监控持续重复的工作，旨在提供一个开放易用的软件平台，使软件的持续集成变成可能。前身是 Hudson 是一个可扩展的持续集成引擎。可用于自动化各种任务，如构建，测试和部署软件。Jenkins 可以通过本机系统包 Docker 安装，甚至可以通过安装 Java Runtime Environment 的任何机器独立运行。</p>
+<blockquote>
+<p><a href="https://www.jenkins.io/zh/doc/" target="_blank" rel="noopener">Jenkins 中文文档</a></p>
+</blockquote>
+<h2 id="安装-jenkins"><a href="#安装-jenkins" class="headerlink" title="安装 jenkins"></a>安装 jenkins</h2><blockquote>
+<p>本文主要主要通过 Docker 对 jenkins 进行安装. 其他安装方法可以参考 Jenkins 官方文档</p>
+</blockquote>
+<p>打开 <a href="https://hub.docker.com/" target="_blank" rel="noopener">Docker hub</a> 搜索 jenkins (需要登录), 点击搜索结果</p>
+<p><img data-src="../images/service-ci-cd/03/03-01.png" alt="jenkins"></p>
+<p>进入详情页后, 往下翻, 找到 <code>How to use image</code></p>
+<p><img data-src="../images/service-ci-cd/03/03-02.png" alt="jenkins"></p>
+<p>根据官方提供的命令安装 jenkins</p>
+<blockquote>
+<p>此处我加上了一些额外参数</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> docker run: 指定一个新的容器并运行一个命令</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> --name: 指定容器名称</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> -itd:</span></span><br><span class="line"><span class="meta">#</span><span class="bash">     i: 打开STDIN，用于控制台交互</span></span><br><span class="line"><span class="meta">#</span><span class="bash">     t: 分配tty设备，该可以支持终端登录，默认为<span class="literal">false</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash">     d: 后台运行</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> -p 11005:8080: 指定容器暴露的端口</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> -p 50000:50000: 指定容器暴露的端口</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> jenkins/jenkins:lts: 使用 jenkins/jenkins 的长期支持版本</span></span><br><span class="line">docker run --name jenkins_ginger -itd -p 11005:8080 -p 50000:50000 jenkins/jenkins:lts</span><br></pre></td></tr></table></figure>
+
+<p>如图表示安装成功, 通过 <code>docker ps</code> 也可以查看到 jenkins 正在运行</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker ps</span><br></pre></td></tr></table></figure>
+
+<p><img data-src="../images/service-ci-cd/03/03-03.png" alt="Jenkins"></p>
+<h2 id="查看-jenkins-默认密码"><a href="#查看-jenkins-默认密码" class="headerlink" title="查看 jenkins 默认密码"></a>查看 jenkins 默认密码</h2><p>通过 <code>docker logs -f jenkins_ginger</code> 可以查看到 jenkins 的日志, 从日志中, 可以获取到 jenkins 的默认密码</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> -f: 跟踪日志输出</span></span><br><span class="line">docker log -f jenkins_ginger</span><br></pre></td></tr></table></figure>
+
+<p><img data-src="../images/service-ci-cd/03/03-04.png" alt="Jenkins"></p>
+<h2 id="登录-jenkins"><a href="#登录-jenkins" class="headerlink" title="登录 jenkins"></a>登录 jenkins</h2><p>打开浏览器, 输入 <code>xx.xx.xx.xx:11005</code> 服务器公网 ip 地址加上刚刚运行时指定的 11005 端口, 就可以看到如下图所示登录页面, 输入上一步获取到的密码, 点击继续</p>
+<p><img data-src="../images/service-ci-cd/03/03-05.png" alt="Jenkins"></p>
+<p>点击安装推荐的插件</p>
+<p><img data-src="../images/service-ci-cd/03/03-06.png" alt="Jenkins"></p>
+<p>进入漫长的等待…</p>
+<p><img data-src="../images/service-ci-cd/03/03-07.png" alt="Jenkins"></p>
+<p>插件安装完成后, 会进入一个设置界面</p>
+<p><img data-src="../images/service-ci-cd/03/03-08.png" alt="Jenkins"></p>
+<p>输入账户密码, 点击继续</p>
+<p><img data-src="../images/service-ci-cd/03/03-09.png" alt="Jenkins"></p>
+<p>点击保存并完成</p>
+<p><img data-src="../images/service-ci-cd/03/03-10.png" alt="Jenkins"></p>
+<p>至此 Jenkins 就安装完成了</p>
+<h2 id="添加清华镜像源"><a href="#添加清华镜像源" class="headerlink" title="添加清华镜像源"></a>添加清华镜像源</h2><p>jenkins 默认从国外镜像源下载镜像, 速度非常感人. 所以我们先更换源地址</p>
+<p>点击 <code>Manage Jenkins</code> -&gt; <code>Manage Plugins</code> -&gt; <code>高级</code> -&gt; <code>升级站点</code></p>
+<blockquote>
+<p>清华镜像源地址: <a href="https://mirrors.tuna.tsinghua.edu.cn/jenkins/updates/update-center.json" target="_blank" rel="noopener">https://mirrors.tuna.tsinghua.edu.cn/jenkins/updates/update-center.json</a></p>
+</blockquote>
+<p><img data-src="../images/service-ci-cd/03/03-11.png" alt="镜像源"></p>
+<h2 id="添加第一个构建任务"><a href="#添加第一个构建任务" class="headerlink" title="添加第一个构建任务"></a>添加第一个构建任务</h2><p>打开 jenkins 选择创建一个新任务</p>
+<p><img data-src="../images/service-ci-cd/03/03-12.png" alt="镜像源"></p>
+<p>输入任务名称, 选择第一项 <code>构建一个自由风格的软件项目</code> 点击确定</p>
+<p><img data-src="../images/service-ci-cd/03/03-13.png" alt="镜像源"></p>
+<p>在 jenkins 首页 点击 <strong>凭证</strong> 添加凭证 选择 ssh</p>
+<p>在本地机器上通过命令创建秘钥</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -b 4096 -C 'XXX@gmail.com'</span><br></pre></td></tr></table></figure>
+
+<p>通过 cat 命令获取私钥, 放入私钥至全局凭证, 取一个容易辨识的名称</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat  .ssh/id_rsa</span><br></pre></td></tr></table></figure>
+
+<p><img data-src="../images/service-ci-cd/03/03-14.png" alt="镜像源"></p>
+<p>通过 cat 命令获取公钥, 配置到 gitlab 的部署秘钥项中</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat  .ssh/id_rsa.pub</span><br></pre></td></tr></table></figure>
+
+<p><img data-src="../images/service-ci-cd/03/03-15.png" alt="镜像源"></p>
+<p>打开需要进行部署的 gitlab 项目仓库, 打开仓库设置, 版本库设置, <code>Deploy Keys</code>项</p>
+<p><img data-src="../images/service-ci-cd/03/03-16.png" alt="镜像源"></p>
+<p>翻到下面, 找到之前配置的部署公钥, 点击 <code>Enable</code> 启用公钥</p>
+<p><img data-src="../images/service-ci-cd/03/03-17.png" alt="镜像源"></p>
+<p>点击仓库名, 复制仓库 SSH 地址. 回到 jenkins 打开第一步创建的构建任务, 选择配置</p>
+<p>配置源码管理:</p>
+<pre><code>- 在源码管理菜单找到 `Git` 项
+- 输入复制的仓库地址
+- 选择第二步加入的凭证
+- 选择需要读取的分支</code></pre><p><img data-src="../images/service-ci-cd/03/03-18.png" alt="镜像源"></p>
+<p>配置构建触发器:</p>
+<pre><code>- 选择 `Build when a change is pushed to GitLab` 项
+- 点开 `高级`
+- 点击最下面的 `Generate`
+- 得到一个 url 与一个 token</code></pre><p><img data-src="../images/service-ci-cd/03/03-19.png" alt="镜像源"></p>
+<p>打开 gitlab 仓库设置 -&gt; 集成设置:</p>
+<pre><code>- 配置链接为上一步从 jenkins 获取到的链接
+- 配置安全令牌为上一步从 jenkins 获取到的 token
+- 取消 ssl 选项
+- 点击增加 web 钩子</code></pre><p><img data-src="../images/service-ci-cd/03/03-20.png" alt="镜像源"></p>
+<p>回到 jenkins -&gt; 打开构建任务 -&gt; 配置 -&gt; 选择构建 -&gt; 选择执行 shell -&gt; 输入一个 shell 命令测试下</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo 'Hello World'</span><br></pre></td></tr></table></figure>
+
+<p><img data-src="../images/service-ci-cd/03/03-21.png" alt="镜像源"></p>
+<p>回到 gielab, 使用 <code>git clone xxxx</code> 克隆仓库到本地, 添加一个文件, 提交一个 <code>commit</code>.</p>
+<p>就可以看到 jenkins 首页已经收到我们的任务, 并开始自动进行构建</p>
+<h2 id="常用插件列表："><a href="#常用插件列表：" class="headerlink" title="常用插件列表："></a>常用插件列表：</h2><h3 id="权限相关"><a href="#权限相关" class="headerlink" title="权限相关"></a>权限相关</h3><ul>
+<li>添加 Github 授权认证 <a href="https://plugins.jenkins.io/github-oauth" target="_blank" rel="noopener">GitHub Authentication</a></li>
+<li>权限相关：<a href="https://plugins.jenkins.io/pam-auth" target="_blank" rel="noopener">PAM Authentication</a>, <a href="https://plugins.jenkins.io/matrix-auth" target="_blank" rel="noopener">Matrix Authorization Strategy</a>, <a href="https://plugins.jenkins.io/role-strategy" target="_blank" rel="noopener">Role-based Authorization Strategy</a></li>
+</ul>
+<h3 id="Git-相关"><a href="#Git-相关" class="headerlink" title="Git 相关"></a>Git 相关</h3><ul>
+<li>Git 相关：<a href="https://github.com/jenkinsci/git-plugin" target="_blank" rel="noopener">Git plugin</a>, <a href="https://plugins.jenkins.io/ssh-slaves" target="_blank" rel="noopener">SSH Slaves</a>, <a href="https://plugins.jenkins.io/github" target="_blank" rel="noopener">GitHub</a>, <a href="https://wiki.jenkins-ci.org/display/JENKINS/GitLab+Plugin" target="_blank" rel="noopener">GitLab Plugin</a></li>
+</ul>
+<h3 id="构建相关"><a href="#构建相关" class="headerlink" title="构建相关"></a>构建相关</h3><ul>
+<li>添加构建的选择参数 Extended Choice Parameter plugin</li>
+<li>参数化构建 Build With Parameters Plugin</li>
+<li>定时周期执行任务, crontab Cron Column Plugin</li>
+<li>添加 python 支持 Python Plugin</li>
+<li>添加构建名字 Build Name Setter Plugin</li>
+<li>构建超时 Build-timeout Plugin</li>
+<li>构建环境变量注入 Build Environment</li>
+<li>构建状态：Embeddable Build Status</li>
+<li>构建名称设置：Build Name and Description Setter</li>
+</ul>
+<h3 id="通知相关"><a href="#通知相关" class="headerlink" title="通知相关"></a>通知相关</h3><ul>
+<li><p>发邮件 Mailer</p>
+</li>
+<li><p>邮件模板 Email Extension Template</p>
+</li>
+<li><p>使用绿色代替默认的蓝色表示任务运行成功的状态 Green Balls</p>
+</li>
+<li><p>彩色输出日志 AnsiColor Plugin</p>
+</li>
+<li><p>硬盘使用情况 Disk Usage</p>
+</li>
+<li><p>变更查询 Job Configuration History</p>
+</li>
+<li><p>实时的执行任务的节点名称：built-on-column</p>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/11/service-Docker%E7%AF%87/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1477,144 +1680,6 @@ PORTS: 容器的端口信息和使用的连接类型（tcp\udp）。</code></pre
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/26/jQuery%E6%BA%90%E7%A0%81-jQuery-fn-init/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/head_pic.jpeg">
-      <meta itemprop="name" content="Ginger">
-      <meta itemprop="description" content="未来可期">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ginger">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/26/jQuery%E6%BA%90%E7%A0%81-jQuery-fn-init/" class="post-title-link" itemprop="url">jQuery源码-jQuery.fn.init</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-03-26 15:29:26" itemprop="dateCreated datePublished" datetime="2020-03-26T15:29:26+08:00">2020-03-26</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-09 14:51:30" itemprop="dateModified" datetime="2020-05-09T14:51:30+08:00">2020-05-09</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/jQuery%E6%BA%90%E7%A0%81/" itemprop="url" rel="index">
-                    <span itemprop="name">jQuery源码</span>
-                  </a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>5.3k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>5 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="jQuery-fn-init-selector-context-rootjQuery"><a href="#jQuery-fn-init-selector-context-rootjQuery" class="headerlink" title="jQuery.fn.init(selector, context, rootjQuery)"></a>jQuery.fn.init(selector, context, rootjQuery)</h1><p>构造函数 jQuery.fn.init() 负责解析参数 selector 和 context 的类型, 并执行相应的逻辑, 最后返回 jQuery.fn.init() 的实例.</p>
-<blockquote>
-<p>解析参数 selector 和 context 公有 12 个有效分支</p>
-</blockquote>
-<p><img data-src="../images/jQuery-source-code/02%E6%9E%84%E9%80%A0jQuery%E5%AF%B9%E8%B1%A1/jQuery.fn.init.png" alt="jQuery.fn.init"></p>
-<h2 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h2><h3 id="定义-jQuery-fn-init-selector-context-rootjQuery"><a href="#定义-jQuery-fn-init-selector-context-rootjQuery" class="headerlink" title="定义 jQuery.fn.init(selector, context, rootjQuery)"></a>定义 jQuery.fn.init(selector, context, rootjQuery)</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">jQuery.fn = jQuery.prototype = &#123;</span><br><span class="line">  <span class="keyword">constructor</span>: jQuery,</span><br><span class="line">  init: function (selector, context, rootjQuery) &#123;</span><br><span class="line">    <span class="keyword">var</span> match, elem, ret, doc</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>在 <code>init()</code> 构造函数定义中接受三个参数 selector、context、rootjQuery</p>
-<ul>
-<li>selector: 可以是任意类型的值, 但只有 undefined、DOM 元素、字符串、函数、jQuery 对象、普通 JavaScript 对象这几种类型有效</li>
-<li>context: 可以不传入, 或者传入 DOM 元素、jQuery 对象、普通 JavaScript 对象之一</li>
-<li>rootjQuery: 包含了 document 对象的 jQuery 对象, 用于 document.getElementById()查找失败、selector 是选择器表达式且未指定 context、selector 是函数的情况.</li>
-</ul>
-<p>rootjQuery 定义与应用场景</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// document.getElementById() 查找失败</span></span><br><span class="line"><span class="keyword">return</span> rootjQuery.find(selector)</span><br><span class="line"></span><br><span class="line"><span class="comment">// slector 是选择器且未指定 context</span></span><br><span class="line"><span class="keyword">return</span> (context || rootjQuery).find(selector)</span><br><span class="line"></span><br><span class="line"><span class="comment">// selector 是函数</span></span><br><span class="line"><span class="keyword">return</span> rootjQuery.ready(selector)</span><br><span class="line"></span><br><span class="line"><span class="comment">// rootjQuery 定义</span></span><br><span class="line">rootjQuery = jQuery(doucment)</span><br></pre></td></tr></table></figure>
-
-<h2 id="参数-selector-可以转换为-false"><a href="#参数-selector-可以转换为-false" class="headerlink" title="参数 selector 可以转换为 false"></a>参数 selector 可以转换为 false</h2><p>参数 selector 可以转换为 false, 例如: undefined、空字符串、null 等, 则直接返回 this, 此时 this 是空 jQuery 对象, 其属性 length 等于 0.</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Handle $('')、$(null) or $(undefined)</span></span><br><span class="line"><span class="keyword">if</span> (!selector) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">this</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="参数-selector-是-DOM-元素"><a href="#参数-selector-是-DOM-元素" class="headerlink" title="参数 selector 是 DOM 元素"></a>参数 selector 是 DOM 元素</h2><p>如果参数 selector 有属性 nodeType, 则认为 selector 是 DOM 元素, 手动设置第一个元素和属性 context 指向该 DOM 元素、属性 length 为 1, 然后返回包含了该 DOM 元素引用的 jQuery 对象</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Handle $(DOMELement)</span></span><br><span class="line"><span class="keyword">if</span> (selector.nodeType) &#123;</span><br><span class="line">  <span class="keyword">this</span>.context = <span class="keyword">this</span>[<span class="number">0</span>] = selector</span><br><span class="line">  <span class="keyword">this</span>.length = <span class="number">1</span></span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">this</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="参数-selector-是字符串-‘body’"><a href="#参数-selector-是字符串-‘body’" class="headerlink" title="参数 selector 是字符串 ‘body’"></a>参数 selector 是字符串 ‘body’</h2><p>如果参数 selector 是字符串 “body”, 手动设置属性 context 指向 document 对象、第一个元素指向 body 元素、属性 length 为 1, 最后返回包含了 body 元素引用的 jQuery 对象</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// The body element only exists once, optimize finding it</span></span><br><span class="line"><span class="keyword">if</span> (selector === <span class="string">'body'</span> &amp;&amp; !context &amp;&amp; <span class="built_in">document</span>.body) &#123;</span><br><span class="line">  <span class="keyword">this</span>.context = <span class="built_in">document</span></span><br><span class="line">  <span class="keyword">this</span>[<span class="number">0</span>] = <span class="built_in">document</span>.body</span><br><span class="line">  <span class="keyword">this</span>.selector = selector</span><br><span class="line">  <span class="keyword">this</span>.length = <span class="number">1</span></span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">this</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="参数-selector-是其他字符串"><a href="#参数-selector-是其他字符串" class="headerlink" title="参数 selector 是其他字符串"></a>参数 selector 是其他字符串</h2><p>如果参数 selector 是其他字符串, 则先检测 selector 是 HTML 代码还是 <code>#id</code>.</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 处理参数是字符串</span></span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">typeof</span> selector === <span class="string">'string'</span>) &#123;</span><br><span class="line">  <span class="comment">// 判断是 HTML 代码 还是 #ID</span></span><br><span class="line">  <span class="keyword">if</span> (</span><br><span class="line">    selector.charAt(<span class="number">0</span>) === <span class="string">'&lt;'</span> &amp;&amp;</span><br><span class="line">    selector.charAt(selector.length - <span class="number">1</span>) === <span class="string">'&gt;'</span> &amp;&amp;</span><br><span class="line">    selector.length &gt;= <span class="number">3</span></span><br><span class="line">  ) &#123;</span><br><span class="line">    <span class="comment">// 如果是以 `&lt;` 开头 `&gt;` 结尾的  并且长度大于等于 3  跳过 正则 检查</span></span><br><span class="line">    match = [<span class="literal">null</span>, selector, mull]</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 使用正则检查  quickExpr = /^(?:[^#&lt;]*(&lt;[\w\W]+&gt;)[^&gt;]*$|#([\w\-]*)$)/</span></span><br><span class="line"><span class="comment">     * 依次匹配 HTML 代码和 id 如果匹配成功 match 数组第一个元素为参数 selector, 第二个元素为匹配的 HTML 代码或 undefined 第三个元素为匹配的 id 或 undefined</span></span><br><span class="line"><span class="comment">     * quickExpr.exec('#target'); // ["#target",undefined,"target"]</span></span><br><span class="line"><span class="comment">     * quickExpr.exec('&lt;div&gt;'); // ["&lt;div&gt;","&lt;div&gt;",undefined]</span></span><br><span class="line"><span class="comment">     * quickExpr.exec('abc&lt;div&gt;'); // ["abc&lt;div&gt;","&lt;div&gt;",undefined]</span></span><br><span class="line"><span class="comment">     * quickExpr.exec('abc&lt;div&gt;abc#id'); // ["abc&lt;div&gt;abc#id","&lt;div&gt;",undefined]</span></span><br><span class="line"><span class="comment">     * quickExpr.exec('div'); // null</span></span><br><span class="line"><span class="comment">     * quickExpr.exec('&lt;div&gt;&lt;img&gt;&lt;/div&gt;'); // ["&lt;div&gt;&lt;img&gt;&lt;/div&gt;","&lt;div&gt;&lt;img&gt;&lt;/div&gt;",undefined]</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    match = quickExpr.exec(selector)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="如果-selector-是单独标签"><a href="#如果-selector-是单独标签" class="headerlink" title="如果 selector 是单独标签"></a>如果 selector 是单独标签</h2><p>如果 selector 是单独标签, 就调用 document.createElement() 创建标签对应的 DOM 元素</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 检查正则匹配结果</span></span><br><span class="line"><span class="comment"> * 如果 match[1] 不是 undefined 即 selector 是 HTML 代码 或者 match[2] 不是 undefined, 即参数 selector 是 #id 并且未传入 context</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">if</span> (match &amp;&amp; (match[<span class="number">1</span>] || !context)) &#123;</span><br><span class="line">  <span class="comment">// HANDLE: $(html) -&gt; $(array)</span></span><br><span class="line">  <span class="keyword">if</span> (match[<span class="number">1</span>]) &#123;</span><br><span class="line">    context = context <span class="keyword">instanceof</span> jQuery ? context[<span class="number">0</span>] : context</span><br><span class="line"></span><br><span class="line">    doc = context ? context.ownerDocument || context : <span class="built_in">document</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 如果传入单个字符 并且是个单标签 直接创建 跳过其他</span></span><br><span class="line">    <span class="comment">// rsingleTag = /^&lt;(\w+)\s*\/?&gt;(?:&lt;\/\1&gt;)?$/,</span></span><br><span class="line">    ret = rsingleTag.exec(selector)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (ret) &#123;</span><br><span class="line">      <span class="comment">// jQuery.isPlainObject() 用于检测对象是否是纯粹的对象 即用对象直接量 &#123;&#125; 或者 new Object() 创建的对象</span></span><br><span class="line">      <span class="keyword">if</span> (jQuery.isPlainObject(context)) &#123;</span><br><span class="line">        selector = [<span class="built_in">document</span>.createElement(ret[<span class="number">1</span>])]</span><br><span class="line">        <span class="comment">// attr() 遇到特殊属性和事件类型时会执行同名 jQuery 方法</span></span><br><span class="line">        jQuery.fn.attr.call(selector, context, <span class="literal">true</span>)</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        selector = [doc.createElement(res[<span class="number">1</span>])]</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>之所以把创建的 DOM 源码放入数组中, 是为了后面方便的调用 jQuery.merge() 方法, 此方法用于合并两个数组的元素到一个数组</p>
-</blockquote>
-<h2 id="参数-selector-是复杂-HTML-代码"><a href="#参数-selector-是复杂-HTML-代码" class="headerlink" title="参数 selector 是复杂 HTML 代码"></a>参数 selector 是复杂 HTML 代码</h2><p>如果参数 selector 是复杂 HTML 代码, 则利用浏览器 innerHTML 创建 DOM 元素</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line"> <span class="keyword">else</span> &#123;</span><br><span class="line">   <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 创建过程由 buildFragment 和 clean 实现</span></span><br><span class="line"><span class="comment">    * buildFragment 返回 -&gt; &#123; fragment: 含有转换后的 DOM 元素的文档片段 , cacheable: HTML代码是否满足缓存条件&#125;</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">   ret = jQuery.buildFragment([ match[<span class="number">1</span>] ], [ doc ])</span><br><span class="line">   <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 如果满足缓存条件, 在使用前 先复制一份</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">   selector = (ret.cacheable ? jQuery.clone(ret.fragment): rest.fragment).childNodes</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> <span class="comment">// 将创建的 DOM 元素 合并到当前 jQuery 对象中返回</span></span><br><span class="line"> <span class="keyword">return</span> jQuery.merage(<span class="keyword">this</span>, selector)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="如果参数-selector-是-id-且未指定参数-context"><a href="#如果参数-selector-是-id-且未指定参数-context" class="headerlink" title="如果参数 selector 是 #id, 且未指定参数 context"></a>如果参数 selector 是 <code>#id</code>, 且未指定参数 context</h2><p>如果参数 selector 是 <code>#id</code>, 且未指定参数 context, 则调用 document.getElementById() 查找含有指定 id 属性的 DOM 元素</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="comment">// 查找含有指定 id 属性的 DOM 元素</span></span><br><span class="line">  elem = <span class="built_in">document</span>.getElementById(mathc[<span class="number">2</span>])</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (elem &amp;&amp; elem.parentNode) &#123;</span><br><span class="line">    <span class="comment">// 检查 id 是否相等</span></span><br><span class="line">    <span class="keyword">if</span> (elem.id !== match[<span class="number">2</span>]) &#123;</span><br><span class="line">      <span class="keyword">return</span> rootjQuery.find(selector)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">this</span>.length = <span class="number">1</span></span><br><span class="line">    <span class="keyword">this</span>[<span class="number">0</span>] = elem</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">this</span>.context = <span class="built_in">document</span></span><br><span class="line">  <span class="keyword">this</span>.selector = selector</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">this</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="参数-selector-是选择器表达式"><a href="#参数-selector-是选择器表达式" class="headerlink" title="参数 selector 是选择器表达式"></a>参数 selector 是选择器表达式</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// HANDLE: $(expr, $(...))</span></span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (!context || context.jquery) &#123;</span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * 如果执行了上下文 且上下文是 jQuery 对象 执行 context.find() 方法</span></span><br><span class="line"><span class="comment">   * 如果没有指定上下文 就执行 rootjQuery.find()</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">  <span class="keyword">return</span> (context || rootjQuery).find(selector);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// HANDLE: $(expr, context)</span></span><br><span class="line">  <span class="comment">// (which is just equivalent to: $(context).find(expr)</span></span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  <span class="comment">// 如果指定了上下文 但上下文不是jQuery对象 则执行方法先创建一个包含 context 的 jQuery 对象, 然后调用 find() 方法</span></span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">this</span>.constructor(context).find(selector);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="参数-selector-是函数"><a href="#参数-selector-是函数" class="headerlink" title="参数 selector 是函数"></a>参数 selector 是函数</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 如果是函数 就绑定 ready 事件</span></span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (jQuery.isFunction(selector))&#123;</span><br><span class="line">  <span class="keyword">return</span> rootjQuery.ready(selector)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="如果参数-selector-是-jQuery-对象"><a href="#如果参数-selector-是-jQuery-对象" class="headerlink" title="如果参数 selector 是 jQuery 对象"></a>如果参数 selector 是 jQuery 对象</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 如果参数包含 selector 就认为是 jQuery 对象</span></span><br><span class="line"><span class="keyword">if</span> (selector.selector !== <span class="literal">undefined</span>) &#123;</span><br><span class="line">  <span class="comment">// 复制他的属性 selector 和 context</span></span><br><span class="line">  <span class="keyword">this</span>.selector = selector.selector</span><br><span class="line">  <span class="keyword">this</span>.context = selector.context</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="参数-selector-是任意其他值"><a href="#参数-selector-是任意其他值" class="headerlink" title="参数 selector 是任意其他值"></a>参数 selector 是任意其他值</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 如果 selector 是数组或伪数组, 则添加到当前 jQuery 对象中</span></span><br><span class="line"><span class="comment"> * 如果 selector 是 JavaScript 对象, 则作为第一个元素放入当前 jQuery 对象中</span></span><br><span class="line"><span class="comment"> * 如果是其他类型的值, 则作为第一个元素放入当前 jQuery 对象中</span></span><br><span class="line"><span class="comment"> * 最后返回当前 jQuery 对象</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">return</span> jQuery.makeArray(selector, <span class="keyword">this</span>)</span><br></pre></td></tr></table></figure>
-
-<h2 id="总览"><a href="#总览" class="headerlink" title="总览"></a>总览</h2><p><img data-src="../images/jQuery-source-code/02%E6%9E%84%E9%80%A0jQuery%E5%AF%B9%E8%B1%A1/jQuery.fn.init_.png" alt="jQuery.fn.init_"></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1687,7 +1752,7 @@ PORTS: 容器的端口信息和使用的连接类型（tcp\udp）。</code></pre
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">95</span>
+          <span class="site-state-item-count">96</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1742,12 +1807,12 @@ PORTS: 容器的端口信息和使用的连接类型（tcp\udp）。</code></pre
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">208k</span>
+    <span title="站点总字数">210k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">3:09</span>
+    <span title="站点阅读时长">3:11</span>
 </div>
 
 
