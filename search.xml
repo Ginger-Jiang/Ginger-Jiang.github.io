@@ -1,6 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>service-mySql篇</title>
+    <url>/2020/05/13/service-mySql%E7%AF%87/</url>
+    <content><![CDATA[<h1 id="MySql"><a href="#MySql" class="headerlink" title="MySql"></a>MySql</h1><p>MySQL 是一个关系型数据库，使用 SQL 语言进行增删改查操作，目前属于 Oracle 旗下的产品。</p>
+<p>MySQL 数据库开源免费，能够跨平台，支持分布式，性能也不错，可以和 PHP、Java 等 Web 开发语言完美配合，非常适合中小型企业作为 Web 数据库（网站数据库）</p>
+<h2 id="Docker-安装-MySql"><a href="#Docker-安装-MySql" class="headerlink" title="Docker 安装 MySql"></a>Docker 安装 MySql</h2><p>进入 <a href="https://hub.docker.com/_/mysql" target="_blank" rel="noopener">docker hub</a> 可以看到 mysql 镜像</p>
+<p>通过 <code>docker search</code> 的命令可以查看 mysql 的可用版本</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker search mysql</span><br></pre></td></tr></table></figure>
+
+<p><img data-src="../images/service-ci-cd/04/04-01.png" alt="search mysql"></p>
+<h2 id="拉取-MySql-镜像"><a href="#拉取-MySql-镜像" class="headerlink" title="拉取 MySql 镜像"></a>拉取 MySql 镜像</h2><p>通过 <code>docker pull</code> 命令拉取官方的最新版本镜像</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker pull mysql:latest</span><br></pre></td></tr></table></figure>
+
+<p><img data-src="../images/service-ci-cd/04/04-02.png" alt="search mysql"></p>
+<h2 id="查看本地镜像"><a href="#查看本地镜像" class="headerlink" title="查看本地镜像"></a>查看本地镜像</h2><p>通过 <code>docker images</code> 查看本地镜像, 通过 <code>TAG</code> 我们可以看到 mysql 最新版镜像已经安装成功</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker images</span><br></pre></td></tr></table></figure>
+
+<p><img data-src="../images/service-ci-cd/04/04-03.png" alt="search mysql"></p>
+<h2 id="运行容器"><a href="#运行容器" class="headerlink" title="运行容器"></a>运行容器</h2><p>安装完成后, 我们可以通过 <code>docker run</code> 命令来运行 mysql 容器</p>
+<p>通过 <code>docker ps</code> 查看 mysql 容器是否在运行</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> -p 3306:3306: 映射容器服务的3306端口到宿主机的3306端口, 让外部可以直接通过 宿主机ip:3306 访问到 MySql 服务</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> MYSQL_ROOT_PASSWORD=123456：设置 MySQL 服务 root 用户的密码。</span></span><br><span class="line">docker run -itd --name mysql-official-website -p 3306:3306 -e MYSQL_ROOT_PASSWORD=你的密码 mysql</span><br><span class="line">docker ps</span><br></pre></td></tr></table></figure>
+
+<p><img data-src="../images/service-ci-cd/04/04-04.png" alt="search mysql"></p>
+<h2 id="登录数据库"><a href="#登录数据库" class="headerlink" title="登录数据库"></a>登录数据库</h2><h3 id="登录远程服务器"><a href="#登录远程服务器" class="headerlink" title="登录远程服务器"></a>登录远程服务器</h3><p>因为我的 mysql 安装在我的云服务器上, 所以需要先登录云服务器, 如果安装在本地可略过这一步</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ssh root@xx.xx.xx.xx</span><br></pre></td></tr></table></figure>
+
+<h3 id="进入-mysql-容器"><a href="#进入-mysql-容器" class="headerlink" title="进入 mysql 容器"></a>进入 mysql 容器</h3><p>我们可以通过 <code>docker exec</code> 命令, 进入我们在运行的 mysql 容器</p>
+<p>通过 <code>mysql</code> 的命令进入 mysql 命令行</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> -i:即使没有附加也保持STDIN 打开</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> -t: 分配一个伪终端</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> mysql-official-website: 你启动容器时候取的容器名字</span></span><br><span class="line">docker exec -it mysql-official-website bash # 进入 mysql 容器</span><br><span class="line"></span><br><span class="line">mysql -uroot -p # 进入 mysql 命令行 需要输入密码</span><br></pre></td></tr></table></figure>
+
+<p><img data-src="../images/service-ci-cd/04/04-05.png" alt="search mysql"></p>
+<h2 id="创建数据库"><a href="#创建数据库" class="headerlink" title="创建数据库"></a>创建数据库</h2><p>通过上一步, 我们已经进入了 mysql 命令行</p>
+<p>在 mysql 命令行, 我们可以通过 <code>CREATE DATABASE</code> 来创建数据库</p>
+<p>通过 <code>show processlist;</code> 来查看所有库</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">CREATE DATABASE &#96;databasename&#96; DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;</span><br><span class="line"></span><br><span class="line">show processlist;</span><br></pre></td></tr></table></figure>
+
+<p><img data-src="../images/service-ci-cd/04/04-06.png" alt="search mysql"></p>
+<h2 id="一个-mysql-8-版本的-bug"><a href="#一个-mysql-8-版本的-bug" class="headerlink" title="一个 mysql 8 版本的 bug"></a>一个 mysql 8 版本的 bug</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 报错信息</span></span><br><span class="line">nodejs.ER_NOT_SUPPORTED_AUTH_MODEError: ER_NOT_SUPPORTED_AUTH_MODE: Client does not support authentication protocol requested by server; consider upgrading MySQL client</span><br></pre></td></tr></table></figure>
+
+<p>从 MySQL8.0 开始，默认的加密规则使用的是 caching_sha2_password</p>
+<p>进入 mysql 命令行, 依次执行如下命令</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 查看当前 root 用户的加密规则</span></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> use mysql;</span></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> select user, host, plugin from user</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 修改加密规则</span></span><br><span class="line">ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY 'password';</span><br></pre></td></tr></table></figure>
+
+<p><img data-src="../images/service-ci-cd/04/04-07.png" alt="search mysql"></p>
+<h2 id="常用-mysql-命令"><a href="#常用-mysql-命令" class="headerlink" title="常用 mysql 命令"></a>常用 mysql 命令</h2><pre><code>- 退出 mysql 命令行: exit
+- 清空 mysql 终端: system clear</code></pre>]]></content>
+      <categories>
+        <category>CI&amp;CD</category>
+      </categories>
+      <tags>
+        <tag>CI&amp;CD</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>service-Jenkins篇</title>
     <url>/2020/05/12/service-Jenkins%E7%AF%87/</url>
     <content><![CDATA[<h1 id="Jenkins"><a href="#Jenkins" class="headerlink" title="Jenkins"></a>Jenkins</h1><p>Jenkins 是一个独立的开源软件项目，是基于 Java 开发的一种持续集成工具，用于监控持续重复的工作，旨在提供一个开放易用的软件平台，使软件的持续集成变成可能。前身是 Hudson 是一个可扩展的持续集成引擎。可用于自动化各种任务，如构建，测试和部署软件。Jenkins 可以通过本机系统包 Docker 安装，甚至可以通过安装 Java Runtime Environment 的任何机器独立运行。</p>
